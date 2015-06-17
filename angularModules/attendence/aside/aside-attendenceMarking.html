@@ -1,0 +1,36 @@
+<div class="aside" tabindex="-1" role="dialog">
+  <div class="aside-dialog">
+    <div class="aside-content">
+      <div class="aside-header">
+        <div class="btn pull-right" ng-click="$hide()">
+        	<i class=" fa fa-close"></i>
+        </div>
+        <h3 class="aside-title" translate="{{'Mark Attendence'|translate}}">
+        </h3>
+      </div>
+      <div class="aside-body">
+      	<div class=" list-group  bg-inherit">
+			<div class="animated flipInX">
+        		<div  class="list-group-item " ng-repeat="courseElement in courseElementlist">
+	        		
+	        			<div class="pull-left">
+	        				<i class="fa fa-calendar"></i> Day {{changeminutes2day(courseElement.tlpoint)}}
+	        			</div>
+	        			<br>
+	          			<div class="font-bold">
+	          		{{courseElement.userCourseElementType}}
+	          			</div>
+	          				
+                    <div class="pull-right checkbox" style="margin-top: -35px">
+	        					  <label>
+	            					  <input ng-model="courseElement.courseElement.attendence" ng-change="fnMarkAttendence(courseElement)" type="checkbox">
+	        					  </label>
+							      </div>
+				
+        		</div>
+            </div>
+      	</div>        
+      </div>
+    </div>
+  </div>
+</div>

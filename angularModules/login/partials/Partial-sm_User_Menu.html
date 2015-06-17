@@ -1,0 +1,52 @@
+<div class="aside w-sm b-l" role="dialog" style="top:0px!important;">
+  <div class="box">
+    <div class="p" style="position: absolute;right: 5px;z-index: 1;">
+      <!-- <a ng-click="$hide()" class="pull-right text-muted m-v-n"><i class="fa fa-times"></i></a> -->
+    </div>
+    <div class="box-row">
+      <div class="box-cell">
+        <div class="box-inner">
+          <div class="list-group no-radius no-borders">
+            <a class="list-group-item p-v-sm bg-baabtra" style="padding:5px; margin-top:0px; margin-bottom:0px;">
+              <qrcode ng-if="!userinfo.ActiveUserData.roleMappingObj.avatar.length" version="2" size="50" color="#4A148C" ng-click="manageProfile();$hide()" class="pull-left m-r" data="{{userinfo.ActiveUserData.username}}"></qrcode>
+
+              <img ng-click="manageProfile();$hide();" ng-if="userinfo.ActiveUserData.roleMappingObj.avatar.length" ng-src="{{userinfo.ActiveUserData.roleMappingObj.avatar}}" class="pull-left m-r img-responsive img-circle shadow-z-3" style="height: 50px;">
+
+              <div class="clear">
+                <span class="font-bold block">{{userinfo.ActiveUserData.username}}</span>
+                <span class="clear text-ellipsis text-xs">{{userinfo.ActiveUserData.eMail}}&nbsp;</span>
+              </div>
+            </a>
+            <!-- <div class="p-h-md p-v-xs m-t">Work</div> -->
+            <a class="list-group-item bg-hover-green-line  p-md" ng-click="navigateToProfile();$hide()">
+                <i class="glyphicon glyphicon-user text-md m-r-xs"></i>
+                <span class="text-md" translate>Profile</span>
+            </a>
+          <!--   <a class="list-group-item p-md bg-hover-green-line" >
+                <i class="fa fa-gears text-md m-r-xs"></i>
+                <span class="text-md">Settings</span>
+            </a>
+            <a class="list-group-item p-md bg-hover-green-line">
+                <i class="fa fa-lock text-md m-r-xs"></i>
+                <span class="text-md">Lock me</span>
+            </a>
+             <a class="list-group-item p-md bg-hover-green-line" ng-click="details()">
+                <i class="glyphicon glyphicon-search text-md m-r-xs"></i>
+                <span class="text-md">Details</span>
+            </a> -->
+            <a class="list-group-item p-md bg-hover-green-line" ng-click="logout();$hide();">
+                <i class="glyphicon glyphicon-log-out text-md m-r-xs"></i>
+                <span class="text-md" translate>LogOut</span>
+            </a>
+           
+          </div>
+        </div>
+      </div>
+    </div>
+    <!-- <div class="p-h-md p-v">
+      <p>Invite People</p>
+      <a href class="text-muted"><i class="fa fa-fw fa-twitter"></i> Twitter</a>
+      <a href class="text-muted"><i class="fa fa-fw fa-facebook"></i> Facebook</a>
+    </div> -->
+  </div>
+</div>

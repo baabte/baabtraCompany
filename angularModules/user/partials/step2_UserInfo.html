@@ -1,0 +1,80 @@
+
+<div class="col-sm-6">
+    <div class="font-bold" translate="{{'Contact Info'| translate}}"> 
+      <hr>
+  </div>
+    
+
+<div class="form-group">
+   <!-- <label for="phone" class="control-label">Phone</label> -->
+   <input type="text" class="" float-label xt-validate msg-pattern="Please enter valid phone number" placeholder="{{'Contact No'| translate}}" ng-minlength="10" ng-pattern="NumberPattern" name="phone" ng-model="formData.contactInfo.phone" xt-validate required indicate-val = "required">
+</div>
+
+                        <div class="form-group m-h-n clearfix">                       	
+                        	<!-- <label for="country" class="control-label">Country*</label> -->
+                            <select  class="" float-label float-label placeholder="{{'Country'| translate}}" xt-validate name="country" data-bv-field="country" ng-model="selection.country" ng-options="countries.countryName for countries in CSDlist" required indicate-val="required">
+                            <option value="">Select a Country</option>
+                            </select>
+                        </div>
+                        <div class="form-group m-h-n clearfix">
+                         	<!-- <label for="state" class="control-label">State*</label> -->
+                            <select  class="" float-label float-label placeholder="{{'State'| translate}}" xt-validate name="state" data-bv-field="state" ng-model="selection.state" ng-options="state.stateName for state in selection.country.States" required indicate-val="required">
+                            <option value="">Select a State</option>
+                            </select>
+                        </div>
+               			
+                        <div class="form-group m-h-n clearfix">
+                        	
+                        	<!-- <label for="district" class="control-label">District*</label> -->
+                            <select  class="" float-label float-label placeholder="{{'District'| translate}}" name="district" data-bv-field="district" ng-model="selection.district" xt-validate ng-options="districts.districtName for districts in selection.state.Districts" required indicate-val="required">
+                            <option value="">Select a District</option>
+                            </select>
+                        </div>
+                  
+                        <div class="form-group">
+                        	<!-- <label for="zipCode" class="control-label">ZipCode*</label> -->
+                            <input type="text" ng-model="formData.contactInfo.zipCode" class="" float-label id="definput" xt-validate msg-pattern="Please enter valid zipcode" placeholder="{{'Zip Code'| translate}}" name="zipCode" ng-pattern="NumberPattern">
+                        </div>
+                   
+                    <div class="form-group m-h-n clearfix">    
+                        <!-- <label for="Address" class="control-label">Address*</label> -->
+                        <textarea class="" float-label name="Address" ng-model="formData.contactInfo.Address"  rows="5" placeholder="{{'Address'| translate}}" required indicate-val="required"></textarea>
+                    </div> 
+</div>
+<div class="col-sm-6">
+    <div class="font-bold" translate="{{'Academic Details'| translate}}"> 
+       <hr>
+  </div>
+  <div class="form-group">
+   <!-- <label for="phone" class="control-label">Phone</label> -->
+   <input type="text" class="" float-label xt-validate  placeholder="{{'Qualification'| translate}}" name="qualification" ng-pattern="AlfaPattern" msg-pattern="Enter a Valid Qualification" ng-model="formData.academicDetails.qualification" xt-validate required indicate-val="required">
+</div>
+<div class="form-group">
+   <!-- <label for="phone" class="control-label">Phone</label> -->
+   <input type="text" class="" float-label xt-validate  placeholder="{{'Specialization'| translate}}" name="specialization" ng-pattern="AlfaPattern" msg-pattern="Enter a Valid Specialization" ng-model="formData.academicDetails.specialization" xt-validate required indicate-val="required">
+</div>
+<div class="form-group">
+   <!-- <label for="phone" class="control-label">Phone</label> -->
+   <input type="text" class="" float-label xt-validate ng-pattern="AlfaPattern" msg-pattern="Enter a Valid University"  placeholder="{{'University'| translate}}" name="university" ng-model="formData.academicDetails.university" xt-validate required indicate-val="required">
+</div>
+<div class="form-group">
+   <!-- <label for="phone" class="control-label">Phone</label> -->
+   <input type="text" class="" float-label xt-validate  placeholder="{{'Pass out'| translate}}" name="passOut" ng-model="formData.academicDetails.passOut" ng-pattern="NumberPattern" msg-pattern="Enter a Valid passOut Year" ng-minlength="4" maxlength='4' xt-validate required indicate-val="required">
+</div>
+<div class="form-group">
+   <!-- <label for="phone" class="control-label">Phone</label> -->
+   <input type="text" class="" float-label xt-validate  placeholder="{{'Percentage'| translate}}" name="percentage" ng-pattern="NumberPattern" msg-pattern="Enter a Valid Percentage"  maxlength='3' ng-model="formData.academicDetails.percentage" xt-validate required indicate-val="required">
+</div>
+
+</div>
+<div class="form-group col-sm-12 row m-h-n clearfix">
+    <div class="col-xs-6">
+        <a ui-sref="home.main.userRegistration.step1" class="btn btn-block btn-info"><span class="glyphicon glyphicon-circle-arrow-left"></span><span translate="{{'Previous Section'| translate}}"></span>
+        </a>
+    </div>
+<div class="col-xs-6">
+    <a ui-sref="home.main.userRegistration.step3" class="btn btn-block btn-info" ng-disabled="userRegistrationForm.$invalid">
+    <span translate="{{'Next Section'| translate}}"></span> <span class="glyphicon glyphicon-circle-arrow-right"></span>
+    </a>
+</div>
+</div>

@@ -1,0 +1,67 @@
+
+
+
+
+
+<div class="h-full m-t-n" tabindex="-1" style="width:101%;height:100%;">
+  <div class="row"> 
+    <div class="panel-content  bg-light">
+      <div class="panel-body no-padding">
+
+<!-- Area to load the users -->
+<div class="row"  style="padding-top:20px;">
+
+ <div class="col-xs-10 col-xs-offset-1  col-md-8 col-md-offset-2  no-padding bg-white">
+<!--   <div > -->
+<!-- <pre>{{orderForm}}</pre> ng-if="fnStatusBasedFilter(course)"-->
+  <div class="col-xs-12 no-padding  bg-light"><!-- ng-repeat="(key, course) in orderForm.orderDetails" -->
+    <span class="col-xs-12 m-v-md font-bold no-padding" style="text-transform:uppercase;"></span>
+
+    	<div ng-if="candidate.gotTheResponseFromDb&&!candidate.orderForm" class="col-xs-12 shadow-z-1 bg-danger m-b-lg">
+    		<div class="col-xs-12 p font-bold text-white" >
+    			{{userDetails.Name}} is not completed the payment. (Order Form : {{candidate.orderFormId}})
+    		</div>
+    	</div>
+    	<div ng-if="candidate.gotTheResponseFromDb" class="col-xs-12 shadow-z-1 bg-white m-b-lg" id="certificate">
+
+            <div class="col-xs-12 no-padding" >
+
+				    <div class="col-md-12">
+					    <div class="row p">
+					        
+					        <div class="col-xs-10">
+					            <div class="font-bold text-lg">{{companyDetails.companyName}}</div>
+					            <!-- <div ng-repeat="addressDetails in companyDetails.Address.split(',')">{{addressDetails}}<br></div> -->
+					            <!-- <div class="font-bold" ng-if="companyDetails.Phone">Phone&nbsp;:&nbsp;<span class="font-normal">{{companyDetails.Phone}}</span></div>
+					            <div class="font-bold" ng-if="companyDetails.Fax">Fax&nbsp;:&nbsp;<span class="font-normal">{{companyDetails.Fax}}</span></div>
+					            <div class="font-bold" ng-if="companyDetails.eMail">Email&nbsp;:&nbsp;<span class="font-normal">{{companyDetails.eMail}}</span></div> -->
+					        </div>
+					        <div class="col-xs-2">
+					            <img  class="img-responsive" height="100" src="{{companyLogo}}">
+					        </div>
+					    </div>
+					<div class="row text-center text-2x font-bold">Certificate</div>
+				    <div class="row p m-t m">
+				    	This is to certify that <b><u>{{userDetails.Name}}</u></b> has undergone <b><u>{{candidate.courseName}}</u></b> program.
+				    </div>
+
+				    <div class="row p m-b text-right">
+				    	Signature of the authorized official
+				    </div>
+
+				</div>
+            </div>
+    	</div>
+    	<div class="col-xs-12 text-right">
+    		<button ng-if="candidate.gotTheResponseFromDb" type="button" print-page print-element-id="certificate" class="btn {{candidate.orderForm?'btn-primary':'btn-danger'}} baab-btn"><i class="fa fa-print"></i>&nbsp;Print</button>
+    	</div>
+     </div>
+   </div><!--ngRepeat child ends-->
+   </div><!--ngRepeat parent ends-->
+</div>
+  </div>
+
+</div>
+
+
+</div>

@@ -1,0 +1,53 @@
+
+
+<div class="modal  fade" tabindex="-1" role="dialog">
+  <div class="modal-dialog modal-xl">
+    <div class="modal-content">
+      <div class="modal-header">        
+        <h4 class="modal-title text-dark" translate="{{'Update Profile Picture'|translate}}"></h4>
+      </div>
+      <div class="modal-body" >
+        <div class="box">
+
+          <div class=" m-t-lg font-bold text-dark " >            
+     <!--  <div data-placement="top" data-type="info" data-html="true" data-animation="am-fade-and-scale" class="text-u-c">
+          Log In<hr>
+      </div>
+       <div data-placement="top" data-type="info" data-html="true" data-animation="am-fade-and-scale" bs-tooltip="PriceConfigTT"  class="w-xl">
+         <input type="text" class="form-control" placeholder="baabra username" >
+      </div>
+      <br>
+      <div data-placement="top" data-type="info" data-html="true" data-animation="am-fade-and-scale" class="w-xl">
+         <input type="text" class="form-control" placeholder="baabra password">
+      </div>
+    <br>        
+     <div data-placement="top" data-type="info" data-html="true" data-animation="am-fade-and-scale" class="w-xl">
+          <button type="button" ng-click="addSocialLoginToExistingUser();" class="btn btn-primary">log in</button>
+          <p class="text-xs" ng-click="$hide();"><a ui-sref="forgot-password" >Forgot password?</a></p>
+        </div> -->
+
+
+        <!-- <form name="updateProfilepicForm">
+          <div class="form-group col-sm-6 no-padding" >
+            <input  f-max-size="500" name="profilepic" type="file" fileupload-dir="profilepic" id="exampleInputFile" ng-model="profilepic" ng-multiple="false" accept="image/*" resetOnClick="true" data-placement="top" data-html="true" data-container="body"  bs-tooltip>
+            <div >
+              <img render-image image="profilepic" file-source = "profilepic"  ng-model="profilepic" class="img-responsive img-thumbnail w-sm m-xs" ng-src="{{profilepic}}" />
+            </div>
+
+          </div>
+        </form> -->
+        <div> 
+          <span translate="{{'Select an image file:'|translate}}"></span>
+          <input type="file" id="fileInput" /></div>
+          <div class="cropArea">
+          <img-crop image="myImage" result-image="myCroppedImage"></img-crop>
+          </div>
+          <div translate="{{'Cropped Image:'|translate}}"></div>
+          <div><img ng-src="{{myCroppedImage}}" /></div>
+        </div>
+
+    </div>
+  </div>   
+</div>
+</div> 
+</div>                

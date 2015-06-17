@@ -1,0 +1,46 @@
+<div class="modal" tabindex="-1" role="dialog">
+  <div class="modal-dialog modal-lg">
+    <div class="modal-content">
+      <form name="formOnetime" class=" ng-pristine ng-valid"  > 
+      <div class="modal-header"> 
+        <button type="button" class="close" ng-click="$hide()">×</button>   
+        <h4 class="modal-title text-primary" translate="{{'Onetime'|translate}}"></h4>
+      </div>
+      <div class="modal-body">
+       <div class="row"> 
+           <div class="col-xs-12 col-sm-12">
+            
+            <div class="form-group">
+             <label translate="{{'Dont Start On'|translate}}" ></label>
+               <div class= "row">
+                    <div class="col-xs-12">
+                     <div class="checkbox checkbox-inline no-margin"  ng-repeat="day in days" bs-tooltip data-title="{{day.id}}" value="{{day.text}}" >
+                        <label >
+                            <input type="checkbox"value="day" ng-click="fnexcludeDaysOneTime(day.id)" ng-checked="excludedDaysOnetime.indexOf(day.id) > -1" >{{day.text}}
+                        </label>
+                      </div>
+                    </div>  
+                </div>       
+            </div> 
+          <!--  <div class="row">
+            <div class="form-group">
+             <input type="text" class="form-control" float-label ng-model="Batch.oneTime.startDate" required data-date-format="dd-MM-yyyy" data-placement="top" data-date-type="date" data-autoclose="true" data-min-date="today"  name="date1" bs-datepicker placeholder="{{'Starts On'|translate}}">
+            </div>
+           </div> -->
+           <!-- <div class="row">
+            <div class="form-group">
+             <input type="text" class="form-control" float-label ng-model="Batch.oneTime.endDate" required data-date-format="dd-MM-yyyy" data-placement="top" data-date-type="date" data-autoclose="true" data-min-date="today"  name="date2" bs-datepicker placeholder="{{'Ends On'|translate}}">
+            </div>
+           </div>  -->    
+           </div>  
+       </div>    
+      </div>
+      <div class="modal-footer">
+         <button type="reset" class="btn btn-primary"  ng-disabled="formOnetime.$pristine" translate="{{'Cancel'|translate}}"></button>
+        <button type="button" class="btn btn-primary" ng-click="savepopUpfn($hide)"  ng-disabled="formOnetime.$invalid" translate="{{'Done'|translate}}" ></button>
+
+      </div>
+     </form> 
+    </div>
+  </div>
+</div>

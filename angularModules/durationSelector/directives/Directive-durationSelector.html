@@ -1,0 +1,25 @@
+<div>
+	<div>
+		<div class="row row-sm">				
+			<div class="col-xs-12" ng-repeat="types in addeddurationTypes">
+				<div class="w-xs pull-left">				
+					<input type="number" ui-validate="'$value >= 1'" required class="form-control" ng-model="types.Duration">
+				</div>
+				<div class="m-l m-r w-sm pull-left">
+					<ui-select ng-model="types.selected" theme="selectize" ng-disabled="$index != addeddurationTypes.length-1 " >
+						<ui-select-match placeholder="{{'Duration type'|translate}}" value="{{$select.selected.name}}">{{$select.selected.name}}</ui-select-match>
+						<ui-select-choices repeat="duration in durationTypes | filter: $select.search">
+	                	<span ng-bind-html="duration.name | highlight: $select.search"></span>
+	            	</ui-select-choices>
+	            </ui-select>
+				</div>
+				<div class="pull-left m-v-n">
+					<button  class="m-l btn btn-default" ng-if="$index != addeddurationTypes.length-1" ng-click="removeDuration($index)"><i class="fa fa-trash"></i></button>
+					<button class="m-l btn btn-default" ng-disabled="types.selected.id == durationTypes.length"  ng-click="addDuration(types.selected)" ng-if="$index == addeddurationTypes.length-1  && types.Duration >=1"><i class="fa fa-plus"></i></button>
+				</div>
+
+			</div>
+		</div>
+	</div>
+
+</div>

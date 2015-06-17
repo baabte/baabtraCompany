@@ -1,0 +1,41 @@
+<div>
+<div ng-click="addOption()" ng-show="!attList.length" class="alert alert-info">
+	<h2 translate="{{'No Attributes defined'|translate}}"></h2>
+	<p class="lead" translate="{{'Click here to add a new attribute definition to this field.'|translate}}"></p>
+</div>
+<div class="table-responsive">
+	<table class="table">
+	<thead ng-show="attList.length">
+		<tr>
+			<th translate="{{'Key'|translate}}"></th>
+			<th translate="{{'Text'|translate}}"></th>
+			<th>
+				<a  class="" ng-show="attType==='other'" ng-click="addOption()" data-title="{{'Add a new option to the list'|translate}}" bs-tooltip>
+					<i class="glyphicon glyphicon-plus"></i>
+				</a>
+			</th>
+			<th class="table-field-options-padding"></th>
+		</tr>
+	</thead>
+	<tbody>
+		<tr ng-form="fieldAttForm" ng-repeat="option in attList" >
+			<td>
+				<input type="text" ng-disabled="attType=='mandatory'||attType=='uneditable'" name="optionValue" ng-model="option.key" ng-required="true" class="form-control">
+			</td>
+			<td>
+				<input type="text" name="text{{$index}}" ng-if="attType!='mandatory'" ng-disabled="attType=='uneditable'" ng-model="option.text" class="form-control">  <!--  xt-validate required -->
+				<input type="text" name="text{{$index}}" ng-if="attType=='mandatory'" ng-disabled="attType=='uneditable' || option.key == 'ng-model'" ng-model="option.text" xt-validate required class="form-control" xt-validate required> 
+			</td>
+			<td>
+				<i bs-tooltip data-title="This field is required" data-placement="right" ng-if="attType=='mandatory'" class="text-md text-warning mdi-alert-error"></i><!-- validation for mandatory fields-->
+				<a class="" ng-click="removeOption($index)"  ng-show="attType==='other'" data-title="{{'Remove this option from the list'|translate}}" bs-tooltip>
+					<i class="glyphicon glyphicon-trash"></i>
+
+				</a>
+			</td>
+			<td></td>
+		</tr>
+	</tbody>
+</table>
+</div>
+</div>

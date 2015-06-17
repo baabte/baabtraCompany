@@ -1,0 +1,36 @@
+.col-0{
+  clear:left;
+}
+
+.row.no-gutter{
+  margin-left: 0;
+  margin-right: 0;
+}
+
+.no-gutter [class*="col"]{
+  padding: 0;
+}
+
+.row-sm{
+  margin-left: -10px;
+  margin-right: -10px;
+  > div{
+    padding-left: 10px;
+    padding-right: 10px;
+  }
+}
+
+/*phone*/
+@media (max-width: 767px) {
+  .row-2 [class*="col"]{
+    width: 50%;
+    float: left;
+  }
+  .row-2 .col-0{
+    clear: none;
+  }
+  .row-2 li:nth-child(odd) { 
+    clear: left;
+    margin-left: 0;
+  }
+}

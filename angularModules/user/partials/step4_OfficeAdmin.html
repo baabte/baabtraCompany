@@ -1,0 +1,42 @@
+<div class="col-sm-12 ">
+    <div class="font-bold" translate="{{'Office Admin'| translate}}"> 
+     <hr>
+  </div>
+
+  <div class=" form-group m-h-n clearfix">
+  	
+    <div class="form-group p-xs">
+            <input type="text" class="form-control ng-pristine ng-valid" ng-model="formData.officeAdmin.doj" data-date-format="dd-MM-yyyy"  data-max-date="" name="doj" placeholder="{{'Date of Joining'|translate}}" bs-datepicker="" autocomplete="off" xt-validate required indicate-val="date">
+            
+  </div>
+
+  	<div class="form-group p-xs">
+            <!-- <input type="text" class="form-control"   placeholder="Branch" name="branch" ng-model="formData.branch " xt-validate required> -->
+              <label for="branch" class="control-label"><small translate="{{'Select Branch'| translate}}"></small></label>        
+            <hierarchical-selector  ng-model="formData.officeAdmin.branchDetails" data="branchDetails" multi-select="false" class="am-fade" on-selection-changed="formData.officeAdmin.branchDetails = items[0]" name="branchDetails" xt-validate required></hierarchical-selector>
+  </div>
+  <!-- {{formData.branchDetails}} -->
+<!--   <div class="form-group p-xs">
+            <input type="text" class="form-control"   placeholder="Course" name="course" ng-model="formData.officeAdmin.course" xt-validate required>
+  </div> -->
+
+  <div class="form-group p-xs">
+            <input type="text" class="form-control"   placeholder="{{'Comment'|translate}}" name="comment" ng-model="formData.officeAdmin.comment" >
+
+</div>
+  
+  
+
+</div>
+
+
+
+              
+
+<div class="text-center">
+    <span class="glyphicon glyphicon-heart"></span>
+    <h3 translate="{{'Its Great You did it!'| translate}}"></h3>
+    
+    <button type="submit" class="btn btn-danger" ng-disabled="userRegistrationForm.$invalid" translate="{{'Submit'| translate}}"></button>
+    <!-- <a href="https://www.instamojo.com/baabte/proceed-to-payment/?data_email={{formData.userInfo.eMail}}&data_name={{formData.personalInfo.firstName+' '+formData.personalInfo.lastName}}&data_readonly=data_amount&data_readonly=data_email&data_amount=100" rel="im-checkout" data-behavior="remote" data-style="flat" data-text="Proceed to pay ?" data-token="83820d4b552a6170ee7f06e69fb84d82"></a><script src="https://d2xwmjc4uy2hr5.cloudfront.net/im-embed/im-embed.min.js"></script> -->
+</div>

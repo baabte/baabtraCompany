@@ -1,0 +1,57 @@
+<div class="modal" style="z-index:1052!important;" tabindex="-1" role="dialog">
+  <div class="modal-dialog modal-lg">
+    <div class="modal-content">
+       <form class="form-horizontal ng-pristine ng-valid" name="course_element_field" xt-form novalidate>
+      <div class="modal-header">
+        <h4 class="modal-title text-primary">
+        <b class="font-normal" translate="{{'Please select and configure the field to add'|translate}}"></b>
+       <b class="font-normal"> {{debugObject.displayName}}?</b>
+      </h4>
+      </div>
+      <div class="modal-body m-v">
+
+           
+      
+        <!-- drop down to load the fields -->
+        <div class="row">
+          <div class="col-xs-12">
+            <div multi-selectable selection-mode="single" input-model="courseElementFieldsDropdown" output-model="selectedField" button-label="iconToShow Name" item-label="iconToShow Name" tick-property="ticked" helper-elements="filter" default-label="Please Select a field to add" helper-elements="filter"></div>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-xs-12">
+            <button type="button" class="btn btn-default" ng-model="addIndex" data-html="1" ng-options="add.value as add.label for add in addAt" bs-select style="padding-left:0px;">          
+            </button>
+          </div>
+        </div>
+        
+
+        <!-- Dispaly Name -->
+        <div class="row">
+          <div class="col-xs-12">
+            <input class="form-control" float-label placeholder="{{'Dispaly Name'|translate}}"  ng-model="dispalyName">
+            {{currentObjectIndex}}
+          </div>
+        </div>
+
+        <div class="row">
+          <div class="col-xs-12 col-md-8">
+            <div class="checkbox" >
+              <label>
+                  <input type="checkbox" ng-model="subElement" value="true">
+                  <a style="color:#666666;" translate="{{'Add as a sub element to this field' | translate}}" ></a>                             
+              </label>
+            </div>
+          </div>
+        </div>
+
+      </div>
+
+      <div class="modal-footer">
+        <button class="pull-left baab-btn btn btn-warning" ng-disabled="Manage_course_element_fields.$invalid" disabled="disabled" ng-click="$hide()" type="button" translate="{{'Cancel'|translate}}"></button>
+        <button class="pull-right baab-btn btn btn-info"  ng-disabled="(!selectedField.length || !dispalyName.length)" ng-class="{'text-info':!course_element_field.$invalid}" disabled="disabled" type="button" ng-click="fnaddCourseElement(selectedField,dispalyName, addIndex,subElement, parentId);$hide();" translate="{{'Add'|translate}}"></button>
+      </div>
+      </form>
+    </div>
+  </div>
+</div>

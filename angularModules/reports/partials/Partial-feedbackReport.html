@@ -1,0 +1,47 @@
+<div class="tab-container col-xs-12 pull-left" >
+<div class="panel b-t b-00C853 bg-light dk">
+<div set-sub-heading-and-background-color class="panel-heading font-bold text-white  p baab-shadow" translate="{{'Feedback Report'|translate}}"></div>
+<div class="panel-body col-xs-12 bg-white p-sm b-b-danger b-b-3x"> <!-- animated fadeInRight -->
+ 	
+  	<!-- <div masonry='{ "transitionDuration" : "0.8s" , "itemSelector" : ".tile"}'> -->
+  		<div class="col-xs-12 col-sm-6 col-md-6 p-sm" ng-repeat="feedback in feedbackList track by $index">
+    		
+    		<div class="shadow-z-1 col-xs-12" style="cursor: pointer;" >
+<form name="Form_Adding_form" ng-submit="AddCompanyRole()" class="form-validation" role="form" xt-form novalidate>
+    		 <div class="row">
+    		 	<div class="col-xs-12  b-b b-light">
+    		 		<span class="col-xs-1 p">
+					<b style="font-size:24;font-weight:bold; text-decoration:underline;color: #ff4081;" translate="{{'Q:'|translate}}"></b> 
+					</span>
+					<span class="col-xs-11 p"><p ng-bind-html="feedback.question"></p></span>
+				</div>
+    		 </div>
+    		<div class="row">
+    			<div class="form-group col-xs-12 col-sm-5 col-md-5 text-center m-v-sm">
+
+			            <!-- <label>Single select:&nbsp;</label> -->
+							<button type="button" class="btn btn-info" ng-model="feedback.chart.type" data-html="1" ng-options="chart.value as chart.label for chart in chartTypes" bs-select>
+  								Action <span class="caret"></span>
+							</button>
+							
+
+          			</div> 
+    		</div>
+    		 <div class="row">
+    				<span ></span>
+    				<div class="pull-left col-xs-12">
+    					<div class="img-responsive" google-chart chart="feedbackList[$index].chart" style="{{cssStyle}}">
+
+  						</div>
+  					</div>
+  				</div>
+  				</form>
+  			</div>
+  	</div>
+<!-- </div> -->
+  	</div>
+
+</div>
+</div>
+
+

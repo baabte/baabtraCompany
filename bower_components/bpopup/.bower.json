@@ -1,0 +1,39 @@
+{
+  "name": "bLazy",
+  "main": "bLazy.js",
+  "version": "0.10.0",
+  "description": "bLazy is a lightweight script for lazy loading and multi-serving images",
+  "homepage": "https://github.com/dinbror/blazy",
+  "keywords": [
+    "blazy",
+    "lazy",
+    "lazyload",
+    "retina",
+    "responsive",
+    "image",
+    "images",
+    "javascript"
+  ],
+  "authors": [
+    {
+      "name": "Bjørn Klinggaard",
+      "url": "http://dinbror.dk",
+      "email": "hello@dinbror.dk"
+    }
+  ],
+  "license": "MIT",
+  "moduleType": [
+    "amd"
+  ],
+  "ignore": [],
+  "_release": "0.10.0",
+  "_resolution": {
+    "type": "version",
+    "tag": "0.10.0",
+    "commit": "fc9be1407045987667d6534c7996226b764bf968"
+  },
+  "_source": "git://github.com/dinbror/bpopup.git",
+  "_target": "~0.10.0",
+  "_originalSource": "bpopup",
+  "_direct": true
+}

@@ -1,0 +1,46 @@
+<div class="col-md-12">
+
+<div class="row"><div class="tab-container col-md-12">
+	 <div class="panel b-t b-00C853 bg-light dk"><div set-sub-heading-and-background-color class="panel-heading font-bold text-white  p baab-shadow" translate="{{'Assign Course Material'|translate}}"></div>
+		
+		<div class="panel-body col-xs-12 bg-white b-b-danger  no-padding-v b-b-3x">
+		<!-- <form name="bulkEnrollmentForm" class="form-validation ng-pristine ng-invalid ng-invalid-required" role="form" xt-form="" novalidate=""> -->
+			<div class="row">
+				<div class="col-xs-12 shadow-z-2 h-full">
+				
+				<!-- <div class="row m-t"> -->
+					<div class="col-xs-12 col-sm-12 col-md-4">
+						<button type="button" class="btn btn-info" ng-model="selectedCourse" data-html="1" ng-options="course.fkCourseId.$oid as course.Name for course in courseObj.courseList" bs-select selected>
+	  					Action <span class="caret"></span>
+						</button>
+
+					</div>
+					<div class="col-xs-12 col-sm-12 col-md-3">
+						<course-multi-select class="m-t-sm" ng-model="courseObj.courseMaterials" course-id="selectedCourse" user-id="urmId">
+						</course-multi-select>
+					</div>
+					<div class="col-xs-12 col-sm-12 col-md-1">
+						<button class="btn btn-success" ng-disabled="!courseObj.courseMaterials.length" ng-click="assignCourseMaterial2timeline()" translate="{{'Assign'|translate}}" disabled="disabled"></button>
+					</div>
+					<!-- course element details -->
+			 		
+					<div class="col-xs-12 col-sm-12 col-md-4">
+							<mentee-view mentee-obj="courseObj.profile" class="m-sm" action-flag="false"></mentee-view>
+					</div>
+				<!-- </div> -->
+				</div>
+           <!--  </form> -->
+		</div>
+		<div class="col-xs-12">
+			 <div  masonry='{ "transitionDuration" : "0.8s" , "itemSelector" : ".tile"}'>
+            	
+		    <div masonry-tile class="tile col-xs-12 col-sm-12 col-md-4 m-t-lg" data-ng-repeat="course in courseObj.courseMaterials">
+		        <!-- <course-element-preview course-id="selectedCourse" preview-data="course.courseElement"></course-element-preview> -->
+		        <material-preview data="course.courseElement"></material-preview>
+		    </div>
+		    </div>
+		</div> 
+	</div>
+</div>
+</div>
+</div>

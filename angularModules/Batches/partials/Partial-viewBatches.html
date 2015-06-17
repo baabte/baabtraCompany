@@ -1,0 +1,68 @@
+<div class="col-md-12">
+	<div class="panel bg-light">  <!-- b-t b-00C853 bg-light  dk-->
+		<!-- <div class="panel-body p-sm bg-light lt"> -->
+			<div class="navbar " set-sub-heading-and-background-color>
+				
+				    <div class="navbar-header">
+				        <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-inverse-collapse">
+				            <span class="icon-bar"></span>
+				            <span class="icon-bar"></span>
+				            <span class="icon-bar"></span>
+				        </button>
+				        <a class="navbar-brand" href="" translate="{{'View Batches'|translate}}"></a>
+				    </div>
+				    <div class="navbar-collapse collapse navbar-inverse-collapse">
+	                    <ul class="nav navbar-nav" role="tablist">
+
+	                      <li class="ng-scope ng-h active" ng-click="viewBatches()">
+	                        <a role="tab" data-toggle="tab" data-index="0" translate="{{'All Batches'|translate}}"></a>
+	                      </li>
+
+	                      <li class="ng-scope" ng-click="viewMentees()">
+	                        <a href="" role="tab" data-toggle="tab" data-index="1"    translate="{{'All Mentees'|translate}}">
+	                        </a>
+	                      </li>
+	                    </ul>
+	                    <ul class="nav navbar-nav navbar-right">
+
+	                    </ul>
+	              </div>
+	            
+	            </div>
+	            <div class="panel-body">
+	            	<div class="row">
+		                <div class="col-xs-12">
+		 
+		                    <div class="col-xs-6">
+		                        <form class="pull-left">
+		                         <!--  <input  ng-model="modelSearch" type="text" class="form-control input-sm no-border" placeholder="{{placeholderVal}}..."> -->
+		                         <input type="text" ng-model="searchText" ng-change="fnSearchBatchMentee(searchText)" class="form-control col-xs-8" placeholder="{{'Search'|translate}}">
+		                        </form></div>
+		                      <div class="col-xs-6">
+		                        <div class="btn-group pull-right">
+		                        	<button type="button" ng-disabled="prevButtonDesabled"  class="btn btn-material-green-200" ng-click="pagination('prev')"><i class="fa fa-fw fa-angle-left"></i></button>
+		                       		<button type="button" ng-disabled="nextButtonDesabled" class="btn btn-material-green-200" ng-click="pagination('next')"><i class="fa fa-fw fa-angle-right"></i></button>
+		                        
+		                    	</div>
+		                      </div>
+		                </div>
+              		</div>
+              		<div class="row"><!--Directive to load batches -->
+              		   <div class="col-md-push-2 col-xs-push-0 col-md-8 col-xs-12 col-sm-12 col-xs-12" >
+							<div class=" col-xs-12 " ng-if="activeTab=='true'" ng-repeat="batch in batchObj.batchList">
+	            				<batch-view batch="batch" action-flag="true"> 
+	            				</batch-view>
+	            			</div>
+	            			<div class="col-xs-12" ng-if="activeTab=='false'" ng-repeat="mentee in batchObj.menteeList">
+	            				<mentee-view mentee-obj="mentee" action-flag="true"> <!--Directive to load batches -->
+	            				</mentee-view>
+	            			</div>
+
+	            		</div>
+
+						</div>
+	            	</div>
+	            </div>
+	</div>
+
+</div>

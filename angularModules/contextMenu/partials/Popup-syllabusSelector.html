@@ -1,0 +1,30 @@
+<div class="modal" tabindex="-1" role="dialog">
+  <div class="modal-dialog">
+    <div class="panel">
+      <div class="p-h p-v-sm bg-info font-bold">
+        Choose syllabus under which element to be added
+      </div>
+      <div class="panel-body">
+        <div class="row" >
+          <div class="col-xs-12">
+            <span  ng-show="selection.length" class="label label-info text-sm p-xs">{{selection[0].name}}<a href="" ng-click="selection = ''"><i class="fa fa-close text-sm text-white p-h-xs"></i></a></span>
+          </div>
+
+        </div>
+        <form name="childForm">
+          <hierarchical-selector ng-if="!selection.length" data="syncData.syllabus" select-only-leafs="true" multi-select="false" on-selection-changed="onSyllabusSelectionChanged(items)"/>
+
+          <!--  <div data-angular-treeview="true" data-node-output="data.selectedNode" data-node-edit="false" data-tree-id="syllabusTree" data-tree-model="data.selectedCourse.syllabus" data-node-id="nodeId" data-node-label="name" data-node-children="children" >
+            </div> -->
+         
+        </form>
+      </div>
+      <div class="modal-footer no-padding">
+        <button type="button" class="btn btn-warning baab-btn" style="margin-right: 10px;" ng-click="$hide();">Cancel</button>
+        <button type="button" class="btn btn-info baab-btn" style="margin-right: 10px;margin-top: 0px;" ng-click="addCourseElement(elementAddType, $hide)" >Ok</button>
+
+        <!-- ng-disabled="!data.selectednSyllabusItem" disabled="disabled" -->
+      </div>
+    </div>
+  </div>
+</div>

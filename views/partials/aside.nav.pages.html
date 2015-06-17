@@ -1,0 +1,22 @@
+
+<div ui-nav ng-class="{'ng-hide':!navBar}" class="breadCrumb">
+  <ul suppress-scroll-y="true" ng-class="{'hideScrollBar':!showScrollbarBreadcrumb}" class="perfect-scrollbar nav nav-container-scroll">
+    
+    <li ng-click="goHome()" class="lt" ng-class="{'animated fadeInDown':navBar,'ng-hide':!navBar}" ui-sref-active="active" >
+      <div>
+       <i class="icon glyphicon glyphicon-list text-lg"></i>
+      </div>
+    </li>
+
+    <li ng-click="goMenu(path,$index)" ng-repeat="path in linkPath track by $index">
+      <div class="animated fadeInDown">
+      <i class="fa {{path.menuIcon}} fa-1x"></i>
+       <i class="text-md"text-to-translate="{{path.MenuName}}" translate>{{path.MenuName}}</i>
+       <i class="fa fa-chevron-right text-xs m-l-sm" ng-if="linkPath.length > $index+1"></i>
+      </div>
+    </li>
+
+  </ul>
+  
+
+</div>

@@ -1,0 +1,93 @@
+<div class="" style="margin-top: -1px;">
+	<div class="bg-light p-h">
+		<div class="row m-b-lg" style="position:fixed; width:101%; z-index:100;">
+			<div class="col-xs-12 shadow-z-1 bg-white">
+				<div class="col-xs-9 col-md-6">
+					<div class="m-t-sm">
+						<span class="pull-left m-r p-v-sm font-bold">Evaluator</span>	
+						<role-user-loader role-id="$root.userinfo.ActiveUserData.roleMappingObj.evalRoles[0]" placeholder-value="Please select a evaluator" selection-type="1" ng-model="data.evaluator">
+						</role-user-loader>
+					</div>			
+					<div ng-if="!$root.userinfo.ActiveUserData.roleMappingObj.evalRoles.length" class="p-sm bg-danger lt m-t-sm" >You have not yet configured your evaluator&nbsp;<a ui-sref="home.main.globalSettings" class="text-md link-hover">Click here to configure</a></div>
+				</div>
+				<div class="col-xs-3 col-md-6 text-right">
+					<span ng-if="data.elementList.length" class="m-r-lg hidden-xs">
+						<span class="font-bold">{{data.elementList.length}}</span>
+						<span class="font-bold">Selected</span>
+					</span>
+					<a class="btn btn-success" ng-disabled="!data.elementList.length && !data.changesOccurred" ng-click="saveEvaluatorList()">Save</a>
+				</div>
+			</div>			
+		</div>
+		<div class="row" style="padding-top: 80px;padding-bottom: 15px;">
+			<!--  <div class="col-xs-3 bg-white p">
+				<div ng-if="$root.userinfo.ActiveUserData.roleMappingObj.evalRoles.length">
+					<label>Evaluator</label>
+					<role-user-loader role-id="$root.userinfo.ActiveUserData.roleMappingObj.evalRoles[0]" placeholder-value="Please select a evaluator" selection-type="1" ng-model="data.evaluator">
+					</role-user-loader>
+				</div>
+				<div class="p bg-danger lt" ng-if="!$root.userinfo.ActiveUserData.roleMappingObj.evalRoles.length">You have not yet configured your evaluator&nbsp;<a ui-sref="home.main.globalSettings" class="text-md link-hover">Click here to configure</a></div>
+			</div> -->
+			<div class="col-md-push-2 col-xs-push-0 col-md-8 col-xs-12 col-sm-12 col-xs-12">
+
+				<div class="row">
+					<div class="col-xs-12 m-b-xs" ng-if="data.evaluator.length && data.evaluableElement">
+						<div class="p shadow-z-1 col-xs-12 bg-white">
+							<div class="col-xs-6 " style="margin-top:-5px;">
+								<div class="checkbox no-margin">
+									<label>
+										<input type="checkbox" ng-change="selectAllElements(data.selectAllElements)" ng-model="data.selectAllElements">
+									</label>
+									<label>Select All</label>
+								</div>
+							</div>
+						</div>
+					</div>
+					<div class="col-xs-12">
+						
+						<div  ng-if="data.courseTimeline" ng-repeat="timelinePoint in data.courseTimeline">
+							<div   ng-repeat="elements in timelinePoint">
+								<div class="p shadow-z-1 col-xs-12 bg-white" ng-if="element.evaluable" ng-init="data.evaluableElement = true" ng-repeat="element in elements">
+									<div  ng-if="data.evaluator" class="col-xs-1" style="margin-top:-5px;">
+										<div class="checkbox no-margin">
+			                    			<label>
+			                        			<input type="checkbox" ng-model="data.elementCheckBox[element.code]" ng-change="elementCheckBoxChange(element, data.elementCheckBox[element.code])">
+			                    			</label>
+			                			</div>
+		                			</div>
+
+									<div class="col-xs-2 col-md-1 ">
+										
+										<!-- <i class="iconCustomBg ui-icon fa {{element.Icon}} b-white text-lg b-2x" style="color:{{element.iconColor}}!important;background-color:{{element.iconBackground}}!important;border-radius: 12px;"></i>  -->
+										<i class="ui-icon fa {{element.Icon}} text-lg"></i>
+									</div>
+									<div class="col-xs-{{10-data.evaluator.length}} col-md-{{11-data.evaluator.length}} no-padding" >
+										<span class="upper font-bold link">{{element.elements[0].value}}</span>
+										
+										<i ng-if="element.evaluator.length" class="mdi-navigation-unfold-less pull-right text-lg link" ng-click="expandDetails(element.evaluator)" bs-tooltip data-title="Show more details" data-placement="left"></i>
+
+										<div ng-if="element.evaluator.length && data.expandDetails == element.evaluator" ng-class="{'am-fade-and-slide-top':data.expandDetails == element.evaluator}">
+											<div class="font-bold p-v-xs">Evaluator(s)</div>
+											<div class="" ng-repeat="evaluator in element.evaluator">
+												<div class="bg-light p-xs m-b-xs b text-name">{{evaluator.Name}}<a bs-tooltip data-title="Click to remove evaluator" data-placement="left" class="pull-right m-r-xs" ng-click="removeEvaluator($index, element)" ><i class="fa fa-trash text-lg"></i></a></div>
+											</div>
+										</div>
+									</div>	
+								</div>
+							</div>
+						</div>
+						<div >
+							
+						</div>
+						
+						<div class="col-xs-12 m-b-xs" ng-if="!data.evaluableElement">
+							<div class="p shadow-z-1 col-xs-12 bg-warning font-bold">
+								There are no evaluable element found .!
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>

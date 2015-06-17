@@ -1,0 +1,39 @@
+<div class="popover" tabindex="-1" ng-show="content"  style="min-width:350px;">
+  <div class="arrow"></div>
+  <h3 class="popover-title" >{{feature.featureName}} </h3>
+  <div class="popover-content" style="border:solid;">
+    <!-- <form name="popoverForm"> -->
+      <a>Descrition : {{feature.featureDescription}}</a><br>
+      <a class="test" href="" editable-text="feature.pricing.price" e-required e-placeholder="Enter the price">Price : {{feature.pricing.price}}</a><br>
+       <a href="" editable-text="feature.pricing.units" e-required e-placeholder="Enter the units">units : {{feature.pricing.units}}</a><br>
+       <a href="" editable-text="feature.pricing.minUnits" e-required e-placeholder="Enter the minimum units">minUnits : {{feature.pricing.minUnits}}</a><br>
+       <a href="" editable-select="selection_.frequency" e-ng-options="frequency for frequency in billings" onaftersave="editBill($data,feature)">
+       Billing : {{selection_.frequency}}</a><br>
+      <span href="" ng-show="custombilling">
+       
+       <a href="" >
+        Years:
+        <a class="label"  editable-text="feature.billing.years">{{feature.billing.years}}</a>
+       
+        <a href="" >
+        Months:
+        <a class="label" editable-text="feature.billing.months">{{feature.billing.months}}</a>
+      
+       <a href="" >
+        Days:
+        <a class="label" editable-text="feature.billing.days">{{feature.billing.days}}</a>
+      </span>
+      </a>
+       <div class="panel-heading bg-white"></div>
+      <div class="form-actions">
+        <button type="button" class="btn btn-danger" ng-click="$hide()">Close</button>
+        <button type="button" class="btn btn-primary" ng-click="callme(feature);popover.saved=true;$hide()">Save changes</button>
+      </div>
+    <!-- </form> -->
+
+  </div>
+</div>
+
+
+
+

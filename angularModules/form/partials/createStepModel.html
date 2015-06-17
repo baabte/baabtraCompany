@@ -1,0 +1,35 @@
+
+
+
+<div class="modal" tabindex="-1" role="dialog">
+  <div class="modal-dialog modal-xl">
+    <div class="modal-content">
+      <div class="modal-header">        
+        <h4 class="modal-title text-primary" translate="{{'Create Step'|translate}}"></h4>
+      </div>
+      <div class="modal-body">
+        <div class="box">
+          <form name="formStep" class="form-validation" role="form" xt-form editable-form novalidate >
+
+          <div class="form-group pull-left form-group col-xs-6">
+          <input type="text" msg-pattern="Enter Step Name (Minimum 1)"placeholder="{{'Enter New Step Name'|translate}}" xt-validate class="form-control" float-label name="stepName" ng-minlength="1" ng-model="stepName" >
+          </div>
+
+          <div class="form-group pull-left col-xs-6">
+            <button ng-disabled="formStep.$invalid||stepName===null||stepName===undefined" ng-click="fnCreateStep(stepName);$hide()"  class="btn btn-default  m-v-n">
+              <i class="fa fa-plus"></i>
+            </button> 
+
+         </div>
+
+        </form>
+      
+    
+
+
+
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

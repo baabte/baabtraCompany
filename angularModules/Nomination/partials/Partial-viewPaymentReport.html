@@ -1,0 +1,99 @@
+<div>
+	 <div  class="panel b-t b-00C853 bg-light dk"><div  set-sub-heading-and-background-color  class="panel-heading font-bold text-white  p baab-shadow"  translate="{{reportName+' report'|translate}}"></div>
+
+
+		<div  class="panel-body col-xs-12 bg-light animated fadeInRight p-sm b-b-danger b-b-3x">
+			<div class="row">
+				<div class="col-xs-12 p text-center">
+
+					<div class="col-xs-12 shadow-z-1 bg-white">
+						<div class="col-xs-12 no-padding">
+			                 <div class="row"> 
+				                 <div class="col-xs-12 no-padding">
+					                  <div class="col-xs-12 col-md-3 text-center h-full p-v">
+					                  		<input type="text" class="form-control"  float-label ng-model="searchObj.date.fromDate" data-date-format="dd-MM-yyyy" data-date-type="date" data-autoclose="true" data-max-date="today" name="doj" bs-datepicker="" autocomplete="off" placeholder="From date">
+					                  </div>
+					                  <div class="col-xs-12 col-md-3 text-center h-full p-v">
+					                  		<input type="text" class="form-control" float-label ng-model="searchObj.date.toDate" data-date-format="dd-MM-yyyy" data-date-type="date" data-autoclose="true" data-max-date="today" name="doj" bs-datepicker="" autocomplete="off" placeholder="To date">
+					                  </div>
+					                  <div class="col-xs-12 col-md-3 text-center h-full p-v">
+					                  	<div ng-click="filterPopup()" class="btn btn-info">
+					                  		<span>Add filters</span>&nbsp;&nbsp;<i class="fa fa-filter"></i>
+					                  	</div>
+					                  </div>
+				              	 </div>
+				              	 <div>
+				              	 	Filters<br>
+				              	 	<div class="col-xs-12 text-left">
+					              	 	<div class="col-xs-3" ng-if="customerType[filter.customerType]">
+					              	 		Customer type:&nbsp;
+					              	 		<span class="label label-info">
+					              	 			{{customerType[filter.customerType].name}}
+					              	 			<i ng-click="deleteSearchKey('customerType')" class="fa fa-close"></i>
+					              	 		</span>
+					              	 	</div>
+					              	 	<div class="col-xs-3" ng-if="filter.courses">
+					              	 		Course:&nbsp;
+					              	 		<span  class="label label-info">
+					              	 			{{filter.courses.Name}}
+					              	 			<i ng-click="deleteSearchKey('course')" class="fa fa-close"></i>
+					              	 		</span>
+					              	 	</div>
+				              	 	</div>
+				              	 </div>
+				              	 <div  class="text-right p-h">
+				              	 	 <div ng-click="clearReport()" class="btn btn-success">Clear</div>
+					              	 <div ng-click="fnGetReport()" class="btn btn-success">Generate report</div>
+				              	 </div>
+			              	 </div>
+		              	</div>
+              		</div> 
+              		<div ng-repeat="(selectedCurrency,value) in currency" ng-if="obj.report&&value" class="col-xs-12 shadow-z-1 bg-white m-t">
+						<div class="col-xs-12 no-padding">
+			                 <div class="row"> 
+				                 <div class="col-xs-12 no-padding">
+					                  <div class="col-xs-12 col-md-12 text-center h-full p-v">
+					                  		<table class="table table-bordered table-hover bg-white">
+											    <thead>
+											      <tr>
+											        <th class="col-xs-1 text-center">#</th>
+											        <th>Course</th>
+											        <th>Customer name</th>
+											        <!-- <th>Customer type</th> -->
+											        <th>Credit ({{currency[selectedCurrency]}})</th>
+											      </tr>
+											    </thead>
+											    <tbody>
+											      <tr ng-repeat="(key, entry) in obj.report|filter:currency[selectedCurrency]">
+											        <td >{{$index+1}}</td>
+											        <td class="text-left">{{entry._id.courseName}}</td>
+											        <td class="text-left">{{entry._id.actHead.length?entry._id.actHead:'N/A'}}</td>
+											        <td class="text-right">{{entry.credit}}</td>
+											        <!-- <td>{{_id.}}</td> -->
+											      </tr>
+											      <tr>
+											      	<td colspan="3" rowspan="{{fnGetObjectLen(totalCredit)+1}}">
+											      		<span class="pull-right text-info"><b>Total</b>
+											      		</span>
+											      	</td>
+											      <!-- </tr> -->
+											      <!-- <tr ng-repeat="(key,value) in totalCredit" ng-if="value"> -->
+											      	<td class="text-right">
+											      		 {{totalCredit[currency[selectedCurrency]]}}
+											      		
+											      	</td>
+											      </tr>
+											    </tbody>
+											</table>
+					                  </div>
+				              	 </div>
+			              	 </div>
+		              	</div>
+              		</div> 	
+
+
+				</div>
+			</div>
+		</div>
+	</div>
+</div>

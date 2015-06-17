@@ -1,0 +1,26 @@
+<div>
+	<div ng-if="answerType=='singleAnswer'">
+		<!-- <paper-radio-group selected="" style="margin-top:-15px;" >
+			<paper-radio-button class="col-xs-12 m-h-lg" ng-repeat="option in options" radio-change="" value="{{option.Name}}"  radio-model="selectedAnswer[0]" ng-disabled="dbAnswer.length" ng-checked="dbAnswer[0]==option.Name"  ng-if="option.value"  name="{{option.value}}" label="{{option.value}}"></paper-radio-button>
+
+		</paper-radio-group> -->
+		<div class="radio radio-success">
+			<label ng-repeat="option in options" class="col-xs-12 m-h-lg m-v" ng-if="option.value.length>0">
+				<input  ng-disabled="dbAnswer.length" ng-checked="dbAnswer[0]==option.Name" value="{{option.Name}}" name="{{options}}" ng-model="selectedAnswer[0]"  type="radio" >
+				{{option.value}}
+			</label>
+	    </div>
+
+		
+	</div>
+
+	<div ng-if="answerType=='multiAnswer'">
+		<!-- <paper-checkbox class="col-xs-12 m-h-lg p" ng-disabled="dbAnswer.length" ng-checked="fnCheckTicked(option.Name)" ng-repeat="option in options" check-model="selectedAnswer[$index]" label="{{option.value}}" ng-if="option.value" value="{{option.Name}}"></paper-checkbox> -->
+		<div class="checkbox checkbox-success">
+			<label ng-repeat="option in options" class="col-xs-12 m-h-lg p" ng-if="option.value.length>0">
+				<input ng-disabled="dbAnswer.length" ng-checked="fnCheckTicked(option.Name)" ng-model="thisval[$index]" ng-change="thisval[$index]?selectedAnswer[$index]=option.Name:selectedAnswer[$index]=''" type="checkbox">
+				{{option.value}}
+			</label>
+		</div>
+	</div>
+</div>

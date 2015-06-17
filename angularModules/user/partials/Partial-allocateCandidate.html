@@ -1,0 +1,139 @@
+<div class="h-full m-t-n" tabindex="-1" style="width:101%;height:100%;">
+  <div class="row"> 
+    <div class="panel-content  bg-light">
+      <div class="panel-body no-padding">
+
+<!-- Area to load the users -->
+ <div style="margin-top:130px;" class="col-xs-10 col-xs-offset-1  col-md-8 col-md-offset-2  no-padding" ng-show="orderFormList&&!orderFormList.length">  <div class="col-xs-12 m-r"> 
+  <div class="alert alert-dismissable alert-danger">
+      <strong translate="{{'There are no any approved users exists.!'|translate}}"></strong> 
+</div></div></div>
+<div class="row p-v" >
+
+ <div class="col-xs-10 col-xs-offset-1  col-md-8 col-md-offset-2  no-padding bg-white">
+<!--   <div > -->
+<!-- <pre>{{orderForm}}</pre> ng-if="fnStatusBasedFilter(course)"-->
+  <div class="col-xs-12 no-padding  bg-light" ng-repeat="(courseName, userLists) in courseBasedUserList"><!-- ng-repeat="(key, course) in orderForm.orderDetails" -->
+    <span class="col-xs-12 m-v-md font-bold no-padding" style="text-transform:uppercase;">{{courseName}} </span>
+
+    <div class="col-xs-12 shadow-z-1 bg-white">
+        <!--  <div class="row m"> -->
+                <div class="col-xs-12 no-padding">
+                 <div class="row"> 
+                 <div class="col-xs-12 no-padding">
+                  <div class="col-xs-4 col-md-2 text-center h-full p-v">
+                 <!--    <div class="col-xs-12" style="padding-top:5px;"> -->
+                      <div class="checkbox no-padding">
+                        <label>
+                          <input ng-model="selectAll" value="true" ng-change="checkAll(selectAll,userLists[0])"  type="checkbox">Select All
+                        </label> <!--  -->
+                      </div>
+                  <!--   </div> -->
+                  </div>
+                  <div class="col-xs-8 col-md-10 text-center h-full p-v ">
+                      <button class="btn btn-success baab-btn pull-right" translate="{{'Allocate to Batch'|translate}}" ng-click="CallEnrollUserModalByCourse('',userLists,'bulk')" data-ng-disabled=""></button>
+            
+            <button ng-click="fnCreateBatch()" class="btn btn-success baab-btn pull-right" translate="{{'Create a New Batch'|translate}}"></button></div>
+                 
+                </div>
+              </div>
+              </div>
+        <!--Filter the users who have status Approved using ng-if-->
+            <div class="col-xs-12 no-padding" ng-repeat="userList in userLists">
+
+            <div class="col-xs-12 p-sm no-padding" ng-if="mentee.status=='Approved'" ng-init="viewBox = true" ng-repeat="mentee in userList.userInfo" style="margin-bottom:0px;">
+            <div style="cursor: pointer;">
+                <div class="row">
+                  <div class="col-xs-12 no-padding b b-light" style="margin-bottom:none;">
+                    <div class="col-xs-3 col-md-2 text-center h-full p-v" style="display:table-cell;">
+                      <div class="checkbox" style="margin-left:7px;" ng-if="mentee.status != 'approved'">
+                            <label>                     
+                                <input type="checkbox" ng-model="mentee.checkedStatus">
+                            </label>
+                      </div>
+                        <img height="100" class="img-resposive p-xs" ng-if="mentee.userPic.length" src="{{mentee.userPic}}">
+                       <i  ng-if="!mentee.userPic.length" class="mdi-action-assignment-ind text-2x  random-background-color img-circle p-xs"></i>
+                       <div class="co-xs-12 m-b-xs text-center m-t-xs">
+                          <span  class="label label-warning">{{mentee.status}}</span>                               
+                        </div>
+                    </div>
+                     
+                    <div class="col-xs-9 col-md-10" style="display:table-cell;">
+                      <div class="row p-v-xs">               
+                      
+                      <div class="col-xs-10 col-md-11">                        
+                          <div class="p b-light text-1x" >
+                                        <div>
+                                          <div class="col-xs-12 m-h-n">
+                                            <div class="pull-left">{{mentee.firstName}}&nbsp;{{mentee.lastName}}</div>
+                                            <div class="pull-right">                                        
+                                            </div>
+                                          </div>
+                                          <div class="col-xs-12 m-h-n">
+                                            <i class="fa fa-at font-bold"></i>&nbsp;{{mentee.eMail}}
+                                          </div> 
+                                          <div class="row m-t am-fade n-padding" ng-show="mentee.showDetails">
+                                            <div class="col-xs-6 no-padding m-t">
+                                                <div class="col-xs-12 m-xs no-padding" ng-if="funCheckExludeList(key)"  ng-repeat="(key,value) in mentee">
+                                                  <strong class="col-xs-7 text-u-c text-sm" ng-if="key!='checkedStatus'">{{key}}<span class="pull-right">:</span></strong>
+                                                  <span class="col-xs-5" ng-if="key != 'contactNoMob' && key != 'fax' && key !='contactNoLandline' && key!='checkedStatus'" >{{value | date}}</span>
+                                                  <span class="col-xs-5" ng-if="key == 'contactNoMob'">{{value}}</span>
+                                                  <span class="col-xs-5" ng-if="key == 'fax'">{{value}}</span>
+                                                  <span class="col-xs-5" ng-if="key == 'contactNoLandline'">{{value}}</span>
+                                                </div>
+                                            </div>
+                                            <div class="col-xs-6">
+                                              <a href="{{mentee.passportCopy}}" ng-if="mentee.passportCopy" target="_blank">
+                                                <img class="col-xs-12 img-responsive img-thumbnail" src="{{mentee.passportCopy}}">
+                                              </a>
+                                            </div>
+                                          </div>                                   
+                                        </div>
+                                      <div class="col-xs-12">
+                                        <span>
+                                          <strong></strong>
+                                        </span>                                      
+                                      </div>
+
+
+                          </div>
+                    </div>
+
+                    <div class="col-xs-2 col-md-1 text-right">
+                      <span ng-model="mentee.$index"></span>
+                      <button class="btn no-padding" ng-click="CallEnrollUserModalByCourse($index,userList,'single')" bs-tooltip data-placement="left" data-title="{{'Enroll this candidate'|translate}}">
+                        <i class="mdi-social-person-add text-lg"></i>
+                      </button>
+
+                      <button class="btn no-padding" >
+                          <i class="mdi-navigation-unfold-more text-lg" ng-show="!mentee.showDetails" ng-click="mentee.showDetails = true" bs-tooltip  data-title="Expand and view details"></i>
+                           <i class="mdi-navigation-unfold-less text-lg" ng-show="mentee.showDetails" ng-click="mentee.showDetails = false" bs-tooltip  data-title="Show less details"></i>
+                      </button>
+
+                    </div>
+
+                      </div>
+
+                    </div>
+                  </div>
+                </div>       
+                   </div>
+              </div>
+            </div>
+              </div>
+     </div>
+   </div><!--ngRepeat child ends-->
+   </div><!--ngRepeat parent ends-->
+</div>
+  </div>
+
+</div>
+<!-- **End**        -->
+
+
+
+<!--       </div>    -->   
+    </div>
+  </div>
+
+</div>

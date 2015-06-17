@@ -1,0 +1,31 @@
+
+<div>
+	<div class="col-xs-12">
+		<div ng-if="startTest && !examFinished && isMentee" class="pull-right">
+			<flip-clock countdown="true" count-down-time="countDownTime"></flip-clock>
+		</div>
+		<percent-indicator ng-if="examFinished" show-percentage="true" total-value="dataValue.value.mark.totalMark" obtain-value="courseElement.markScored" ng-model="form"></percent-indicator>
+
+		<div ng-hide="startTest==true" class="col-xs-12 text-center">
+			<div class="btn btn-warning"  ng-click="startTimer()">Click to Start Test<div class="ripple-wrapper"></div>
+         	</div>
+        </div>
+		<div ng-if="startTest">
+		<div  ng-repeat="question in dataValue.value.testModel">
+				
+				
+					<test-question-view  data="{{fnFormatObj(question)}}" index="innerIndex" multi-answer="true" question-response="questionAnswer[start+$index]" course-element="courseElement"></test-question-view>
+
+
+		</div>
+
+		
+        <div class="col-xs-12 text-center" ng-if="noOfQuestions==stop">
+			<div ng-if="isMentee&&!examFinished" class="btn btn-danger pull-right" ng-click="submitModalshowModal()" translate="{{'Submit'|translate}}"><div class="ripple-wrapper"></div>
+         	</div>
+
+        </div>
+        </div>
+		
+	</div>
+</div>

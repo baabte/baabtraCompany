@@ -1,0 +1,33 @@
+<div class="modal" tabindex="-1" role="dialog">
+  <div class="modal-dialog modal-lg">
+    <div class="modal-content">
+      <div class="modal-header">
+      	<div class="pull-right hidden-xs w">
+    <div class="input-group">
+      <span class="input-group-btn">
+        <button type="submit" class="btn btn-sm no-bg btn-icon no-shadow no-padder"><i class="ti-search"></i></button>
+      </span>
+      <input type="text" ng-model="SearchIcon" class="form-control input-sm no-bg no-border" placeholder="{{'Search...'|translate}}">
+    </div>
+  </div>
+        <h4 class="modal-title text-primary" translate="{{'Choose Your Icon'|translate}}"></h4>
+      </div>
+      <div class="modal-body">
+      	<div class="box">
+      	        <div class="box-row">
+          <div class="box-cell scrollable hover">
+            <div class="box-inner p p-h-sm">
+              <!-- mail list -->
+              
+              <div class="list-group list-group-md no-border no-radius no-margin">
+				<div ng-click="setIcon(icon);$hide()" ng-mouseover="Over=true" ng-mouseleave="Over=false" style="cursor: pointer;" ng-repeat="icon in IconName | filter:SearchIcon" class="m-b-lg m-l pull-left" ><i class="ui-icon fa {{icon}} ui-iconnfo text-lg" ng-class="{'b-2x ui-iconnfo bg-success':Over}"></i></div>
+              </div>
+              <!-- / mail list -->
+            </div>
+            </div>
+          </div>
+        </div>
+	</div>
+	</div>
+      	</div>
+      	</div>

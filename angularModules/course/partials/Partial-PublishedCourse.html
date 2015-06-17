@@ -1,0 +1,149 @@
+ <script type="text/ng-template" id="nestedBranch.html">
+ <a ng-click="searchCoursesAvailable(branch.id,'Branches')">{{branch.id}}</a>   
+      <ul class="dropdown-submenu" ng-if="branch.childrenObj" > 
+            <li ng-repeat="branch in branch.childrenObj" ng-include="'nestedBranch.html'"></li>
+
+     </ul>
+              
+</script>
+<script type="text/ng-template" id="nestedDomain.html">
+<a ng-click="searchCoursesAvailable(node._id,'Domains')">{{node._id}}</a>
+                    <ul class="dropdown-submenu" ng-if="node.childrenObj" > 
+                          <li ng-repeat="node in node.childrenObj" ng-include="'nestedDomain.html'"> </li>
+                 
+                      </ul>
+</script>
+
+  <div class="panel b-t b-00C853 bg-light dk">
+    <div set-sub-heading-and-background-color
+     class="panel-heading font-bold text-white  p baab-shadow">Published Course</div>
+    <div  class="panel-body">
+      <div class="row">
+        <div class="col-xs-3">
+            <input class="form-control" float-label id="focusedInput" type="text" ng-model="searchCourse" ng-change="searchCoursesAvailable(searchCourse, '')"  placeholder="Search for a course" >
+        </div>
+        <div class="col-xs-6 text-center m-v">
+          <div class="btn btn-raised btn-sm btn-material-purple-500" ng-click="showNavMenu=!showNavMenu; searchCourse=''">
+            <i class="mdi-navigation-menu"></i>Browse Course
+          </div>
+        </div>
+        <div class="col-xs-3 m-v">
+          <div class="btn-group pull-right" >
+               <button type="button" class="btn btn-xs btn-material-purple-500" ng-click="prevOne()"  title="Previous" ng-disabled="prevButtondisabled" ><i class="fa fa-fw fa-angle-left"></i><div class="ripple-wrapper"></div></button>
+              <button type="button" class="btn btn-xs btn-material-purple-500" ng-click="nextOne()" ng-disabled="publishedCourses.courseLength<12" title="Next"><i class="fa fa-fw fa-angle-right"></i><div class="ripple-wrapper"></div></button>
+           </div>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-xs-12" ng-if="showNavMenu"  ng-class="{'am-fade-and-slide-top ':showNavMenu,'am-fade-and-slide-top ':!showNavMenu}">
+       <div class="col-xs-6 col-ls-6 col-sm-8 col-xs-8 p" style="float:none;margin: 0 auto;">
+            <ul class="nav nav-pills nav-tabs">
+              <li class="dropdown" >
+               <a  data-toggle="dropdown" class="dropdown-toggle" >
+               <span translate="{{'Course Domain'|translate}}"></span> <b class="caret"></b></a>
+                <ul class="dropdown-menu vertical-scroll">  
+                 <li ng-repeat="node in domainTree" ng-include="'nestedDomain.html'" >
+                  </li>          
+                </ul>         
+              </li>
+
+              <li class="dropdown" >
+               <a data-toggle="dropdown" class="dropdown-toggle" >
+               <span translate="{{'Technologies'|translate}}"></span> <b class="caret"></b></a>
+                  <ul class="dropdown-menu vertical-scroll"> 
+                    <li ng-repeat="tech in technologies" ng-click="searchCoursesAvailable(tech,'Technologies')" ><a>{{tech}}</a>   
+                    </li>
+                   </ul> 
+             </li>
+              <li class="dropdown" >
+                 <a  data-toggle="dropdown" class="dropdown-toggle" >
+                 <span translate="{{'Branches'|translate}}"></span> <b class="caret"></b></a>
+                  <ul class="dropdown-menu vertical-scroll"> 
+                     <li ng-repeat="branch in branchDetails" ng-include="'nestedBranch.html'"   >
+                    </li> 
+                  </ul>
+              </li>
+              <li class="dropdown" >
+                 <a  data-toggle="dropdown" class="dropdown-toggle" >
+                 <span translate="{{'Mode of Course'|translate}}"></span> <b class="caret"></b></a>
+                  <ul class="dropdown-menu">
+                     <li ng-click="searchCoursesAvailable('online','Delivery')" ><a translate="{{'Online'|translate}}"></a></li>
+                     <li ng-click="searchCoursesAvailable('offline','Delivery')"><a translate="{{'Offline'|translate}}"></a></li>
+                  </ul>  
+               </li>
+              <li class="dropdown" >
+               <a  data-toggle="dropdown" class="dropdown-toggle" >
+               <span translate="{{'Tags'|translate}}"></span> <b class="caret"></b></a>
+                  <ul class="dropdown-menu vertical-scroll" > 
+                    <li ng-repeat="tag in taggs" ng-click="searchCoursesAvailable(tag,'Tags')" ><a>{{tag}}</a>   
+                    </li>
+                   </ul> 
+             </li>
+             <li class="dropdown" >
+               <a  data-toggle="dropdown" class="dropdown-toggle" >
+               <span translate="{{'Designation'|translate}}"></span> <b class="caret"></b></a>
+                  <ul class="dropdown-menu vertical-scroll" > 
+                    <li ng-repeat="desig in Designation" ng-click="searchCoursesAvailable(desig,'Designation')" ><a>{{desig}}</a>   
+                    </li>
+                   </ul> 
+             </li>
+              <!-- <li><a>Course Duration</a></li> -->
+
+            </ul>
+       </div>   
+      </div>
+      </div>
+     
+      <div class="row">
+                   <div class="col-xs-12"  >
+           <div  masonry='{ "transitionDuration" : "0.8s" , "itemSelector" : ".tile"}'>
+
+           <div masonry-tile class="tile col-xs-12 col-sm-4 col-md-4 col-lg-3 pull-left masonry-brick" ng-repeat="course in publishedCourses.courses">            
+
+            <div class="panel course-box" >
+                 <!--  <div class="ribbon">
+                      <a href="#">Fork me on GitHub</a>
+                  </div> -->
+                 
+                 <div class="p text-right">
+
+                   <!-- <button ng-click="deleteCourseDetails(course._id.$oid)" class="btn btn-default pull-right no-margin"><i class="mdi-action-delete text-lg " ></i></button>
+
+                   <button ng-click="editCourse(course._id.$oid)" class="btn btn-default pull-right no-margin"><i class="mdi-image-edit text-lg" ></i></button> -->
+                  
+                   <a ng-if="course.companyId.$oid==companyId" data-placement="bottom-right" data-html="true" bs-dropdown="data.courseDropdown"><i class="mdi-navigation-more-vert text-lg" ></i></a>
+
+                 </div>
+                 <div class="panel-body" ng-click="viewCourseDetails(course._id.$oid)" style="cursor:pointer; cursor: hand;">       
+                           <div class="text-center">
+                              <img src="{{ course.courseImg }}" >
+                           </div>
+                           <div class="font-bold text-black p-v-xs m-h-sm">{{course.Name}}</div>
+                           <div class="text-black  course-description text-muted content-limiter" ng-bind-html="course.courseDetails[0].value"></div>
+                      
+                 </div>
+            
+           </div>
+           </div>
+           </div>
+          </div> 
+      </div>
+          
+
+        <div class="col-sm-8"  ng-hide="publishedCourses.courses.length||notfoundCourse" >
+            <div id="alerts-container" class="animated fadeIn"  >
+                
+                 <div class="alert alert-dismissable alert-danger animated fadeIn">
+                 <button type="button" class="close" data-dismiss="alert">×</button>
+               <strong translate="{{'Not Found!'|translate}}"></strong><span translate="{{'No Matching Courses Found.'|translate}}"></span>
+               </div>
+            </div>    
+        </div>       
+  
+      </div>
+
+ 
+</div>
+  
+
+ 

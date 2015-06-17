@@ -1,0 +1,111 @@
+<div class="col-sm-12 ">
+    <div class="font-bold" translate="{{'Professional Experience'| translate}}"> 
+      <hr>
+  </div>
+  
+      <div>
+        <div class="col-sm-2 form-group p-xs">
+            <input type="text" class="form-control" xt-validate  placeholder="{{'Company'| translate}}" name="company" ng-pattern="AlfaPattern" msg-pattern="Enter a Valid Company Name" ng-model="tableData.company" xt-validate >
+        </div>
+        <!-- {{tableData.company}} -->
+        <div class="col-sm-2 form-group p-xs">
+            <input type="text" class="form-control" xt-validate  placeholder="{{'Designation'| translate}}" name="designation" ng-pattern="AlfaPattern" msg-pattern="Enter a Valid Designation" ng-model="tableData.designation" xt-validate >
+        </div>
+        <!-- {{tableData.designation}} -->
+        <div class="col-sm-2 form-group p-xs ">
+          <input type="text" class="form-control ng-pristine ng-valid" ng-model="tableData.fromDate" name="fromDate" data-date-format="dd-MM-yyyy"  data-max-date="" placeholder="{{'From'| translate}}" xt-validate  msg-pattern="Enter a Valid Joining date" bs-datepicker="" autocomplete="off">
+        </div>
+        <!-- {{tableData.fromDate}} -->
+        <div class="col-sm-2 form-group p-xs">
+
+          <input type="text" class="form-control ng-pristine ng-valid" ng-model="tableData.toDate" name="toDate" msg-pattern="Enter a Valid Date" data-date-format="dd-MM-yyyy" data-min-date="" xt-validate placeholder="{{'To'| translate}}" bs-datepicker="">
+          <!-- {{tableData.untilDate}} -->
+        
+
+        </div>
+        <!-- <div class="col-sm-2 form-group p-xs">
+        <span ng-show="professionalFilled" ng-click="addFormField(tableData,userRegistrationForm)" class=" col-sm-1  fa fa-plus-circle  text-2x"></span>
+      </div> -->
+      <div class="col-sm-2 form-group p-xs">
+      <button type="button" ng-disabled="tableData.company==undefined||tableData.designation==undefined||tableData.fromDate==undefined||tableData.toDate==undefined" ng-click="addFormField(tableData)" class="btn btn-sm btn-success">
+        <i class="glyphicon glyphicon-plus">
+        </i><span translate="{{'Add'| translate}}"> </span>
+      </button>
+    </div>
+     <!--  <div class="col-sm-12">
+
+
+      <input class="col-sm-3" ng-repeat="field in table.fields track by $index" type='text' ng-model='table.fields[$index]' placeholder='Field:'>
+      </div> -->
+        
+    <table st-table="proExperienceCollection" st-safe-src="rowCollection" class="panel panel-default table table-striped">
+      <thead>
+      <tr>
+        <th translate="{{'Company'| translate}}"></th>
+        <th translate="{{'Designation'| translate}}"></th>
+        <th translate="{{'From'| translate}}"></th>
+        <th translate="{{'To'| translate}}"></th>
+        <th></th>
+      </tr>
+    </thead>
+    <tbody>
+            <tr ng-repeat="row in proExperienceCollection" class="ng-scope">
+        <td class="ng-binding">{{row.company}}</td>
+        <td class="ng-binding">{{row.designation}}</td>
+        <td data-date-format="dd-MM-yyyy" class="ng-binding">{{row.fromDate}}</td>
+        <td class="ng-binding">{{row.toDate}}</td>
+        <td>
+          <button type="button" ng-click="removeProExperience(row)" class="btn btn-xs btn-default">
+            <i class="fa fa-times"></i>
+          </button>
+        </td>
+      </tr>
+      </tbody>
+    </table>
+
+
+</div>
+
+
+
+<div class="col-sm-12 ">
+    <div class="font-bold" translate="{{'Social Profiles'| translate}}"> 
+     <hr>
+  </div>
+    
+    <div class="input-group m-b">            
+            <input type="text" name="facebook" msg-pattern="Please enter valid url" ng-model="formData.socialProfiles.facebook" class="form-control"xt-validate placeholder="{{'Facebook profile url'| translate}}" ng-pattern="urlPattern" indicate-val="facebook">
+    </div>
+   
+    
+    
+    <div class="input-group m-b">            
+            <input type="text" name="Google+" msg-pattern="Please enter valid url" ng-model="formData.socialProfiles.gplus" class="form-control" xt-validate placeholder="{{'Google+ profile url'| translate}}"  ng-pattern="urlPattern"  indicate-val="google">
+    </div>
+    
+
+	
+   	<div class="input-group m-b">     		
+     		<input type="text" name="Twitter" msg-pattern="Please enter valid url" ng-model="formData.socialProfiles.twitter" class="form-control" xt-validate placeholder="{{'Twitter profile url'| translate}}"  ng-pattern="urlPattern"  indicate-val="twitter">
+	</div>
+   
+    
+	<div class="input-group m-b">
+     		<input type="text" name="LinkedIn" msg-pattern="Please enter valid url" ng-model="formData.socialProfiles.linkedin" class="form-control" xt-validate placeholder="{{'LinkedIn profile url'| translate}}"  ng-pattern="urlPattern"  indicate-val="linkedin">
+	</div>
+   
+
+</div>
+              
+
+<div class="col-sm-12 form-group row m-h-n clearfix">
+    <div class="col-xs-6">
+        <a ui-sref="home.main.userRegistration.step2" class="btn btn-block btn-info"><span class="glyphicon glyphicon-circle-arrow-left"></span> <span translate="{{' Previous Section'| translate}}"> </span>
+        </a>
+    </div>
+<div class="col-xs-6">
+    <a ui-sref="home.main.userRegistration.step4" class="btn btn-block btn-info" ng-disabled="userRegistrationForm.$invalid">
+    <span translate="{{'Next Section'| translate}}"></span> <span class="glyphicon glyphicon-circle-arrow-right"></span>
+    </a>
+</div>
+</div>

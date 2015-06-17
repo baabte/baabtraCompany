@@ -1,0 +1,106 @@
+<div class="col-xs-12">
+	<div class="row">
+		<div class="tab-container col-xs-12">
+		 	<div class="panel b-t b-00C853  dk" set-sub-heading-and-background-color>
+		 		<div set-sub-heading-and-background-color class="panel-heading font-bold text-white  p baab-shadow" translate="{{'Batch Attendance'|translate}}">
+		 		
+		 		</div>
+				
+				<div class="panel-body col-xs-12 bg-white p-sm b-b-danger b-b-3x no-padding fl-parent-height-main">
+
+					<div class="col-xs-12 col-sm-12 col-md-4  shadow-z-2 h-full" set-parent-height  parent-cl-name="'fl-parent-height-main'">
+						<div class="row">
+
+
+							<div class="col-xs-12 col-sm-12 col-md-12">
+								<div class="formgen-dropdown m-t m-b" >
+									<!-- added by lijin on 14-4-2015 -->
+									<div multi-selectable selection-mode="single"  ng-show="batchObj.materialList.length" input-model="batchObj.courseTimeline" output-model="batchObj.selectedTlPoint" button-label="Name" item-label="Name"  tick-property="ticked" helper-elements="filter" default-label="Please select a {{selectedDurationName}}">	
+									</div>
+								</div>
+								<div class="formgen-dropdown m-t m-b" >
+									<!-- input model edited by lijin batchObj.materialList on 14-4-2015 -->
+										<div multi-selectable selection-mode="single"  ng-show="filteredMeterials.length" input-model="filteredMeterials" output-model="batchObj.selectedCourseMaterial" button-label="Name" item-label="Name"  tick-property="ticked" helper-elements="all none reset filter" default-label="Please select a course material">	
+										</div>  <!-- on-item-click="onItemClick(data)" -->
+										<div ng-if="batchObj.materialList.length==0" class="animated fadeIn">
+											<!-- <i class="fa fa-spiner fa-spin text-lg text-info"></i> -->
+									        <div class="alert ng-scope am-fade alert-button bg-danger lt text-white no-margin" ng-class="[type ? 'alert-' + type : null]" style="display: block;"><!-- ngIf: dismissable -->
+									        
+									          <strong class="ng-binding" translate="{{'Not Found!'|translate}}"></strong>&nbsp;
+									          <span translate="{{'There are no any materials with attendance tracking enabled under this course'|translate}}"></span>
+									        </div>
+
+										</div>
+										<div ng-if="status==false" class="animated fadeIn">
+											<!-- <i class="fa fa-spiner fa-spin text-lg text-info"></i> -->
+									        <div class="alert ng-scope am-fade alert-button bg-danger lt text-white no-margin" ng-class="[type ? 'alert-' + type : null]" style="display: block;"><!-- ngIf: dismissable -->
+									        
+									          <strong class="ng-binding" translate="{{'Not Found!'|translate}}"></strong>&nbsp;
+									          <span translate="{{'There are no any course materials added in this batch.'|translate}}"></span>
+									        </div>
+
+										</div>
+								</div>
+
+							</div>
+
+							<!-- </div>
+
+						
+						<div class="row"> -->
+							<div class="col-xs-12 col-sm-12 col-md-12 m-t m-l pull-left">
+								
+									<!-- <div masonry-tile class="tile col-xs-12 col-sm-6 col-md-6" data-ng-repeat="course in batchObj.selectedCourseList"> -->
+				          				<!-- <course-element-preview course-id="selectedCourse" preview-data="batchObj.selectedCourseMaterial[0].courseElement"></course-element-preview> -->
+				        			<!-- </div> -->
+				        	<material-preview data="batchObj.selectedCourseMaterial[0].courseElement"></material-preview>
+							</div>
+						</div>
+					</div>
+					<div class="col-xs-12 col-sm-12 col-md-8">
+						<div class="row">
+							<div class="col-xs-12 col-sm-12 col-md-12 m-t-xs">
+
+								<batch-view ng-if="batchObj.batchDetails" shadow="false" batch="batchObj.batchDetails"></batch-view>
+								
+
+							</div>
+							
+						</div>
+						<div class="divider"> </div>
+						<div class="row">
+							<div class="col-xs-12 col-sm-12 col-md-12 m-t-xs">
+														<!--directive to load mentee list of selected batch-->
+									
+								<div class="row col-xs-12 m-t"><span class="col-xs-12 m-b text-lg b-success b-b b-2x"><label floating-label translate="{{'Mentees under this batch'|translate}}"></label></span></div>
+									<div class="row col-xs-12 m-b" ng-show="batchObj.selectedCourseMaterial[0].userList.length">
+									<form class="pull-right">
+
+		                         		<div class="form-control-wrapper"><input type="text" ng-model="searchText" class="form-control col-xs-8 ng-pristine ng-valid empty" placeholder="Search"><span class="material-input"></span></div>
+		                        	</form>
+		                        </div>
+		                        <div class="row col-xs-12">
+
+											<attendance-mentee-list page-type="'batchAttendance'" time-line-obj="batchObj.selectedCourseMaterial[0]" search-text="searchText" ng-model="batchObj.selectedList"> </attendance-mentee-list>
+											<!-- <div class="text-center" ng-if="!batchObj.selectedCourseMaterial[0]">
+												<i class="fa fa-spinner fa-spin"></i>
+											</div> -->
+								</div>
+								<div class="row col-xs-12 m-b" ng-if="!batchObj.selectedCourseMaterial[0]">
+											<!-- <i class="fa fa-spiner fa-spin text-lg text-info"></i> -->
+									        <div class="alert ng-scope am-fade alert-button bg-danger lt text-white no-margin" ng-class="[type ? 'alert-' + type : null]" style="display: block;"><!-- ngIf: dismissable -->
+									        
+									          <strong class="ng-binding" translate="{{'Not selected!'|translate}}"></strong>&nbsp;
+									          <span translate="{{'Please select a course material to load the users'|translate}}"></span>
+									        </div>
+
+										</div>
+								
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>

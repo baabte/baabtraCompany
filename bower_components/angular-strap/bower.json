@@ -1,0 +1,15 @@
+{
+  "name": "angular-strap",
+  "main": ["angular-strap.js", "angular-strap.tpl.js"],
+  "version": "1.2",
+  "homepage": "https://github.com/baabte/baabtra",
+  "description": "angular strap",
+  "license": "MIT",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ]
+}

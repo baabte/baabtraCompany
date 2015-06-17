@@ -1,0 +1,22 @@
+
+
+<div class="modal  fade w-auto-xs" tabindex="-1" role="dialog" >
+  <div class="modal-dialog modal-xl">
+    <div class="modal-content">
+      <div class="modal-body">
+        <div class="box">
+           <div data-placement="top" data-type="info" data-html="true" data-animation="am-fade-and-scale" bs-tooltip="PriceConfigTT"  class="form-group">
+              <form name="emailform" ng-submit="submitEmailForLogin(userEmail);$hide()" role="form" xt-form novalidate>
+               <div class="col-sm-9" >
+                    <input type="text" xt-validate name="email" ng-pattern="emailPattern" class="form-control" ng-model="userEmail" id="email"  placeholder="{{'Enter your Email'|translate}}" msg-pattern='{{emailMsg}}' ng-minlength="1">
+               </div>
+              <div class="col-sm-3" >
+                 <button type="submit" class="btn btn-warning baab-btn" style="margin:-1px 1px" ng-disabled="emailform.$invalid||userEmail===undefined||userEmail===null" translate="{{'Continue'|translate}}"></button>
+              </div>
+              </form>
+           </div>
+      </div>
+    </div>   
+  </div>
+</div> 
+</div>      

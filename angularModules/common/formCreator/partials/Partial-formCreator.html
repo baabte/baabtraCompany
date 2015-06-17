@@ -1,0 +1,47 @@
+<div class="col-md-12">
+	<div class="row  bg-white">
+		<div class="col-xs-6  bg-white">
+			<div class="col-xs-12 no-padding m-t" ng-if="roleId == data.roleId">
+		            <label class="col-xs-2 control-label">Form name</label>
+		            <div class="col-xs-10">
+		                <input type="text" ng-model="data.form.formName" class="form-control" required placeholder="Form name">
+		            </div>
+			</div>
+			<!-- form creator -->
+			<div class="col-xs-12 m-t" >
+				<div acf-edit-form acf-model="data.formSchema" acf-fields="data.formSchema.fields"></div>
+			</div>
+
+
+			<div class="col-xs-12" ng-if="data.formSchema.fields.length">
+				<a class="btn btn-info" ng-click="saveFormDetails()">Save form</a>
+			</div>
+
+		</div>
+
+		<div class="col-xs-6 p-v">
+			<div class="col-xs-12 p bg-info lt shadow-z-1 text-white b link" ng-click="loadExitingCustomForms()">
+				<span ng-if="!data.forms.length">Click show existing custom form(s)</span>
+				<span ng-if="data.forms.length">Existing custom form(s)</span>
+			</div>
+
+			<div ng-if="roleId == data.roleId"  class="col-xs-12 shadow-z-1 p b am-fade-and-slide-top" ng-click="editForm(form)" ng-repeat = "form in data.forms">
+				<span class="text-u-c link"  bs-tooltip data-title="Click to edit {{form.formName}}" data-placement="left">{{form.formName}}</span>
+				<span class="pull-right"  bs-tooltip data-title="Click to remove {{form.formName}}" data-placement="left" ng-click="removeForm(form, $index)"><a href=""><i class="fa fa-trash text-lg"></i></a></span>
+			</div>
+			<div ng-if="roleId != data.roleId"  class="col-xs-12 shadow-z-1 p b am-fade-and-slide-top" ng-click="addMoreFeilds(form)" ng-repeat = "form in data.forms">
+				<span class="am-fade-and-slide-top" ng-if="form._id.$oid == data.form.formId"><a href=""><i class="font-bold mdi-navigation-check text-success " style="font-weight: 700;" ></i></a></span>
+				<span class="text-u-c link"  bs-tooltip data-title="Click to add more fields" data-placement="left">{{form.formName}}</span>
+
+			</div>
+
+		</div>
+	</div>
+
+	<div class="row bg-white">
+		<!-- created form view -->
+			<div class="col-xs-12" ng-show="data.formSchema.fields.length">
+				<div acf-form input-model="data.formSchema" output-model="data.obj"></div>
+			</div>
+	</div>
+</div>

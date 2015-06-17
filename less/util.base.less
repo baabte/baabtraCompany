@@ -1,0 +1,58 @@
+.pos-rlt{
+  position: relative;
+  z-index: 1;
+}
+.pos-abt{
+  position: absolute;
+}
+.pos-fix{
+  position: fixed;
+}
+.pos-stc{
+  position: static !important;
+}
+
+.block{
+  display:block;
+}
+.block.hide{
+  display: none;
+}
+.pull-none{
+  float: none;
+}
+.inline{
+  display:inline-block;
+}
+.none{
+  display: none;
+}
+.active > .inline, 
+.active > .auto .inline{
+  display: none;
+}
+.active > .none, 
+.active > .auto .none{
+  display: inline-block;
+}
+
+.line {
+  height: 1px;
+  margin: 10px 0;
+  font-size:0;
+  overflow: hidden;
+}
+.line-dashed{
+  border-style: dashed !important;
+  background-color: transparent;
+  border-width:0;
+}
+
+.rounded{
+  border-radius: 500px;
+}
+
+.clear{
+  display:block;
+  overflow: hidden;
+}

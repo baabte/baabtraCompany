@@ -1,0 +1,26 @@
+{
+  "name": "tableExport",
+  "main": ["tableExport.js","jquery.base64.js","jspdf/libs/sprintf.js", "jspdf/jspdf.js", "jspdf/libs/base64.js"],
+  "version": "1.0",
+  "homepage": "https://github.com/baabte/baabtra",
+  "authors": [
+    "jihin <jihin@baabte.com>"
+  ],
+  "description": "package to export html to pdf, csv, excel etc.",
+  "keywords": [
+    "html",
+    "to",
+    "pdf",
+    "excel",
+    "csv"
+  ],
+  "license": "MIT",
+  "private": true,
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ]
+}

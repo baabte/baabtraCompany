@@ -1,0 +1,39 @@
+
+<div ng-class="{'shadow-z-1 set-full-height':shadow==undefined,'b set-full-height':shadow==false}" style="cursor: pointer;">
+	<div class="row bg-white">
+		<div class="col-xs-12">
+			<div class="col-xs-1">
+				<div class="p-v">	
+					<i ng-if="!menteeObj.profile.profile.userPic" class="m-t-sm hidden-xs mdi-action-assignment-ind text-2x  random-background-color img-circle p-xs pull-left"></i>
+					 <img ng-if="menteeObj.profile.profile.userPic" class="img-resposive p-xs" src="{{menteeObj.profile.profile.userPic}}"></img>
+				</div>
+			</div>
+			<div class="col-xs-8" >
+				<div class="row">
+					<div class="p b-4x b-light text-1x">
+                        <div class="font-bold text-name">{{menteeObj.profile.profile.firstName}} {{menteeObj.profile.profile.lastName}}</div>
+                        <div><i>{{menteeObj.username.userName}}</i></div>
+                        
+                        <div class="upper font-bold" ng-if="menteeObj.Name">Course : {{menteeObj.Name}}</div>
+                    </div>
+				</div>
+			</div>
+
+			<div class="col-xs-3 p-h">
+				<div class="m-t">
+					<a href="" ng-if="!specificOption" html="true" data-placement="left" bs-dropdown="actions" class="pull-right no-margin"><i class="mdi-action-list text-xl"></i><div class="ripple-wrapper"></div></a>
+
+					<a ng-if="specificOption" class="btn btn-success baab-btn " ng-click="executeFunction(actions[specificOption-1].click)" ng-bind-html="actions[specificOption-1].text"></a>
+				</div>
+			</div>
+		</div>
+	</div>   
+	<!-- <div class="col-xs-1">
+				<div class="row p">
+					<div class="col-xs-12 " ng-if="actionFlag">
+	                   <a href="" html="true" data-placement="left" bs-dropdown="actions" class="pull-right no-margin"><i class="mdi-action-list text-xl"></i><div class="ripple-wrapper"></div></a>
+	                   <a class="btn btn-success baab-btn " ng-click="executeFunction(actions[specificOption-1].click)" ng-bind-html="actions[specificOption-1].text"></a>
+     				</div>
+				</div>
+			</div> -->    
+</div>

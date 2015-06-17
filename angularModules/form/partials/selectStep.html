@@ -1,0 +1,58 @@
+<div class="col-xs-12 bg-white">
+      <div class="panel panel-body b-a">
+        <!-- <div class="panel-body"> -->
+	        <div class="col-xs-12" >
+	        	 <div  class="b-light panel-body">
+				      <div  class=" col-xs-12" > 
+				      	<div >
+				          <button ng-click="createStepModel()"  class="btn btn-warning baab-btn pull-right">Add Step</button>  
+				        </div>
+				      	<div class="col-md-6 col-xs-12 font-bold">
+				         {{customForm.formDisplayName}} Steps  &nbsp;<em>Select to Configure Step</em><hr>
+				        </div>
+				        
+				        
+				      </div>
+      				<!-- {{test}}
+      				{{customForm.formSchema}} -->
+      				<!-- customForm.formSchema[$index+2].stepName -->
+            		<div class="col-xs-12">
+
+            		  <div class="col-md-2 panel b-light panel-body m-r-md  m-b"  ng-click="status.selected = i" href ng-repeat="(i,val) in customForm.formSchema">{{val.stepName}} &nbsp  <i ng-show="status.selected==i" class="pull-right fa fa-check-circle text-primary"></i><br><a href class="pull-right fa fa-trash" ng-click="fnDeleteStep(i)"></a>
+
+            		  </div> 
+            		</div>    
+    			 </div>				        	
+			</div> 
+
+
+			<div class="form-group  m-h-n clearfix">
+			    <div class="col-xs-6 col-md-6">
+			        <button ui-sref="home.main.formCustomizer.SelectForm" class="btn btn-block btn-info"><span class="glyphicon glyphicon-circle-arrow-left"></span> Previous Section 
+			        </button>
+			    </div>
+				<div class="col-xs-6 col-md-6">
+				    <button ng-disabled="status.selected==undefined" ui-sref="home.main.formCustomizer.customizeForm" class="btn btn-block btn-info" >
+				    Configure {{customForm.formSchema[status.selected].stepName}} <span class="glyphicon glyphicon-circle-arrow-right"></span>
+				    </button>
+				</div>
+			</div>
+        </div>
+        
+        
+      <!-- </div> -->
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+

@@ -1,0 +1,63 @@
+.navbar{
+	border: none;
+	margin: 0;
+	min-height: @header-height;
+	.navbar-btn{
+		margin-top: (@header-height - 34)/2;
+	}
+	.navbar-form{
+		margin-top: (@header-height - 30)/2;
+		margin-bottom: (@header-height - 30)/2;
+	}
+	.navbar-nav > li > a{
+		padding-top: (@header-height - @line-height-computed)/2;
+		padding-bottom: (@header-height - @line-height-computed)/2;
+	}
+	.navbar-brand{
+		width: @aside-width;
+		font-size: 20px;
+		display: block;
+		height: @header-height;
+		padding:(@header-height - @line-height-computed)/2 (@header-height - @line-height-computed)/2+5;
+		&:hover{
+			text-decoration: none;
+		}
+		img{
+			max-height: 20px;
+			margin-top: -4px;
+			vertical-align: middle;
+		}
+	}
+	.navbar-img{
+		max-height: @header-height;
+		position: relative;
+		top: 0;
+		margin-top: -(@header-height - @line-height-computed)/2;
+		margin-bottom: -(@header-height - @line-height-computed)/2;
+	}
+	.navbar-text{
+		margin-top: (@header-height - @line-height-computed)/2;
+		margin-bottom: (@header-height - @line-height-computed)/2;
+	}
+	.navbar-divider{		
+		width: 1px !important;
+		height: @header-height;
+		float: left;
+		position: relative;
+		border-left: 1px solid #ccc;
+		opacity: .3;		
+	}
+	.navbar-header{
+		> button{
+			text-decoration: none;
+			font-size: 16px;
+			padding: 0 (@header-height - @line-height-computed)/2;
+			line-height: @header-height;
+			border: none;
+			background-color: transparent;
+		}
+	}
+	.navbar-collapse{
+		.box-shadow(none);
+	}
+}

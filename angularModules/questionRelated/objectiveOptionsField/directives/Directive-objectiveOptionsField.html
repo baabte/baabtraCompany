@@ -1,0 +1,21 @@
+<div class="row">
+
+	<div class="col-xs-12">
+		<div class="row">
+			<select ng-change="changeNumberingType()" placeholder="{{'Select numbering type'|translate}}" data-animation="am-fade-and-slide-top"  ng-model="selectedNumbering" ng-options="value.name for (key, value) in optionsArray" data-html="true" bs-select></select>
+		</div>
+	</div>
+	<div class="col-xs-12" ng-repeat="(key,val) in answers track by key">
+		<div class="row m-t-n">
+			<div class="m-t-n">
+			<div class="col-xs-6 m-t">
+				<input class="form-control " float-label placeholder="Option {{selectedNumbering.value[$index]}}." ng-change="ansChanged(answers[$index].value,$index)" name="option" ng-model="answers[$index].value">
+				<i class="pull-right mdi-av-playlist-add text-2x" data-placement="left" bs-dropdown="dropDown($index)"></i>
+			</div>
+			<div class="col-xs-6">
+				<textarea class="form-control" float-label  name="optionWhy" placeholder="{{'Why / Why not this answer (optional)'|translate}}" ng-model="answers[$index].why" rows="0" xt-validate style="width:100%;"></textarea>
+			</div>
+			</div>
+		</div>
+	</div>
+</div>

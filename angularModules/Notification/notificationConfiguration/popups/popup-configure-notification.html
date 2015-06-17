@@ -1,0 +1,65 @@
+<div  class="modal modal-full-width" tabindex="-1" role="dialog">
+    <div class="modal-dialog-full-width  modal-full-width">
+      <div class="modal-content">
+        <div class="p bg-info font-bold baab-shadow">
+          Design Marksheet
+        </div>
+        <div class="modal-body">
+          <!-- <pre>{{elementsOfSelectedNode}}</pre> -->
+
+          <div class="row">
+            <div class="col-xs-3 p b-r">
+              <div ng-click="data.selectedTab='manage user'" translate="{{'Manage related users'|translate}}" class="col-xs-12 p b-t b-l b-r b-b {{data.selectedTab=='manage user'?'shadow-z-1 bg-light':''}}">
+                
+              </div>
+              <div ng-click="data.selectedTab='interval'" translate="{{'Interval'|translate}}" class="col-xs-12 p b-t b-l b-r b-b {{data.selectedTab=='interval'?'shadow-z-1 bg-light':''}}">
+              </div>
+            </div>
+            <div class="col-xs-9">
+              <!-- manage user tab -->
+              <div class="col-xs-12" ng-if="data.selectedTab=='manage user'">
+                <!-- roles multi select here -->
+                <div multi-selectable ng-if="data.roles" input-model="data.roles" output-model="data.config.roles" button-label="Name" item-label="Name" tick-property="ticked" helper-elements="all none reset filter" default-label="Please Select roles">
+                </div>
+
+              </div>
+              <!-- end of manage user -->
+
+              <!-- interval tab -->
+              <div class="col-xs-12" ng-if="data.selectedTab=='interval'">
+                <div class="radio radio-success">
+                    <label>
+                      <input type="radio" required xt-validate  ng-checked="data.config.interval=='instant'" value="instant" ng-model="data.config.interval"   name="interval">
+                      <b class="font-normal" translate="{{'Instant'|translate}}"></b>
+                    </label>
+
+                    <label>
+                      <input type="radio" required xt-validate  ng-checked="data.config.interval=='daily'" value="daily" ng-model="data.config.interval"   name="interval">
+                      <b class="font-normal" translate="{{'Daily'|translate}}"></b>
+                    </label>
+
+                    <label>
+                      <input type="radio" required xt-validate  ng-checked="data.config.interval=='weekly'" value="weekly" ng-model="data.config.interval"   name="interval">
+                      <b class="font-normal" translate="{{'Weekly'|translate}}"></b>
+                    </label>
+
+                    <label>
+                      <input type="radio" required xt-validate  ng-checked="data.config.interval=='monthly'" value="monthly" ng-model="data.config.interval"   name="interval">
+                      <b class="font-normal" translate="{{'Monthly'|translate}}"></b>
+                    </label>
+                </div>
+              </div>
+              <!-- end of interval tab -->
+
+            </div>
+          </div>
+          
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-primary baab-btn" ng-click="$hide()">Cancel</button>
+
+          <button type="button" class="btn btn-success baab-btn" ng-click="saveConfiguration($hide)">Save</button>
+        </div>
+      </div>
+    </div>
+</div>

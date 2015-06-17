@@ -1,0 +1,34 @@
+{
+  "planId": "",
+  "planName": "",
+  "features": {
+    "feature1": {
+      "featureId": "",
+      "featureName": "",
+      "pricing": {
+        "price": "",
+        "units": ""
+      },
+      "billing": {
+        "years": "",
+        "months": "",
+        "days": "",
+        "totalDays": ""
+      }
+    },
+    "feature2": {
+      "featureId": "",
+      "featureName": "",
+      "pricing": {
+        "price": "",
+        "units": ""
+      },
+      "billing": {
+        "years": "",
+        "months": "",
+        "days": "",
+        "totalDays": ""
+      }
+    }
+  }
+}

@@ -1,0 +1,64 @@
+<div class="p-md m-v-md  col-xs-12">
+	<div class="shadow-z-1 pull-left col-xs-12 no-padding b" style="border:2px solid #009587;">
+		<ul class="nav nav-tabs p ">
+		  <li   role="presentation" ng-class="{'b-b b-yellow b-2x':selectedTab=='question'}" ng-click="selectedTab='question'">
+		  	<a >
+		  		<span class="text-lg font-bold">1. </span>
+		  		<span translate="{{'Question'|translate}}"></span>
+		  		<div class="col-xs-1 pull-right"><i  class="text-lg mdi-hardware-keyboard-arrow-right"></i></div>
+		  	</a>
+		  </li>
+		  <li   role="presentation" ng-class="{'b-b b-yellow b-2x':selectedTab=='answerType'}" ng-click="selectedTab='answerType'">
+		  	<a >
+		  		<span class="text-lg">2. </span>
+		  		<span translate="{{'Response  type '|translate}}"></span>
+		  		<div class="col-xs-1 pull-right"><i  class="text-lg mdi-hardware-keyboard-arrow-right"></i>
+		  		</div>
+		  	</a>
+		  </li>
+		  <li   role="presentation" ng-class="{'b-b b-yellow b-2x':selectedTab=='response'}" ng-click="selectedTab='response'">
+		  	<a >
+		  		<span class="text-lg">3. </span>
+		  		<span translate="{{'Response'|translate}}"></span>
+		  	</a>
+		  </li>
+		</ul>
+
+			
+			<div ng-show="selectedTab=='question'" class="p-xs">
+				
+    		
+    			<div class="m-v-lg">
+	    			<em class="text-muted" translate="{{'Question'|translate}}"></em>
+	      			<ng-quill-editor name="questionDesc" ng-model="feedback.question"  toolbar="true" link-tooltip="true" image-tooltip="true" toolbar-entries="font size bold list bullet italic underline strike align color background link image" required xt-validate editor-required="true" error-class="input-error"></ng-quill-editor>
+	      		</div>
+	    			
+			</div>
+			<div class="col-xs-12 pull-left" ng-show="selectedTab=='answerType'" >
+				<div class="col-xs-12 p" ng-if="feedback.type=='objective'">
+
+					<div class="radio radio-success">
+					    <label>
+					        <input type="radio" required xt-validate ng-checked="feedback.answerType=='singleAnswer'" value="singleAnswer"  ng-model="feedback.answerType"  name="answerType">
+					        <b class="font-normal" translate="{{'Single Answer'|translate}}"></b>
+					    </label>
+					</div>
+
+					<div class="radio radio-success">
+					    <label>
+					        <input type="radio" required xt-validate  ng-checked="feedback.answerType=='multiAnswer'" value="multiAnswer"  ng-model="feedback.answerType" name="answerType">
+					        <b class="font-normal" translate="{{'Multi Answer'|translate}}"></b>
+					    </label>
+					</div>
+				</div>
+			</div>
+
+
+
+			<div class="col-xs-12 pull-left"  ng-show="selectedTab=='response'">
+				<div class="col-xs-12">
+					<objective-options-field required xt-validate ng-if="feedback.type=='objective'" answers="feedback.options"></objective-options-field>
+				</div>
+			</div>
+	</div>
+</div>

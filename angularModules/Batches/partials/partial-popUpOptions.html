@@ -1,0 +1,52 @@
+<div class="modal" tabindex="-1" role="dialog">
+  <div class="modal-dialog modal-lg">
+    <div class="modal-content">
+      <form name="formCourse" class=" ng-pristine ng-valid"  > 
+      <div class="modal-header"> 
+       <button type="button" class="close" ng-click="$hide()">×</button> 
+        <h4 class="modal-title text-primary" translate="{{'Add this batch under the courses'|translate}}"></h4>
+      </div>
+      <div class="modal-body">
+        <div class="row">
+          <div class="col-xs-12">
+                    <div class="row ">
+                      <div class="col-xs-12 m-b p-v ">
+                      <u><span class="text-1x " translate="{{'This batch is currently added to the following courses'|translate}}"></span></u>
+                     </div> 
+                   </div>
+                     <div class="row">
+                      <div class="col-xs-12">
+                        <button class=" btn-material-blue-700 m-b m-r"  ng-repeat="item in existingCourses[0].course">{{item.Name}}<i class="fa fa-trash m-l" ng-click="fnRemoveCourse($index)" bs-tooltip data-title="Delete this course" ></i> </button>
+                       </div>
+                      </div>
+                  
+                  
+             
+                
+       <div class="row"> 
+           <div class="col-xs-12 col-sm-12">
+               
+                  <div class="row m-l">
+                   <div class="col-xs-12">
+                        <em class="pull-left text-E91E63" translate="{{'* Add this batch to more courses'|translate}}"></em>  
+                    <div class="col-xs-6"  data-title="Add this Batch Under" bs-tooltip >   
+                        <course-loader ng-model="Batch.newCourse" multi-select="multi" required >
+                       </course-loader>
+                     </div>
+                   </div>  
+                 </div>
+               
+           </div>  
+       </div> 
+      </div>
+      </div>    
+      </div>
+      <div class="modal-footer">
+         <button type="reset" class="btn btn-primary" translate="{{'Cancel'| translate}}" ng-click="$hide()"></button>
+        <button type="button" class="btn btn-primary" ng-click="addCoursestoBatch($hide)"  ng-disabled="formCourse.$invalid" translate="{{'Save'|translate}}" ></button>
+
+      </div>
+     </form> 
+    </div>
+  </div>
+</div>

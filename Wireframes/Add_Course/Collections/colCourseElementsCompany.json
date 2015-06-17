@@ -1,0 +1,31 @@
+{
+  "id": "",
+  "Name": "",
+  "Icon": "",
+  "menuDisplayName": "",
+  "companyId": "",
+  "courseElementTemplate": [
+     {
+      "label": "",
+      "inputType": "",
+      "validations": [],
+      "allowedValues": [],
+      "atrributes": {
+        "attr1": "",
+        "attr2": ""
+      },
+      "userConfigurable": "true/false"
+    },
+    {
+      "label": "",
+      "inputType": "",
+      "validations": [],
+      "allowedValues": [],
+      "atrributes": {
+        "attr1": "",
+        "attr2": ""
+      },
+      "userConfigurable": "true/false"
+    }
+  ]
+}

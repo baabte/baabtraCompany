@@ -1,0 +1,80 @@
+<div class="row">
+	<div class="col-sm-12">
+        <div class="panel box-shadow">
+        	<div set-sub-heading-and-background-color class="panel-heading lt" >
+            	<span class="font-bold">Jobs</span>
+          	</div>
+          	<div class="panel-body">
+          		<div class="row">
+                <div class="col-sm-12">
+                    <div class="pull-right">
+                  <div class="btn-group" style="margin-top: 4px;">
+            <button type="button" class="btn btn-xs btn-default baab-btn" ng-click="prev_one()"><i class="fa fa-fw fa-angle-left"></i></button>
+            <button type="button" class="btn btn-xs btn-default baab-btn" ng-click="next_one()"><i class="fa fa-fw fa-angle-right"></i></button>
+          </div>
+                  <div class="pull-right hidden-xs w">
+                    <div class="input-group">
+                      <span class="input-group-btn">
+                        <button type="submit" class="btn btn-sm bg-white btn-icon no-shadow no-padder">
+                          <i class="ti-search"></i>
+                        </button>
+                      </span>
+                      <input ng-model="modelSearch" type="text" class="form-control input-sm no-border" placeholder="{{'Search Jobs...'|translate}}">
+                    </div>
+                  </div>
+                  </div>
+                </div>
+          			<div class="col-md-6 col-md-12 col-sm-12" ng-repeat="Job in Jobs">
+          				<form class="form-horizontal ng-pristine ng-valid" style="cursor: pointer;">
+      					<div class="panel b-light bg-light" ng-class="{'lt':!Job.activeFlag}">
+        					<div class="panel-heading p-v-xs p-h-sm">
+                    <div class="pull-right">
+                      <a ng-click="editJobDetails(Job)" href="" class="text-muted m-r-xs" title="Edit Job"><i class="glyphicon glyphicon-edit text-lg"  ></i></a>
+                    <a href="" class="text-muted" title="Hide Job" ng-click="hideJobDetails(Job._id.$oid,Job.activeFlag)"><i class="glyphicon text-lg" ng-class="{'glyphicon-eye-open':!Job.activeFlag,'glyphicon-eye-close':Job.activeFlag}"></i></a>
+                    </div>
+        						<a href="" class="text-lg text-ellipsis" ng-click="ViewJobDetails(Job)" disabled >{{Job.jobTittle}}</a>
+        					<div>
+        					<div class="panel-body ng-hide p-sm">
+        						
+        							<div class="form-group">
+        								<div class="col-sm-3">
+      									   <i class="glyphicon glyphicon-briefcase"></i>
+      									   <span>1-6 yrs</span>
+      									</div>
+        								<div class="col-sm-2">
+      									   <i class="glyphicon glyphicon-map-marker"></i>
+      									   <span >{{Job.Location}}</span>
+      									</div>
+    								</div>
+    								<div class="form-group">
+        								<div class="col-sm-3">
+      									   <label translate="{{'Job Description'|tanslate}}"></label>
+      									</div>
+      									<div class="col-sm-9">
+      									   <label >{{Job.jobDescription | limitTo: 100}}...</label>
+      									</div>
+      								</div>
+      								<div class="form-group">
+        								<div class="col-sm-6">
+      									   <i class="fa  fa-rupee"></i>
+      									   <span >{{Job.minSalary}}</span>
+      									   <span>-</span>
+      									   <span >{{Job.maxSalary}}</span>
+      									   <span >P.A</span>
+      									</div>
+        								<div class="col-sm-6">
+        									<div class="pull-right">
+      									   <span translate="{{'Posted On:'|translate}}"></span>
+      									   <span >{{Job.createdDate | date:'dd-MM-yyyy'}}</span>
+      									   </div>
+      									</div>
+    								</div>
+        					</div>
+     	 				</div>
+     	 				</form>
+    				</div>
+          		</div>
+          	</div>
+        </div>
+	</div>
+</div>

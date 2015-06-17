@@ -1,0 +1,32 @@
+<div class="aside col-xs-4 m-h-n baab-shadow" tabindex="-1" role="dialog">
+  <div class="aside-dialog">
+    <div class="aside-content">
+        <div class="aside-title p m-r-n font-bold p-xs shadow-z-2" set-sub-heading-and-background-color translate="{{data.asideHeading|translate}}"></div>
+      <div class="aside-body m-t-n" >
+        <form name="departmentForm">
+          <div class="row">
+            <div class="col-xs-12">
+              <input id="departmentName" float-label type="text" class="form-control"  ng-model="department.name" required="" placeholder="{{'Department Name'|translate}}">
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-xs-12">
+            <div class="form-group">
+              <label  translate="{{'Department Head'|translate}}"></label>
+              <role-user-loader placeholder-value="Please select a person" role-id="3" selection-type="1" ng-model="department.Head">
+              </role-user-loader>
+            </div>
+            </div>
+          </div>
+        </form>
+      </div>
+      <div class="aside-footer">
+        <div class="row m-v-n p-xs">
+          <button type="button" class="btn btn-warning baab-btn no-margin" translate="{{'Cancel'|translate}}" ng-click="$hide()"></button>
+          <button type="button" ng-if="!data.editable" ng-disabled="departmentForm.$invalid" disabled="disabled" class="btn btn-info baab-btn no-margin" translate="{{'Create'|translate}}" ng-click="createNewDepartment(department, $hide)"></button>
+          <button type="button" ng-if="data.editable" ng-disabled="departmentForm.$invalid" disabled="disabled" class="btn btn-info baab-btn no-margin" translate="{{'Update'|translate}}" ng-click="updateDepartment(department, $hide)"></button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

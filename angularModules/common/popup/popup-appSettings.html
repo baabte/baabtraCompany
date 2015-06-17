@@ -1,0 +1,74 @@
+<div class="modal" tabindex="-1" role="dialog">
+  <div class="modal-dialog modal-lg">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h4 class="modal-title text-primary">Customize theme</h4>
+      </div>
+      <div class="modal-body">
+        <form class="form-horizontal ng-pristine ng-valid" style="cursor: pointer;">
+          <div class="row">
+            <div class="col-xs-12">
+              <div class="form-group">
+                <div class="row">
+                  <div class="col-xs-12">
+                    <div class="radio radio-inline radio-primary">
+                        <label>
+                            <input type="radio" ng-model="header.type" value="Header">
+                            Header colour
+                        </label>
+                    </div>
+                    <div class="radio radio-inline radio-primary">
+                        <label>
+                            <input type="radio" ng-model="header.type" value="breadCrumb">
+                            Bread crumb colour
+                        </label>
+                    </div>
+                    <div class="radio radio-inline radio-primary">
+                        <label>
+                            <input type="radio" ng-model="header.type" value="background">
+                            Background colour
+                        </label>
+                    </div>
+                  </div>
+                </div>
+                <p class="clearfix" >
+                  <a ng-class="{'shadow-z-2':hover}" ng-mouseenter="hover = true" ng-mouseleave="hover = false" class="inline {{color}} p-xs m-xs pull-left no-borders color-hover" ng-repeat="color in options.headerColor" ng-click="setHeaderColor(color)">
+                  </a>
+                </p>
+              </div>
+              <div class="form-group">
+                <div class="row">
+                  <label class="col-xs-3 control-label">Background image</label>
+                  <div class="col-xs-7">
+                    <input type="text" readonly="" class="form-control floating-label" placeholder="Browse background image...">
+                    <input type="file" ng-file-select="backgroundImageChanged($files)">
+                  </div>
+                  <div class="col-xs-2" ng-if="$root.userinfo.ActiveUserData.appSettings.backgroundImage.length">
+                    <a href="" ng-click="removeBackgroundImage()"><i bs-tooltip data-title="Remove background image" data-placement="left" class="fa mdi-action-delete text-2x m-v-xs"></i></a>
+                  </div>
+                </div>
+              </div>
+              <div class="form-group">
+                <div class="row">
+                  <label class="col-xs-3 control-label">Logo</label>
+                  <div class="col-xs-7">
+                    <input type="text" readonly="" class="form-control floating-label" placeholder="Browse logo...">
+                    <input type="file" ng-file-select="logoChanged($files)">
+                  </div>
+                  {{$root.userinfo.ActiveUserData.appSettings.log.length}}
+                  <div class="col-xs-2" ng-if="$root.userinfo.ActiveUserData.appSettings.logo.length">
+                    <a href="" ng-click="removeLogo()"><i bs-tooltip data-title="Remove logo" data-placement="left" class="fa mdi-action-delete text-2x m-v-xs"></i></a>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </form>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-warning" ng-click="cancelAppSettings($hide)">Cancel</button>
+        <button type="button" class="btn btn-primary" ng-click="saveAppSettings($hide)">Save</button>
+      </div>
+    </div>
+  </div>
+</div>

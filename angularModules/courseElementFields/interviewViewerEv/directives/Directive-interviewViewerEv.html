@@ -1,0 +1,19 @@
+<div>
+	<div class="row" ng-repeat="question in questionArray">
+		<div class="col-xs-12 p font-bold">
+			{{question.question}}
+		</div>
+
+		<div class="col-xs-12">
+			<div class="">
+            	<label  class="col-xs-2 col-md-1 control-label">Mark</label>
+            	<div class="col-xs-10 col-md-5">
+                	<input ng-if="question.mark" type="number" ng-model="question.markScored" class="form-control" ui-validate=" '$value <= question.mark' "  placeholder="Max mark {{question.mark}}" required ng-change="markChanged(question.markScored, $index)">
+
+                	<input ng-if="!question.mark" type="number" ng-model="question.markScored" class="form-control" ng-change="markChanged(question.markScored, $index)" placeholder="Mark scored" required>
+            	</div>
+        </div>
+		</div>
+		
+	</div>
+</div>

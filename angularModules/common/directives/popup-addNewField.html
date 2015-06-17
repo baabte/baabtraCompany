@@ -1,0 +1,29 @@
+<div class="modal" tabindex="-1" role="dialog">
+  <div class="modal-dialog modal-lg">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h4 class="modal-title text-primary"></h4>
+      </div>
+      <div class="modal-body">
+        <div class="m-t form-group">
+          <label class="pull-left m-r m-t-xs w-xs"  translate = "{{'Type'|translate}}"></label>
+          <button type="button" class="form-control w" ng-model="selectedDetail" ng-change="addCustomDetail(selectedDetail)" data-html="1" ng-options="customDetail.value as customDetail.label for customDetail in customDetailDropdown" placeholder="{{'Select a detail type'|translate}}" bs-select></button>
+        </div>
+        <div class="m-t form-group">
+          <label class="pull-left m-r m-t-xs w-xs"  translate = "{{'Add After'|translate}}"></label>
+          <button type="button" class="form-control w" ng-model="afterThisFieldDefault" ng-change="fnAfterThisField(afterThisFieldDefault)" data-html="1" ng-options="detailField.title as detailField.title for detailField in detailFields" placeholder="{{'Select a detail type'|translate}}" bs-select></button>
+        </div>
+
+      	<input type="text" class="form-control m-t" float-label placeholder="{{'Title'|translate}}" ng-model="newField.title">
+      	<div class="m-t" ng-include="newField.template"></div>
+      	<input class="form-control m-t" float-label placeholder="{{'Help text'|translate}}" ng-model="newField.help">
+
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-warning" ng-disabled="enableButton" ng-click="$hide();" translate = "{{'Cancel'|translate}}"></button>
+        <button type="button" class="btn btn-primary" ng-disabled="enableButton || !newField.title.length" ng-click="addThisField(newField,$hide);" >{{btnName}}</button>
+      </div>
+    </div>
+  </div>
+</div>
+

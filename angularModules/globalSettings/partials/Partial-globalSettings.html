@@ -1,0 +1,286 @@
+
+<div class="p-h-md p-v bg-white box-shadow b-b ng-scope">
+  <h3 class="no-margin" translate="{{'Global Settings'|translate}}"></h3>
+</div> 
+<div class="box ng-scope bg-white" >
+  <div class="col-md-3">
+    <div style="background:url({{userinfo.ActiveUserData.roleMappingObj.avatar}}) center center; background-size:cover">
+      <div class="p-lg bg-white-opacity text-center">
+        <a href="" class="w-sm inline m-t-md">
+          <img ng-src="{{userinfo.ActiveUserData.roleMappingObj.avatar}}" class="img-circle img-responsive">
+        </a>
+        <div class="m-b m-t-sm h2">
+          <!-- <span class="text-black">Mike</span> -->
+        </div>
+        <p>
+          <!-- Great day, Great life -->
+        </p>
+      </div>
+    </div>
+    <ul class="nav nav-list b-t bg-white font-bold" ui-nav="">
+      <li role="presentation" ng-class="{'b-b b-yellow b-2x':selectedTab=='SetEvaluator '}" ng-click="selectedTab='SetEvaluator';setState('SetEvaluator')">
+
+        <a href="">Set an Evaluator </a>
+      </li>
+       <li role="presentation" ng-class="{'b-b b-yellow b-2x':selectedTab=='SetSupervisor'}" ng-click="selectedTab='SetSupervisor';setState('SetSupervisor')">
+
+        <a href="">Set a Supervisor </a>
+      </li>
+      <li role="presentation" ng-class="{'b-b b-yellow b-2x':selectedTab=='GenerateUniqueCode'}" ng-click="selectedTab='GenerateUniqueCode';setState('GenerateUniqueCode')">
+        <a href="">Generate Unique Codes</a>
+      </li>
+       <li role="presentation" ng-class="{'b-b b-yellow b-2x':selectedTab=='attendanceAlert'}" ng-click="selectedTab='attendanceAlert';setState('attendanceAlert')">
+        <a href="">Attendance Alert</a>
+      </li>
+       <li role="presentation" ng-class="{'b-b b-yellow b-2x':selectedTab=='OrderForm'}" ng-click="selectedTab='OrderForm';setState('OrderForm')">
+        <a href="">Order Form</a>
+      </li>
+      <li role="presentation" ng-class="{'b-b b-yellow b-2x':selectedTab=='candidateAge'}" ng-click="selectedTab='candidateAge';setState('candidateAge')">
+        <a href="">Candidate age limit</a>
+      </li>
+    </ul>
+  </div>
+  <div class="col-md-9 b-l bg-white" >
+    <div class="p-md bg-light b-b font-bold">Global Settings Configuration</div>
+  
+<div class="form-group bg-light m-sm p-sm" ng-show="selectedTab=='SetEvaluator'">
+        
+  <div >    
+          <div class="row p-sm">
+               <div class="col-md-4" >Select Which All Roles can be Added as Evaluator  <span class="pull-right">:</span></div>
+                     <div class="col-md-5 " >
+                     <div multi-selectable input-model="roleslist"  output-model="selectedrole" button-label="Name" item-label="Name" tick-property="ticked" helper-elements="all none reset filter" default-label="Select Evaluator Roles"    name="selectItem"></div>
+                     </div>    
+                     <div class="col-md-3" ></div>            
+          </div>
+           <div class="row p-sm">
+                    <div class="col-md-4" ></div>
+                    <div class="col-md-5 " >
+                    <button  class="btn btn-info" ng-disabled="!selectedrole.length" ng-enabled="enableaddEvaluator"  ng-click="setEvaluator()">save</button>
+                    <button  class="btn btn-danger" ng-click="selectedrole=undefined">cancel</button>
+                    </div>    
+                    <div class="col-md-3" ></div>            
+          </div>
+    </div>
+    <div class="bg-white" ng-if="selectedEvalRoles.length">
+              <div class="callout callout-info font-bold">
+              <span class="text-info">Current Evaluator Roles of The Company</span>      
+              </div>
+              <div class="row p-xs no-margin " >
+                  <div class="col-md-4 p m-h-sm m-v-xs bg-light" style="width: 31%;" ng-repeat="selectedEvalRole in selectedEvalRoles">
+                  <span class="font-bold m-t">{{selectedEvalRole.Name}}</span>
+                  <a href class="pull-right " ng-click="removeExistingEvaluator(selectedEvalRole,$index)"><i class="glyphicon glyphicon-trash" ></i></a>
+              </div>
+     </div>
+            
+          
+    </div>
+</div>  
+<!-- div that is used for set supervisor -->
+
+<div class="form-group bg-light m-sm p-sm" ng-show="selectedTab=='SetSupervisor'">
+   <div>
+          <div class="row p-sm">
+                <div class="col-md-4">
+                  Select Which All Roles Can be Added as Supervisors of the Company <span class="pull-right">:</span>
+                </div>
+                <div class="col-md-5">
+                       <div multi-selectable input-model="supervisorrolelist"  output-model="selectedSupervisorrole" button-label="Name" item-label="Name" tick-property="ticked" helper-elements="all none reset filter" default-label="Select an Supervisors " ></div>
+                  
+                </div>
+                <div class="col-md-3">
+                </div>
+          </div> 
+           <div  class="row p-sm">
+                    <div class="col-md-4" ></div>
+                    <div class="col-md-5 " >
+                    <button  class="btn btn-info" ng-disabled="!selectedSupervisorrole.length"  ng-click="setSupervisors()">save</button>
+                    <button  class="btn btn-danger" ng-click="selectedSupervisorrole=undefined">cancel</button>
+                    </div>    
+                    <div class="col-md-3" ></div>            
+          </div>  
+
+   </div>   
+   <div class="bg-white" ng-if="selectedSupervisorsRoles.length">
+          
+          <div class="callout callout-info font-bold">
+              <span class="text-info">Current Supervisors of The Company</span>      
+              </div>
+              <div class="row p-xs no-margin " >
+                  <div class="col-md-4 p m-h-sm m-v-xs bg-light" style="width: 31%;" ng-repeat="selectedSupervisorsRole in selectedSupervisorsRoles">
+                  <span class="font-bold m-t">{{selectedSupervisorsRole.Name}}</span>
+                  <button type="button" class="btn pull-right no-margin" ng-click="removeExistingSupervisors(selectedSupervisorsRole,$index)"><i class="glyphicon glyphicon-trash" ></i></button>
+          </div>
+
+
+   </div>  
+  
+</div>  
+</div>
+
+<!-- end set GenerateUniqueCode -->
+<div ng-show="selectedTab=='GenerateUniqueCode'" class="row bg-light m-sm p-sm">
+        <form name="FormCodeGenerator" class="form-validation" ng-submit="GenerateCode()" xt-form novalidate>
+       <div class="row p-sm">
+       <div class="col-md-4" >Choose items to Create Code Pattern<span class="pull-right">:</span></div>
+           <div class="col-md-5 " >
+             <div multi-selectable input-model="entities"  output-model="selectedEntity" button-label="Name" item-label="Name" tick-property="ticked" helper-elements="all none reset filter" default-label="Please Select item"    name="selectItem"></div>
+             </div>    
+          <div class="col-md-3" ></div>            
+       </div>
+       <div class="row p-sm" >
+           <div class="col-md-4" >Create Your own Code Pattern<span class="pull-right">:</span></div>
+           <div class="col-md-4" >
+                <input type="text" placeholder="Set prefix" ng-model="prefix" class="form-control" xt-validate required ng-minlength="1" name="prefix">
+          </div>    
+          <div class="col-md-4" >
+                
+          </div> 
+        </div>  
+         <div class="row p-sm" >
+           <div class="col-md-4" >Select a Pattern for Code Increment <span class="pull-right">:</span></div>
+           <div class="col-md-4">
+                 <div multi-selectable selection-mode="single" input-model="incrementTypes"  output-model="selectedPattern" button-label="Name" item-label="Name" tick-property="ticked" helper-elements="all none reset filter" default-label="Seletc Increment Pattern"   name="selectItem"></div>      
+       
+          </div>
+          <div class="col-md-4" >
+          </div>            
+        </div>          
+         <div class="row p-sm" >
+           <div class="col-md-4" >Set Starting Range for the Pattern<span class="pull-right">:</span></div>
+           <div class="col-md-4">
+                <input type="number" placeholder="Set Start Range" ng-model="statrange" class="form-control" xt-validate min="1"  name="statrange">                
+          </div>
+          <div class="col-md-4" >
+          </div>            
+        </div>
+       
+         <div class="row p-sm"  ng-if="prefix&&selectedPattern">
+           <div class="col-md-4" ><!-- Preview of Your Pattern<span class="pull-right">:</span> --></div>
+           <div class="col-md-4 " >
+                <div class="panel p-v-md b-success">
+                <div class="pull-left pull-none-sm p-h text-center m-r m-v-xs">
+                  <i class="glyphicon  glyphicon-qrcode text-4x text-muted"></i>
+                </div>
+                <div class="clear">
+                  <div class="text-2x font-bold text-black">{{prefix+getIncrementalCode(statrange,selectedPattern)}}</div>
+                  <small class="text-dk">Preview of Your Code Pattern</small>
+                </div>
+              </div>
+          </div>
+          <div class="col-md-4" >
+              
+          </div>            
+        </div>
+        <div class="row" >
+           <div class="col-md-4" ></div>
+           <div class="col-md-4" >
+                <button ng-disabled="FormCodeGenerator.$invalid||!selectedEntity.length||!selectedPattern.length" type="submit" class="btn btn-info ">save</button>
+                <button type="reset" class="btn btn-danger">cancel</button> 
+          </div>
+          <div class="col-md-4" >
+          </div>   
+        </div>
+        </form> 
+
+<!--Code Updation div  -->
+
+
+        <div class="bg-white" ng-if="existingItemAndCodes.length">
+              <div class="callout callout-info font-bold no-margin">
+              <span class="text-info">Current items and codes list</span>      
+              </div>
+              <div class="row no-margin font-bold shadow-z-2" >
+                      <div class="col-md-3 callout-info p">Items</div>
+                      <div class="col-md-3 callout-info p">Prefix</div>
+                      <div class="col-md-3 callout-info p">Increment Pattern</div>
+                      <div class="col-md-3 callout-info p">Start From</div>
+              </div>
+               <div class="row no-margin font-bold b"  ng-repeat="existingItemAndCode in existingItemAndCodes">
+                      <div class="col-md-3 p-h p-v-sm " style="word-wrap: break-word;">
+                        <div class="p-sm bg-primary m-xs text-light" ng-repeat="items in existingItemAndCode.items">{{getItemByNameByValue(items)}}
+                        <a href="" class="pull-right p-xs b h-full" ng-click="removeItemFromAgroup(items)">
+                        <i class=" glyphicon glyphicon-trash"></i>
+                        </a>
+                        </div>
+                       <!--  <div style="padding-left:1px">
+                            
+                             <a  e-placeholder="{{'add more '|translate}} role" editable-select="abc" onshow="loadGroups()" e-ng-options="ent.value as ent.Name for ent in entities">
+                              <i class="mdi-content-add-box" style="font-size:30px"></i> 
+                             </a>
+                        </div> -->
+                      </div>
+                      <div class="col-md-3 p-h p-v-sm">
+                      <a href=""  editable-text="existingItemAndCode.prefix" onaftersave="updateItemProps(existingItemAndCode,$data,'prefix')"  e-required e-placeholder="{{'Enter'|translate}} Prefix" > {{existingItemAndCode.prefix}} </a>
+                </div>
+                      <div class="col-md-3 p-h p-v-sm">
+                       <a  editable-select="existingItemAndCode.IncPattern" buttons="yes" e-ng-options="incrementType.value as incrementType.value for incrementType in incrementTypes" onaftersave="updateItemProps(existingItemAndCode,$data,'IncPattern')">
+                       {{existingItemAndCode.IncPattern}}
+                       </a>
+                      </div>
+                      <div class="col-md-3 p-h p-v-sm">
+                       <a href=""  editable-text="existingItemAndCode.startRange" onaftersave="updateItemProps(existingItemAndCode,$data,'startRange')"  e-required e-placeholder="{{'Enter'|translate}} Prefix" > {{existingItemAndCode.startRange}} </a>
+                      </div>
+                      <!--  -->
+              </div>          
+          
+        </div>
+
+</div>
+<!--End of  Code Updation div -->
+
+
+
+<!-- set attendance alerts -->
+  <div ng-show="selectedTab=='attendanceAlert'" class="row bg-light m-sm p-sm">
+        <attendance-alert-config course-obj=""> </attendance-alert-config>
+  </div>
+<div ng-show="selectedTab=='OrderForm'" class="row bg-light m-sm p-sm">
+    <div class="row p-sm">
+        <div class="col-md-4">
+          <span translate="{{'Order Form Configurable'|translate}}"></span>
+          <span class="pull-right" translate="{{':'|translate}}"></span>
+        </div>
+        <div class="col-md-4">
+               <div class="radio radio-inline radio-primary ">
+                                    <label>
+                                        <input type="radio" ng-model="OrderForm" value="Default" ng-change="setOrderFormConfOrNot(OrderForm)">
+                                        No
+                                    </label>
+              </div>            
+        </div>
+         <div class="col-md-4">
+               <div class="radio radio-inline radio-primary ">
+                                    <label>
+                                        <input type="radio" ng-model="OrderForm" value="Configurable" ng-change="setOrderFormConfOrNot(OrderForm)">
+                                        Configurable
+                                    </label>
+              </div>                    
+        </div>
+    </div>
+</div>
+
+
+<!-- tab for managing candidate age limit - by lijin on 20-5-2015 -->
+<div ng-if="selectedTab=='candidateAge'" class="row bg-light m-sm p-sm">
+    <div class="row p-sm">
+        <div class="col-xs-12">
+          <span class="font-bold" translate="{{'Set age limit range for candidate registration.'|translate}}"></span>
+          <!-- <span class="hidden-xs" translate="{{'Set age limit range'|translate}}"></span> -->
+          <!-- <span class="pull-right hidden-xs">:</span> -->
+        </div>
+        <div class="col-md-8 col-xs-12">
+            <div range-slider min="1" max="85" model-min="existingConfiguration.candidateAgeLimit.min" model-max="existingConfiguration.candidateAgeLimit.max"></div>                 
+        </div>
+         <div class="col-md-12 text-right">
+              <button class="btn btn-success" ng-disabled="updatingCandidateAgeLimit" ng-click="saveAgeLimitRange()">Save</button>                    
+        </div>
+    </div>
+</div>
+   <!-- end of candidate age limit tab -->
+      
+  </div>
+</div>
+<!--/end attendance alerts configs  -->
+
+ 

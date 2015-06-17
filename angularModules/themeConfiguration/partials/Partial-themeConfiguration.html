@@ -1,0 +1,292 @@
+<div class="p-h-md p-v bg-white box-shadow  ng-scope">
+  <h3 class="no-margin" translate="{{'Theme Configuration'|translate}}"></h3>
+</div> 
+<div class="box ng-scope bg-white" >
+  <div class="col-md-3">
+<!--     <div style="background:url({{userinfo.ActiveUserData.roleMappingObj.avatar}}) center center; background-size:cover">
+      <div class="p-lg bg-white-opacity text-center">
+        <a href="" class="w-xs inline">
+          <img ng-src="{{userinfo.ActiveUserData.roleMappingObj.avatar}}" class="img-circle img-responsive">
+        </a>
+        <div class="m-b m-t-sm h2">
+        </div>
+        <p>
+     
+        </p>
+      </div>
+    </div> -->
+    <ul class="nav nav-list b-t bg-white font-bold" ui-nav="">
+      <li role="presentation" ng-class="{'b-b b-success b-2x':selectedTab=='Customizetheme'}" ng-click="selectedTab='Customizetheme';setState('Customizetheme');">
+
+        <a href=""  translate="{{'Customize theme'|translate}}"></a>
+      </li>
+      <li role="presentation" ng-class="{'b-b b-success b-2x':selectedTab=='selectMenutype'}" ng-click="selectedTab='selectMenutype';setState('selectMenutype');">
+        <a href="" translate="{{'Menu'|translate}}"></a>
+      </li>
+       <li role="presentation" ng-class="{'b-b b-success b-2x':selectedTab=='SubTitlesandBackground'}" ng-click="selectedTab='SubTitlesandBackground';setState('SubTitlesandBackground');">
+        <a href="" translate="{{'Panel and Element Color'|translate}}"></a>
+      </li>
+       
+    </ul>
+
+  </div>
+  <div class="col-md-9 b-l bg-white">
+      <div class="p-md bg-light b-b font-bold" translate="{{'Theme configuration'|translate}}"></div>
+      <div class="form-group bg-light m-sm p-sm" ng-show="selectedTab=='Customizetheme'">
+               <div class="modal-header">
+                <h4 class="modal-title text-primary" translate="{{'Customize theme'|translate}}"></h4>
+               </div>
+              <div class="modal-body">
+                <form class="form-horizontal ng-pristine ng-valid" style="cursor: pointer;">
+                  <div class="row">
+                    <div class="col-xs-12">
+                      <div class="form-group">
+                        <div class="row">
+                          <div class="col-xs-12">
+                            <div class="radio radio-inline radio-primary">
+                                <label >
+                                    <input type="radio" ng-model="header.type" value="Header" >
+                                    Header colour
+                                </label>
+                            </div>
+                            <div class="radio radio-inline radio-primary">
+                                <label>
+                                    <input type="radio" ng-model="header.type" value="breadCrumb">
+                                    Bread crumb colour
+                                </label>
+                            </div>
+                            <div class="radio radio-inline radio-primary">
+                                <label>
+                                    <input type="radio" ng-model="header.type" value="background">
+                                    Background colour
+                                </label>
+                            </div>
+                          </div>
+                        </div>
+                        <p class="clearfix" >
+                          <a ng-class="{'shadow-z-2':hover}" ng-mouseenter="hover = true" ng-mouseleave="hover = false" class="inline {{color}} p-xs m-xs pull-left no-borders color-hover" ng-repeat="color in options.headerColor" ng-click="setHeaderColor(color)">
+                          </a>
+                        </p>
+                      </div>
+                      <div class="form-group">
+                        <div class="row">
+                          <label class="col-xs-3 control-label" translate="{{'Background image'|translate}}"></label>
+                          <div class="col-xs-7">
+                            <input type="text" readonly="" class="form-control floating-label" placeholder="{{'Browse background image...'|translate}}">
+                            <input type="file" ng-file-select="backgroundImageChanged($files)">
+                          </div>
+                          <div class="col-xs-2" ng-if="$root.userinfo.ActiveUserData.appSettings.backgroundImage.length">
+                            <a href="" ng-click="removeBackgroundImage()"><i bs-tooltip data-title="Remove background image" data-placement="left"  class="fa mdi-action-delete text-2x m-v-xs"></i></a>
+                          </div>
+                        </div>
+                      </div>
+                      <div class="form-group">
+                        <div class="row">
+                          <label class="col-xs-3 control-label" translate="{{'Logo'|translate}}"></label>
+                          <div class="col-xs-7">
+                            <input type="text" readonly="" class="form-control floating-label" placeholder="{{'Browse logo...'|translate}}">
+                            <input type="file" ng-file-select="logoChanged($files)">
+                          </div>
+                          {{$root.userinfo.ActiveUserData.appSettings.log.length}}
+                          <div class="col-xs-2" ng-if="$root.userinfo.ActiveUserData.appSettings.logo.length">
+                            <a href="" ng-click="removeLogo()"><i bs-tooltip data-title="Remove logo" data-placement="left" class="fa mdi-action-delete text-2x m-v-xs"></i></a>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </form>
+              </div>
+              <div class="modal-footer">
+                 <!--  <button type="button" class="btn btn-warning" ng-click="cancelAppSettings($hide)">Cancel</button> -->
+                  <button type="button" class="btn btn-primary" ng-click="saveAppSettings($hide)">Save</button>
+              </div>
+       
+          </div>  
+          <div class="form-group bg-light m-sm p-sm" ng-show="selectedTab=='selectMenutype'" >
+          <!-- div for menu type -->
+              <div class="row p-sm ">
+                <div class="col-sm-4 ">
+                  <div class="radio radio-success"    >
+                    Menu type
+                    <span class="pull-right" >:</span>
+                  </div>
+                </div>
+                <div class="col-sm-4 ">
+                               <div class="radio radio-success" >
+                                <label>
+                                  <input ng-change="setMenuType(menuType)" type="radio" name="Menutype" ng-model="menuType" value="modern" checked=""><span class="circle"></span><span ></span>
+                                  modern
+                                </label>
+                              </div>
+                </div>
+                <div class="col-sm-4">
+                             
+                              <div class="radio radio-success">
+                                <label>
+                                  <input type="radio" ng-change="setMenuType(menuType)" name="Menutype" ng-model="menuType" value="classic"><span class="circle"></span><span ></span>
+                                  classic
+                                </label>
+                              </div>                              
+                </div>
+              </div>
+              <div class="b-b"></div>
+              <!-- div end menu type -->
+
+              <!-- div for set menu type -->
+               <div class="row p-sm" >
+                <div class="col-sm-4 ">
+                  <div class="radio radio-success" >
+                  Menu Color
+                     <a bs-tooltip data-title="You can Customize your Menu  Color Scheme by Clicking 'Custom' Option. By default System will Initialize Menu in 'random' Color Scheme" data-placement="bottom-right" data-type="success" ng-mouseenter="showOrHideMenucolormsg=true" ng-mouseleave="showOrHideMenucolormsg=false" href class="p-xs" style="top:2px"><i class=" glyphicon glyphicon-info-sign"></i></a>
+                    <span class="pull-right">:</span>
+                
+                  </div>
+                </div>
+                <div class="col-sm-4 " ng-show="menuType!='classic'">
+                               <div class="radio radio-success">
+                                <label>
+                                  <input ng-change="CustomizeMenuColor=false;saveMenuColor(menuColor)" ng-model="menuColor" type="radio" name="MenuColor"  value="random" checked=""><span class="circle"></span><span ></span>
+                                  random
+                                </label>
+                              </div>
+
+                </div>
+                <div class="col-sm-4">
+                             
+                              <div class="radio radio-success">
+                                <label>
+                                  <input type="radio" ng-model="menuColor" ng-change="setMenuColor(menuColor)" name="MenuColor" ng-click="CustomizeMenuColor=true"  value="custom"><span class="circle"></span><span ></span>
+                                  Custom
+                                </label>
+                              </div>                              
+                </div>
+              </div>
+
+               <div class="row p-sm no-margin callout-info" ng-show="CustomizeMenuColor">
+                    <div class="modal-header">
+                    <h4 class="modal-title text-primary" translate="{{'Customize Menu Color'|translate}}"></h4>
+                   </div>
+                   <div class="modal-body">
+                    <form class="form-horizontal ng-pristine ng-valid" style="cursor: pointer;">
+                      <div class="row"> 
+                        <div class="col-xs-12">
+                          <div class="form-group">
+                            <div class="row">
+                              <div class="col-xs-3" ></div>
+                              <div class="col-xs-3">
+                                <div class="radio radio-inline radio-primary ">
+                                    <label>
+                                        <input type="radio" ng-model="menutype" value="menuPrimaryColor" >
+                                        Primary colour
+                                    </label>
+                                </div>
+                              </div>                              
+                              <div class="col-xs-3">
+                                <div class="radio radio-inline radio-primary pull-left">
+                                    <label>
+                                        <input type="radio" ng-model="menutype" value="menuSecondaryColor">
+                                        Secondary colour
+                                    </label>
+                                </div>
+                              </div>
+                              <div class="col-xs-3"></div>
+                            </div>
+                            <p class="clearfix" >
+                              <a ng-class="{'shadow-z-2':hover}" ng-mouseenter="hover = true" ng-mouseleave="hover = false" class="inline {{color}} p-xs m-xs pull-left no-borders color-hover" ng-repeat="color in options.headerColor" ng-click="setMenuColor(color)">
+                              </a>
+                            </p>
+                          </div>
+                        </div>
+                      </div>
+                    </form>
+                  </div>
+                  <div class="modal-footer">
+                      <button type="button" class="btn btn-warning " ng-click="CustomizeMenuColor=false">Cancel</button>
+                      <button type="button" class="btn btn-primary no-margin" ng-click="saveMenuColor()" ng-disabled="!activeBtn">Save</button>
+                      
+                  </div>
+
+              </div>
+              <!-- div for set menu type -->
+          </div>
+        <!-- div for to set background and subtitles -->
+        <div class="form-group bg-light m-sm p-sm" ng-show="selectedTab=='SubTitlesandBackground'" >
+               <div class="row p-sm ">
+                  <div class="col-sm-4 ">
+                    <div class="radio radio-success"    >
+                      Panel Heading and Element Colors
+                      <span class="pull-right" >:</span>
+                    </div>
+                  </div>
+                  <div class="col-sm-4 ">
+                                 <div class="radio radio-success" >
+                                  <label>
+                                    <input ng-change="CustomizesubTitAndBackg=false;saveSubMenuAndBackgrounds(subTitAndBackg)" ng-model="subTitAndBackg" type="radio" name="subTitAndBackg" value="random" ><span class="circle"></span>
+                                    Random Color
+                                  </label>
+                                </div>
+                  </div>
+                  <div class="col-sm-4">
+                               
+                                <div class="radio radio-success">
+                                  <label>
+                                    <input ng-model="subTitAndBackg" type="radio"  name="subTitAndBackg" ng-click="CustomizesubTitAndBackg=true" value="custom"><span class="circle"></span>
+                                    Custom Color
+                                  </label>
+                                </div>                              
+                  </div>
+              </div>
+               <div class="row p-sm no-margin callout-info" ng-show="CustomizesubTitAndBackg">
+                    <div class="modal-header">
+                    <h4 class="modal-title text-primary" translate="{{'Customize Panel Heading and Element Color'|translate}}"></h4>
+                   </div>
+                   <div class="modal-body">
+                    <form class="form-horizontal ng-pristine ng-valid" style="cursor: pointer;">
+                      <div class="row"> 
+                        <div class="col-xs-12">
+                          <div class="form-group">
+                            <div class="row">
+                              <div class="col-xs-3" ></div>
+                              <div class="col-xs-3">
+                                <div class="radio radio-inline radio-primary ">
+                                    <label>
+                                        <input type="radio" ng-model="SubTitleandBackcolor" value="SubTitlecolour" >
+                                        Panel header Color
+                                    </label>
+                                </div>
+                              </div>                              
+                              <div class="col-xs-3">
+                                <div class="radio radio-inline radio-primary pull-left">
+                                    <label>
+                                        <input type="radio" ng-model="SubTitleandBackcolor" value="Backgroundcolour">
+                                        Element color
+                                    </label>
+                                </div>
+                              </div>
+                              <div class="col-xs-3"></div>
+                            </div>
+                            <p class="clearfix" >
+                              <a ng-class="{'shadow-z-2':hover}" ng-mouseenter="hover = true" ng-mouseleave="hover = false" class="inline {{color}} p-xs m-xs pull-left no-borders color-hover" ng-repeat="color in options.headerColor" ng-click="setSubTitAndBackground(color)">
+                              </a>
+                            </p>
+                          </div>
+                        </div>
+                      </div>
+                    </form>
+                  </div>
+                  <div class="modal-footer">
+                      <button type="button" class="btn btn-warning " ng-click="CustomizesubTitAndBackg=false">Cancel</button>
+                      <button type="button" class="btn btn-primary no-margin" ng-click="saveSubMenuAndBackgrounds()" ng-disabled="!subtitleAndbackactiveBtn">Save</button>
+                      
+                  </div>
+
+              </div>
+
+          </div>
+          
+
+        <!--  /div for to set background and subtitles-->
+
+
+</div>  

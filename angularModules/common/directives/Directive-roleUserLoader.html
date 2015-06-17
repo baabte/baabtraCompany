@@ -1,0 +1,7 @@
+<div class="formgen-dropdown" >
+	
+	<div ng-if="selectionType == 1 && usersUnderRoles" multi-selectable selection-mode="single" ng-if="usersUnderRoles" input-model="usersUnderRoles" output-model="ngModel" button-label="Name" item-label="Name"  on-item-click="onItemClick(data)" tick-property="ticked" helper-elements="all none reset filter" default-label="{{placeholderValue}}">	
+	</div>
+	<div ng-if="selectionType == 2 && usersUnderRoles" multi-selectable selection-mode="multi" ng-if="usersUnderRoles" input-model="usersUnderRoles" output-model="ngModel" button-label="Name" item-label="Name"  on-item-click="onItemClick(data,$index)" tick-property="ticked" helper-elements="all none reset filter" default-label="{{placeholderValue}}">	
+	</div>
+</div>

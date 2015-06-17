@@ -1,0 +1,98 @@
+<div class="modal modal-full-width" tabindex="-1" role="dialog" >
+  <div class="modal-dialog-full-width  modal-full-width">
+    <div class="modal-content bg-white">
+
+      <div class="navbar navbar-inverse btn-material-blue-A700 ">
+        <div class="navbar-header col-xs-3">
+          <h4 class="font-bold" >Existing Course Elements</h4>
+        </div>
+        <div type="button" class="btn pull-right no-padding" ng-click="$hide()">
+          <i class="mdi-navigation-close text-lg text-white"></i>
+        </div>
+      </div>
+
+      <div class="modal-body no-padding ">
+
+        <div class="col-md-3 col-xs-12  b-r" >
+          <div class="navbar-header col-xs-3">
+            <h4 class="font-bold" >Courses</h4>
+          </div>
+
+          <div class="navbar-collapse collapse navbar-inverse-collapse">
+            <form class="navbar-form  navbar-left col-xs-8">
+                <input type="text" class="form-control" ng-model="Courses.searchTextCourse" placeholder="Search">
+            </form>               
+          </div>
+
+          <div class="list-group" style=" height:405px; overflow-x:hidden;">
+            <div ng-repeat="course in Courses|filter:Courses.searchTextCourse |orderBy:'-draftFlag'">                 
+              <a href ng-click="fnselectCourse(course);status.formCourse = $index" bs-tooltip data-title="click to see Elements"  class="list-group-item " >{{course.Name}}
+                <i ng-show="status.formCourse==$index" class="pull-right fa fa-check-circle text-primary"></i></br>
+                <span ng-if="course.draftFlag==1" class="label label-success ">Published</span>
+                <span ng-if="course.draftFlag==0" class="label label-warning ">Drafted</span>
+              </a>
+                              
+            </div>
+          </div>  
+        </div> 
+
+        <div class=" col-md-5 col-xs-12 b-r"  >           
+          <!-- <div class="navbar-header col-xs-3">
+          </div> -->
+
+          <div class="navbar-collapse collapse navbar-inverse-collapse">
+            <h4 class="font-bold" >Course Syllabus</h4>    
+          </div>
+
+          <div  style=" height:405px; overflow-x:hidden;">
+           
+            <!-- {{selectedCourse.syllabus}} -->
+            <div ng-if="selectedCourse.syllabus" data-angular-treeview="true" data-tree-id="syllabusTree" data-tree-model="selectedCourse.syllabus" data-node-output="selectedSyllabus.syllabus" data-tree-mode="add" data-node-edit="false" data-node-id="nodeId" data-node-label="name" data-node-children="children" ></div>
+<!--             {{selectedSyllabus.syllabus}}
+ -->
+          </div> 
+        </div>
+
+        <div class=" col-md-4 col-xs-12 b-r"  >           
+          <!-- <div class="navbar-header col-xs-3">
+          </div> -->
+
+          <div class="navbar-collapse collapse navbar-inverse-collapse">
+            <span><h4 class="font-bold" >Syllabus Materials</h4></span>
+            <span class="checkbox ">
+              <label>
+                <input ng-change="fnSelectAll(selection)" ng-model="selection" type="checkbox">Select All
+              </label>
+            </span> 
+          </div>
+
+          <div  style=" height:405px; overflow-x:hidden;">
+
+
+            <div ng-if="syllabusElements.length==0" class="p shadow-z-1 col-xs-12 btn-material-red-500">
+                <h4 translate="{{'No Materials under the syllabus'| translate}}"></h4>
+            </div>
+            <div class="col-xs-12" ng-if="syllabusElements" ng-repeat="element in syllabusElements" >
+            
+
+              <div class="col-xs-12 m-t">                         
+                <material-preview  addmaterial="previewOut" data="selectedCourse.courseTimeline[element[0]][element[1]][element[2]]"></material-preview>
+              </div>
+               
+            </div> 
+
+          </div>
+
+        </div>  
+
+      </div>
+            <!-- {{courseElement}}  -->
+      
+      <div class="modal-footer">
+          <a class="btn btn-info" ng-disabled="disableAdd" ng-click="fnAddElements()">Add</a>
+
+      </div>
+
+    </div>
+  </div>
+</div>

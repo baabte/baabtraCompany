@@ -1,0 +1,63 @@
+
+<div>
+	<div class="col-xs-12">
+		<div ng-if="startTest && !examFinished && isMentee" class="pull-right">
+			<flip-clock countdown="true" count-down-time="countDownTime"></flip-clock>
+		</div>
+		<percent-indicator ng-if="examFinished" show-percentage="true" total-value="dataValue.value.mark.totalMark" obtain-value="courseElement.markScored" ng-model="form"></percent-indicator>
+
+		<div ng-hide="startTest==true" class="col-xs-12 text-center">
+			<div class="btn btn-warning"  ng-click="startTimer()">Click to Start Test<div class="ripple-wrapper"></div>
+         	</div>
+        </div>
+		<div ng-if="startTest">
+		<div  ng-repeat="question in dataValue.value.testModel.slice(start,stop)">
+				
+				
+				<!-- <div ng-if="question.type=='objective'">
+					<div class="shadow-z-1 col-xs-12 m-b-md">
+					<div class="col-xs-12 m-t-md">
+						<div class="col-xs-1 course-description ">
+							<i class=" line fa fa-question pull-left" style="font-size:24;font-weight:bold; text-decoration:underline; margin-top:13px;color: #ff4081;"></i>
+						</div>
+						<div class="col-xs-11 course-description no-padding" ng-bind-html="question.question">
+						</div>
+					</div>
+					<div class="col-xs-12 m-b-md">
+					<objective-options options="question.options" answer-type="question.answerType" answer="question.answer" mark-scored="question.markScored" user-answer="question.userResponse" db-answer="question.userResponse" mark-obj="question.mark">
+					</objective-options>
+					{{question}}
+					</div>
+					</div>
+				</div> -->
+				
+				
+					<test-question-view  data="{{fnFormatObj(question)}}" index="innerIndex" multi-answer="true" question-response="questionAnswer[start+$index]" course-element="courseElement"></test-question-view>
+
+				<!-- {{questionAnswer}} -->
+				
+
+
+		</div>
+
+		<div class="col-xs-12 text-center" ng-if="start==0&&noOfQuestions!=stop">
+			<div class="btn btn-info" ng-click="questionChangeNext(start,stop)" translate="{{'Next'|translate}}"><div class="ripple-wrapper"></div>
+         	</div>
+        </div>
+        <div class="col-xs-12 text-center" ng-if="start>0&&stop<noOfQuestions">
+        	<div class="btn btn-info " ng-click="questionChangePrevious(start,stop)" translate="{{'Previous'|translate}}"><div class="ripple-wrapper"></div>
+         	</div>
+			<div class="btn btn-info" ng-click="questionChangeNext(start,stop)" translate="{{'Next'|translate}}"><div class="ripple-wrapper"></div>
+         	</div>
+        </div>
+        <div class="col-xs-12 text-center" ng-if="noOfQuestions==stop">
+        	<div ng-if="dataValue.value.questionView.mode=='multiple'" class="btn btn-info pull-left" ng-click="questionChangePrevious(start,stop)" translate="{{'Previous'|translate}}"><div class="ripple-wrapper"></div>
+         	</div>
+			<div ng-if="isMentee&&!examFinished" class="btn btn-danger pull-right" ng-click="submitModalshowModal()" translate="{{'Submit'|translate}}"><div class="ripple-wrapper"></div>
+         	</div>
+
+        </div>
+        </div>
+		
+	</div>
+</div>

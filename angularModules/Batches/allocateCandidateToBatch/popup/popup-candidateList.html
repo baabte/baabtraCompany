@@ -1,0 +1,50 @@
+<div  class="modal modal-full-width" tabindex="-1" role="dialog">
+    <div class="modal-dialog-full-width  modal-full-width">
+      <div class="modal-content">
+        <div class="p bg-info font-bold baab-shadow">
+          Move candidates
+        </div>
+        <div class="modal-body">
+          <!-- <pre>{{elementsOfSelectedNode}}</pre> -->
+          
+          <div  ng-repeat="mentee in data.menteesList" class="col-lg-push-2 col-sm-12 col-lg-8 col-xs-12  p-h-sm shadow-z-1  pull-left bg-white" style="cursor: pointer;" ng-class="{'bg-success text-white':batch._id.$oid==data.selectedBatchId}">
+            <!-- ng-click="goToThisStateWithBatchID(batch._id.$oid)" -->
+                <div class="row  p-v-sm b-b" >
+                  <div class="col-xs-1">
+                          <div class="checkbox col-xs-6">
+                              <label>
+                                  <input type="checkbox"  ng-model="mentee.checked">
+                              </label>
+                          </div>
+                  </div>
+
+                  <div class="col-xs-11">
+                     <div class="col-xs-12 font-bold">
+                      {{mentee.details.profile.firstName}} {{mentee.details.profile.lastName}}
+                    </div>
+                    <div class="col-lg-8 col-xs-8 col-sm-6">
+                      <div class="col-xs-12">
+                        {{mentee.details.userName}}
+                      </div>
+                      <div class="col-xs-12">
+                        {{mentee.details.profile.userCode}}
+                      </div>
+                      <!-- <div class="col-xs-12">
+                         {{batch}}
+                      </div> -->
+                    </div>
+                  </div>
+                 
+ 
+                </div>
+          </div>
+          
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-primary baab-btn" ng-click="$hide()">Cancel</button>
+
+          <button type="button" class="btn btn-success baab-btn" ng-click="moveToSelectedBatch($hide)">Move</button>
+        </div>
+      </div>
+    </div>
+</div>

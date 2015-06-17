@@ -1,0 +1,91 @@
+<div class="row">
+	<div class="col-md-12">
+		
+		<!-- outer panel -->
+		<div class="panel">
+			<div class="p font-bold btn-material-purple-A400 baab-shadow">
+				<i class="fa fa-paperclip text-lg m-r"></i>
+				<b translate="{{'Create a feedback'|translate}}"></b>
+			</div>
+			<div class="panel-body">
+				<form name="feedbackForm">
+					<div class="row">
+						<!-- Feedback title -->
+						<div class="col-xs-12 col-sm-6">
+							<input type="text" class="form-control" placeholder="{{'Feedback title'|translate}}" ng-model="myForm.title" float-label>
+						</div>
+
+						<!-- Valid until -->
+						<div class="col-xs-12 col-sm-6">
+							<input type="text" class="form-control" placeholder="{{'Valid until'|translate}}" ng-model="myForm.validUntil" float-label data-date-format="dd-MM-yyyy" data-date-type="date" data-autoclose="true" data-start-date="today" data-min-date="today" name="date2" bs-datepicker>
+						</div>
+
+						<!-- Feedback description -->
+						<div class="col-xs-12">
+							<textarea class="form-control" rows="3" placeholder="{{'Feedback description'|translate}}" ng-model="myForm.description" float-label></textarea>
+							<span class="help-block"></span>
+						</div>
+
+						<!-- form access  -->
+						<div class="col-xs-12">
+							<div class="form-group m-t">
+								<div class="col-xs-2 control-label m-v text-muted"><b class="font-normal" translate="{{'To'|translate}}"></b></div>
+								<div class="col-xs-11 col-md-3 m-v">
+									<div class="radio radio-inline radio-primary no-margin">
+										<label>
+											<input type="radio" name="formAccessTo" ng-model="myForm.formAccessTo" value="Public" checked=""><b class="font-normal" translate="{{'Public'|translate}}"></b>
+										</label>
+									</div>
+									<div class="radio radio-inline radio-primary">
+										<label>
+											<input type="radio" name="formAccessTo" ng-model="myForm.formAccessTo" value="Private">
+											<b class="font-normal" translate="{{'Private'|translate}}"></b>
+										</label>
+									</div>
+								</div>
+								<div class="col-xs-6" ng-if='myForm.formAccessTo == "Private"'>
+									<tags-input class="bootstrap" ng-model="data.selectedCompanyRoles" placeholder="{{'Select roles'|translate}}" replace-spaces-with-dashes="false" min-length="1">
+										<auto-complete source="data.companyRoles | filter:$query" min-length="0" debounce-delay="0" max-results="15"></auto-complete>
+									</tags-input>
+								</div>
+							</div>
+						</div>
+
+						<!-- feedback about -->
+						<div class="col-xs-12">
+							<div class="form-group m-t">
+								<div class="col-xs-2 control-label m-v text-muted"><b class="font-normal" translate="{{'Feedback about'|translate}}"></b></div>
+								<div class="col-xs-2">
+
+									<!-- feedback about -->
+									<button type="button" class="btn btn-default no-margin" ng-change="feedbackTypeChanged()" ng-model="data.selectedFeedbackAbout" data-html="1" ng-options="feedbackAbout.value as feedbackAbout.label for feedbackAbout in data.feedbackAboutDropdown" bs-select placeholder="{{'choose an option'|translate}}">
+									<span class="caret"></span>
+								</div>
+								<div class="col-xs-6 no-margin">
+									  <!-- course loader -->
+									  <course-loader ng-if="data.selectedFeedbackAbout =='course'" ng-model="data.course" multi-select="multi" ></course-loader>
+
+									  <!-- mentee loader -->
+									  <mentee-loder ng-model="data.mentees" ng-if="data.selectedFeedbackAbout =='mentee'">
+									  </mentee-loder>
+
+									  <!-- batch loader -->
+									  <batch-loader ng-model="data.batches" ng-if="data.selectedFeedbackAbout =='batch'">
+									  </batch-loader>
+								</div>
+							</div>
+						</div>
+
+						<div class="col-xs-12">
+							<feedback-creator ng-if="data.companyRoles" ng-model="myForm.questions"></feedback-creator>
+						</div>
+					</div>
+				</form>
+			</div>
+			<div class="panel-footer">
+				<button class="btn btn-material-indigo-A700"><b class="font-normal" translate="{{'Cancel'|translate}}"></b></button>
+				<button ng-click="createFeedbackForm()" class="btn btn-material-purple-A400 pull-right"><b class="font-normal" translate="{{'Create feedback'|translate}}"></b></button>
+			</div>
+		</div>
+	</div>
+</div>

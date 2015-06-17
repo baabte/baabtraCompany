@@ -1,0 +1,16 @@
+
+
+<div class="panel panel-default m-t p-md p-v-xs b-b b-5x {{borderClass}}">
+	
+	<div class="row">
+	    <div class="col-xs-12 p-v b">
+	    	<div data-angular-treeview="true" data-tree-id="syllabusTree" data-tree-model="course.syllabus" data-node-output="selectedData" data-node-edit="true" data-node-id="nodeId" data-node-label="name" data-node-children="children" ></div>
+	    </div>
+	</div>
+
+	<div class="row">
+		<div class="col-xs-12 text-right">
+			<button  type="submit" class="btn btn-info baab-btn" style="margin-right: 10px;" ng-disabled="generalInfo.$invalid || !totalCourseDuration" disabled="disabled" ng-click="completeStep3(course, 'step4');"  translate="{{'Next'|translate}}"></button>
+		</div>
+	</div>
+</div>

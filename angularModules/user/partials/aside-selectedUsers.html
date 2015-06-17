@@ -1,0 +1,20 @@
+<div class="aside aside-open-backdrop" tabindex="-1" role="dialog" style="display: block;">
+  <div class="aside-dialog">
+    <div class="aside-content">
+      <div class="aside-header" >
+        <button type="button" class="close" ng-click="$hide()">×</button>
+        <h4 class="aside-title" translate="{{'Selected Users'|translate}}"></h4>
+      </div>
+      <div class="aside-body" >
+        <div ng-repeat="selectedUser in courseAllocate.selectedUsers track by $index">
+          <div class="col-xs-12">
+          <div class="font-bold col-xs-10">{{selectedUser.profile.firstName}} {{selectedUser.profile.lastName}}</div><a ng-click="fnUserRemove(selectedUser)"><i class="col-xs-2 mdi-content-remove-circle text-2x"></i></a>
+          </div>
+        </div>      
+      </div>
+      <!-- <div class="aside-footer" >
+        <button type="button" class="btn btn-default" ng-click="$hide()">Close</button>
+      </div> -->
+    </div>
+  </div>
+</div>

@@ -1,0 +1,33 @@
+
+
+<div class="modal" style="z-index: 1052 !important;" tabindex="-1" role="dialog" >
+  <div class="modal-dialog modal-lg">
+    <div class="modal-content">
+      <!-- <div class="modal-header" >
+        <button type="button" class="close" ng-click="$hide()">×</button>
+        <h4 class="modal-title ng-binding" ng-bind-html="title">Title</h4>
+      </div> -->
+      <div class="modal-body no-padding" >
+           <form name="questionFrom" xtform no-validate>
+              <question-field ng-if="questionModel" ng-model="questionModel"></question-field>
+                    
+                    <div class="pull-right no-padding m-r" style="margin-top:-35px" >
+                      <div class="btn btn-warning" ng-click="questionShowDeactivate();" >
+                        <span translate="{{'Discard' | translate}}"></span>
+                        <div class="ripple-wrapper"></div>
+                      </div>
+                      <div class="btn btn-primary" ng-disabled="questionFrom.$invalid" ng-click="addQuestion(questionModel,placeindex)">
+                        <span translate="{{'Add to Test' | translate}}"></span>
+                        <div class="ripple-wrapper"></div>
+                      </div>
+                    </div>
+          </form> 
+       
+
+      </div>
+      <div class="modal-footer no-padding">
+        
+      </div>
+    </div>
+  </div>
+</div>

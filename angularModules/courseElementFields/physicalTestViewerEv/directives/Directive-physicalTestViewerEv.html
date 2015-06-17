@@ -1,0 +1,95 @@
+<div>
+
+
+<div class="row m-t-lg">
+
+	<div class="col-xs-12 m-b" ng-repeat="test in tests">
+		<div class="col-xs-12 font-bold btn-material-red-400 m-b" style="text-transform:uppercase;">{{test.type}}</div>
+		<div class="col-xs-12 text-right p-r">
+			<button type="button" class="btn" ng-model="test.passStatus" data-html="1" ng-options="passStatus.value as passStatus.label for passStatus in passStatuses" bs-select ng-class="{'btn-material-green-600':test.passStatus=='pass','btn-material-red-500':test.passStatus=='fail'}"></button>
+		</div>
+		<!-- candidate details -->
+		<div class="col-xs-12">
+			<div class="col-xs-6 col-sm-3 font-bold" ng-if="evaluateArray[$index].checkGender">Gender</div>
+			<!-- this div will show up only if there is atleast one pass criteria which has a gender check in it -->
+			<div class="col-xs-6  col-sm-3" style="margin-top:-18px;" ng-if="evaluateArray[$index].checkGender">
+					<button type="button" class="btn btn-default" ng-model="test.candidate.gender" data-html="1" ng-options="gender.value as gender.label for gender in evaluateArray[$index].genderArray" bs-select style="padding-left:3px;" ng-change="validate(test)"></button>
+			</div>				
+
+		</div>
+		<!-- End. candidate details -->
+
+		<!-- ng-repeat for values in categorization -->
+		<div class="col-xs-12 m-v-xs" ng-repeat="category in test.candidate.categorizationArray">
+			
+			<div class="col-xs-6 col-sm-2 font-bold">{{category.category}}</div>
+			<!-- this div will show up only if there is atleast one pass criteria which has a gender check in it -->
+			<div class="col-xs-6  col-sm-2" style="margin-top:-18px;" >
+				<input type="number" class="form-control" ng-model="category.value" ng-change="validate(test)" >
+			</div>
+			<div class="col-xs-2 col-sm-1" ng-if="evaluateArray[$index].checkCategory">
+					<div ng-if="category.category == 'height'">
+			        	cm
+			        </div>
+			        <div ng-if="category.category == 'weight'">
+			        	Kg
+			        </div>
+			        <div ng-if="category.category == 'age'">
+			        	years
+			        </div>
+			</div>
+		</div>			
+		<!-- End. ng-repeat for values in categorization -->
+
+		<div class="col-xs-12 font-bold m-b m-t" style="text-decoration:underline;">Performance details:</div>
+
+		<div class="col-xs-12">
+			<div class="col-xs-7 col-md-3">
+				<button type="button" class="btn btn-default" ng-model="test.candidate.evalUnit" data-html="1" ng-options="evalUnit.value as evalUnit.label for evalUnit in evaluateArray[$index].evalUnitsArray" bs-select style="padding-left:3px;"></button>&nbsp;<strong>:</strong>&nbsp;
+			</div>
+
+			<div class="col-xs-5 col-md-2">
+				<input type="number" class="form-control" ng-model="test.candidate.performedUnits" ng-change="validate(test)" >
+			</div>
+
+			<div class="col-xs-6 col-md-2" ng-if="test.candidate.evalUnit == 'Time'">
+				<button  type="button" class="btn btn-default" ng-model="test.candidate.timeUnit" data-html="1" ng-options="timeUnit.value as timeUnit.label for timeUnit in timeUnits" bs-select style="padding-left:3px;"></button>
+			</div>
+			<div class="col-xs-6 col-md-2" ng-if="distanceArray.indexOf(test.candidate.evalUnit) != -1">	
+				<button  type="button" class="btn btn-default" ng-model="test.candidate.lengthUnit" data-html="1" ng-options="lengthUnit.value as lengthUnit.label for lengthUnit in lengthUnits" bs-select style="padding-left:3px;"></button>
+			</div>
+
+			<div class="col-xs-4 col-md-2 p-v-sm" ng-if="evaluateArray[$index].checkPer">
+				in
+			</div>
+
+			<div class="col-xs-4 col-md-2" ng-if="evaluateArray[$index].checkPer">				
+				<input type="number" class="form-control" ng-model="test.candidate.performedTime" ng-change="validate(test)"  >
+			</div>
+			<div class="col-xs-4 col-md-2" ng-if="evaluateArray[$index].checkPer">
+
+				<button type="button" class="btn btn-default" ng-model="test.candidate.perTimeUnit" data-html="1" ng-options="timeUnit.value as timeUnit.label for timeUnit in evaluateArray[$index].perTimeUnitArray" bs-select style="padding-left:3px;"></button>
+
+			</div>
+			
+		</div>
+		<!-- performance details -->
+		
+		<!-- pass criteria -->
+		<div class="row">
+			<div class="col-xs-12" ng-repeat="singleCriteria in test.passCriteria">
+				
+			
+					{{$index +1}}. {{buildCriteria(singleCriteria)}}
+					
+				
+			</div>
+		</div>
+
+		
+		
+	</div>
+
+</div>
+
+</div>

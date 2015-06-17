@@ -1,0 +1,30 @@
+<div class="col-xs-12 m-h-n shadow-z-1 p m-b" ng-show="data!=undefined">
+	<div clas="row">
+		<div class="col-xs-2 no-padding"><i class="ui-icon m-r m-t pull-left fa {{data.Icon}}" style="color:{{data.iconBackground}} !important;"></i></div>
+		<div class="col-xs-10 no-padding">
+			<em>{{data.elements[0].value}}</em><br/>
+
+			<small>{{data.Name}}</small>
+			<div  ng-if="!buttonShow">
+			<a ng-click="elementPreview()"><i bs-tooltip data-title="{{'Element preview'}}" data-placement="left" class="mdi-action-visibility pull-right text-lg"></i></a>
+			</div>
+
+			<div ng-if="buttonShow">
+			<!-- <a ng-click="addElement()"><i bs-tooltip data-title="Add Material to Course" data-placement="left" class="mdi-content-add-circle-outline text-2x pull-right"></i></a> -->
+			<!-- <div class="col-xs-12"> -->
+			<a ng-click="elementPreview()"><i bs-tooltip data-title="{{'Element preview'}}" data-placement="left" class="mdi-action-visibility text-2x"></i></a>
+
+			<span class="checkbox pull-right">
+                    <label>
+                        <input ng-model="data.selection" type="checkbox"> 
+                    </label>
+            </span>
+            <!-- </div> -->
+			
+			</div>
+
+
+		</div>
+
+	</div>
+</div>in

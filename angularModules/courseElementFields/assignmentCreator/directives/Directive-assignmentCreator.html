@@ -1,0 +1,269 @@
+<div class=" bg-white">
+	<form name="assignmentForm">
+
+	<div class="row">
+		<div class="col-xs-12 m-v">			
+			<div class="col-xs-3 p-v">
+						<span class="font-bold" translate="{{'Time available for submission' | translate}}"></span>
+					</div>
+
+					<div class="col-xs-3">
+						<input type="number" class="form-control" name="assignmentDuration" xt-validate ng-model = "ngModel.duration.duration" >
+					</div>
+
+					<div class="col-xs-4" ng-if="penaltyTimeUnits">
+						<button type="button" class="btn btn-default" ng-model="ngModel.duration.durationUnit" data-html="1" ng-options="timeUnit.value as timeUnit.label for timeUnit in penaltyTimeUnits" bs-select>					
+						</button>						
+					</div>
+		</div>
+	</div>
+
+
+	<div class="row b-b">
+		<div class="col-xs-12">
+			<div class="col-xs-12 font-bold" translate="{{'Penality Rules' | translate}}" >
+			</div>
+			<div class="col-xs-12">
+				<em>Use the below fields to construct a penalty rule. a couple of examples are provided below for reference
+
+				<br> 
+
+				<strong class="text-default"><i> Example 1: &nbsp;</i></strong> <strong class="text-success">When</strong> submission is late <strong class="text-success">by</strong> 5 days, <strong class="text-success">block submission</strong> and <strong class="text-success">Reduce</strong> 10% of marks <strong class="text-success">for</strong> one time .
+
+
+				<br> 
+
+				<strong class="text-default"><i> Example 2: &nbsp;</i></strong> <strong class="text-success">When</strong> submission is late <strong class="text-success">by</strong> 5 days,  <strong class="text-success">Reduce</strong> 10% of marks <strong class="text-success">for</strong> each day delayed.
+
+				
+
+				</em>
+			</div>
+		</div>
+	</div>
+
+	<!-- Penalty rules addition section -->
+	<div class="row">
+		<div class="col-xs-12">		
+			<div class="col-xs-12 col-md-5 m-t shadow-z-1">	
+
+				<!-- When -->
+				<div class="row bg-light" ng-if="penaltySubmissionModes">
+					<div class="col-xs-12">
+						<div class="col-xs-3 p-v">
+							<i class="font-bold" translate="{{'When' | translate}}"></i>
+						</div>
+						
+						<div class="col-xs-4">
+							<button type="button" class="btn btn-default pull-left text-left" ng-model="penaltyObj.submissionMode" data-html="1" ng-options="mode.value as mode.label for mode in penaltySubmissionModes" bs-select style="padding-left:0px;">					
+							</button>
+						</div>
+
+					</div>
+				</div>
+
+				<!-- by -->
+
+				<div class="row bg-light" ng-if="penaltyObj.submissionMode != 're-submitted'">
+
+					<div class="col-xs-12">
+						<div class="col-xs-3 p-v">
+							<i class="font-bold" translate="{{'by' | translate}}"></i>
+						</div>
+
+						<div class="col-xs-3">
+							<input type="number" class="form-control" name="lateTime" xt-validate ng-model = "penaltyObj.lateTime" >
+						</div>
+
+						<div class="col-xs-4">
+							<button type="button" class="btn btn-default" ng-model="penaltyObj.lateTimeUnits" data-html="1" ng-options="timeUnit.value as timeUnit.label for timeUnit in penaltyTimeUnits" bs-select style="padding-left:0px;">					
+							</button>
+							<span  class="font-bold"> , </span>
+						</div>
+
+					</div>
+				</div>
+
+				<!-- Block -->
+				<div class="row" ng-if="penaltyObj.submissionMode != 're-submitted'">
+					<div class="col-xs-12 m-v">					
+						<div class="col-xs-push-3 col-xs-8">
+							<div class="checkbox" >
+		                    <label>
+
+		                        <input type="checkbox" ng-model="penaltyObj.blockSubmission" value="true">
+		                        <a style="color:#666666;" translate="{{'Block submission' | translate}}" ></a>
+		                         
+		                    </label>
+		                	</div>
+		                </div>
+					</div>
+				</div> 
+
+				<!-- Reduce -->
+				<div class="row" ng-if="penaltyUnits">
+					<div class="col-xs-12">
+						<div class="col-xs-3 p-v">
+							<i class="font-bold" ng-if="penaltyObj.blockSubmission" translate="{{'and' | translate}}"></i>
+							<i class="font-bold" translate="{{'reduce' | translate}}"></i>
+							
+						</div>
+
+						<div class="col-xs-3">
+							<input type="number" class="form-control" name="reductionUnits" xt-validate ng-model = "penaltyObj.reductionUnits" >
+						</div>
+
+						<div class="col-xs-4">
+							<button type="button" class="btn btn-default pull-left text-left" ng-model="penaltyObj.penaltyCalculationUnit" data-html="1" ng-options="unit.value as unit.label for unit in penaltyUnits" bs-select style="padding-left:0px;">					
+							</button>
+						</div>
+
+					</div>
+				</div> 
+
+
+				
+				<!-- For -->
+				<div class="row" ng-if="!penaltyObj.blockSubmission">
+					<div class="col-xs-12">
+						<div class="col-xs-3 p-v">
+							<i class="font-bold" translate="{{'for' | translate}}"></i>
+						</div>				
+						<div class="col-xs-4">
+							<button type="button" class="btn btn-default pull-left text-left" ng-model="penaltyObj.penaltyFrequency" data-html="1" ng-options="frequency.value as frequency.label for frequency in penaltyFrequencies" bs-select style="padding-left:0px;">					
+							</button>
+						</div>
+
+					</div>
+				</div>
+				
+				<div class="col-xs-12 p-v m-v-n" >
+					<button class="btn  btn-material-red baab-btn m-v-n pull-right" ng-show="!ruleEditMode"  ng-click="addPenaltyRule()"> <i class="mdi-content-add m-r"></i> Add Rule</button>
+					<button class="btn  btn-material-pink-500 baab-btn m-v-n pull-right" ng-show="ruleEditMode"  ng-click="updatePenaltyRule()"> <i class="mdi-action-done m-r"></i> Update Rule</button>
+				</div>			
+				
+			</div>
+			
+
+		<!-- Penalty Rules repeater -->
+		
+			<div class="col-xs-12 col-md-6 m-t-xs" ng-repeat="rule in ngModel.penaltyArray">
+
+				<div class="col-xs-8 col-md-10  p-v">
+					{{$index + 1}}. When {{rule.submissionMode}} {{fnShowByDate(rule.submissionMode, rule.lateTime, rule.lateTimeUnits)}},{{fnShowBlockSubmission(rule.blockSubmission)}} reduce {{rule.reductionUnits}}{{rule.penaltyCalculationUnit}} {{fnSHowPenaltyFrequency(rule)}}
+				</div>
+				
+				<div class="col-xs-2 col-md-1  p-v m-v-n">
+					<button class="btn  btn-material-red baab-btn m-v-n" bs-tooltip data-title="Remove Rule" data-placement="top"  ng-click="removeRule($index)"> <i class="mdi-action-delete"></i> </button>
+				</div>
+				<div class="col-xs-2 col-md-1  p-v m-v-n">
+					<button class="btn  btn-material-red baab-btn m-v-n" bs-tooltip data-title="Edit Rule" data-placement="top"  ng-click="editRule(rule)"> <i class="mdi-editor-mode-edit"></i>  </button>
+				</div>		
+				
+			</div>
+		</div>
+	</div>
+
+		<!-- <div class="form-group col-xs-12">
+			<input type="text" class="form-control" float-label ng-model="ngModel.deadLine" data-date-format="dd-MM-yyyy" data-date-type="date" data-autoclose="true" data-min-date="today" name="deadLine" bs-datepicker="" autocomplete="off" placeholder="Last Date of Submission">
+
+
+		</div> -->
+
+		<!-- <div class="form-group  col-xs-12">
+			<h4>
+				<div class="font-bold" translate="{{'Penality Settings' | translate}}"></div>
+			</h4>
+
+
+			 <div class="col-xs-6">
+				<div class="form-group">
+					<em translate="{{'Penality on Late Submission ' | translate}}"></em>
+					<select class="form-control" ng-model="ngModel.penality.lateSubmission" id="select" required>
+		             	<option selected="selected"  value="" required translate="{{'Select Penality (in %)' | translate}}"></option>
+		             	<option ng-repeat = "num in percentageNum" value="{{num}}">{{num}}%</option>  
+		            </select>
+	            </div>
+
+				<div class="form-group">
+		            <em translate="{{'Penality on Re-Submission ' | translate}}"></em>
+					<select class="form-control" ng-model="ngModel.penality.reSubmission" id="select" required>
+		             	<option selected="selected"  value="" required translate="{{'Select Penality (in %)' | translate}}"></option>
+		             	<option ng-repeat = "num in percentageNum" value="{{num}}">{{num}}%</option>  
+		            </select>
+	        	</div>
+            </div>
+          
+
+			<div class="col-xs-6">
+
+				<div class="form-group">
+					<em translate="{{'Penality for unattended Questions' | translate}}"></em>
+
+		            <label class="control-label">Penality Count Method</label>
+		            <div class="col-xs-6">
+		                <div class="radio radio-primary">
+		                    <label>
+		                        <input type="radio" ng-model="ngModel.penality.unattended.unit" name="unit" id="unit1" value="percentage" checked="">
+		                        Percentage of Question weightage 
+		                    </label>
+		                </div>
+		            </div>
+		            <div class="col-xs-6">
+		                <div class="radio radio-primary">
+		                    <label>
+		                        <input type="radio" ng-model="ngModel.penality.unattended.unit" name="unit" id="unit2" value="times">
+		                        Times the Question weightage
+		                    </label>
+		                </div>
+		            </div>
+		           		     
+				</div>
+
+				<div class="form-group" ng-if="ngModel.penality.unattended.unit=='percentage'" style="margin-top: 48px;">
+					<select class="form-control" ng-model="ngModel.penality.unattended.value" id="select" required>
+		             	<option selected="selected"  value="" required translate="{{'Select Penality (in %)' | translate}}"></option>
+		             	<option ng-repeat = "num in percentageNum" value="{{num}}">{{num}}%</option>  
+		            </select>
+		        </div>
+
+		        <div class="form-group" ng-if="ngModel.penality.unattended.unit=='times'" style="margin-top: -25px;">
+					<input type="number" class="form-control " min="0" float-label placeholder="{{'How many times the Question weightage'|translate}}" name="penality.unattended.value" xt-validate required ng-model="ngModel.penality.unattended.value">
+
+		        </div>
+            </div>
+		</div> -->
+
+		<!-- <div class="form-group  col-xs-12">
+			<h4>
+				<div class="font-bold col-xs-2" translate="{{'Total Mark :' | translate}}"></div>
+				<div class="font-bold col-xs-1" style="margin-left:-100px;">{{ngModel.mark.totalMark}}</div>
+			</h4>
+ 
+		</div> -->
+
+		<!-- {{ngModel}} -->
+
+		<!-- <div class="col-xs-12">
+			<div class="btn btn-primary" ng-disabled="assignmentForm.$invalid" ng-click="questionShowActivate()">
+			<span translate="{{'Add Assignment Question' | translate}}"></span>
+			<div class="ripple-wrapper"></div>
+			</div>
+		</div> -->
+	</form>
+	
+
+	<div class="col-xs-12" ng-repeat="assignment in ngModel.assignmentsModel track by $index">
+		
+		<div class="col-xs-12" >
+			<question-viewer data="{{fnFormatObj(assignment)}}" index="1" course-element="courseElement"></question-viewer>
+		</div>
+		
+		<div class="col-xs-12">
+			<i class="pull-right mdi-av-playlist-add text-2x" data-placement="left" bs-dropdown="dropDown($index)"></i>		
+		</div>
+
+	</div>
+
+
+</div>

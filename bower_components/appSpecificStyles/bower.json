@@ -1,0 +1,25 @@
+{
+  "name": "appSpecificStyles",
+  "version": "1.0",
+  "description": "These are the application specific scripts",
+  "main":[
+          "css/weather-icons.min.css"
+          ,"http://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,400,600,700,300"
+          ,"css/beyond.min.css"
+          ,"css/demo.min.css"
+          ,"css/typicons.min.css"
+          ,"css/animate.min.css"
+  ],
+  "authors": [
+    "Team-baabtra"
+  ],
+  "license": "MIT",
+  "private": true,
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ]
+}

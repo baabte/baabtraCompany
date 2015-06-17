@@ -1,0 +1,39 @@
+<div class="panel panel-default m-t p-md p-v-xs b-b b-5x {{borderClass}}">
+  
+  <!-- Top Header row -->
+  <div class="row">
+
+    <!-- Heading -->
+<!--     <div class="bg-gold-dark p-sm">
+      <i class="fa fa-puzzle-piece text-1x inline"></i>
+      <span class="text-1x font-bold">Design Course</span>
+    </div> -->
+    <!-- Heading .end -->
+
+  </div>
+  <!-- Top header row .End -->
+
+  <!-- body row -->
+  <div class="row">
+    <div class="col-xs-12">
+      <div class="panel-body">
+
+            <div class="col-xs-12 am-fade">
+              <course-timeline class="p-v" total-duration="course.Duration.durationInMinutes" ddl-bind-object="ddlBindObject" callback-functions="tlPopOver" sync-data="course" tl-elements="['courseTimeline']" course-id="courseId" err-tooltip = "errTooltip" valid = "valid" course-preview-obj="coursePreviewObject">
+              </course-timeline>
+            </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Footer row   -->
+<div class="row">
+  <div class="col-xs-12 m-b">
+    <footer class="text-right">
+     <button type="submit" class="btn btn-info baab-btn" ng-disabled="acGenInfo.$invalid || !valid" disabled="disabled" ng-click="completeStep4();" >Publish {{course.type}}</button>
+    </footer>   
+  </div>
+</div>
+<!-- footer row .End -->
+
+</div>

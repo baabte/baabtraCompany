@@ -1,0 +1,15 @@
+<div class="formgen-dropdown m-xs" >
+	<div multi-selectable  ng-show="summaryDetails.length" input-model="summaryDetails" output-model="ngModel" button-label="Name" item-label="Name"  tick-property="ticked" helper-elements="all none reset filter" default-label="Please select a course material">	
+	</div>  <!-- on-item-click="onItemClick(data)" -->
+	<div ng-if="summaryDetails.length==0">
+		<!-- <i class="fa fa-spiner fa-spin text-lg text-info"></i> -->
+        <div class="alert ng-scope alert-button bg-danger lt text-white no-margin" ng-class="[type ? 'alert-' + type : null]" style="display: block;"><!-- ngIf: dismissable -->
+        
+          <strong class="ng-binding" translate="{{'Not Found!'|translate}}"></strong>&nbsp;
+			 <span translate="{{'Already all course material under the course has been added to this user/batch time line'|translate}}"></span>
+        </div>
+
+	</div>
+	
+
+</div>

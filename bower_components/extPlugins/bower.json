@@ -1,0 +1,43 @@
+{
+  "name": "extPlugins",
+  "version": "1.0",
+  "description": "These are the external plugins used in the website, mainly design related",
+  "main": [
+            "dist/plugins/bootstrap/css/bootstrap.min.css", 
+            "dist/plugins/font-awesome/css/font-awesome.css", 
+            "dist/plugins/flexslider/flexslider.css", 
+            "dist/plugins/animate-css/animate.min.css", 
+            "dist/css/styles.css", 
+            "dist/plugins/jquery-migrate-1.2.1.min.js", 
+            "dist/plugins/detectmobilebrowser.js", 
+            "dist/plugins/jquery.easing.1.3.js", 
+            "dist/plugins/bootstrap/js/bootstrap.min.js", 
+            "dist/plugins/jquery-inview/jquery.inview.min.js", 
+            "dist/plugins/FitVids/jquery.fitvids.js", 
+            "dist/plugins/jquery-scrollTo/jquery.scrollTo.min.js", 
+            "dist/plugins/jquery-placeholder/jquery.placeholder.js", 
+            "dist/plugins/flexslider/jquery.flexslider-min.js", 
+            "dist/plugins/bgSwitcher/jquery.bgswitcher.js", 
+            "dist/js/main.js", 
+            "dist/js/animations.js"
+            ],
+  "keywords": [
+    "bootstrap",
+    "animations",
+    "easing",
+    "scrollto",
+    "font-awesome",
+    "flexslider"
+  ],
+  "authors": [
+    "Anoop"
+  ],
+  "license": "MIT",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ]
+}

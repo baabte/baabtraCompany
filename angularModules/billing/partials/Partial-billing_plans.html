@@ -1,0 +1,85 @@
+
+<div class="col-sm-12 p-sm"  set-sub-heading-and-background-color>
+	<h3 class="no-margin">Billing plans</h3>
+</div>
+<div class="bg-white" >
+	<div class="panel-heading bg-white">
+				<strong>add new plans</strong>
+	</div>
+	<div class="container bg-white " >
+		<div class="form-group">
+				<div class="col-sm-4">
+						<div class="form-group">
+						<input type="text" class="form-control" float-label ng-model="planName" placeholder="{{'Plan Name'|translate}}">
+						</div>
+            <!-- id="feature_list_div" -->
+						<div class="list-group" >
+					          <a href="" class="list-group-item b-l-primary" data-animation="am-fade-and-scale" data-type="success" bs-tooltip="tooltip" ng-repeat="feature in features" ng-click="addfeature($index)">
+					          <span class="pull-right text-primary "><i class="glyphicon glyphicon fa fa-plus"></i></span>
+					          <label class="block font-bold"> {{feature.featureName}}</label>
+					        </a>
+
+     	</div>
+      
+				</div>			
+    <!-- style="border:solid" -->
+    <div class="col-sm-8 "  >
+        <div  id="current_plan" ng-show="current_plan" class="callout-info">
+        <h4 class="list-group-item">{{planName}}</h4><br>
+        <span ng-repeat="feature in features_to_billing_plan" class="btn  btn-primary m-xs b-a">{{feature.featureName}} &nbsp 
+        <i class="ti-settings" data-content="feature" data-template="views/ui/angular-strap/edit_tooltip.html" data-animation="am-flip-x"  bs-popover="" ng-click="filterBillingPlan(feature)"></i>&nbsp
+        <i class="glyphicon glyphicon-remove-sign" ng-click="removeFromFeaturelist(feature,$index)"></i>
+        </span>
+        <div class="panel-heading "></div>
+          <footer class="text-right" ng-show="feature_add_menu">
+            <button class="btn w-xs btn-primary m-t-xs right" ng-click="addPlan()">add plan</button>
+          </footer>
+           
+        </div>
+        <div ng-show="current_plan">
+         <div class="panel-heading " ></div>
+        </div>
+        <div>
+        <ul class="nav m-b-lg" ui-nav="">
+        <li ng-class="{'active am-fade':toggle==$index}" ng-repeat="plan in current_plans" >
+          <a href="" class="auto list-group-item text-ellipsis text-info" >
+            
+            <span class="pull-right text-muted m-r-xs" >
+            <span ng-click="toggleCustom($index)" class="p-h-lg" >
+            <label class="p-h" >Features({{plan.features.length}})</label>
+              <i class="fa fa-arrow-down inline"></i>
+              <i class="fa fa-arrow-up none"></i>
+            </span>
+             <i class="fa fa-dollar"></i>
+             <label>{{calculate_plan_prize(plan)}}</label>
+             <span class="p-h-lg">
+                    <i class="glyphicon glyphicon-trash" ng-click="delete_plan(plan,$index)"></i>
+              </span>
+            </span>
+
+            {{plan.planName}}
+          </a>
+          
+          <ul class="nav nav-sub nav-sm " >
+            <li >
+              <a href="" ng-repeat="feature in plan.features" ><span class="fa  fa-fw text-muted" >{{feature.featureName}}</span> </a>
+    
+            </li>
+
+          </ul>
+        </li>
+        </ul>
+        </div>
+        
+
+    </div>	
+		</div>
+
+	</div>
+</div>
+
+
+<!-- <button type="button" class="btn btn-lg btn-danger ng-scope" title="Title" data-content="Hello Popover<br />This is a multiline message!" data-template="views/ui/angular-strap/popover.tpl.html" data-animation="am-flip-x" bs-popover="">Custom Popover
+      <br>
+      <small>(using data-template)</small>
+    </button> -->

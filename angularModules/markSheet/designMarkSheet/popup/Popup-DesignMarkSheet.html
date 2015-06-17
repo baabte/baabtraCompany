@@ -1,0 +1,47 @@
+<div  class="modal modal-full-width" tabindex="-1" role="dialog">
+    <div class="modal-dialog-full-width  modal-full-width">
+      <div class="modal-content">
+        <div class="p bg-info font-bold baab-shadow">
+          Design Marksheet
+        </div>
+        <div class="modal-body">
+          <!-- <pre>{{elementsOfSelectedNode}}</pre> -->
+          <div class="col-xs-12 col-sm-6">
+            <div data-angular-treeview="true" data-node-output="data.selectedNode" data-node-edit="false" data-tree-id="syllabusTree" data-tree-model="data.selectedCourse.syllabus" data-node-id="nodeId" data-node-label="name" data-node-children="children" >
+            </div>
+          </div>
+          <div class="col-xs-12 p col-sm-6">
+            <div class="col-xs-12 p shadow-z-1 bg-danger" ng-if="elementsOfSelectedNode&&!elementsOfSelectedNode.length">
+              There are no elements with '{{data.markType}}' status under selected section..!
+            </div>
+            <div class="col-xs-12 p shadow-z-1" ng-if="elementsOfSelectedNode.length" ng-repeat="(key, value) in elementsOfSelectedNode">
+             <!-- {{value.element}} -->
+              <div>
+                <!-- <div class="col-xs-1">
+                  <i class="text-2x {{checkSelectedElements(value.key)==-1?'mdi-content-add-circle-outline':'text-success mdi-action-done-all'}}"></i>
+                </div> -->
+                <div ng-if="checkSelectedElements(value.key)==-1" ng-click="addToMarksheet(value.key)" bs-tooltip data-title="Click to add this element to marksheet" class="col-xs-1">
+                  <i class="text-2x mdi-content-add-circle-outline"></i>
+                </div>
+                <div ng-if="checkSelectedElements(value.key)!=-1" ng-click="removeFromMarksheet(value.key)"  bs-tooltip data-title="This element is already added to marksheet,Click to remove" class="col-xs-1">
+                  <i class="text-2x text-success mdi-action-done-all"></i>
+                </div>
+                <div class="col-xs-1">
+                  <i style="background:{{value.element.iconBackground}};color:{{value.element.iconColor}};" class="fa {{value.element.Icon}} img-circle text-2x p-xs"></i>
+                </div>
+                <div class="col-xs-10">
+                  {{value.element.elements[0].value}}
+                </div>
+              </div>
+            </div>
+          </div>
+          
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-primary baab-btn" ng-click="$hide()">Cancel</button>
+          <!-- <button type="button" class="btn btn-primary baab-btn"><i class="fa fa-download" ></i>&nbsp;Download</button> -->
+          <button type="button" class="btn btn-success baab-btn" ng-click="saveMarksheetToDb($hide)">Save</button>
+        </div>
+      </div>
+    </div>
+</div>

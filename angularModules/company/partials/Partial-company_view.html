@@ -1,0 +1,99 @@
+<div  name="manage" class="col-xl-12 " ui-view>
+
+  <div class="row">
+      <div class="col-xs-12">
+        <span class="pull-right">
+        <a class="btn btn-warning baab-btn" ng-href="#/home/main/company/registration" translate="{{'Register a new Company'|translate}}"></a>
+        </span>
+      </div>
+    </div>
+
+
+  <div class="panel panel-default"> 
+
+  <div class="bg-white p-sm b-b b-2x b-success " >
+  <h4 class="no-margin" translate="{{'Registered Companies'|translate}}"></h3>
+</div>  
+ 
+    <div class="panel-heading bg-white">
+      <div class="col-sm-4">
+      <div class="input-group m-v-md">
+                      
+                      <input  ng-model="CompanySearch" type="text" class="form-control input col-md-2 no-border well" float-label placeholder="{{placeholderVal}}...">
+                      <span class="input-group-btn">
+                        <button ng-click="searchCompany(CompanySearch)" class="btn btn-sm bg-white btn-icon no-shadow no-padder">
+                          <i class="glyphicon glyphicon-search text-xl"></i>
+                        </button>
+                      </span>
+                    </div>
+                    </div>          
+          
+           
+    </div>
+    <div class="panel-body animated flipInX"><!-- panel body open -->
+
+      <table class="table table-striped table-bordered table-hover">
+        <tr >
+        <td>
+      <div style="height: 400px;overflow: auto;" ><!-- screen size limit open -->
+        
+        <div class="col-sm-2 " ng-repeat="company in companylist | filter:CompanySearch" >
+          
+          <div style="background:url(images/a0.jpg) center center; background-size:cover">
+            <div class="p-sm-1 bg-white-opacity text-center">
+              <a href="" class="w-xs inline">
+              <img src="images/a0.jpg" class="img-circle img-responsive">
+              </a>
+              <div class="m-b m-t-sm h3">
+                <span class="text-black" >{{company.companyName}}</span>
+              </div>
+              <a ng-href="#home/main/company/manage/company-info/{{companyId}}" class="btn btn-sm btn-info m-b p-h" ng-click="manageCompany(company._id.$oid)" translate="{{'Manage'|translate}}"></a>
+            </div>
+          </div>
+        
+        
+          <div class="list-group no-radius well" >
+          </br>
+              <a class="text-muted" ng-href="http://{{company.facebook}}" target="_blank">
+                <i class="fa ui-icon fa-facebook"></i>
+              </a>
+              <a class="text-muted" ng-href="http://{{company.twitter}}" target="_blank">
+                <i class="fa ui-icon fa-twitter"></i>
+              </a>
+              <a class="text-muted" ng-href="http://{{company.linkedin}}" target="_blank">
+                <i class="fa ui-icon fa-linkedin"></i>
+              </a>
+              <a class="text-muted" ng-href="http://{{company.gplus}}" target="_blank">
+                <i class="fa ui-icon fa-google-plus"></i>
+              </a>   
+             
+              <div class="pull-right sm "data-html="true" data-placement="top" data-animation="flip-x" data-html="true" title="Contact Info" data-content="Email<br>{{company.eMail}}<br>Phone<br>{{company.Phone}}<br>Mob<br>{{company.Mobile}}" data-trigger="hover"  bs-popover="">
+              <i class="fa fa-info text-xl"></i>
+              </div>
+          </div>
+
+         
+        
+        </div>
+         <div class="row" ng-show="ShowNoDataFound">
+                          <div class="col-sm-8" >
+                            <div id="alerts-container" class="animated fadeIn">
+                              <div class="alert ng-scope am-fade alert-button bg-danger lt" ng-class="[type ? 'alert-' + type : null]" style="display: block;"><!-- ngIf: dismissable -->
+                                <button type="button" class="close ng-scope" ng-click="$hide()">×</button><!-- end ngIf: dismissable --> 
+                                <strong class="ng-binding" translate="{{'Not Found!'|translate}}"></strong>&nbsp;
+                                <span class="ng-binding" >{{WarringMessage}}</span>
+                              </div>
+                            </div>
+                          </div>
+                      </div>
+
+      </div><!-- screen size limit  close -->
+      </td>
+      </tr>
+    </table> 
+    <div class="horizontal-space"></div>
+    <span class="pull-right">
+    <button class="btn btn-blue" data-placement="top" data-original-title="More Registered Companies" ng-click="showMore();" translate="{{'show more..'|translate}}"></button> </span> 
+    </div> <!-- panel body close -->
+  </div>
+</div>

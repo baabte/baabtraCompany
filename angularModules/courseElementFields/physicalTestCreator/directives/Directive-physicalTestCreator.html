@@ -1,0 +1,154 @@
+<div>
+
+
+<em translate="{{'below you can create and add type of physical tests and set pass criterias for each' | translate }}" class="m-b-lg"></em>
+
+<div class="row m-t-lg">
+
+	<div class="col-xs-12">
+		<div class="col-xs-6">
+			<input class="form-control" ng-model="physicalTest.type" placeholder = "{{'Test Type' | translate }}">
+			<em>(eg. running, push-ups, sit-ups etc.)</em>
+		</div>
+
+		<div class="col-xs-6 p-v-md font-bold">
+			<i class="ui-icon mdi-content-add text-lg" style="cursor:pointer; cursor:hand;" ng-click="addTest(physicalTest)"></i>
+		</div>
+	</div>
+
+</div>
+
+<div class="row m-t-lg b-t" ng-if="ngModel.tests.length">
+	<div class="col-xs-12 b-b" ng-repeat="test in ngModel.tests">
+		<div class="col-xs-12 font-bold text-large m-v" style="text-transform:uppercase;">
+			<div ng-show="!test.typeEditMode" class="col-xs-8 col-md-3">{{test.type}}</div>
+			<input ng-show="test.typeEditMode" ng-model="test.type" type="text" class="form-control">
+			<i class="text-primary m-l mdi-action-delete" style="cursor:pointer; cursor:hand;" bs-tooltip data-title="Remove Criteria" data-placement="top"  ng-click="removeType($index)"></i>
+			
+			<i ng-show="!test.typeEditMode" class="text-primary m-l mdi-editor-mode-edit" style="cursor:pointer; cursor:hand;" bs-tooltip data-title="Edit Criteria" data-placement="top"  ng-click="test.typeEditMode = true"></i>
+			
+			<i ng-show="test.typeEditMode" class="text-primary m-l mdi-action-done" style="cursor:pointer; cursor:hand;" bs-tooltip data-title="Edit Criteria" data-placement="top"  ng-click="test.typeEditMode = false"></i>
+		</div>
+
+		<div class="row">
+			<div class="col-xs-12" ng-repeat="singleCriteria in test.passCriteria">
+				
+			
+					{{$index +1}}. {{buildCriteria(singleCriteria)}}
+					<i class="text-info m-l mdi-action-delete" style="cursor:pointer; cursor:hand;" bs-tooltip data-title="Remove Criteria" data-placement="top"  ng-click="removeCriteria(test, $index)"></i>
+			
+					<i class="text-info m-l mdi-editor-mode-edit" style="cursor:pointer; cursor:hand;" bs-tooltip data-title="Edit Criteria" data-placement="top"  ng-click="editCriteria(test, singleCriteria)"></i>
+				
+			</div>
+		</div>
+
+		<div class="col-xs-12 m-t">
+			<em class="m-t" translate="{{'Please use the below fields to configure pass criteria for the type, if different criteria is added for the same categorization under same rules, the last added criteria will apply.' | translate}}"></em>
+			<br>
+				<!-- gender -->
+				<div class="col-xs-12" ng-if="test.showGenderDD">
+					<div class="checkbox pull-left m-l m-v-n" ng-if="test.showGender">
+		              <label data-title="Include this criteria?" data-placement="top"  bs-tooltip>
+						<input type="checkbox" ng-model="test.passCriteriaObj.checkGender" value="true">
+			             
+			          </label>
+			        </div>
+			        <div class="pull-left  m-l" style="margin-top:-13px;">
+			        	<button type="button" class="btn btn-default" ng-model="test.passCriteriaObj.gender" data-html="1" ng-options="gender.value as gender.label for gender in genders" bs-select style="padding-left:3px;"></button>
+			        </div>
+				</div>
+
+				<!-- age -->
+				<div class="col-xs-12" ng-if="test.showCategoryDD">
+					<div class="checkbox pull-left m-l m-v-n"  ng-if="test.showCategory" >
+		              <label data-title="Include this criteria?" data-placement="top"  bs-tooltip>
+						<input type="checkbox" ng-model="test.passCriteriaObj.checkCategory" value="true" >
+			            <a style="color:#666666;" translate="{{'whose' | translate}}" ></a>    
+			          </label>
+			        </div>
+
+			        <div class="pull-left  m-l" style="margin-top:-13px;">
+			        	<button type="button" class="btn btn-default" ng-model="test.passCriteriaObj.categorization" data-html="1" ng-options= "categorization.value as categorization.label for categorization in  categorizations" bs-select style="padding-left:3px;"></button>
+			        	&nbsp; is between
+			        </div>
+
+			        <div class="pull-left  m-l" style="margin-top:-13px;">
+			        	<div class="col-xs-4" style="padding-top:13px;">
+			        		<input type="number" class="form-control" ng-model = "test.passCriteriaObj.minLimit">
+			        	</div>
+			        	<div class="col-xs-2" style="padding-top:17px;">&nbsp;and&nbsp;</div>
+			        	<div class="col-xs-4" style="padding-top:13px;">
+			        		<input type="number" class="form-control" ng-model = "test.passCriteriaObj.maxLimit">
+			        	</div>
+			        </div>
+
+			        <div class="pull-left p-v-md" style="margin-top:-13px;" ng-if="test.passCriteriaObj.categorization == 'height'">
+			        	cm
+			        </div>
+			        <div class="pull-left p-v-md" style="margin-top:-13px;" ng-if="test.passCriteriaObj.categorization == 'weight'">
+			        	Kg
+			        </div>
+			        <div class="pull-left p-v-md" style="margin-top:-13px;" ng-if="test.passCriteriaObj.categorization == 'age'">
+			        	years
+			        </div>
+
+				</div>
+
+				<div class="col-xs-12 m-t-md font-bold" style="padding-left:35px;"> pass the test if</div>
+
+
+				<!-- test pass critria -->
+				<div class="col-xs-12">
+
+					<div class="col-xs-2">
+						<button type="button" class="btn btn-default" ng-model="test.passCriteriaObj.evalUnit" data-html="1" ng-options="evalUnit.value as evalUnit.label for evalUnit in evalUnits" bs-select style="padding-left:3px;"></button>
+
+					</div>
+
+					<div class="col-xs-1" style="padding-top:20px;">is</div>
+
+					<div class="col-xs-3">
+						<button type="button" class="btn btn-default" ng-model="test.passCriteriaObj.equate" data-html="1" ng-options="equate.value as equate.label for equate in equates" bs-select style="padding-left:3px;"></button>
+					</div>
+
+					<div class="col-xs-3">
+						<input type="number" class="form-control" ng-model = "test.passCriteriaObj.passLimit" required>
+					</div>
+
+					<div class="col-xs-3" >
+						<button ng-if="test.passCriteriaObj.evalUnit == 'Time'" type="button" class="btn btn-default" ng-model="test.passCriteriaObj.timeUnit" data-html="1" ng-options="timeUnit.value as timeUnit.label for timeUnit in timeUnits" bs-select style="padding-left:3px;"></button>
+						<button ng-if="distanceArray.indexOf(test.passCriteriaObj.evalUnit) != -1" type="button" class="btn btn-default" ng-model="test.passCriteriaObj.lengthUnit" data-html="1" ng-options="lengthUnit.value as lengthUnit.label for lengthUnit in lengthUnits" bs-select style="padding-left:3px;"></button>
+					</div>
+
+
+
+				</div>
+
+				<div class="col-xs-12"  ng-if="test.passCriteriaObj.evalUnit == 'Number'">
+					<div class="checkbox pull-left m-l m-v-n" >
+		              <label data-title="Include this criteria?" data-placement="top"  bs-tooltip>
+						<input type="checkbox" ng-model="test.passCriteriaObj.per" value="true" >
+			            <a style="color:#666666;" translate="{{'per ' | translate}}" ></a>    
+			          </label>
+			        </div>
+
+			        <div class="pull-left  m-l" style="margin-top:-13px;">
+						<button type="button" class="btn btn-default" ng-model="test.passCriteriaObj.perTimeUnit" data-html="1" ng-options="timeUnit.value as timeUnit.label for timeUnit in timeUnits" bs-select style="padding-left:3px;"></button>
+					</div>
+
+				</div>
+
+				<div class="col-xs-12">
+					<button class="btn  btn-material-red baab-btn m-v-n pull-right" ng-show="!test.criteriaEditMode"  ng-click="addCriteria(test)"> <i class="mdi-content-add m-r"></i> Add Criteria</button>
+					<button class="btn  btn-material-pink-500 baab-btn m-v-n pull-right" ng-show="test.criteriaEditMode"  ng-click="updateCriteria(test, test.passCriteriaObj)"> <i class="mdi-action-done m-r"></i> Update Criteria</button>
+				</div>	
+
+
+
+		</div>
+
+	</div>
+</div>
+
+
+</div>

@@ -1,0 +1,68 @@
+<div class="modal  fade w-auto-xs" tabindex="-1" role="dialog" >
+	<div class="modal-dialog modal-xl">
+    	<div class="modal-content">
+    		<div class="modal-header" >
+        		<button type="button" class="close" ng-click="$hide()">×</button>
+        		<h4 class="modal-title ng-binding" ng-bind-html="title" translate="{{'Change Batch Status'|translate}}" ></h4>	
+      	</div>
+        <div class="modal-body m-b-lg">
+            <div class="m-b-lg">
+                <label for="select" class="col-xs-2 control-label">Status</label>
+                <div class="col-xs-10">
+                  <!-- status of the batch course mapping -->
+                    <select class="form-control" ng-model="status" id="select">
+                        <option value="">Select Status</option>
+                        <option value="active">Active</option>
+                        <option value="inactive">InActive</option>
+                        <option value="running">Running</option>
+                        <option value="completed">Completed</option>
+                        <option value="cancelled">Cancelled</option>
+                        <option value="postponed">Postponed</option>
+                        <option value="advance">Advance</option>
+                    </select>
+                </div>
+            </div>
+            <div class="m-b-lg" ng-if="status=='postponed'||status=='advance'">
+
+                <div ng-if="status=='postponed'">
+                    <label for="select" class="col-xs-2 control-label">Batch Starts On</label>
+                    <div class="col-xs-10">
+                        <!-- startDate -->
+                           <input  type="text" class="form-control" float-label ng-init="date.startDate=previousStartDate" ng-model="date.startDate" data-date-format="dd-MM-yyyy" data-placement="top" data-date-type="date" data-autoclose="true" data-min-date="{{previousStartDateFormated}}" name="date1" bs-datepicker required >
+
+                    </div>  
+                   <!--  <label for="select" class="col-xs-2 control-label">Batch Ends On</label>
+                    <div class="col-xs-10">
+                           <input  type="text" class="form-control" float-label ng-init="date.endDate=previousEndDate" ng-model="date.endDate" data-date-format="dd-MM-yyyy" data-placement="top" data-date-type="date" data-autoclose="true" data-min-date="{{previousStartDateFormated}}" name="date1" bs-datepicker required >
+
+                    </div>   -->
+                </div>
+
+                <div ng-if="status=='advance'">
+                    <label for="select" class="col-xs-2 control-label" translate="{{'Batch Starts On'|translate}}"></label>
+                    <div class="col-xs-10">
+                           <input  type="text" class="form-control" float-label ng-init="date.startDate=previousStartDate" ng-model="date.startDate" data-date-format="dd-MM-yyyy" data-placement="top" data-date-type="date" data-autoclose="true" data-max-date="{{previousStartDateFormated}}" name="date2" bs-datepicker required >
+
+                        
+                    </div> 
+                   <!--  <label for="select" class="col-xs-2 control-label">Batch Ends On</label>
+                    <div class="col-xs-10">
+                           <input  type="text" class="form-control" float-label ng-init="date.endDate=previousEndDate" ng-model="date.endDate" data-date-format="dd-MM-yyyy" data-placement="top" data-date-type="date" data-autoclose="true" data-min-date="{{previousStartDateFormated}}" name="date1" bs-datepicker required >
+
+                    </div>    -->
+                </div>
+
+            </div>
+            <br>
+        </div>
+
+
+     		<div class="modal-footer m-t-lg">
+        		<button type="button" class="btn btn-default" ng-click="$hide()" translate="{{'Close'|translate}}"></button>
+        		<button type="button" class="btn btn-primary" ng-click="fnChangeStatus(status,$hide)" translate="{{'Save'|translate}}"></button>
+      		</div>   
+   		</div>
+	</div> 
+</div>      
+
+

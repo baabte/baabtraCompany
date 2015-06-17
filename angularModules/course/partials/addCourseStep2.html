@@ -1,0 +1,139 @@
+<!-- Outer Panel  -->
+<form name="generalInfo" class="form-validation">
+<div class="panel panel-default m-t p-md p-v-xs b-b b-5x {{borderClass}}">
+  
+
+  <!-- body row -->
+  <div class="row">
+
+    <!-- Left Half -->
+    <div class="col-xs-12 no-padding" ng-class="{'col-sm-6':totalCourseDuration}">
+            <!-- Heading -->
+<!--       <div class="p-sm bg-baabtra-green  b-r b-white  b-r-3x">
+            <i class="fa fa-clock-o  text-1x inline"></i>
+            <span class="text-1x font-bold">Duration</span>
+      </div> -->
+      <!-- Heading .end -->
+      <!-- Panel Body -->
+      <div class="p-lg">
+        <div class="row row-sm">
+        <!-- Duration Selector Directive -->
+        <duration-selector duration="course.Duration.DurationDetails" duration-in-minutes="course.Duration.durationInMinutes"  return-in="Minutes" tot-duration-in-units ="totalCourseDuration">
+        </duration-selector>
+        <!-- Duration Selector Directive -->
+        </div>
+      </div>
+      <!-- Panel body .end -->
+    </div>
+    <!-- Left Half .End -->
+
+    <!-- Right half -->
+    <div class="col-xs-12 col-sm-6  no-padding" ng-if="totalCourseDuration">
+             <!-- Heading -->
+<!--       <div class="p-sm bg-baabtra-green b-l b-white  b-l-3x">
+            <i class="fa fa-money text-1x inline"></i>
+            <span class="text-1x font-bold">Fee</span>
+      </div> -->
+      <!-- Heading .end -->
+      <div class="panel-body">
+        <div class="row row-sm">
+          <div class="col-xs-12">
+            <div class="radio radio-success pull-left">
+                <label>
+                  <input type="radio" ng-model="course.Fees.free" ng-value="true" ng-change="course.Fees.totalAmount = ''">
+
+                  <b class="font-normal" translate="{{'Free'|translate}}"></b>                 
+
+                </label>
+            </div>
+
+            <div class="radio radio-success pull-left m-l" style="padding-top:15px;">
+                <label>
+                  <input type="radio" ng-model="course.Fees.free" ng-value="false">
+
+                  <b class="font-normal" translate="{{'Paid'|translate}}"></b>                 
+
+                </label>
+            </div>           
+            <em class="text-muted text-00C853 col-xs-12" translate="{{'(Please specify the type of the Course)'|translate}}"></em>
+            <br>           
+          </div>
+          </div>
+        <div class="row m-t row-sm  p-v-md" ng-if="(course.Fees.free==0)">
+            <div class="col-xs-6 col-md-3 animated fadeInDown">
+              <input class="form-control" float-label type="number" ng-blur="fnTotalFeeChanged()" ng-model="course.Fees.totalAmount" placeholder="{{'Total Amount'|translate}}" ui-validate="'$value >= 1'" required autocomplete="off">
+            </div>
+            <div class="col-xs-2">
+              <ui-select required ng-model="course.Fees.currency" theme="selectize" ng-disabled="disabled" style="width: 70px;">
+                <ui-select-match placeholder="" ng-bind-html="$select.selected.name"></ui-select-match>
+                <ui-select-choices repeat="Fees in feeIn | filter: $select.search">
+                <span ng-bind-html="Fees.name | highlight: $select.search"></span>
+              </ui-select-choices>
+            </ui-select>
+            </div>
+                     
+          </div>
+          
+          <!-- Payment Type row -->
+          <div class="row m-t row-sm" ng-if="course.Fees.totalAmount>0">
+             <div class="col-xs-6 col-md-3 animated fadeInDown">
+
+                <div class="radio radio-success pull-left">
+                  <label>
+                    <input type="radio" ng-model="course.Fees.payment.oneTime" ng-value="true">
+
+                    <b class="font-normal" translate="{{'Onetime'|translate}}"></b>           
+
+                  </label>
+                </div>
+
+                <div class="radio radio-success pull-left" style="padding-top:15px;">
+                    <label>
+                      <input type="radio" ng-model="course.Fees.payment.oneTime" ng-value="false">
+
+                      <b class="font-normal" translate="{{'Installments'|translate}}"></b>    
+
+                    </label>
+                </div>
+              </div>
+
+              <div class="col-xs-6 col-md-4 am-fade" ng-if="course.Fees.payment.oneTime == 1">               
+                <ui-select ng-model="course.Fees.payment.mode" theme="selectize" ng-disabled="disabled" style="width: 170px;">
+                <ui-select-match placeholder="{{'Select a payment type'|translate}}">{{$select.selected.name}}</ui-select-match>
+                <ui-select-choices repeat="payment in paymentTypes | filter: $select.search">
+                <span ng-bind-html="payment.name | highlight: $select.search"></span>
+              </ui-select-choices>
+            </ui-select>
+              </div>
+          </div>
+          <em ng-show="PaymentOpt" class="text-muted text-00C853" translate="{{'Please specify the payment type'|translate}}"></em>
+          </div>
+     </div>
+    <!-- Right half .End -->
+  </div>
+  <!-- body row .End -->
+
+          <div class="row">
+
+            <div class="col-xs-12 am-fade" ng-if="totalCourseDuration">
+              <em class="text-muted text-00C853" translate="{{'The time line below represents the total duration of the course.'|translate}}"></em>
+              <br>
+              <em class="text-muted text-00C853" ng-if="(course.Fees.free==0)" translate="{{'You can click on any point in the timeline and add a payment check point. A payment check point means an intermediate point of time during the course where the candidate has to pay a certain amount as part of the installments. If you set an arcade mode on this the candidate will not be able to advance without making the specified payment. (Payment check points can also be added while adding course materials)'|translate}}"></em>
+              <course-timeline class="p-v" total-duration="course.Duration.durationInMinutes" ddl-bind-object="ddlBindObject" callback-functions="tlPopOver" sync-data="course" tl-elements="['courseTimeline']" course-id="courseId" err-tooltip = "errTooltip" valid = "valid" course-preview-obj="coursePreviewObject">
+              </course-timeline>
+            </div>
+          </div>
+
+<!-- Footer row   -->
+<div class="row">
+  <div class="col-xs-12 m-b">
+    <footer class="text-right">
+     <button  type="submit" class="btn btn-info baab-btn" ng-disabled="generalInfo.$invalid || !totalCourseDuration" disabled="disabled" ng-click="completeStep2(course);"  translate="{{'Next'|translate}}"></button>
+    </footer>   
+  </div>
+</div>
+<!-- footer row .End -->
+
+</div>
+</form>
+<!-- outer panel .End

@@ -1,0 +1,119 @@
+<div class="p pull-left b-b col-xs-12 m-v {{data.uniqueId}}">
+
+	
+
+	<div class="row">
+		<div class="col-xs-12" > <!-- ng-if="question.markScored>=0&&question.evaluated" -->
+			<div class="col-xs-5 m-l-lg pull-right">
+			<percent-indicator show-percentage="false" total-value="question.mark.totalMark" obtain-value="question.markScored"></percent-indicator>
+			</div>
+		</div>
+	</div>
+	<div class="row">
+		<div class="col-xs-12 font-bold btn-material-red-600 p-xs" ng-if="fromAssignment.value.resultStatus == 'to be resubmitted'">
+			The evaluator has asked you to re-submit the answer of this question
+		</div>
+	</div>
+
+	<div class="font-bold col-xs-12">{{question.title}}</div>
+
+	<div class="col-xs-12 m-v">
+		<div class="course-description"><i class=" line fa fa-question pull-left" style="font-size:24;font-weight:bold; text-decoration:underline; margin-top:13px;color: #ff4081;"></i></div>
+		<div class="col-xs-11 course-description no-padding m-l-xs" ng-bind-html="question.question"></div>
+	</div>
+
+	<!-- sub elements -->
+	<div class="row m">
+		<sub-elements-preview data="data" preview-data = "previewData" course-id = "courseId"><sub-elements-preview>
+	</div>
+
+<!-- ******************************************************************************************** -->
+	<!-- elements from assignment, this will show up only if the question happens to be inside an asignment-->
+	<div class="row m" ng-if="fromAssignment">
+
+				<!-- Input & output-->
+			<div class="row m-b-lg">
+				<div class="col-xs-12">
+					
+					<div class="col-xs-5 bg-light p" ng-if="fromAssignment.value.input">
+						<div class="col-xs-12 font-bold">Input</div>
+						<div class="col-xs-12 p-h-lg">{{fromAssignment.value.input}}</div>			
+					</div>
+					
+					<div class="col-xs-5 bg-light p" ng-if="fromAssignment.value.input" ng-class="{'col-xs-push-2':fromAssignment.value.input}">
+						<div class="col-xs-12 font-bold">Output</div>
+						<div class="col-xs-12 p-h-lg">{{fromAssignment.value.output}}</div>			
+					</div>
+				
+
+				</div>
+			</div>
+
+			<!-- Input & output images -->
+			<div class="row m-b-md">
+				<div class="col-xs-12">			
+					<div class="col-xs-5 p-lg bg-light" ng-if="fromAssignment.value.inputImage">
+						  <div class="col-xs-12 font-bold">Input image</div>
+				          <div class="col-xs-12 p-h-lg text-center"><img ng-click="showImage('input')"  class="img-responsive img-thumbnail w-sm m-xs" ng-src="{{fromAssignment.value.inputImage}}" style="cursor:pointer;" bs-tooltip data-placement="top" data-title="Click to view an enlarged version"/>
+				          </div>
+				       
+					</div>
+					
+					<div class="col-xs-5 p-lg bg-light" ng-if="fromAssignment.value.outputImage" ng-class="{'col-xs-push-2':fromAssignment.value.inputImage}">				
+						  <div class="col-xs-12 font-bold">Output image</div>
+				         <div class="col-xs-12 p-h-lg text-center"> <img ng-click="showImage('output')"  class="img-responsive img-thumbnail w-sm m-xs" ng-src="{{fromAssignment.value.outputImage}}" style="cursor:pointer;" bs-tooltip data-placement="top" data-title="Click to view an enlarged version"/>
+				         </div>
+				      
+					</div>
+
+				</div>
+			</div>
+
+			<!-- Answer and Hint-->
+			<div class="row m-b-lg">
+				<div class="col-xs-12 m-b-lg">				
+					<div class="col-xs-5 bg-light p" ng-if="fromAssignment.value.hint">
+					
+						<div class="col-xs-12 font-bold">Answer Hint</div>
+						<div class="col-xs-12 p-h-lg">{{fromAssignment.value.hint}}</div>			
+					
+					</div>
+				</div>
+			</div>
+		
+	</div>
+<!-- ******************************************************************************************** -->
+
+	<h4 class="btn-material-pink-400 p-xs">Please provide your answer below</h4>
+	<div ><!-- ng-hide="question.markScored>=0" -->
+		<div id="answers{{randomKey}}" class="p col-xs-12"></div>
+		
+		<div ng-if="isMentee&&!multiAnswer&&showSubmitButton" class="p col-xs-12">
+
+			<!-- <paper-button raised class="pull-right" ng-class="{'bg-info':userAnswer.length}" ng-if="!question.userAnswer" ng-disabled="!userAnswer.length" type="submit" style="" ng-click="saveAnswer()">Submit</paper-button> -->
+			<button class="pull-right btn btn-success baab-btn" ng-class="{'bg-info':userAnswer.length}" ng-if="!question.userAnswer" ng-disabled="!userAnswer.length" type="submit" ng-click="saveAnswer()">Submit</button>
+
+		</div>
+	</div>
+	<div ng-if="question.markScored>=0&&!question.evaluated">
+		<div class="col-xs-11 m-l-lg"><!-- <div class="font-bold pull-left m-t-xs">Pending review</div> --></div>
+	<!-- <div ng-if="question.markScored>=0&&question.evaluated==1">
+		<div class="col-xs-11 m-l-lg"><div class="font-bold pull-left m-t-xs">You have scored </div><span class="label label-lg bg-success pos-rlt m-l-md m-t-md"><b class="arrow left b-success pull-in"></b>{{question.markScored}} / {{question.mark.totalMark}}</span></div>
+	</div> -->
+	<div ng-if="question.submitStatus == 'submitted'">
+		<!-- <span class="label btn-warning pull-left">Pending review</span> commented by lijin on 6-5-2015 -->
+		<div class="col-xs-4 m-l-lg pull-right" style="font-size:12px;">
+
+			<div ng-init="SubmittedDate=convertDate(question.dateOfSubmission)" class=" pull-left m-t-xs"> 
+				<span class="font-bold">Submitted on </span>
+				<div> 
+					<i class="text-md mdi-action-event"></i>{{SubmittedDate.day}}<br>
+					<i class="text-md mdi-device-access-time"></i> {{SubmittedDate.time}}
+				</div>
+			</div>
+
+		</div>
+		
+	</div>
+
+</div>

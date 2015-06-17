@@ -1,0 +1,54 @@
+<div class="bg-white p-sm b-b b-2x b-success " set-sub-heading-and-background-color>
+  <h4 class="no-margin" translate="{{'Manage company roles'|translate}}"> </h3>
+</div>
+
+<div class="panel col-md-12 bg-white animated fadeInRight p-sm b-b-danger "  >
+	
+	<div class="col-md-4 " style="padding-left: 0px">
+		 <form name="Form_Adding_form" ng-submit="AddCompanyRole()" class="form-validation" role="form" xt-form novalidate>
+
+		 		<!-- <paper-input-decorator label="Name of the role" floatinglabel="">
+      					<input is="core-input" name="roleName" required xt-validate ng-model="roleName">
+    			</paper-input-decorator>		 -->
+    			<div class="form-group">
+    			 <input type="text" class="form-control" float-label placeholder="{{'Name of the role'|translate}}" name="roleName" required xt-validate ng-model="roleName">
+    			</div>
+
+    			<div class="form-group">
+    			 <textarea class="form-control" float-label placeholder="{{'Enter a description for the role'|translate}} " name="roleDesc" ng-model="RoleDesc"></textarea>
+    			</div>
+		 	
+				<div class="form-group m-v-md">
+
+					<button class="btn btn-warning baab-btn"  ng-class = "{'bg-warning':!Form_Adding_form.$pristine}" type="reset" role="button" ng-disabled="Form_Adding_form.$pristine" translate="{{'cancel'|translate}}"></button>	
+
+					<button class="btn btn-info baab-btn" ng-disabled="Form_Adding_form.$invalid || progress" type="submit" style="" >{{btnRoleAdd}} </button>
+		        </div>		        
+			
+		 </form>
+	</div>	
+</div>
+
+<div class="bg-white p-sm b-b b-2x b-success "  ng-if="roles">
+  <h4 class="no-margin" translate="{{'Existing roles'|translate}}"></h3>
+</div>
+<!-- ng-if="ng-repeat.length" -->
+<div ng-if="roles" class="col-xs-12  bg-white b-success b-b-5x p" >
+	<div class="col-xs-12 col-sm-6 col-md-4 shadow-z-1 no-padding m-xs" ng-repeat="roleData in roles" >
+			
+			<a href="">
+				<span class="pull-right m" data-title="Remove role!" ng-click="deleteRole(roleData,$index)" bs-tooltip>
+					<i  class="mdi-action-delete text-2x"></i>
+				</span>
+			</a>
+		
+		<div>		
+			<div class="p r-2x b-l-success text-1x font-bold b-l-5x inline clear">
+	  			<a href="" class="Rolelink" editable-text="roleData.roleName" onaftersave="updateUserRole('roleName',roleData,$data)"  e-required e-placeholder="{{'Enter'|translate}} role" > {{roleData.roleName}} </a>
+	  		</div>
+  			<small class="clear pull-none-sm text-dk p r-1x "><a href="" class="RoleDesc " style="color:#777777;" editable-text="roleData.roleDescription" onaftersave="updateUserRole('roleDescription',roleData,$data)" e-required e-placeholder="{{'Enter'|translate}} role description" >{{roleData.roleDescription}}</a> </small>
+  		</div>
+
+	</div>
+</div>
+

@@ -1,0 +1,185 @@
+<div class="row">
+  <div class="col-sm-12">
+    <div class="panel b-light">
+      <div class="panel-body p-sm bg-light lt">
+        <div class="bs-example" append-source="">
+          <div class="tab-container ng-scope ng-valid ng-dirty">
+              <ul class="nav nav-tabs" role="tablist">
+
+                <li ng-class="{'active':!comapanyUser,'ng-hide':roleId==2}" class="ng-scope ng-h" ng-click="getCompanyAdmin()">
+                  <a role="tab" data-toggle="tab" data-index="0"  class="ng-binding" translate="{{'Company Admin'|translate}}"></a>
+                </li>
+
+                <li  ng-class="{'active':comapanyUser,'ng-hide':roleId==2}" class="ng-scope" ng-click="getCompanyUser()">
+                  <a href="" role="tab" data-toggle="tab" data-index="1"  class="ng-binding">
+                    <i class="ui-icon fa fa-arrow-left ui-iconnfo text-md bg-info" style="cursor: pointer;" ng-show="ModelUserBox && roleId==1" ng-click="getCompanyAdmin()"></i>
+                    <span translate="{{'Company Users'|translate}}"></span>
+                  </a>
+                </li>
+
+                <div class="pull-right">
+                  <div class="btn-group" style="margin-top: 4px;">
+                    <button type="button" class="btn btn-xs btn-default" ng-click="prev_one()"><i class="fa fa-fw fa-angle-left"></i></button>
+                    <button type="button" class="btn btn-xs btn-default" ng-click="next_one()"><i class="fa fa-fw fa-angle-right"></i></button>
+                  </div>
+                  <div class="pull-right hidden-xs w">
+                    <div class="input-group">
+                      <span class="input-group-btn">
+                        <button type="submit" class="btn btn-sm bg-white btn-icon no-shadow no-padder"><i class="ti-search"></i>
+                        </button>
+                      </span>
+                      <input  ng-model="modelSearch" type="text" class="form-control input-sm no-border" placeholder="{{placeholderVal}}...">
+                    </div>
+                  </div>
+                </div>
+              </ul>
+
+              <div class="tab-content">
+                  <div title="To Level Roles" ng-class="{'active':!comapanyUser,'ng-hide':roleId==2}" class="ng-binding ng-scope tab-pane am-fade">
+                    <div class="row">
+                      <div class="col-lg-4 col-md-4 col-sm-6 col-xs-12 p-sm" ng-repeat="company in companyDetails">
+                        <div class="box bg-light" style="cursor: pointer;" ng-click="getMenus(company._id.$oid)">
+                          <div class="box-col w-xs text-center dk">
+                            <img src="images/a0.jpg" class="w-xs m-r pull-left">
+                          </div>
+                          <div class="box-col p b-b b-4x b-light" ng-class="{'b-success am-fade':companyState==company._id.$oid}">
+                            <a href="" >{{company.companyName}}</a>
+                            <div class="pull-left " translate="{{'Company User'|translate}}"></div>
+                            <i class="fa pull-right text-xl text-success b-4x" ng-class="{'fa-spinner fa-spin':(companyState==company._id.$oid)&&!menudetails,'fa-check-circle':(companyState==company._id.$oid)&&menudetails}"></i>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                  
+                  <div class="ng-binding ng-scope tab-pane am-fade" ng-class="{'active':comapanyUser,'ng-hide':roleId==2}">
+                    <div class="row" ng-class="{'ng-hide':ModelUserBox}" >
+                      <div class="col-lg-4 col-md-4 col-sm-6 col-xs-12 p-sm" ng-repeat="company in companyDetails">
+                        <div class="box bg-light" style="cursor: pointer;" ng-click="getUsers(company._id.$oid)">
+                                <div class="box-col w-xs text-center dk">
+                                  <img src="images/a0.jpg" class="w-xs m-r pull-left" >
+                                </div>
+                                <div class="box-col p b-b b-4x b-light" ng-class="{'b-success am-fade':companyState==company._id.$oid}">
+                                  <a href="" >{{company.companyName}}</a><br>
+                                  <div class="pull-left" translate="{{'Company'|translate}}"></div>
+                                  <i class="fa  pull-right text-xl text-success b-4x b-info" ng-class="{'fa-check-circle am-fade':companyState==company._id.$oid}"></i>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                  </div><!-- end ngRepeat: tab in tabs --><!-- end ngRepeat: tab in tabs -->
+                                <div class="row" ng-show="ModelUserBox">
+                        <div class="col-lg-3 col-md-4 col-sm-6 col-xs-12 p-sm"  ng-repeat="user in UserList">
+                          <div class="box bg-light" style="cursor: pointer;" ng-click="getUserMenu(user.value.fkUserRoleMappingId.$oid,user.value.fkRoleId)">
+                                  <div class="box-col w-xs text-center dk">
+                                    <img src="images/a0.jpg" class="w-xs m-r pull-left" >
+                                  </div>
+                                  <div class="box-col p b-b b-4x b-light" ng-class="{'b-success am-fade':UserState==user.value.fkUserRoleMappingId.$oid}">
+                                    <a >{{user.value.name}}</a><br>
+                                    <div class="pull-left" translate="{{'User'|translate}}"></div>
+                                    <i class="fa  pull-right text-xl text-success b-4x b-info" ng-class="{'fa-check-circle am-fade':UserState==user.value.fkUserRoleMappingId.$oid}"></i>
+                                  </div>
+                              </div>
+                          </div>
+                      </div>
+                  <div class="row" ng-show="ShowNoDataFound">
+                              <div class="col-sm-8" >
+                                <div id="alerts-container" class="animated fadeIn">
+                                    <div class="alert ng-scope am-fade alert-button bg-danger lt" ng-class="[type ? 'alert-' + type : null]" style="display: block;"><!-- ngIf: dismissable -->
+                                      <button type="button" class="close ng-scope" ng-click="$hide()">×</button><!-- end ngIf: dismissable --> 
+                                      <strong class="ng-binding" translate="{{'Not Found!'|translate}}"></strong>&nbsp;
+                                      <span class="ng-binding" >{{WarringMessage}}</span>
+                                    </div>
+                                </div>
+                              </div>
+                          </div>
+              </div>
+          </div>
+                               <script type="text/ng-template" id="Render_ExMenus.html">
+                                <div style="font-weight:400!important" ui-tree-handle class="tree-node dd-item dd2-item" id="{{node.fkMenuId.$oid}}"> 
+                                    <div class="dd2-content list-group-item b-l-info bg-light" style="border: 1px #cccccc solid;" ng-class="{'lt':node.MenuLink.trim().length}">
+                                        <a data-nodrag ng-click="toggle(this)">
+                                            <span ng-if="!node.MenuLink.trim().length" class="glyphicon" ng-class="{'glyphicon-plus': collapsed, 'glyphicon-minus': !collapsed}"></span>
+                                        </a> {{node.MenuName}}
+                                        <div title="Remove" class="pull-right glyphicon glyphicon-chevron-right blueberry" data-nodrag="" ng-click="removeFromTree1(this);remove(this)"></div>
+
+                                        <!--<a title="Remove" class="pull-right glyphicon glyphicon-chevron-right m-r blueberry" data-nodrag="" ng-click="moveRight(this)"></a>-->
+                                    </div>
+                                    <ol ui-tree-nodes="" ng-model="node.childMenuStructure" ng-class="{hidden: collapsed}" class="dd-list">
+                                        <li ng-repeat="node in node.childMenuStructure" class="dd-item dd2-item" data-id="13"  ui-tree-node ng-include="'Render_ExMenus.html'">
+                                        </li>
+                                    </ol>
+                                      <div ng-if="node.actionMaster.length" class="checkbox animated fadeInDown" style="margin-top: -5px;">
+
+                                          <div class="checkbox" ng-repeat="action in node.actionMaster">
+                                            <label>
+                                              <input type="checkbox" ng-init="node.actionStatus[$index]=fnActionExists(action.actionName==undefined?null:action.actionName,node.actions)" ng-model="node.actionStatus[$index]" ng-change="checkAction(node,this,$index)" value=""> {{action.actionName}}
+                                            </label>
+                                          </div>          
+                                      </div>
+                                </div>
+                                 
+                            </script>
+                            <script type="text/ng-template" id="Render_AllMenus.html">
+                                <div style="font-weight:400!important" ui-tree-handle class="tree-node dd-item dd2-item" id="{{node.fkMenuId.$oid}}">
+                                <div class="dd2-content list-group-item bg-light lt" style="border-color: #BFC1C3;">
+                                    <!--<a data-nodrag ng-click="toggle(this)">
+                                        <span class="glyphicon text-mg" ng-class="{'glyphicon-plus': collapsed, 'glyphicon-minus': !collapsed}"></span>
+                                    </a>-->{{node.MenuName}}
+                                    <div title="Add" class="pull-right glyphicon glyphicon-chevron-left" data-nodrag="" ng-click="removeFromTree2(this);remove(this)"><span></span></div>
+                                </div>
+                                <ol ui-tree-nodes="" ng-model="node.childMenuStructure" ng-class="{hidden: collapsed}">
+                                    <li ng-repeat="node in node.childMenuStructure" ui-tree-node ng-include="'Render_AllMenus.html'"></li>
+                                </ol>
+
+                            </script>
+                            <div class="box bg-white" style="border: #e3e5e7 solid 1px;" ng-show="menudetails">
+        <div class="col-sm-6">
+      <div class="box">
+        <div class="p p-v-sm">
+          <h4 class="no-margin font-bold pull-left" translate="{{'Current Menus'|translate}}"></h4>
+          <a class="m-h-xs pull-right" ng-click="createGroupModal()"  translate="{{'Create A Menu Group'|translate}}"></a>
+        </div>
+        <div class="box-row">
+          <div class="box-cell scrollable hover">
+<div class="col-lg-12 col-sm-12 col-xs-12 box-inner">
+                                            <h4 class="no-margin m-b font-bold"></h4>
+                                            <div  id="tree1-root" ui-tree="tree1NodesOptions" class="dd dd-draghandle bordered" data-max-depth="2">
+                                                <ol ui-tree-nodes ng-model="tree1" class="dd-list " >
+                                                    <li ng-mouseover="editMenu=true" ng-mouseleave="editMenu=false"  ng-repeat="node in tree1" class="dd-item dd2-item list-group list-group-gap" ui-tree-node ng-include="'Render_ExMenus.html'"></li>
+                                                </ol>
+                                            </div>
+                                            <div class="horizontal-space"></div>
+                                        </div>
+          </div>
+        </div>
+        <div class="p p-v-sm">
+          <button class="btn w-sm btn-info pull-right m-b" ng-click="FnAddUserMenu()" translate="{{'Save Changes'|translate}}"></button>
+        </div>
+      </div>
+    </div>
+        <div class="col-sm-6">
+      <div class="box">
+        <div class="p p-v-sm">
+          <h4 class="no-margin font-bold" translate="{{'Menu List'|translate}}"></h4>
+        </div>
+        <div class="box-row">
+          <div class="box-cell scrollable hover">
+           <div class="col-lg-12 col-sm-12 col-xs-12 box-inner">
+                                        <h4 class="no-margin m-b font-bold"></h4>
+                                        <div id="tree2-root" ui-tree="tree2NodesOptions" class="dd dd-draghandle bordered">
+                                            <ol  ui-tree-nodes ng-model="tree2" class="dd-list">
+                                                <li ng-repeat="node in tree2" class="dd-item dd2-item list-group list-group-gap" ui-tree-node ng-include="'Render_AllMenus.html'"></li>
+                                            </ol>
+                                        </div>
+                                    </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+          </div>
+          </div>
+      </div>
+  </div>
+</div>

@@ -1,0 +1,168 @@
+<div>
+
+
+
+
+	<div class="row">
+		<div class="col-xs-12 ">
+			<div class="col-xs-12 m-t-md">
+				<div class="col-xs-1 course-description ">
+					<i class=" line fa fa-question pull-left" style="font-size:24;font-weight:bold; text-decoration:underline; margin-top:13px;color: #ff4081;"></i>
+				</div>
+				<div class="col-xs-11 course-description no-padding "  ng-bind-html="data.value.question">
+				</div>
+
+				<!-- sub elements -->
+				<!-- <div class="row m">
+					<sub-elements-preview data="data" preview-data = "previewData" course-id = "courseId"><sub-elements-preview>
+				</div>
+ -->
+
+					<!-- ******************************************************************************************** -->
+					<!-- elements from assignment, this will show up only if the question happens to be inside an asignment-->
+					<div class="row m" ng-if="!angular.equals(fromAssignment,{})">
+
+								<!-- Input & output-->
+							<div class="row m-b-lg" ng-if="fromAssignment.value.input || fromAssignment.value.output">
+								<div class="col-xs-12">
+									
+									<div class="col-xs-5 bg-light p" ng-if="fromAssignment.value.input">
+										<div class="col-xs-12 font-bold">Input</div>
+										<div class="col-xs-12 p-h-lg">{{fromAssignment.value.input}}</div>			
+									</div>
+									
+									<div class="col-xs-5 bg-light p" ng-if="fromAssignment.value.output" ng-class="{'col-xs-push-2':fromAssignment.value.input}">
+										<div class="col-xs-12 font-bold">Output</div>
+										<div class="col-xs-12 p-h-lg">{{fromAssignment.value.output}}</div>			
+									</div>
+								
+
+								</div>
+							</div>
+
+							<!-- Input & output images -->
+							<div class="row m-b-md" ng-if="fromAssignment.value.inputImage || fromAssignment.value.outputImage">
+								<div class="col-xs-12">			
+									<div class="col-xs-5 p-lg bg-light" ng-if="fromAssignment.value.inputImage">
+										  <div class="col-xs-12 font-bold">Input image</div>
+								          <div class="col-xs-12 p-h-lg text-center"><img ng-click="showImage('input')"  class="img-responsive img-thumbnail w-sm m-xs" ng-src="{{fromAssignment.value.inputImage}}" style="cursor:pointer;" bs-tooltip data-placement="top" data-title="Click to view an enlarged version"/>
+								          </div>
+								       
+									</div>
+									
+									<div class="col-xs-5 p-lg bg-light" ng-if="fromAssignment.value.outputImage" ng-class="{'col-xs-push-2':fromAssignment.value.inputImage}">				
+										  <div class="col-xs-12 font-bold">Output image</div>
+								         <div class="col-xs-12 p-h-lg text-center"> <img ng-click="showImage('output')"  class="img-responsive img-thumbnail w-sm m-xs" ng-src="{{fromAssignment.value.outputImage}}" style="cursor:pointer;" bs-tooltip data-placement="top" data-title="Click to view an enlarged version"/>
+								         </div>
+								      
+									</div>
+
+								</div>
+							</div>
+
+							<!-- Answer and Hint-->
+							<div class="row m-b-lg" ng-if="fromAssignment.value.hint">
+								<div class="col-xs-12 m-b-lg">
+								<div class="col-xs-5 bg-light p" ng-if="fromAssignment.value.hint">
+									
+										<div class="col-xs-12 font-bold">Answer</div>
+										<div class="col-xs-12 p-h-lg">{{fromAssignment.value.answer}}</div>			
+									
+									</div>				
+									<div class="col-xs-5 bg-light p" ng-if="fromAssignment.value.hint" ng-class="{'col-xs-push-2':fromAssignment.value.hint}">
+									
+										<div class="col-xs-12 font-bold">Answer Hint</div>
+										<div class="col-xs-12 p-h-lg">{{fromAssignment.value.hint}}</div>			
+									
+									</div>
+								</div>
+							</div>
+						
+					</div>
+				<!-- ******************************************************************************************** -->
+
+
+
+				<div>
+					<div class="btn-material-pink-400 font-bold p-xs col-xs-12" ng-if="answerPreviewData.elements.length" translate="{{ 'Answer from the Candidate' | translate }}">
+						
+					</div>
+					<div class="col-xs-12 course-description m-t-xs" ng-if="answerPreviewData.elements.length">
+						<course-element-full-view preview-data="answerPreviewData" ></course-element-full-view>
+					</div>						
+				</div>
+			</div>
+
+			<div class="row">
+				<div class="col-xs-12">	
+					<div class="btn-material-pink-400 font-bold p-xs col-xs-12" translate="{{ 'Evaluation' | translate }}" ></div>
+				</div>
+			</div>
+
+
+			<div class="col-xs-12 m-t-md b-b m-b-lg">
+				<div class="col-xs-12 m-b-md">
+					<div class="col-md-6 col-xs-12" ng-if="data.value.mark.markCriteria.length">
+						<em translate="{{'Answer Key Points & Mark Weightage' | translate}}"></em>
+						<div ng-repeat="markCriteria in data.value.mark.markCriteria">
+							<div ng-if="markCriteria.criteria" class="col-xs-12 font-bold">
+							 		{{markCriteria.criteria}} : {{markCriteria.mark}}
+							</div>
+							<div ng-if="markCriteria.criteria==undefined" class="font-bold text-danger">
+								No Criteria Defined
+							</div>
+						</div>	
+					</div>
+
+
+				<div class="row">
+					<div class="col-xs-12  m-t-lg">
+						<div class="col-xs-2 font-bold">
+							Marks : {{data.value.mark.totalMark}}
+							<div ng-if="data.value.type=='objective'">
+							Mark Scored : {{data.value.markScored}}
+							</div>
+						</div>
+
+						<div class="col-xs-6" style="margin-top:-18px;"  ng-if="data.value.type=='descriptive'">
+							<button type="button" class="btn btn-default pull-left text-left" ng-model="result.data.value.resultStatus" data-html="1" ng-options="questionEvOption.value as questionEvOption.label for questionEvOption in questionEvOptions" bs-select style="padding-left:2px;" ng-change="setMarks()" ng-if="data.value">
+						</div>
+							
+						<div style="margin-top:-30px;"  ng-if="data.value.type=='descriptive'" class="col-xs-4">
+						
+								<input  ng-if="data.value" type="number" placeholder="{{' Marks Scored '|translate}}" xt-validate required class="form-control" min="0" float-label name="markScored" ng-minlength="1" ng-model="result.data.value.markScored" ng-change="markChanged()" ui-validate=" '$value <= data.value.mark.totalMark' ">
+						
+						</div>
+						
+					</div>
+				  </div>
+
+
+				 <div class="row" class="row m-b" ng-if="fromAssignment.value.penaltyHistory.length">
+					<div class="col-xs-12 font-bold">
+						Applicable penalties
+					</div>
+				</div>
+
+				<div class="col-xs-12" ng-repeat="rule in fromAssignment.value.penaltyHistory">	
+					<div class="col-xs-12 col-md-12 m-t-xs btn-material-amber-A200">
+						<div class="col-xs-10">
+							<i class="text-danger">
+							{{$index + 1}}. When {{rule.submissionMode}} {{fnShowByDate(rule.submissionMode, rule.lateTime, rule.lateTimeUnits)}},{{fnShowBlockSubmission(rule.blockSubmission)}} reduce {{rule.reductionUnits}}{{rule.penaltyCalculationUnit}} {{fnSHowPenaltyFrequency(rule)}}
+							</i>
+						</div>
+
+						<div class="col-xs-2 pull-right text-right" ng-if="fnShowAppliedPenalty()">
+							<i class="mdi-action-assignment-turned-in font-bold text-success">Applied</i>
+						</div>
+					</div>				
+				</div>
+
+
+				</div>					
+			</div>
+
+
+		</div>
+	</div>
+</div>

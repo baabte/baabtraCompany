@@ -1,0 +1,80 @@
+<div class="tab-container col-xs-12 pull-left" >
+<div class="panel b-t b-00C853 bg-light dk">
+<div class="panel-heading font-bold text-white bg-00C853 p baab-shadow" translate="{{'Mentee Attendance Report'|translate}}"></div>
+<div class="panel-body col-xs-12 bg-white p-sm b-b-danger b-b-3x"> <!-- animated fadeInRight -->
+ 	
+  	<!-- <div masonry='{ "transitionDuration" : "0.8s" , "itemSelector" : ".tile"}'> -->
+  		<div class="col-xs-12 col-sm-12 col-md-12 p-sm">
+    		
+    		<div class="shadow-z-1 col-xs-12" style="cursor: pointer;" >
+<form name="Form_Adding_form" ng-submit="AddCompanyRole()" class="form-validation" role="form" xt-form novalidate>
+    		<div class="row">
+    			<div class="form-group col-xs-12 col-sm-12 col-md-4">
+
+			            <!-- <label>Single select:&nbsp;</label> -->
+							<button type="button" class="btn btn-info" ng-model="selectedCourse" data-html="1" ng-options="course._id.$oid as course.Name for course in attReportObj.courses" bs-select selected>
+  					Action <span class="caret"></span>
+							</button>
+							
+
+          			</div>
+          			<div class="form-group col-xs-12 col-sm-12 col-md-4">
+
+			            <!-- <label>Single select:&nbsp;</label> -->
+							<button type="button" class="btn btn-info" ng-model="chartObj.type" data-html="1" ng-options="chart.value as chart.label for chart in chartTypes" bs-select>
+  								Action <span class="caret"></span>
+							</button>
+							
+
+          			</div> 
+
+          		<div class="form-group col-xs-12 col-sm-12 col-md-4">	
+				<div class="b fl-parent-height" style="cursor: pointer;">
+<!-- ng-if="timeLineObj.courseElement.excludeList.indexOf(user.fkUserRoleMappingId.$oid)==-1" -->
+					<div class="row">
+						<div class="col-xs-12">
+							<div set-parent-height  parent-cl-name="'fl-parent-height'" class="col-xs-3 random-background-color text-center h-full" style="display:table-cell;">
+								 <i class="mdi-action-perm-contact-cal text-3x"></i><br/>
+							</div>
+							<div class="col-xs-9" style="display:table-cell;">
+								<div class="row">
+				        				<div class="b-4x b-light col-xs-12">
+				                        <small>
+				                        <div class="pull-left font-bold text-ellipsis">{{attReportObj.profile.profile.profile.firstName}} {{attReportObj.profile.profile.profile.lastName}}</div><br/>
+				                        <div ><i>{{attReportObj.profile.username.userName}}</i> 
+				                        <i class="fa pull-right text-xl text-success b-2x"></i></div>
+										</small>
+				                        </div>
+				                       
+				                        
+								</div>
+							</div>
+						</div>
+					</div>       
+				</div>
+				</div>
+    		</div>
+    		 <div class="row">
+    				
+    				<div class="pull-left col-md-offset-4 m-b">
+    				<span ng-hide="selectedCourse==undefined">	<div  class="img-responsive" google-chart chart="chartObj" style="{{cssStyle}}">
+  						</div></span>
+  						<div  ng-if="selectedCourse==undefined" class="alert m-b ng-scope am-fade alert-button bg-danger lt text-white no-margin" ng-class="[type ? 'alert-' + type : null]" style="display: block;"><!-- ngIf: dismissable -->
+					        
+					    	<strong class="ng-binding" translate="{{'Not Found!'|translate}}"></strong>&nbsp;
+					   		<span translate="{{'Select a course to view the attendance report'|translate}}"></span>
+					    </div>
+
+					    </div>
+  					</div>
+  				</div>
+  				</form>
+  			</div>
+  	</div>
+<!-- </div> -->
+  	</div>
+
+</div>
+</div>
+
+

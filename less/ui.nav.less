@@ -1,0 +1,113 @@
+nav {
+	ul.nav {
+		li {
+			display: block;
+			position: relative;
+			li {
+				a {
+					padding-top: floor((@aside-nav-sub-height - @line-height-computed)/2);
+					padding-bottom: floor((@aside-nav-sub-height - @line-height-computed)/2);
+					padding-left: 45px;
+				}
+				li a{
+					padding-left: 65px;
+				}
+			}
+			a {
+				font-weight: normal;
+				text-transform: none;
+				display: block;
+				padding: floor((@aside-nav-height - @line-height-computed)/2) 20px;
+				position: relative;
+				.badge,
+				.label {
+					font-size: 11px;
+					padding: 2px 5px;
+					margin-top: 2px;
+					margin-left: 5px;
+				}
+				> .pull-right i{
+					width: 1.2em;
+					text-align: right;
+					.rotate(-45deg);
+					position: relative;
+					top: 5px;
+				}
+				> i {
+					min-width: 1.2em;
+					text-align: center;
+					margin-right: 5px;
+				}
+			}
+			&.active{
+				> a {
+					> .pull-right i{
+						top: 0;
+						.rotate(0deg);
+					}
+				}
+			}
+		}
+		&.nav-stacked{
+			a,
+			.nav-header{
+				padding: floor((@aside-nav-stacked-height - @line-height-computed)/2) 10px;
+			}
+		}
+	}
+	.nav-header{
+		padding: floor((@aside-nav-height - @line-height-computed)/2)+2 20px;
+	}
+}
+
+.app-aside-top{
+	.app-aside{
+		.app-aside-body{
+			&,
+			&:hover{
+				overflow: visible !important;
+			}
+		}
+		nav {
+			.nav-header{
+				display: none;
+			}
+			ul ul{
+				min-width: 200px;
+				display: none;
+				position: absolute;
+				z-index: 1000;
+				opacity: 1;
+		    margin-left: 0;
+		    height: auto !important;
+		    overflow: visible;
+		    ul{
+		    	left: 100%;
+		    	top: 0;
+		    }
+			}
+			li{
+				float: left;
+				display: inline-block;
+				position: relative;
+				&:hover,
+				&:focus,
+				&:active{
+					> ul{
+						display: block;
+					}
+				}
+				> a{
+					padding: (@aside-top-height - @line-height-computed)/2 15px;
+				}
+				li{
+					display: block;
+					float: none;
+					a{
+						padding: 8px 15px;
+					}
+				}
+			}			
+		}
+	}
+}

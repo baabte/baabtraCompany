@@ -1,0 +1,22 @@
+<div class="col-xs-12" ng-if="data.feedBackDetails">
+	<div class="row bg-white" >
+		<div class="col-xs-12">
+			
+			<!-- feedback viwer -->
+			<div class="row p-v text-lg font-bold btn-material-indigo-A400 baab-shadow">
+				<div class="col-xs-12">{{data.feedBackDetails.title}}</div>
+			</div>
+			<div class="row p-v">
+				<!-- feedback about -->
+				<div class="col-xs-12">{{data.feedBackDetails.description}}</div>
+			</div>
+
+			<feedback-viewer ng-if="data.feedBackDetails" feedback-form="data.feedBackDetails.questions" user-response="data.feedBackDetails.userResponse[0].response" feedback-response="data.feedbackResponse"></feedback-viewer>
+
+			<!-- submit feedback -->
+			<button ng-if="!data.feedBackDetails.userResponse" class="btn btn-material-blue-A700 pull-right" ng-click="submitMyResponse()">Submit
+				<div class="ripple-wrapper"></div>
+			</button>
+		</div>
+	</div>
+</div>

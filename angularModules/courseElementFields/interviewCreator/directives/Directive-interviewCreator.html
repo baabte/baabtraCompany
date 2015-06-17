@@ -1,0 +1,116 @@
+<div>
+
+
+	<!-- interview options -->
+	<!-- question addition -->
+	<div class="row">
+		<div class="col-xs-12">			 
+
+			  <div class="col-xs-12 radio radio-success">
+			    <label class="col-xs-12" >
+			      <input type="radio" ng-model="ngModel.questionSelection.type" value="manual" checked="">
+			      <span class="col-xs-12 m-l" translate="{{'Add questions manually for this interview' | translate}}"></span>
+			    </label>
+			  </div>
+			  <div class="col-xs-12 radio radio-success">
+			    <label class="col-xs-12">
+			      <input type="radio" ng-model="ngModel.questionSelection.type" value="automatic">
+			       <span class="col-xs-12 m-l" translate="{{'Pick questions from the question bank' | translate}}"></span>
+			    </label>
+			  </div>
+			  
+
+		</div>
+	</div>
+
+	<div class="row" ng-if="ngModel.questionSelection.type == 'automatic'">
+		<div class="col-xs-11 col-xs-push-1">			 
+
+		<div class="col-xs-12 col-md-1"> Pick
+		</div>
+		<div class="col-xs-12 col-md-2"> 
+			<input type="number" class="form-control" ng-model="ngModel.questionSelection.noOfQuestions"	>
+		</div>
+
+		<div class="col-xs-12 col-md-9 "> questions randomly from the question bank </div>
+
+		</div>
+	</div>
+
+
+	<div class="row m-t-lg" >
+		<div class="col-xs-12">			 
+
+		<div class="col-xs-12 col-md-6"> Consider the candidate as passed if he/she scores more than
+		</div>
+		<div class="col-xs-12 col-md-2"> 
+			<input type="number" class="form-control" ng-model="ngModel.passCriteria"	>
+		</div>
+
+		<div class="col-xs-12 col-md-4"> % of marks.</div>
+
+		</div>
+	</div>
+
+
+
+
+
+
+<div class="row m-t-lg">
+	<div class="col-xs-12">
+		<em translate="{{'You can add questions to the interview regardless the the mode you selected above; upon saving, questions will automatically be saved to the question bank' | translate }}"></em>
+		<!-- question addition section -->
+		<interview-question question = "questionObj" selected-tab="selectedTab"></interview-question>
+
+		<div class="col-xs-12">			
+			<button class="btn  btn-material-red baab-btn m-v-n pull-right" ng-show="!questionEditMode"  ng-click="addQuestion(questionObj)" ng-disabled="!questionObj"> <i class="mdi-content-add m-r"></i> Add Question</button>
+			<button class="btn  btn-material-pink-500 baab-btn m-v-n pull-right" ng-show="questionEditMode"  ng-click="updateQuestion(questionObj)"> <i class="mdi-action-done m-r"></i> Update Question</button>
+		</div>
+
+	</div>
+</div>
+
+<!-- added questions	 -->
+
+<div class="row m-t-lg b-t p-v-lg" ng-if="ngModel.questionArray.length">
+	<div class="col-xs-12 b-b m-b" ng-repeat="question in ngModel.questionArray">
+
+	<div class="col-xs-10">
+		
+		<div class="col-xs-12 m-b">
+			<div class="col-xs-1">
+				<i class="mdi-action-help text-lg text-warning" bs-ttoltip data-placement="top" data-title="Question"></i>
+			</div>
+			<div class="col-xs-11">{{question.question}}</div>			
+		</div>
+
+		<div class="col-xs-12" ng-if="question.answerHint">
+			<div class="col-xs-1">
+				<i class="mdi-communication-messenger text-lg text-success" bs-ttoltip data-placement="top" data-title="Answer Hint"></i>
+			</div>
+			<div class="col-xs-11">{{question.answerHint}}</div>	
+		</div>
+
+	</div>
+
+	<div class="col-xs-2">
+		<div class="col-xs-12" ng-if="question.mark">
+			<strong translate="{{'Marks: ' | translate}}"></strong>{{question.mark}}
+		</div>
+
+		<div class="col-xs-12">
+			<button class="btn btn-material-indigo-500 baab-btn m-v-n" bs-tooltip data-title="Remove Question" data-placement="top"  ng-click="removeQuestion(question, $index)"> <i class="mdi-action-delete"></i> </button>
+			<br>
+			<button class="btn btn-material-indigo-500 baab-btn m-v-n" bs-tooltip data-title="Edit Question" data-placement="top"  ng-click="editQuestion(question)"> <i class="mdi-editor-mode-edit"></i>  </button>
+		</div>
+
+	</div>
+	
+		
+	</div>
+</div>
+
+
+
+</div>

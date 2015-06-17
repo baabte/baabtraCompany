@@ -1,0 +1,10 @@
+<div>
+<div ng-repeat="feedback in feedbackForm" >
+		<div class="col-xs-12 m-t-lg">
+			<div class="col-xs-1 course-description "><i class=" line fa fa-question pull-left" style="font-size:24;font-weight:bold; text-decoration:underline; margin-top:13px;color: #ff4081;"></i></div>
+			<div class="col-xs-11 course-description no-padding" ng-bind-html="feedback.question"></div>
+		</div>
+		<objective-options options="feedback.options" answer-type="feedback.answerType" answer="feedback.options" mark-scored="markScored" user-answer="feedbackResponse[$index].userResponse" db-answer="userResponse[$index].userResponse" mark-obj="mark">
+		</objective-options>
+</div>
+</div>

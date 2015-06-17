@@ -1,0 +1,35 @@
+<div class="container">  
+
+
+  <div class="center-block w-xl w-auto-xs m-b-lg">
+  <div class="social-title">&nbsp &nbspConnect with Your Social Accounts</div>
+  <br>
+  
+  <div>&nbsp &nbsp<img src="images/facebook.png" class="logo-prop">&nbsp <img src="images/twitter.png" class="logo-prop">&nbsp <img src="images/google+.png" class="logo-prop"><div >
+    <br>
+    <div class="m-b text-sm">
+      Sign in with your {{app.name}} Account
+    </div>
+
+    <form name="signinform" ng-submit="fnCheckLogin()" class="form-validation" role="form" xt-form novalidate>
+      <div class="form-group">
+        <label class="hide">Email</label>
+        <input type="text"  placeholder="Someone@example.com" class="login-form-control" ng-model="loginCredential.userName" ng-pattern="emailPattern" id="email" xt-validate name="email"  msg-pattern='{{emailMsg}}'  class="form-control email" ng-change="fnCheckEmailExists(email)"  required>
+       <!--  {{signinform.email.$error}} -->superadmin@baabte.com superadmin123
+      </div>
+      <div class="form-group m-b-xs">
+        <label class="hide">Password</label>
+        <input type="password" placeholder="Password" name="password" class="login-form-control" ng-model="loginCredential.password" xt-validate required ng-minlength="5">
+      </div>      
+      <div class="checkbox no-margin">        
+        <label class="ui-checks">
+          <input type="checkbox"><i></i> Keep me signed in
+        </label>
+      </div>
+      <button type="submit" class="btn btn-info p-h-md m-v-lg" ng-disabled="signinform.$invalid || progress" >{{btnSignupText}}</button>
+      <p class="text-xs"><a ui-sref="forgot-password">Forgot password?</a></p>
+      <p class="m-v-lg text-sm">Do not have an account? <a ui-sref="signup">Create an account</a></p>
+    </form>
+  </div>
+</div>
+<div class="app-footer" ng-include="'views/footer.html'"></div>	

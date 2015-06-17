@@ -1,0 +1,41 @@
+<!-- <div class="row">
+	<div class="bg-light">
+		<div class=" m-b-lg" style="position:fixed; width:101%; z-index:100;">
+			<div class="col-xs-12 font-bold text-right p upper bg-white shadow-z-1">
+				{{menteeObj.selectedCourse.Name}}
+			</div>
+		</div>
+		<div class=""  ng-if="menteeObj.selectedCourse" style="padding-top: 80px;padding-bottom: 15px;">
+			<div class="col-md-push-2 col-xs-push-0 col-md-8 col-xs-12 col-sm-12 col-xs-12">
+
+				<div  ng-repeat="element in menteeObj.elementOrderArray" >
+					<evaluation-loader course-timeline="menteeObj.selectedCourse.courseTimeline" element-order="menteeObj.selectedCourse.elementOrder[element]" evaluator-id="rm_id" course-mapping-id="menteeObj.selectedCourse._id.$oid"></evaluation-loader>
+				</div>
+			</div>
+		</div>
+	</div>
+</div> -->
+
+<div class="bg-light">
+	<div ng-if="menteeObj.selectedCourse" class="bg-white" style="position: fixed;width:100%;z-index:100;">
+		<div class="col-xs-12 p-xs  shadow-z-1">
+			<div class="col-xs-4">
+				<user-card class="m-t-xs" user-id="menteeObj.selectedCourse.fkUserRoleMappingId.$oid">
+				</user-card>
+			</div>
+			<div class="col-xs-8 font-bold upper text-right p-v ">
+				{{menteeObj.selectedCourse.Name}}
+			</div>
+		</div>
+	</div>
+	<div class="row" ng-if="menteeObj.selectedCourse" style="padding-top: 80px;padding-bottom: 15px;">
+		<div class="col-md-push-2 col-xs-push-0 col-md-8 col-xs-12 col-sm-12 col-xs-12">
+			<div  ng-repeat="element in menteeObj.elementOrderArray" >
+				<evaluation-loader course-timeline="menteeObj.selectedCourse.courseTimeline" element-order="menteeObj.selectedCourse.elementOrder[element]" evaluator-id="rm_id" course-mapping-id="menteeObj.selectedCourse._id.$oid" evaluable-element="menteeObj.evaluableElement"></evaluation-loader>
+			</div>
+			<div ng-if="!menteeObj.evaluableElement" class="col-xs-12 shadow-z-1 p bg-warning font-bold">
+				There are no evaluable element found .!
+			</div>
+		</div>
+	</div>
+</div>

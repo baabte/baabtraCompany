@@ -1,0 +1,19 @@
+<div>
+	<div ng-if="section.length" class="row" ng-repeat="(key, section) in summaryDetails">
+		<div class="col-xs-12">
+			<div class="bg-light dk lt p-sm font-bold">{{summaryViewIn.name.replace('(s)','')}} {{key}}</div>
+		</div>
+		<div class="col-xs-12" ng-repeat="(key, item) in section">
+			<div class="b-b hidden-xs" style="cursor:pointer;" ng-class="{'btn-material-light-blue-300':mouseEnter}" ng-mouseenter="mouseEnter = true" ng-mouseleave="mouseEnter = false">
+				<div class="pull-left p-sm b-r">{{key+1}}</div>
+				<div class="pull-left p-sm"><i class="fa fa-fw {{item.icon}} text-md"></i></div>
+				<div class="p-sm">{{item.title}}</div>
+			</div>
+			<div class="b-b visible-xs btn-material-light-blue-300" style="cursor:pointer;">
+				<div class="pull-left p-sm b-r font-bold">{{key+1}}</div>
+				<div class="pull-left p-sm"><i class="fa fa-fw {{item.icon}} text-md"></i></div>
+				<div class="p-sm">{{item.title}}</div>
+			</div>
+		</div>
+	</div>
+</div>

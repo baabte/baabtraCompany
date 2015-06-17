@@ -1,0 +1,35 @@
+<div class="popover" tabindex="-1" style="min-width:300px;" >
+  <button type="button" class="close m-xs" ng-click="$hide()">×</button>
+  <h3 class="popover-title" ng-bind-html="title" ng-show="title"></h3>
+  <div class="popover-content" >
+      <div class="form-actions" >
+            <div class="m-sm p-sm"  ng-show="title=='Weekly'" style="float: center !important;">
+                <div>
+                   <input type="number" placeholder="Select Week" ng-model="dates.weekNumber" class="form-control"  min="1" max="52"  name="weekNumber">
+                </div>
+                <div class="p-v pull-right">
+                    <button class="btn btn-default pull-right"  ng-disabled="!dates.weekNumber||!dates.weekNumber>52" ng-click="UpdateReport('weekly')">Generate Report</button>
+                </div>
+            </div>
+
+             <div  ng-show="title=='Monthly'" class="m-sm pull-left" style="float: center !important;">
+                <div class="p-v pull-left w-md" >
+                     <select class="form-control" float-label placeholder="{{'Select Month'|translate}}"  name="months"  id="months" ng-model="month" ng-options="month.name for month in months" ng-change="UpdateReport('monthly',month)">
+                    </select>
+                </div>
+               
+            </div>
+             <div  ng-show="title=='DateRange'" class="m-sm pull-left" style="float: center !important;">
+                <div  >
+                    <input type="text"  class="form-control" float-label ng-model="dates.startDate" data-date-format="dd-MM-yyyy" data-date-type="date" data-autoclose="true" data-max-date="today" name="SelectStartDate" bs-datepicker="" autocomplete="off" placeholder="Select Start Date" >
+                </div>
+               <div>
+                     <input type="text"  class="form-control" float-label ng-model="dates.endDate" data-date-format="dd-MM-yyyy" data-date-type="date" data-autoclose="true" data-max-date="today" name="SelectStartDate" bs-datepicker="" autocomplete="off" placeholder="Select End Date">
+               </div>
+               <div class="p-v  pull-left" >
+                    <button class="btn btn-default pull-right" ng-disabled="!dates.startDate||!dates.endDate" ng-click="UpdateReport('DateRange')">Generate Report</button>
+               </div>
+            </div>
+      </div>
+  </div>
+</div>

@@ -1,0 +1,50 @@
+<div class="m-t">
+<div class="text-center p-v" ng-if="relatedCourses == 0">
+    <i class="fa fa-circle-o-notch fa-spin text-lg text-info"></i>
+</div>
+<div class="list-group" ng-if="relatedCourses.Technologies.length > 1">
+    <div class="text-dark font-bold">Users who viewed this course also viewed:</div>
+    <div ng-if="Technology._id.$oid != keywords._id.$oid" class="list-group-item" ng-repeat="Technology in relatedCourses.Technologies">
+        <a href="" class="w-thumb-md pull-left m-r"><img src="{{Technology.courseImg}}" class="img-responsive"></a>
+
+        <div class="row-content b-b b-success">
+            <a href="" ng-click="viewCourseDetails(Technology._id.$oid)" class="text-light	"><div class="text-md font-bold">{{Technology.Name}}</div></a>
+            <p class="text-black  course-description text-muted content-limiter" ng-bind-html="Technology.courseDetails[0].value"></p>
+        </div>
+        <div class="col-xs-12">
+            <span style="font-weight: normal;" ng-repeat="Technology in Technology.Technologies" class="label btn-material-green-100 m-r-xs m-t-xs pull-left">{{Technology}}</span>
+        </div>
+    </div>
+</div>
+
+<div class="list-group" ng-if="relatedCourses.Tags.length > 1">
+    <div class="text-dark font-bold">Related Courses:</div>
+    <div ng-if="Tag._id.$oid != keywords._id.$oid" class="list-group-item" ng-repeat="Tag in relatedCourses.Tags">
+            <a href="" class="w-thumb-md pull-left m-r"><img src="{{Tag.courseImg}}" class="img-responsive"></a>
+
+        <div class="row-content b-b b-success">
+            <a href="" ng-click="viewCourseDetails(Tag._id.$oid)" class="text-light  "><div class="text-md font-bold">{{Tag.Name}}</div></a>
+            <p class="text-black  course-description text-muted content-limiter" ng-bind-html="Tag.courseDetails[0].value"></p>
+        </div>
+        <div class="col-xs-12">
+            <span style="font-weight: normal;" ng-repeat="Tags in Tag.Tags" class="label btn-material-green-100 m-r-xs m-t-xs pull-left">{{Tags}}</span>
+        </div>
+    </div>
+</div>
+
+<div class="list-group" ng-if="relatedCourses.Domains.length > 1">
+    <div class="text-dark font-bold">Domains</div>
+    <div ng-if="Domain._id.$oid != keywords._id.$oid" class="list-group-item" ng-repeat="Domain in relatedCourses.Domains">
+            <a href="" class="w-thumb-md pull-left m-r"><img src="{{Domain.courseImg}}" class="img-responsive"></a>
+
+        <div class="row-content b-b b-success">
+            <a href="" ng-click="viewCourseDetails(Domain._id.$oid)" class="text-light  "><div class="text-md font-bold">{{Domain.Name}}</div></a>
+            <p class="text-black  course-description text-muted content-limiter" ng-bind-html="Domain.courseDetails[0].value"></p>
+        </div>
+        <div class="col-xs-12">
+            <span style="font-weight: normal;" ng-repeat="Domains in Domain.Domains" class="label btn-material-green-100 m-r-xs m-t-xs pull-left">{{Domains}}</span>
+        </div>
+    </div>
+</div>
+
+</div>

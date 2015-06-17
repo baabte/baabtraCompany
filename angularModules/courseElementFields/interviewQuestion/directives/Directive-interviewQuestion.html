@@ -1,0 +1,78 @@
+<div class="p-md m-v-md  col-xs-12">
+
+
+
+<!-- style="background:#F3E5F5;border:1px solid #ff4081" class="p-sm"  -->
+
+
+<div class="shadow-z-1 pull-left col-xs-12 no-padding b" style="border:2px solid #009587;">
+
+
+<ul class="nav nav-tabs p">
+  <li   role="presentation" ng-class="{'b-b b-yellow b-2x':selectedTab=='question'}" ng-click="selectedTab='question'"><a ><span class="text-lg font-bold m-t-xs">1</span><span class="hidden-xs hidden-sm m-t-xs" translate="{{'. Question'|translate}}"></span> <div class="m-l-xs pull-right"><i  class="text-2x m-v-n mdi-hardware-keyboard-arrow-right"></i></div></a></li>
+
+ 
+  <li   role="presentation" ng-class="{'b-b b-yellow b-2x':selectedTab=='answers'}" ng-click="selectedTab='answers'"><a ><span class="text-lg m-t-xs">2</span><span class="hidden-xs hidden-sm m-t-xs" translate="{{'. Answer Hint'|translate}}"></span> <div class="m-l-xs pull-right"><i  class="text-2x m-v-n mdi-hardware-keyboard-arrow-right"></i></div></a></li>
+  
+  <li   role="presentation" ng-class="{'b-b b-yellow b-2x':selectedTab=='marks'}" ng-click="selectedTab='marks'"><a ><span class="text-lg m-t-xs">3</span><span class="hidden-xs hidden-sm m-t-xs" translate="{{'. Marks'|translate}}"></span></a></li>
+
+</ul>
+
+
+	<!-- <paper-tabs selected="0" class="pink">
+	  <paper-tab ng-click="selectedTab='question'">Question </paper-tab>
+	  <div  class="icon-container-inactive" ng-class="{'icon-container-active':selectedTab=='question'}"><core-icon icon="arrow-forward"></core-icon></div>
+	  <paper-tab ng-click="selectedTab='answerType'">Answer type</paper-tab>
+	  <div  class="icon-container-inactive" ng-class="{'icon-container-active':selectedTab=='answerType'}"><core-icon icon="arrow-forward"></core-icon></div>
+	  <paper-tab ng-click="selectedTab='answers'">Answers</paper-tab>
+	  <div  class="icon-container-inactive" ng-class="{'icon-container-active':selectedTab=='answers'}"><core-icon icon="arrow-forward"></core-icon></div>
+	  <paper-tab ng-click="selectedTab='marks'">Marks</paper-tab>
+	</paper-tabs> -->
+
+
+
+
+
+				<div ng-show="selectedTab=='question'" class="p-xs">
+
+
+					<em class="visible-xs visible-sm m-v-xs" translate="{{'Please add a question' | translate}}"></em>
+				
+      					<!-- <input class="form-control" float-label type="text" placeholder="Question Title (optional)" name="questionTitle" ng-model="question.title"> -->
+    		
+    					<div class="m-v-lg">	    					
+	      					<textarea class="form-control" placeholder="{{'Question'|translate}}" float-label name="questionDesc" ng-model="question.question"></textarea>
+	      				</div>
+	    			
+				</div>
+				
+
+
+				<div class="col-xs-12 pull-left"  ng-show="selectedTab=='answers'">
+
+					<em class="visible-xs visible-sm m-v-xs" translate="{{'You can provide a hint for the answer here  (optional)' | translate }}"></em>
+
+					<div class="m-v-lg">	    				
+	      					 <textarea class="form-control" float-label placeholder="{{'Answer Hint (Optional)'|translate}}" ng-model="question.answerHint"></textarea>
+	      				</div>
+
+					
+			    </div>
+
+						<div class="col-xs-12 pull-left" ng-show="selectedTab=='marks'">
+					<div class="col-xs-12 m-v">
+
+						<em class="visible-xs visible-sm m-v-xs" translate="{{ 'Please provide the total marks to be provided for the correct answer' | translate}}"></em>
+
+						<input type="number" float-label ng-model="question.mark" class="form-control" placeholder="{{ 'Marks' | translate }}" >
+
+					</div>
+
+				</div>
+
+				</div>
+
+
+</div>			
+
+

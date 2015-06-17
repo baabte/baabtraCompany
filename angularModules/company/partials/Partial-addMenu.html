@@ -1,0 +1,124 @@
+
+<!-- outer container -->
+<div class="row">
+
+  <!-- add menu container -->
+  <div class="col-xs-12">
+    <div class="row">
+      <div class="col-xs-12">
+        <!-- panel -->
+        <div class="panel b-t b-9C27B0">
+          <!-- panel head -->
+          <div set-sub-heading-and-background-color  class="font-bold text-white  p baab-shadow" translate="{{'Add Menu'|translate}}"></div>
+          <!-- panel body -->
+          <div class="panel-body">
+            
+              <form role="form" name="formAddMenu" class="ng-pristine ng-valid">
+                  <div class="row row-sm">
+                  <!-- Menu name -->
+                  <div class="col-xs-12 col-sm-6 col-lg-3">
+                    <div class="form-group">                    
+                      <input type="text" class="form-control" placeholder="{{'Enter menu name'|translate}}" ng-model="menu.MenuName" required>
+                    </div>
+                  </div>
+
+                  <!-- Menu link -->
+                  <div class="col-xs-12 col-sm-6 col-lg-3">
+                    <div class="form-group">                
+                      <input type="text" class="form-control" placeholder="{{'Enter menu link'|translate}}" ng-model="menu.MenuLink">
+                    </div>
+                  </div>
+
+                  <!-- Change icon -->
+                  <div class="col-xs-12 col-sm-6 col-md-4 col-lg-3">
+                      <icon-chooser selected-icon="menu.menuIcon"></icon-chooser>
+                  </div>
+
+                  <!-- visible to user -->
+                  <div class="col-xs-12 col-sm-6 col-md-4 col-lg-3">
+                    <div class="form-group">
+                      <div class="togglebutton">
+                        <label class="m-r" translate="{{'Visible to user'|translate}}"></label>
+                        <label>                          
+                          <input type="checkbox" ng-click="menu.canView=!menu.canView" ng-checked="menu.canView" ng-value="menu.canView">
+                        </label>
+                      </div>
+                    </div>
+                  </div>
+
+                  </div>
+                  <div class="row">
+                  <!-- public link -->
+                  <div class="col-xs-12 col-sm-6 col-md-4 col-lg-3">
+                    <div class="form-group">
+                      
+                      <div class="togglebutton">
+                        <label class="m-r" translate="{{'Public link'|translate}}"></label>
+                        <label>                          
+                          <input type="checkbox" ng-click="menu.publicLink=!menu.publicLink" ng-checked="menu.publicLink" ng-value="menu.publicLink">
+                        </label>
+                      </div>
+                    </div>
+                  </div>
+
+                  <!-- Actions -->
+                  <div class="col-xs-12 col-sm-9">
+                    <div class="form-group">
+                      <div class="row">
+                        <div class="col-xs-5"><input type="text" class="form-control"placeholder="{{'Enter action name'|translate}}" ng-model="menu.actionName"></div>
+                        <div class="col-xs-5"><input type="text" class="form-control "  placeholder="{{'Enter state name'|translate}}"  ng-model="menu.stateName">
+                        </div>
+                        <div class="col-xs-2">
+                          <a href="">
+                            <i ng-click="addActtion()" class="fa fa-plus-circle fa-2x"></i>
+                          </a>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+
+                  <div class="col-xs-6">
+                    <ul class="nav nav-sm nav-pills m-b" ui-nav="">
+                      <li class="active m-r-xs bg-light lt" ng-repeat="action in menu.actions">
+                        <a ng-click="editAction(action,$index)" >{{action.actionName}}<button type="button" class="close" style="margin-top: -2px;margin-left: 2px;" ng-click="removeAction($index)">×</button></a>
+                      </li>
+                    </ul>
+                  </div>
+                   </div>
+              </form>
+            <div class="row">
+              <div class="col-xs-12">
+                <a ng-click="loadMenu()" class="" translate="{{'Edit Existing Menus'|translate}}"></a>
+              </div>
+            </div>
+          </div>
+          <div class="panel-footer p-v-xs">
+            <button class="btn btn-warning baab-btn" translate="{{'Cancel'|translate}}"></button>
+            <button ng-click="UpdateMenu()" ng-show="updateMenu" class="btn btn-info baab-btn pull-right" ng-disabled="menuDetails.$invalid"  translate="{{'Update'|translate}}"></button>
+            <button class="btn btn-info baab-btn pull-right" ng-show="addMenu" ng-disabled="formAddMenu.$invalid" ng-class="{'bg-info':!formAddMenu.$invalid}" ng-click="AddMenu()" disabled="disabled"  translate="{{'Add'|translate}}"></button>
+          </div>
+        </div>
+    </div>
+    </div>
+
+    <div class="row" ng-if="allMenus">
+      <div class="panel panel-default">
+        <div class="panel-body">
+          <div ng-mouseover="Over=true" ng-mouseleave="Over=false" ng-repeat="menu in allMenus" class="m-md text-sm btn b btn-lg bg-light lt m-r animated fadeInDown" style="color:#444444;">
+          <div ng-if="!menu.menuDetail||!menu.menuDetail.userMenu">
+            <div ng-click="editMenu(menu)">
+            <i class="fa {{menu.menuIcon}} fa-3x pull-left" ></i>
+            <span class="block clear text-left m-v-xs"><b class="text-lg block font-bold" >{{menu.MenuName}}</b>
+            </span></div>
+            <div>
+            <i ng-click="removeMenu(menu)" class="fa pull-right text-lt" ng-class="{'fa-trash':Over}" style="cursor: pointer;"></i>
+            <i class="fa m-r-xs pull-right text-lt" style="cursor: pointer;" ng-class="{'fa-edit':Over}"></i>
+            </div>
+          </div>
+        </div>
+      
+      </div>
+      </div>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,41 @@
+
+<div ng-repeat="element in previewData"  class="col-md-12 col-xs-12 col-sm-12 col-lg-12  bg-white" style="padding:5px;">
+	<div  ng-if="element.answerType=='singleAnswer'">
+		  <div class="panel-heading bg-white">
+	          <h4 class="modal-title text-primary">{{element.title}}</h4>
+	      </div>	
+			
+	           <div ng-bind-html="element.question" class="course-description"> </div>		
+				<paper-radio-group  role="radiogroup" class=" col-md-2 col-xs-2 col-sm-2 col-lg-2">
+					<paper-radio-button ng-repeat= "option in element.options" ng-click="changeRadio(option.key,$event)"  name="{{option.value}}" label="{{option.value}}" value="{{option.key}}" role="radio" tabindex="0"  aria-label="{{option.value}}"  class="core-selected m-l" style="padding:10px;"  ></paper-radio-button>
+				</paper-radio-group>
+			  
+	  <div class="col-md-12 col-xs-12 col-sm-12 col-lg-12" ng-if="element.submitType=='single'"> 		
+        <paper-button raised=""  role="button" class="btn-primary baab-btn" tabindex="0" style="text-transform: none;" ng-click="saveAnswer('radio')" ng-disabled="buttonInactiveState" >Save</paper-button>   		 			
+	  </div>
+	</div>
+	
+    <div  ng-if="element.answerType=='multiAnswer'">
+    	 <div class="panel-heading bg-white">
+            <h4 class="modal-title text-primary">{{element.title}}</h4>
+         </div>
+		
+            <div ng-bind-html="element.question" class="course-description"> </div>	
+            <div class="col-md-4 col-xs-12 col-sm-4 col-lg-4">
+	            <div   ng-repeat= "option in element.options">  		
+					<core-label horizontal="" layout=""  >  
+					  <paper-checkbox role="checkbox" tabindex="0" ng-click="changeCheckBox(option.key,$event)"  aria-labelledby="core-label-1" style="padding: 10px;" class="m-l"></paper-checkbox>             
+		                <div vertical="" layout="" > 
+		                 <h5>{{option.value}}</h5>
+		                </div> 
+		            </core-label> 
+	            </div>
+	        </div>
+	          
+       
+       <div class="col-md-12 col-xs-12 col-sm-12 col-lg-12" style="padding:5px;" ng-if="element.submitType=='single'"> 		
+        <paper-button raised=""  role="button" class="btn-primary baab-btn" tabindex="0" style="text-transform: none;" ng-click="saveAnswer('checkbox')" ng-disabled="!selectedCheckboxval.length>0">Save</paper-button>
+	  </div>
+	</div>
+   
+</div>

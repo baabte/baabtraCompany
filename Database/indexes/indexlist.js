@@ -1,0 +1,10 @@
+db.clnActiveUserData.ensureIndex({ "userLoginId": 1, "loginDate": 1 })
+db.clnCompany.ensureIndex({ "fkuserLoginId": 1, "companyName": 1 })
+db.clnRoleMaster.ensureIndex({ "companyId": 1, "roleName": 1 })
+db.clnRoleMenuMapping.ensureIndex({ "fkRoleId": 1}) 	
+db.clnRoleMenuMapping.ensureIndex({ "fkcompanyId": 1,"fkuserId" : 1,"formName" : 1}) 	 	
+db.clnUserLogin.ensureIndex({ "userName" : 1,"password" : 1,"socialProfiles.mediaName" : 1,"socialProfiles.id" : 1}) 	
+db.clnUserMenuMapping.ensureIndex({ "fkUserRoleMappingId" : 1}) 	 	
+db.clnUserRoleMapping.ensureIndex({ "fkRoleId" : 1, "fkCompanyId" : 1,"fkUserLoginId" : 1})
+db.tempClnRoleMapJoined.ensureIndex({"value.companyId" : 1,"value.name" : 1})
+

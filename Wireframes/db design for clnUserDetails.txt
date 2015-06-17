@@ -1,0 +1,13 @@
+db design for clnUserDetails 
+
+{
+	_id:"",
+	fkUserLoginId:"",
+	profile:{
+
+	}
+	crmId:"",
+	urmId:"",
+	createdDate:"",
+	updatedDate:""
+}

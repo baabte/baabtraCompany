@@ -1,0 +1,56 @@
+<div >
+	<div class="bg-light p-h">
+		<!-- top bar sowing the filter and search  -->
+	 	<div class="row m-b-lg" style="position:fixed; width:101%; z-index:100;">
+            <div ng-if="classic" set-sub-heading-and-background-color  class="panel-heading font-bold text-white  p baab-shadow"   translate="{{'Users'|translate}}"></div>
+            <div  class="col-xs-12 shadow-z-1 bg-white" >
+            	<!-- design for mobile -->
+            		<div class="visible-xs row">
+	                    <div class="col-xs-5 no-padding">
+	                    	<div class="btn btn-addon "><i class="mdi-content-filter-list text-2x"></i><i translate="{{'Filter'|translate}}"></i></div>
+	                    </div>
+	                    <div class="col-xs-7 m-t-sm text-left">
+	                        <div class="input-group m-b pull-left ">
+	                            <span class="input-group-addon"><i class="mdi-action-search text-2x"></i></span>
+	                            <input type="text" ng-change="searchUser()" ng-model="userObj.searchKey" class=" form-control" placeholder="Search Users" autocomplete="off">
+	                        </div>
+	                    </div>
+                    </div>
+                    <!-- design for desktop -->
+                    <div class="hidden-xs pull-right">
+                    	<div class="col-sm-2 m-t-sm no-padding">
+	                    	<div class="btn btn-addon "><i class="mdi-content-filter-list text-2x"></i><i translate="{{'Filter'|translate}}"></i></div>
+	                    </div>
+	                    <div class="col-sm-10 m-t-md no-padding">
+	                        <div class="input-group m-b pull-left col-xs-10">
+	                            <span class="input-group-addon"><i class="mdi-action-search text-2x"></i></span>
+	                            <input type="text" ng-change="searchUser()" ng-model="userObj.searchKey" class="form-control" placeholder="Search Users" autocomplete="off">
+	                        </div>
+	                        <div class="">
+	                            <a class="text-2x " ng-click="prevOne()" title="Previous" ng-disabled="prevButtondisabled"><i class="fa fa-chevron-circle-left"></i></a>
+	                            <a class="text-2x " ng-click="nextOne()" ng-disabled="userObj.userList.length<9" title="Next"><i class="fa fa-chevron-circle-right"></i></a>
+	                        </div>
+	                    </div>
+                    </div>                                                             
+            </div>
+        </div>
+        <!-- body part -->
+        <div ng-if="classic" class="row" style="padding-top: 100px;padding-bottom: 15px;">
+        	  <div class="m-t-lg col-sm-push-0 col-xs-push-0 col-xs-12 col-sm-3 ">
+        	  	classic
+        	  </div>
+        	  <div class="m-t-lg col-sm-push-3 col-xs-push-0 col-xs-12 col-sm-9 ">
+        	  	classic
+        	  </div>
+        </div>
+        <div ng-if="!classic" class="row" style="padding-top: 80px;padding-bottom: 15px;">
+        	  <div class="m-t-lg col-sm-push-0 col-xs-push-0 col-xs-12  ">
+        	  	modern
+        	  </div>
+        	  <div class="m-t-lg col-sm-push-3 col-xs-push-0 col-md-10 col-xs-12  ">
+        	  	modern
+        	  </div>
+        </div>
+
+    </div>
+</div>

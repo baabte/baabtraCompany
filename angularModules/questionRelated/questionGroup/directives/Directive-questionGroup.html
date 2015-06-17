@@ -1,0 +1,84 @@
+<div class="col-xs-12 bg-white no-padding">
+	<div class="p bg-info">
+  		<div class="text-white b-2x" translate="{{'Make a test'| translate}}"></div>
+	</div>
+	<form name="questionMarkField" xtform no-validate>
+		<div class="col-xs-12">
+			<div class="col-xs-6  ">
+				<div class="form-group col-xs-12" >
+
+		    		<input type="number" class="form-control " min="0" float-label placeholder="{{'Total  Mark'|translate}}" name="mark.totalMark" xt-validate required ng-model="mark.totalMark">
+		    		
+				</div>
+				<div class="form-group col-xs-12" >
+					
+		    		<input type="number" class="form-control " min="0" float-label placeholder="{{'Qualifying Score'|translate}}" name="qualifyScore" xt-validate required ng-model="mark.qualifyScore">
+		    		
+				</div>
+
+				<div class="form-group col-xs-12" >
+	      			<div class="col-md-6 col-xs-12 m-t-md">
+	      			<input type="number" class="form-control " min="0" float-label placeholder="{{'Duration'|translate}}" name="duration" xt-validate required ng-model="duration.value">  
+	      			</div>
+	      			<div class="paper-dropdown col-md-6 col-xs-12 m-t-lg">
+						<select placeholder="" xt-validate required data-animation="am-fade-and-slide-top" ng-options="unit for unit in units" name="unit" ng-model="duration.unit"  class="form-control" data-html="true" bs-select></select>
+					</div> 
+	      		</div>								
+	      	</div>
+
+	      	<div class="col-xs-6 ">
+	      		<div class="form-group col-xs-12 ">
+	                <label class=" control-label"  translate="{{'Result Mode'| translate}}"></label>
+	                    <div class="radio radio-primary">
+	                        <label>
+	                           <input type="radio" ng-model="resultMode" xt-validate required name="resultMode" id="resultMode" value="live"><span class="circle"></span><span class="check"></span>
+	                            <b class="font-normal" translate="{{'Live Result'|translate}}"></b>
+	                        </label>
+	                    </div>
+	                    <div class="radio radio-primary">
+	                        <label>
+	                           <input type="radio" ng-model="resultMode" xt-validate required name="resultMode" id="resultMode" value="submit"><span class="circle"></span><span class="check"></span>
+	                           <b class="font-normal" translate="{{'On Submit'|translate}}"></b>
+	                        </label>
+	                    </div>	                                            
+	            </div>
+	      		<div class="form-group col-xs-12 ">
+	                <label class=" control-label" translate="{{'Question View'| translate}}"></label>
+	                <div class="radio radio-primary">
+	                    <label>
+	                    	<input type="radio" ng-model="questionView.mode" xt-validate required name="questionView" id="questionView" value="single"><span class="circle"></span><span class="check"></span>
+	                    	<b class="font-normal" translate="{{'Single Page'|translate}}"></b>
+
+	                    </label>
+	                </div>
+	                <div class="radio radio-primary">
+	                    <label>
+	                        <input type="radio" ng-model="questionView.mode" xt-validate required name="questionView" id="questionView" value="multiple"><span class="circle"></span><span class="check"></span>
+	                        <b class="font-normal" translate="{{'Multiple Page'|translate}}"></b>
+	                    </label>
+	                </div>
+	                <div class="form-group" ng-if="questionView.mode=='multiple'">
+		    			<input type="number" class="form-control " float-label placeholder="{{'Questions per page'|translate}}" name="questionPerPage" xt-validate required ng-model="questionView.questionPerPage">
+					</div>                               
+	            </div>		    			                                    
+	      	</div>
+	      
+	  	</div>	
+	       
+	</form>
+	<div class="btn btn-primary" ng-disabled="questionMarkField.$invalid" ng-click="questionShowActivate()">
+		<span translate="{{'Add Question' | translate}}"></span>
+		<div class="ripple-wrapper"></div>
+	</div>
+	<div class="col-xs-12" ng-repeat="question in questionGroupModel track by $index">
+		
+		<div class="col-xs-12" >
+			<question-viewer data="{{fnFormatObj(question)}}" index="1" course-element="courseElement"></question-viewer>
+		</div>
+		
+		<div class="col-xs-12">
+			<i class="pull-right mdi-av-playlist-add text-2x" data-placement="left" bs-dropdown="dropDown($index)"></i>		
+		</div>
+	</div>
+
+</div>

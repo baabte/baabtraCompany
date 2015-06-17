@@ -1,0 +1,46 @@
+
+<div>
+	<div ng-show="!courseData" class="font-bold">Select Course </div>
+	<course-loader ng-if="courseData" ng-model="courseData.course"> </course-loader> 
+
+	<input type="text" ng-if="courseData" class="form-control" float-label ng-model="courseData.doj" data-date-format="dd-MM-yyyy" data-date-type="date" data-autoclose="true" data-min-date="today" name="doj" bs-datepicker="" autocomplete="off" placeholder="Date of Joining">
+
+
+	<select class="form-control" ng-if="courseData" float-label  xt-validate name="coursetype" data-bv-field="coursetype" ng-model="courseData.coursetype" required ng>
+	 	<option value="" translate="{{'Select Course Mode'|translate}}"></option>
+	 	<option value="selfPaced" ng-init="courseData.materialAssignment='automatic'">Online Self-paced</option>
+	 	<option value="instructorLead">Online Instructor lead</option>
+	 	<option value="offline">Offline</option>
+	</select>
+
+	<div ng-if="courseData.coursetype&&courseData.coursetype!='selfPaced'">
+		<div class="col-xs-12">
+			<batch-loader courseobj="courseData" ng-model="courseData.batch"></batch-loader>
+		</div>
+		
+		<div class="form-group" ng-if="!courseData.batch.length">
+	            <label class="col-xs-12 control-label">Course Material Assignment</label>
+	            <div class="col-xs-12">
+	            	<div class="radio radio-primary col-xs-2" style="margin-top: 0px;">
+	                    <label>
+	                        <input type="radio" name="materialAssignment" ng-model="courseData.materialAssignment" value="automatic" >
+	                        Automatic
+	                    </label>
+	                </div>
+	                <div class="radio radio-primary col-xs-2" style="margin-top: 0px;">
+	                    <label>
+	                        <input type="radio" name="materialAssignment" ng-model="courseData.materialAssignment" value="cascade" >
+	                        Cascade
+	                    </label>
+	                </div>
+	                <div class="radio radio-primary col-xs-2" style="margin-top: 0px;">
+	                    <label>
+	                        <input type="radio" name="materialAssignment" ng-model="courseData.materialAssignment"  value="manual">
+	                        Manual
+	                    </label>
+	                </div>
+	            </div>       
+	    </div>
+	</div>
+
+</div>

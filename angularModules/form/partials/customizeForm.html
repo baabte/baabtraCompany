@@ -1,0 +1,70 @@
+<div class="col-xs-12  bg-white">
+
+	
+
+</div>
+
+<div class="col-xs-12 ">
+      <div class="panel b-light panel-body b-a">
+      	<div  class="col-xs-12">
+        	<button ui-sref="home.main.formCustomizer.SelectStep" ng-click="animation=next" class="btn btn-info baab-btn" translate="{{'Back'|translate}}"></button>
+
+        	<button ng-disabled="stepCustomForm.$invalid||(customForm.formSchema[status.selected].stepFormSchema.fields=== undefined)||customForm.formSchema[status.selected].stepFormSchema.fields.length ===0" ng-click="fnSaveCustomForm()" class="pull-right btn btn-info baab-btn" translate="{{'Save'|translate}}"></button>
+  		</div>	
+        <div class="col-xs-12">
+        	<form name="stepCustomForm" class="form-validation" role="form" xt-form editable-form novalidate>
+        		 
+   				 <div class="form-group ">
+          			<input type="text" msg-pattern="Enter Step Name (Minimum 1)" placeholder="{{'Selected Step Name'|translate}}" xt-validate required class="form-control" float-label name="stepName" ng-minlength="1" ng-model="customForm.formSchema[status.selected].stepName" >
+    			</div>
+
+    		</form>
+    		<form class="form-horizontal" xt-form editable-form novalidate>
+      			<div fg-edit fg-schema="customForm.formSchema[status.selected].stepFormSchema"></div>
+    		</form>
+      <!--   <div acf-edit-form acf-model="schemaObj" acf-fields="customForm.formSchema[status.selected].stepFormSchema"></div>  -->
+  		</div>	       			
+      </div>         
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!-- <div  class="col-md-12 bg-white">
+<form novalidate class="form">
+  <div fg-form
+       fg-form-data="myFormData"
+       fg-schema="formStep[status.selected].stepFormSchema">
+  </div>
+</form>
+
+</div> -->
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

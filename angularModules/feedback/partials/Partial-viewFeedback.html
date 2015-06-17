@@ -1,0 +1,39 @@
+<div class="col-xs-12" >
+	<div class="row bg-white" >
+		<ul set-sub-heading-and-background-color class="nav nav-tabs  p-xs baab-shadow" style="border-bottom: #3d5afe 1px solid;">
+      				<li class="active" ng-if="data.feedbackRequests.pendingFeedback.length" ng-click="data.feedbackType = 'Pending'" ng-class="{'b-b b-2x b-white':data.feedbackType == 'Pending'}"><a href="#Pending" data-toggle="tab">Pending<b class="badge bg-danger up">{{data.feedbackRequests.pendingFeedback.length}}</b></a></li>
+      				<li ng-if="data.feedbackRequests.submitedFeedback.length" ng-click="data.feedbackType = 'Submited'" ng-class="{'b-b b-2x b-white':(data.feedbackType == 'Submited') || !data.feedbackRequests.pendingFeedback.length}"><a href="#Submited" data-toggle="tab">Submited</a></li>
+      			</ul>
+      			<div id="myTabContent" class="tab-content">
+      				<div class="tab-pane fade  p" id="Pending" ng-class="{'active in':data.feedbackRequests.pendingFeedback.length}">
+      					<ul class="list-group scrollable hover" style="max-height: 550px;">
+	        		<li class="list-group-item baab-list-item col-xs-12 col-sm-6 col-md-4 col-lg-3" ng-repeat="feedbackRequest in data.feedbackRequests.pendingFeedback">
+	          			<a href="" class="pull-left w-thumb m-r b-l b-l-2x b-success"><img src="images/CompanyLogs/company.png" class="img-responsive"></a>
+	          			<div class="clear" ng-click="changeRequest(feedbackRequest._id.$oid)">
+	          				<div class="text-muted text-xs pull-right">{{feedbackRequest.createdDate.$date | date:"MM/dd/yyyy 'at' h:mma"}}</div>
+	            			<div>
+	            				<a href="" class="font-bold block">{{feedbackRequest.title}}</a>{{feedbackRequest.description}}
+	            			</div>
+
+
+	          			</div>
+	        		</li>
+      			</ul>
+      				</div>
+      				<div class="tab-pane fade p" id="Submited" ng-class="{'active in':!data.feedbackRequests.pendingFeedback.length}">
+      					<ul class="list-group scrollable hover" style="max-height: 550px;">
+	        		<li class="list-group-item baab-list-item col-xs-12 col-sm-6 col-md-4 col-lg-3" ng-repeat="feedbackRequest in data.feedbackRequests.submitedFeedback">
+	          			<a href="" class="pull-left w-thumb m-r b-l b-l-2x b-success"><img src="images/CompanyLogs/company.png" class="img-responsive"></a>
+	          			<div class="clear" ng-click="changeRequest(feedbackRequest._id.$oid)">
+	          				<div class="text-muted text-xs pull-right">{{feedbackRequest.createdDate.$date | date:"MM/dd/yyyy 'at' h:mma"}}</div>
+	          				<div>
+	            				<a href="" class="font-bold block">{{feedbackRequest.title}}</a>
+	            			</div>
+	            			{{feedbackRequest.description}}
+	          			</div>
+	        		</li>
+      			</ul>
+      				</div>
+      			</div>
+	</div>
+</div>

@@ -1,0 +1,18 @@
+{
+  "name": "ngHierarchicalSelector",
+  "version": "1.0",
+  "homepage": "https://github.com/baabte/baabtra",
+  "authors": [
+    "Jihin <jihin@baabte.com>"
+  ],
+  "main":["dist/ng-hierarchical-selector.0.2.0.css", "dist/ng-hierarchical-selector.0.2.0.js"],
+  "description": "Directives for showing a selector a control in a tree structure",
+  "license": "MIT",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ]
+}

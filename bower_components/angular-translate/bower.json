@@ -1,0 +1,18 @@
+{
+  "name": "angular-translate",
+  "main": ["angular-translate.js"
+           ,"loader-static-files.js"
+           ,"storage-cookie.js"
+           ,"storage-local.js"],
+  "version": "2.0",
+  "homepage": "https://github.com/baabte/baabtra",
+  "description": "angular translate",
+  "license": "MIT",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ]
+}

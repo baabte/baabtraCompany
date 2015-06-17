@@ -1,0 +1,66 @@
+<div class="col-md-12">
+	<div class="panel b-t b-00C853 bg-light dk">
+		<div set-sub-heading-and-background-color class="panel-heading font-bold text-white  p baab-shadow" translate="{{'Candidate Registartion Report'|translate}}"></div>
+	<div class="panel-body col-md-12 bg-white animated fadeInRight p-sm b-b-danger b-b-3x"  >
+
+		<div class="col-sm-12 col-md-12">
+					 <div class="btn-group  pull-right">
+                        <button type="button" class="btn btn-default"  title="Weekly" data-template="angularModules/reports/partials/dateParams.tpl.html" data-animation="am-flip-x" placement="bottom"  bs-popover>weekly</button>
+
+                        <button type="button" class="btn btn-default"  title="DateRange" data-template="angularModules/reports/partials/dateParams.tpl.html" data-animation="am-flip-x" placement="bottom-right"   bs-popover>Date Range</button>
+           </div>
+		</div>
+		 <div class="col-sm-12 col-md-12" ng-if="total">
+		    <div class="col-md-4"></div>
+		    <div class="col-md-4"><div class="panel p"><span class="font-bold">Total Number of Registerd Candidates : {{total}}</div></div>
+		  </div>
+		 <div class="col-sm-2 col-md-2 ">
+                     <!-- <ul class="list-group">
+                        <li class="list-group-item" >
+                          <img src="../images/chart_icons/chart_pie.png" ng-class="{'b-b b-success b-2x':candidateRegistrationReport.type=='PieChart'}" placement="right" bs-tooltip data-title="Pie Chart" ng-click="candidateRegistrationReport.type='PieChart'">
+                        </li>
+                         <li class="list-group-item">
+                          <img src="../images/chart_icons/chart_area.png" ng-class="{'b-b b-success b-2x':candidateRegistrationReport.type=='AreaChart'}" placement="right" bs-tooltip data-title="Area Chart" ng-click="candidateRegistrationReport.type='AreaChart'">
+                        </li>
+                        <li class="list-group-item">
+                          <img src="../images/chart_icons/chart_column.png" ng-class="{'b-b b-success b-2x':candidateRegistrationReport.type=='ColumnChart'}" placement="right" bs-tooltip data-title="Column Chart" ng-click="candidateRegistrationReport.type='ColumnChart'">
+                        </li>
+                        <li class="list-group-item">
+                          <img src="../images/chart_icons/chart_line.png" ng-class="{'b-b b-success b-2x':candidateRegistrationReport.type=='LineChart'}" placement="right" bs-tooltip data-title="Line Chart" ng-click="candidateRegistrationReport.type='LineChart'">
+                        </li>
+                        <li class="list-group-item">
+                          <img src="../images/chart_icons/chart_dashboard.png" ng-class="{'b-b b-success b-2x':candidateRegistrationReport.type=='BarChart'}"  placement="right" bs-tooltip data-title="Bar Chart" ng-click="candidateRegistrationReport.type='BarChart'">
+                        </li>
+                        <li class="list-group-item">
+                          <img src="../images/chart_icons/chart_table.png" ng-class="{'b-b b-success b-2x':candidateRegistrationReport.type=='Table'}" placement="right" bs-tooltip data-title="Table" ng-click="candidateRegistrationReport.type='Table'">
+                        </li>
+                      </ul> -->
+                      <ul class="list-group">
+                        <li class="list-group-item" >
+                          <img src="../images/chart_icons/chart_pie.png" ng-class="{'b-b b-success b-2x':type=='Pie'}" placement="right" bs-tooltip data-title="Pie Chart" ng-click="changeChartType('Pie')">
+                        </li>
+                         <li class="list-group-item">
+                          <img src="../images/chart_icons/doughnutChart.png" ng-class="{'b-b b-success b-2x':type=='Doughnut'}" placement="right" bs-tooltip data-title="Doughnut Chart" ng-click="changeChartType('Doughnut')">
+                        </li>
+                        <li class="list-group-item">
+                          <img src="../images/chart_icons/chart_column.png" ng-class="{'b-b b-success b-2x':type=='Bar'}" placement="right" bs-tooltip data-title="Bar Chart" ng-click="changeChartType('Bar')">
+                        </li>
+                         <li class="list-group-item">
+                          <img src="../images/chart_icons/chart_line.png" ng-class="{'b-b b-success b-2x':type=='Line'}" placement="right" bs-tooltip data-title="Line Chart" ng-click="changeChartType('Line') ">
+                      </ul>
+    
+  </div>
+  <div class="col-sm-6 col-md-6 " ng-show="hideOrShowChart">
+     <!-- <div google-chart chart="candidateRegistrationReport" style="{{cssStyle}}"> -->
+         <canvas id="base"  class="chart-base" chart-type="type" data="data" labels="labels" legend="true" ></canvas> 
+  </div>
+   <div class="col-sm-6 col-md-6" ng-hide="hideOrShowChart">
+   <div  class="alert alert-danger " style="position:fixed; width:50%">
+        <strong translate="{{'There are no data found .!!'|translate}}"></strong> 
+    </div>
+  </div>
+
+
+	</div>
+	</div>
+</div>

@@ -1,0 +1,5 @@
+<div class="alert" tabindex="-1" ng-class="[type ? 'alert-' + type : null]">
+  <button type="button" class="close m-l" ng-click="$hide()" >&times;</button>
+  <span ng-bind-html="content"></span>&nbsp;
+  <a href="" ng-click="undo();$hide()"><i class="fa fa-undo"></i>&nbsp;<strong ng-bind="title" ></strong></a>
+</div>

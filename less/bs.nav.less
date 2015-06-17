@@ -1,0 +1,167 @@
+.nav,
+.nav.bg-inherit{
+  > li{
+    > a{
+      color: @nav-color;
+    }
+    > a:hover,
+    > a:focus,
+    &.active > a{
+      color: @nav-active-color;
+      background-color: @nav-bg;
+    }
+  }
+}
+
+.nav{  
+  &.nav-lg{
+    > li > a{
+      padding: 20px 20px;
+    }
+  }
+  &.nav-md{
+    > li > a{
+      padding: 15px 15px;
+    }
+  }
+  &.nav-sm{
+    > li > a{
+      font-size: @font-size-sm;
+      padding: 6px 12px;
+    }
+  }
+  &.nav-xs{
+    > li > a{
+      font-size: @font-size-xs;
+      padding: 4px 10px;
+    }
+  }
+  &.nav-xxs{
+    > li > a{
+      font-size: @font-size-xs;
+      padding: 1px 10px;
+    }
+  }
+  &.nav-rounded{
+    > li > a{
+      border-radius: 20px;
+    }
+  }
+  &.no-radius {
+    > li{
+      > a {
+        border-radius: 0;
+      }
+    }
+  }
+  .open{
+    > a{
+      &,
+      &:hover,
+      &:focus{
+        background-color: @nav-bg;
+      }
+    }
+  }
+}
+
+.nav-pills{
+  > li{
+    &.active {
+      > a{        
+        &,
+        &:hover,
+        &:focus,
+        &:active{
+          color: @nav-pills-active-color;
+          background-color: @nav-pills-active;
+        }
+        > .text-muted{
+          color: @nav-pills-active-color;
+        }
+      }
+    }
+  }
+}
+
+.nav-tabs{
+  border-color: @border-color;
+  > li{
+    > a{
+      border-radius: @panel-border-radius @panel-border-radius 0 0;
+      border-bottom-color: @border-color;
+    }
+    &:hover > a,
+    &.active > a,
+    &.active > a:hover
+    &.active > a:focus{
+      border-color: @border-color;  
+      background-color: #fff;    
+    }
+    &.active > a{
+      border-bottom-color: #fff !important;
+    }
+  }
+  &.nav-justified{
+    > li{
+      display: table-cell;
+      width: 1%;
+      > a{
+        margin-bottom: 0;
+        border-radius: @panel-border-radius @panel-border-radius 0 0;
+      }
+    }
+  }
+}
+
+.nav-lines{
+  margin-bottom: -1px;
+  border-width: 0 !important;
+  > li{
+    float: left;
+    margin-right: 15px;
+    border-bottom-width: 1px;
+    border-bottom-style: solid;
+    border-bottom-color: transparent;    
+    > a{
+      padding-left: 0 !important;
+      padding-right: 0 !important;
+      background-color: transparent !important;
+    }
+    &.active{
+      border-bottom-color: inherit; 
+    }
+  }
+}
+
+.nav-list{
+  a{
+    border-bottom:1px solid @border-color;
+  }
+}
+
+.tab-container{
+  margin-bottom: 15px;
+  .tab-content{
+    padding:15px;
+    background-color: #fff;
+    border: 1px solid @border-color;
+    border-top-width: 0; 
+    border-radius: 0 0 @panel-border-radius @panel-border-radius;
+  }
+}
+
+.nav-sub{
+  opacity: 0;
+  height: 0;
+  overflow: hidden;
+  margin-left: -20px;
+  .transition(all .2s ease-in-out 0s);
+
+  .active > &{
+    opacity: 1;
+    margin-left: 0;
+    height: auto !important;
+    overflow: visible;
+  }
+}

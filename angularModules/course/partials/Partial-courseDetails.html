@@ -1,0 +1,173 @@
+<div ng-if="course" class="container-fluid bg-light" >
+
+  <!-- course header -->
+  <div class="row random-background-color shadow-z-2 hidden-xs" id="courseHeaderBg">
+
+    <div class="col-xs-12 m-h-n m-b">
+        <div class="col-xs-3  m-t">
+          <img class="img-responsive bg-white shadow-z-1 hidden-xs" style="width:100%;" ng-src="{{course.courseImg}}" />
+        </div>
+        <div class="col-xs-12 col-md-9">
+          
+          <!-- course Name -->
+          <div class="row p">
+            <h1  class="pull-left" style="color: inherit;">{{course.Name}}</h1>
+          </div>
+          <!-- Details -->
+          <div class="row font-bold">
+            <div class="col-xs-12"  masonry='{ "transitionDuration" : "0.8s" , "itemSelector" : ".tile"}'>              
+
+               <!-- Available At -->
+              <div ng-if="course.Branches" masonry-tile parent="courseHeaderBg" class="tile col-xs-12 col-sm-5 random-background-color p m shadow-z-1 masonry-brick no-margin" style="margin:3px!important;">
+                <i class="mdi-communication-location-on text-2x col-xs-1 m-r"></i>
+                <div ng-repeat="branch in course.Branches">{{branch}}</div>
+              </div>
+              <!-- Available At -->
+
+              <!-- Tile -->
+              <div masonry-tile ng-if="course.Fees" parent="courseHeaderBg" class="tile col-xs-12 col-sm-5 random-background-color p m shadow-z-1 masonry-brick no-margin" style="margin:3px!important;">
+                <i class="mdi-maps-local-offer text-2x col-xs-1" ></i>
+                <div class="pull-left col-xs-11 m-v-xs">{{feeDetails.paymentIn}} {{feeDetails.amount}}
+                <div ng-if="feeDetails.payment">
+                  <div class="pull-left">Mode : {{feeDetails.payment.Mode}}&nbsp;</div>
+                  <div ng-if="feeDetails.payment.When">- {{feeDetails.payment.When}}</div>
+                  <div class="p-v" ng-if="feeDetails.payment.installmentDetails" ng-bind-html="feeDetails.payment.installmentDetails"></div>
+                </div>
+                </div>
+              </div>
+              <!-- End. Tile -->
+
+              <!-- Tile -->
+              <div ng-if="prettyDuration" masonry-tile parent="courseHeaderBg" class="tile col-xs-12 col-sm-5 random-background-color p m shadow-z-1 masonry-brick no-margin" style="margin:3px!important;">
+                <i class="mdi-device-access-time text-2x col-xs-1" ></i>
+                <div class="pull-left col-xs-11" ng-repeat="duration in prettyDuration">{{duration}}</div>
+              </div>
+              <!-- End. Tile -->
+
+
+                            <!-- Delivery Mode -->
+              <div ng-if="course.Delivery" masonry-tile parent="courseHeaderBg" class="tile col-xs-12 col-sm-5 random-background-color p m shadow-z-1 masonry-brick no-margin" style="margin:3px!important;">
+                <div ng-repeat="(key, value) in course.Delivery">
+                  <div class="pull-left" ng-class="{'line-through':!value}">{{key}}</div>
+                  <i class="text-lg m-t" ng-class="{'mdi-action-done':value, 'mdi-content-clear':!value}"></i>
+                </div>
+              </div>
+              <!-- Delivery Mode --> 
+              
+              <!-- Technologies -->
+              <div masonry-tile ng-if="course.Technologies.length" parent="courseHeaderBg" class="tile col-xs-12 col-sm-5 random-background-color p m shadow-z-1 masonry-brick no-margin" style="margin:3px!important;">
+                <i class="mdi-action-settings-ethernet text-2x col-xs-1 m-r" ></i>
+                <div class="pull-left m-v-xs" ng-repeat="(key, value) in course.Technologies"><div class="pull-left p-h-xs" ng-if="$index>0">,</div>{{value}}</div>
+                
+              </div>
+              <!-- End. Technologies -->   
+
+
+         
+             
+            </div>
+          </div>
+          <!-- End. Details -->
+
+
+        </div>
+    </div>
+  </div>
+
+
+  <div class="row random-background-color shadow-z-2 visible-xs" id="courseHeaderBg" style="background-image:url({{course.courseImg}});background-size: cover;">
+    <div class="col-xs-12 m-h-n m-b">
+          
+          <!-- course Name -->
+          <div class="row p">
+            <h1  class="pull-left text-dark">{{course.Name}}</h1>
+          </div>
+          <!-- Details -->
+          <div class="row font-bold">
+            <div class="col-xs-12"  masonry='{ "transitionDuration" : "0.8s" , "itemSelector" : ".tile"}'>              
+
+               <!-- Available At -->
+              <div ng-if="course.Branches" masonry-tile parent="courseHeaderBg" class="tile col-xs-12 col-sm-5 random-background-color p m shadow-z-1 masonry-brick no-margin" style="margin:3px!important;">
+                <i class="mdi-communication-location-on text-2x col-xs-1 m-r"></i>
+                <div ng-repeat="branch in course.Branches">{{branch}}</div>
+              </div>
+              <!-- Available At -->
+
+              <!-- Tile -->
+              <div masonry-tile ng-if="course.Fees" parent="courseHeaderBg" class="tile col-xs-12 col-sm-5 random-background-color p m shadow-z-1 masonry-brick no-margin" style="margin:3px!important;">
+                <i class="mdi-maps-local-offer text-2x col-xs-1" ></i>
+                <div class="pull-left col-xs-11 m-v-xs">{{feeDetails.paymentIn}} {{feeDetails.amount}}
+                <div ng-if="feeDetails.payment">
+                  <div class="pull-left">Mode : {{feeDetails.payment.Mode}}&nbsp;</div>
+                  <div ng-if="feeDetails.payment.When">- {{feeDetails.payment.When}}</div>
+                  <div class="p-v" ng-if="feeDetails.payment.installmentDetails" ng-bind-html="feeDetails.payment.installmentDetails"></div>
+                </div>
+                </div>
+              </div>
+              <!-- End. Tile -->
+
+              <!-- Tile -->
+              <div ng-if="prettyDuration" masonry-tile parent="courseHeaderBg" class="tile col-xs-12 col-sm-5 random-background-color p m shadow-z-1 masonry-brick no-margin" style="margin:3px!important;">
+                <i class="mdi-device-access-time text-2x col-xs-1" ></i>
+                <div class="pull-left col-xs-11" ng-repeat="duration in prettyDuration">{{duration}}</div>
+              </div>
+              <!-- End. Tile -->
+
+
+                            <!-- Delivery Mode -->
+              <div ng-if="course.Delivery" masonry-tile parent="courseHeaderBg" class="tile col-xs-12 col-sm-5 random-background-color p m shadow-z-1 masonry-brick no-margin" style="margin:3px!important;">
+                <div ng-repeat="(key, value) in course.Delivery">
+                  <div class="pull-left" ng-class="{'line-through':!value}">{{key}}</div>
+                  <i class="text-lg m-t" ng-class="{'mdi-action-done':value, 'mdi-content-clear':!value}"></i>
+                </div>
+              </div>
+              <!-- Delivery Mode --> 
+              
+              <!-- Technologies -->
+              <div masonry-tile ng-if="course.Technologies.length" parent="courseHeaderBg" class="tile col-xs-12 col-sm-5 random-background-color p m shadow-z-1 masonry-brick no-margin" style="margin:3px!important;">
+                <i class="mdi-action-settings-ethernet text-2x col-xs-1 m-r" ></i>
+                <div class="pull-left m-v-xs" ng-repeat="(key, value) in course.Technologies"><div class="pull-left p-h-xs" ng-if="$index>0">,</div>{{value.text}}</div>
+                
+              </div>
+              <!-- End. Technologies -->   
+
+
+         
+             
+            </div>
+          </div>
+          <!-- End. Details -->
+
+    </div>
+  </div>
+
+
+  <div class="row text-dark m-v">
+    <div class="col-xs-12 col-sm-9">
+
+      <!-- course details viewer - courseDetails -->
+      <course-detail-viewer ng-if="course.courseDetails" course-details="course.courseDetails" editable="false">
+      </course-detail-viewer>
+
+      <!-- course summery - courseDetails -->
+      <div class="text-2x font-bold lh">Course Summary</div>
+      <course-summary class="b-r" ng-if="course.courseDetails" course-details="course.courseTimeline" summary-view-in="course.selectedDuration">
+      </course-summary>
+
+    </div>
+    <div class="col-xs-12 col-sm-3 m-t">
+      <div class="row">
+        <div class="col-xs-12">
+        <div class="pull-right  text-right">
+          <i class="font-bold"> Provided By : {{companyDetails.companyName}}</i>
+         <!--  <img class="img-responsive img-thumbnail m-l pull-right" style="height:75px;" src="images/CompanyLogs/baabtra.png"> -->
+        </div>
+        </div>
+      </div>
+      <div class="row">
+        <course-by-keywords ng-if="course.courseDetails" skip-this="true" keywords="course">
+        </course-by-keywords>
+      </div>
+    </div>
+  </div>
+</div>

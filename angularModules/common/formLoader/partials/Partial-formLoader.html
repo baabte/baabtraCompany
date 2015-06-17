@@ -1,0 +1,21 @@
+<div class="col-xs-12" style="margin-top: -62px;" ng-show="data.formSteps.length">
+	<div class="row ">
+		<form id="msform" name="msform" >
+
+		<!-- progressbar -->
+			<ul id="progressbar">
+				<li ng-class="{'active':$index <= data.currentStepIndex}" style="width: {{data.width}}%;" ng-repeat="step in data.formSteps">{{step}}</li>
+			</ul>
+			<!-- fieldsets -->
+			<fieldset>
+				<h2 class="fs-title">{{data.formSteps[data.currentStepIndex]}}</h2>
+				<!-- <h3 class="fs-subtitle">{{msform.$invalid}}</h3> -->
+				<div  class="am-fade-and-slide-right" acf-form input-model="data.form[data.currentStep]" output-model="data.formOut[data.currentStepIndex]"></div>
+
+				<a class="btn btn-success baab-btn" style="line-height: 14px;" ng-if="data.currentStepIndex > 0" ng-click="previousStep()">Previous</a>
+				<a class="btn btn-success baab-btn" style="line-height: 14px;" ng-if="data.currentStepIndex != data.formSteps.length-1" ng-disabled="msform.$invalid" disabled="disabled" ng-click="nextStep()">Next</a>
+				<a class="btn btn-success baab-btn" ng-if="data.currentStepIndex == data.formSteps.length-1" style="line-height: 14px;" ng-disabled="msform.$invalid || data.registerButtonClicked" disabled="disabled" ng-click="submitUserDetails()">Submit</a>
+			</fieldset>
+		</form>
+	</div>
+</div>

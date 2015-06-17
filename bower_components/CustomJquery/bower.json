@@ -1,0 +1,31 @@
+{
+  "name": "CustomJquery",
+  "version": "1.0",
+  "description": "This icludes the custom jQuery files those are needed for the application",
+  "main": "dist/index.js",
+  "keywords": [
+    "jquery",
+    "index",
+    "activate",
+    "area",
+    "html"
+  ],
+  "authors": [
+    "anoop"
+  ],
+  "license": "MIT",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests",
+    "build",
+    "examples",
+    "src"
+  ],
+  "dependencies": {
+    "jquery": "latest"
+  },
+  "private": true
+}

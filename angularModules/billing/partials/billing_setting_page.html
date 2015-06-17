@@ -1,0 +1,67 @@
+
+
+
+<div class="modal" tabindex="-1" role="dialog">
+  <div class="modal-dialog modal-xl">
+    <div class="modal-content">
+      <div class="modal-header">        
+        <h4 class="modal-title text-primary"> Configure {{selectedFeature.featureName}}</h4>
+      </div>
+      <div class="modal-body">
+<div class="box">
+
+        <div class=" m-t-sm font-bold">            
+      <div data-placement="top" data-type="info" data-html="true" data-animation="am-fade-and-scale" bs-tooltip="PriceConfigTT" >
+          Pricing<hr>
+      </div>
+              
+      <div class="form-group " >
+        <label  class="col-sm-3 " for="definpu">Price</label>
+          <span   editable-text="selectedFeature.pricing.price"class=" font-bold" onaftersave="editPricing(selectedFeature.pricing)" required>: {{selectedFeature.pricing.price||'Price' }}
+          </span>
+      </div>
+                                    
+                                    
+      <div class="form-group " >
+        <label class="col-sm-3 " for="definpu">No of Units</label>                        
+           <span   editable-text="selectedFeature.pricing.units"class=" font-bold" onaftersave="editPricing(selectedFeature.pricing)" required>: {{selectedFeature.pricing.units||'Units' }}
+           </span>
+      </div>
+    </div>
+    <div class=" m-t-sm font-bold" >
+      <div data-placement="top" data-type="info" data-html="true" data-animation="am-fade-and-scale" bs-tooltip="BillConfigTT" >
+        Billing<hr>
+      </div>              
+        <div class="form-group " >
+          <label class="col-sm-3  " for="definpu">Billing Frequency</label>                              
+            <span href editable-select="sel.freqency" e-ng-options="fre for  fre in bill" onaftersave="editBill($data)">: {{sel.freqency}}
+            </span>                 
+        </div>
+          <br>
+        <div ng-show="custombillfield">
+          <div class="form-group " >
+            <label class="col-sm-2" for="definpu">Years</label> 
+              <span class="col-sm-2"  editable-text="selectedFeature.billing.years" onaftersave="editCustomBilling()">: {{selectedFeature.billing.years||'Years'}}
+              </span>                             
+            </div>
+            <div class="form-group " >
+              <label class="col-sm-2  " for="definpu">Months</label>
+                <span class="col-sm-2"  editable-text="selectedFeature.billing.months"  onaftersave="editCustomBilling()">: {{selectedFeature.billing.months||'Months'}}
+                </span>             
+            </div>
+            <div class="form-group " >
+              <label class="col-sm-2  " for="definpu">Days</label>                
+                <span class="col-sm-2" editable-text="selectedFeature.billing.days"  onaftersave="editCustomBilling()">: {{selectedFeature.billing.days||'Days'}}
+                </span>                             
+            </div>
+          </div>
+    </div>                      
+
+
+
+
+      </div>
+      </div>
+    </div>
+  </div>
+</div>

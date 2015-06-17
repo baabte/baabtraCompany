@@ -1,0 +1,70 @@
+<div id="receipt" class="col-xs-12 lt ">
+    <div class="row">
+     
+        <div class="col-xs-10">
+            <div class="font-bold text-lg">{{companyObject.companyName}}</div>
+            <div ng-repeat="addressDetails in companyObject.Address.split(',')">{{addressDetails}}<br></div>
+            <div class="font-bold" ng-if="companyObject.Phone">Phone&nbsp;:&nbsp;<span class="font-normal">{{companyObject.Phone}}</span></div>
+            <div class="font-bold" ng-if="companyObject.Fax">Fax&nbsp;:&nbsp;<span class="font-normal">{{companyObject.Fax}}</span></div>
+            <div class="font-bold" ng-if="companyObject.eMail">Email&nbsp;:&nbsp;<span class="font-normal">{{companyObject.eMail}}</span></div>
+        </div>
+        <div class="col-xs-2">
+            <img  class="img-responsive" height="100" src="{{companyObject.companyLogo}}">
+        </div>
+    </div>
+    <div class="row">
+    	<table  class="table table-striped table-hover b b-dark">
+            <thead>
+                <!-- <tr style="width:100%;" >
+                    <td style="text-decoration: underline;" class="text-center font-bold text-2x pull-center">ORDER FORM</td>
+                </tr> -->
+                <div class="text-center p-sm">
+                    <h3 class="no-margin font-bold" style="text-decoration: underline;">RECEIPT  (No. - {{receiptDetails.customCompanyCode}})</h3>
+                    
+                </div>
+                <tr class="b b-dark">
+                    <th style="border-bottom: 1px #000 solid;" colspan="2">Order form ID&nbsp;:&nbsp;{{receiptDetails.orderFormCode}}</th>
+                    <!-- <th style="border-bottom: 1px #000 solid;"></th> -->
+                    <th style="border-bottom: 1px #000 solid;"></th>
+                    <th style="border-bottom: 1px #000 solid;"></th>
+                    <th style="border-bottom: 1px #000 solid;"></th>
+                    <th style="border-bottom: 1px #000 solid;">Date&nbsp;:&nbsp;{{receiptDetails.createdDate.$date | date:'MM/dd/yyyy'}}</th>
+                </tr>
+                <tr class="text-lg text-dark info b-b b-dark">
+                    <th class="b b-dark">Sl. No.</th>
+                    <th class="b b-dark">Particulars</th>
+                    <th class="b b-dark">Count</th>
+                    <th class="b b-dark">Price</th>
+                    <th class="b b-dark">Discount</th>
+                    <th class="b b-dark">Payable Amount</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr ng-init="data.grandTotal = data.grandTotal + course.userCount*course.coursePrice" ng-repeat="course in receiptDetails.receiptDetails">
+                    <td class="font-bold b-b b-t b-dark">{{$index + 1}}</td>
+                    <td class="b b-dark">{{course.course}}</td>
+                    <td class="b b-dark">{{course.count}}</td>
+                    <td class="b b-dark">{{course.actualAmount}}&nbsp;{{course.currency}}</td>
+                    <td class="b b-dark">{{course.discount?course.discount:'0'}}&nbsp;%</td>
+                    <td class="b b-dark">{{course.payableAmount}}&nbsp;{{course.currency}}</td>
+                </tr>
+                <tr>
+                	<th colspan="5">Total Payable Amount</th>
+                	<th>{{receiptDetails.totalPayableAmount}}&nbsp;AED</th>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+    <div class="row bg-white no-padding">
+    	<div class="col-xs-12 no-padding">
+    		<div class="col-xs-9 no-padding" style="line-height:40px;">Received with thanks from Mr./Ms. ...............................................................<br>
+    		the sum of ......................................................................................................
+    		</div>
+    		<div class="col-xs-3 p-v-lg">
+    			Signature ..........................
+    		</div>
+    	</div>
+    </div>
+
+</div>
+

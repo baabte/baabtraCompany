@@ -1,0 +1,106 @@
+
+<div class="row m-t-n">
+	<div class="col-xs-12 bg-light h-full" style="min-height:800px;">
+
+	 <div class="row no-padding m-b bg-white shadow-z-2 header" style="position:fixed; width:105%; z-index:100;">
+          <div class="col-xs-12 no-padding">
+
+
+		            <!-- HEADER -->
+        <div class="row m">
+        <form name="batchAttForm" role="form" xt-form novalidate>
+                <div class="col-xs-12 m-t">
+                <div class="col-xs-12 col-md-3 m-t">
+                	<input required xt-validate type="text" class="form-control" id="doj" placeholder="{{'From Date'|translate}}"  data-date-format="dd-MM-yyyy" data-placement="bottom" data-date-type="date" data-autoclose="true" data-max-date="today"  name="fromDate" bs-datepicker ng-model="filter.date.fromDate">
+                </div>
+                <div class="col-xs-12 col-md-3 m-t">
+                	<input required xt-validate type="text" class="form-control" id="doj" placeholder="{{'To Date'|translate}}"  data-date-format="dd-MM-yyyy" data-placement="bottom" data-date-type="date" data-autoclose="true" name="toDate" bs-datepicker ng-model="filter.date.toDate">
+                </div>
+                <div class="col-xs-12 col-md-3 m-t-sm">
+                	<!-- <i ng-show="!data.batchList.length" class="fa fa-spinner fa-spin"></i> -->
+                	<div  required xt-validate name="batch"  ng-show="data.batchList.length" multi-selectable selection-mode="single" input-model="data.batchList"  output-model="filter.selectedBatch" button-label="icon batchName" item-label="icon batchName" tick-property="ticked" helper-elements="filter" default-label="Please Select a batch" helper-elements="filter"></div>
+                	
+                </div>
+                <div class="col-xs-12 col-md-3 pull-right">
+              <button class="btn btn-success" data-ng-disabled="batchAttForm.$invalid" type="button" data-ng-click="viewReport()" translate="{{'View Report'|translate}}"></button>
+            </div>
+                   
+            </div>
+
+            </form>
+        </div>
+        </div>
+        </div>
+		<div style="margin-top:180px;">		
+		<span ng-if="reportArr.length" class="col-md-push-2 col-xs-push-0 col-md-8 col-xs-12 col-sm-12 font-bold no-padding m-b" style="text-transform:uppercase;" translate="{{'Batch Attendance Report'}}"></span>
+		<div ng-if="flag==1"   class="alert alert-danger" style="position:fixed; width:101%;">
+      	<strong translate="{{'There are no data found .!!'|translate}}"></strong> 
+		</div>
+			<div ng-if="reportArr.length" class="col-md-push-2 col-md-8 col-xs-12 col-sm-12 p-sm shadow-z-1 no-padding no-margin pull-left bg-white">
+
+				<div class="set-full-height  p-sm no-padding" style="cursor: pointer;" >
+  				<!-- 	<div class="pull-left shadow-z-1 col-xs-12 p"  data-ng-repeat="rpt in reportArr" style="border:solid">	
+                   <div class="col-xs-12 col-md-3 m-t">
+                    <select required xt-validate style="width:90%;"  class="form-control m-r" ng-model="rpt.type" ng-options="chart.value as chart.label for chart in chartTypes">
+                    <option value="">Select a chart type</option>
+                </select>
+          </div>					
+  					<div class="pull-left col-md-offset-4 m-b" style="border:solid">
+      				<span>
+                <div class="img-responsive" google-chart chart="rpt" style="{{cssStyle}}">
+    						</div>
+              </span>
+    						<div ng-if="!rpt.data.length" class="alert m-b ng-scope am-fade alert-button bg-danger lt text-white no-margin" ng-class="[type ? 'alert-' + type : null]" style="display: block;">
+  					        
+  					    	<strong class="ng-binding" translate="{{'Not Found!'|translate}}"></strong>&nbsp;
+  					   		<span translate="{{'Select a course to view the attendance report'|translate}}"></span>
+  					    </div>
+
+  					    </div>
+  					</div> -->
+
+					</div>
+          
+          <div ng-show="reportArr.length" class="row"  style="margin-left:0;margin-right:0;">
+            <!--  -->
+            <table class="table table-bordered table-hover bg-white">
+                <thead>
+                  <tr>
+                    <td colspan="4"><span class="font-bold">Total Working Days </span></td>
+                    <td ><span class="font-bold">{{totalWorkingDays}}</span></td>
+                  </tr>
+                  <tr>
+                    <th>Sl.No</th>
+                    <th>Candidate Name</th>
+                    <th>Present</th>
+                    <th>Absents</th>
+                    <th>Planned Leave</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr ng-repeat="rpt in reportArr">
+                    <td >{{$index+1}}</td>
+                    <td>{{rpt.title}}</td>
+                    <td>{{findValue(rpt.data,'Present')}}</td>
+                    <td>{{findValue(rpt.data,'Absent')}}</td>
+                    <td>{{findValue(rpt.data,'Planned leave')}}</td>
+                  </tr>
+                   
+                </tbody>
+              </table>
+          </div>
+
+					</div>
+
+				</div>
+				
+
+			</div>
+
+		</div>
+
+
+
+
+
+

@@ -1,0 +1,76 @@
+<div class="row">
+ <div class="col-xs-12">
+    <div class="panel">
+    	<form name="emailSms" xt-form  class="ng-pristine ng-valid"> 
+    	   <div class="panel-heading font-bold text-white bg-00C853 p baab-shadow" translate="{{'Email& Sms template Configuration'|translate}}"></div>
+           <div class="panel-body">
+           	<div class="row m-l">
+           		<!-- <input type="text" class="form-control" international-phone-number preferred-countries="pl, de" ng-model="phone" default-country="in"> -->
+              <div class="col-xs-12">
+                 <div class="row">
+                  <div class="col-xs-6">
+                    <div class="row">
+                     <!--  <div class="col-xs-6 p">
+                         <label translate="{{'Select a Page for email& sms configuration'|translate}}"></label>
+                      </div> -->
+                      <div class="col-xs-6">
+                        <select  placeholder="{{'Select a Page'|translate}}"   ng-options="menu as menu.MenuName for menu in menuNames"  ng-model="template.menu"  class="form-control" ng-change="fnGetActions(template.menu._id.$oid)" data-html="true" bs-select required>
+                         </select>
+                       </div>
+                       <div class="col-xs-6" ng-if="template.menu" >
+                          <select  placeholder="{{'Select a state'|translate}}"   ng-options="state.stateName as state.stateName for state in menuStates[0].actions"  ng-model="template.menuState"  class="form-control" data-html="true" bs-select required> </select>
+                        </div>
+                    </div> 
+                  </div>
+                   <div class="col-xs-6" >           
+                     <!--  <div class="row">
+                        <div class="col-xs-6 p">
+                           <label translate="{{'Select a  state for this page'|translate}}"></label>
+                        </div>
+                        <div class="col-xs-6">
+                          <select  placeholder="{{'Select a state'|translate}}"   ng-options="state._id.$oid as state.stateName for state in menuStates[0].actions"  ng-model="menuState"  class="form-control" data-html="true" bs-select> </select>
+                        </div>
+                      </div>
+                    -->
+                    <div class="row" >
+                      <div class="col-xs-6 " ng-if="template.menu">
+                               <input class="form-control " float-label   ng-model="template.event" placeholder="{{'Event'|translate}}" name="Event" required>
+                      </div> 
+                    </div> 
+                 </div> 
+               </div> 
+              </div>
+            </div>
+           <!--  <div class="row">
+              <div class="col-xs-12 m-l">
+                <div class="row">
+                  <div class="col-xs-6 m-l">
+                    <a ng-click="loadTemplates()" translate="{{'View Templates'|translate}}"></a>
+                  </div>
+                </div>
+              </div>
+            </div> -->
+          <!--   <div class="row">
+               <div class="col-xs-12">
+                <div class="row">
+                  <div class="col-xs-6">
+                   <div class=" list-group  bg-inherit"  >
+                     
+                    <div class="list-group-item p" ng-repeat="template in addedTemplates">                  
+                        <span class="pull-right" style="cursor:pointer;"></span>
+                         <b class="text-lg block font-bold ng-binding">{{template.menu.MenuName}}</b>
+                    </div>
+                  </div>
+                 </div>    
+              </div>    
+            </div>
+           </div>	 -->
+            <div class="panel-footer">
+	          <button class="btn btn-warning baab-btn" type="reset" ng-disabled="emailSms.$pristine" >cancel</button>		
+		        <button class="btn btn-info baab-btn" ng-disabled="emailSms.$invalid" ng-click="saveTemplate()"  >Add template</button>
+  
+           </div>
+        </form>		
+    </div>	
+ </div>
+</div>

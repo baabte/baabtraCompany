@@ -1,0 +1,44 @@
+{
+  "userId": "",
+  "plan": {
+    "planId": "",
+    "planName": "",
+    "features": [
+     {
+        "featureId": "",
+        "featureName": "",
+        "pricing": {
+          "price": "",
+          "units": ""
+        },
+        "billing": {
+          "years": "",
+          "months": "",
+          "days": "",
+          "totalDays": ""
+        }
+      },
+       {
+        "featureId": "",
+        "featureName": "",
+        "pricing": {
+          "price": "",
+          "units": ""
+        },
+        "billing": {
+          "years": "",
+          "months": "",
+          "days": "",
+          "totalDays": ""
+        }
+      }
+    ],
+    "totalAmount": "",
+    "discount": "",
+    "payableAmount": "",
+    "previousInvoiceOn": "",
+    "previousPaymentOn": "",
+    "nextInvoiceOn": "",
+    "accountActive": "true/false"
+  }
+}

@@ -1,0 +1,53 @@
+<div class="row">
+	<div class="col-sm-12">
+      	<div class="panel b-light">
+
+            <div class="panel-body p-sm bg-light lt">
+            	<div class="col-sm-12">
+      <form name="Job" class="form-validation ng-pristine ng-invalid ng-invalid-required">
+        <div class="panel shadow-z-1">
+        	<div set-sub-heading-and-background-color class="p  text-white font-bold" translate="{{'Post a job'|translate}}">
+            
+          </div>
+          <div class="panel-body">                   
+            <div class="form-group m-h-n clearfix">
+              <div class="col-sm-12">                 
+                <input type="text" class="form-control" float-label placeholder="{{'Job  Title'|translate}}" ng-model="Job.Tittle" required>
+              </div>
+            </div>
+            <div class="form-group">              
+              <textarea class="form-control" float-label placeholder="{{'Job Description'|translate}}" ng-model="Job.Description" required></textarea>
+            </div>
+            <div class="form-group">           
+              <textarea class="form-control" float-label  placeholder="{{'Qualification'|translate}}" ng-model="Job.Qualification" required></textarea>
+            </div>
+            <div class="form-group m-h-n clearfix">
+              <div class="col-sm-6">
+             
+              <div class="row">
+              	<div class="col-sm-6 col-xs-6">
+				<input type="number" class="form-control" float-label placeholder="{{'Minimum Salary'|translate}}" ng-model="Job.minSalary" ui-validate="'$value>=.1'">
+            </div>
+            <div class="col-sm-6 col-xs-6">
+                <input type="number" class="form-control" float-label placeholder="{{'Max Salary'|translate}}" ng-model="Job.maxSalary" ui-validate="'$value>Job.minSalary' ">
+            </div>
+            </div>
+              </div>
+           <div class="col-sm-6">                
+                <input type="text" class="form-control" float-label placeholder="{{'Location'|translate}}" ng-model="Job.Location" required>
+              </div>
+            </div>
+            <div class="form-group">             
+                <input type="text" class="form-control" float-label placeholder="{{'Use commas to separate tags'|translate}}" ng-model="Job.Tag">
+            </div>
+          </div>
+          <footer class="panel-footer text-right">
+            <button type="button" ng-click="PostJob()" class="btn btn-info baab-btn" ng-disabled="Job.$invalid" disabled="disabled" translate="{{'Post Job'|translate}}"></button>
+          </footer>
+        </div>
+      </form>
+    </div>
+            </div>
+        </div>
+    </div>
+</div>

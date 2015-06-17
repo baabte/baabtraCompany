@@ -1,0 +1,38 @@
+<div class="col-md-12 bg-light">
+	<div class="row " style="position:fixed; width:101%; z-index:100;">
+			<div class="col-xs-12 shadow-z-1 bg-white">
+				<div class="p-v-sm" ng-if="menteeMarkSheet.course">
+					<div class="text-name col-xs-4 p-v-sm">
+						<user-card user-id="menteeMarkSheet.course.fkUserRoleMappingId.$oid">
+						</user-card>
+					</div>
+					<div class="upper font-bold col-xs-8 p-v-sm text-right">{{menteeMarkSheet.course.Name}}</div>
+				</div>
+			</div>
+		</div>
+	<div class="row p-v" style="padding-top: 80px;padding-bottom: 15px;">
+		<div class="col-md-push-2 col-xs-push-0 col-md-8 col-xs-12 col-sm-12 col-xs-12 ">
+			<div class="bg-white shadow-z-1" ng-if="menteeMarkSheet.course.syllabus != null">
+
+				<div class="col-xs-12 p-sm bg-white shadow-z-1 m-b-sm font-bold" ng-if="menteeMarkSheet.noMarkSheet">
+					<div class="col-xs-11">{{menteeMarkSheet.course.syllabus[0].name}}
+					</div>
+					<div class="col-xs-1 font-bold">{{menteeMarkSheet.course.syllabus[0].mark.markScored}}/{{menteeMarkSheet.course.syllabus[0].mark.maxMark}}</div>
+				</div>
+				<!-- <div class="col-xs-12 shadow-z-1 bg-white  p-sm">
+					<div class="col-xs-8"></div>
+					<div class="col-xs-2 text-center font-bold">Mark Scored</div>
+					<div class="col-xs-2 text-center font-bold">Max Mark</div>
+				</div> -->
+				<div ng-if="menteeMarkSheet.course.syllabus[0].children.length" class="shadow-z-1 col-xs-12 bg-white p-v" ng-if="menteeMarkSheet.noMarkSheet">
+					<mark-sheet mark-sheet-obj='menteeMarkSheet.markSheet'>
+					</mark-sheet>
+				</div>
+			<div ng-if="menteeMarkSheet.course.syllabus == null || !menteeMarkSheet.noMarkSheet" class="col-xs-12 shadow-z-1 p bg-warning font-bold">
+				Mark sheet not available :-)
+			</div>
+		</div>
+	</div>
+</div>
+</div>
+

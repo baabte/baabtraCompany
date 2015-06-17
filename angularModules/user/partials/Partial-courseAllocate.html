@@ -1,0 +1,170 @@
+<div  class="panel b-t b-00C853 bg-light dk">
+
+<div class="" style="margin-top: -1px;">
+    <div class="bg-light p-h">
+        <div class="row m-b-lg" style="position:fixed; width:101%; z-index:100;">
+            <div ng-if="classic" set-sub-heading-and-background-color  class="panel-heading font-bold text-white  p baab-shadow"   translate="{{'Allocate to Course'|translate}}"></div>
+                        <div  class="col-xs-12 shadow-z-1 bg-white" >
+                            <div class="col-md-5 col-xs-12">
+                                <div class="m-t-lg ">
+                                    <div class="input-group m-b pull-left col-xs-8">
+                                        <span class="input-group-addon"><i class="mdi-action-search text-2x"></i></span>
+                                            <input type="text" ng-change="searchUser()" ng-model="userObj.searchKey" class="form-control" placeholder="Search Users" autocomplete="off">
+
+                                    </div>
+                                    <div class="col-xs-4">
+                                        <a class="text-2x " ng-click="prevOne()" title="Previous" ng-disabled="prevButtondisabled"><i class="fa fa-chevron-circle-left"></i></a>
+                                        <a class="text-2x " ng-click="nextOne()" ng-disabled="userObj.userList.length<9" title="Next"><i class="fa fa-chevron-circle-right"></i></a>
+                                    </div>
+                                  
+                                </div>
+                            </div>
+
+                            <div class="col-md-2 col-xs-12" ng-show="showFields">
+                                <div class="m-t-md " >
+                                    
+                                    <course-loader ng-model="courseAllocate.selectedCourse"></course-loader>
+                                  
+                                </div>
+                              
+                            </div>
+
+                            <div class="col-md-3 hidden-xs text-left">
+                                <div ng-if="showFields" class="m-t-sm">
+                                    <div class=" btn btn-white" ng-click="showSelectedUsers()">
+                                        Selected Users
+                                    <i  class="m-l-xs m-t-xs mdi-social-group text-2x"></i>
+                                 </div>
+                                </div>
+                            </div>
+                            
+                            
+
+                            <div class="col-md-2 col-xs-12">
+                                <div class="m-t-sm  hidden-xs">
+                                
+                                    <a ng-if="showFields" class="btn btn-success  text-right" ng-disabled="!showFields||courseAllocate.selectedCourse.length==0" ng-click="fnAllocateUser()" translate="{{'Allocate'|translate}}"></a>
+                                </div>
+
+                                <div class="visible-xs">
+                                    <div class="col-xs-6 ">
+                                        <div ng-if="showFields" >
+                                        
+                                <i ng-click="showSelectedUsers()" class="btn m-t-xs mdi-social-group text-2x"></i>
+                                         
+                                        </div>
+                                    </div>
+
+                                    <a ng-if="showFields"  class="btn btn-success  text-right" ng-disabled="!showFields||courseAllocate.selectedCourse.length==0" ng-click="fnAllocateUser()" translate="{{'Allocate'|translate}}"></a>
+                                </div>
+                            </div>
+
+                        </div>
+        </div>
+        <div class="row" style="padding-top: 80px;padding-bottom: 15px;">
+
+            <div class="m-t-lg col-md-push-2 col-xs-push-0 col-md-8 col-xs-12 col-sm-12 col-xs-12">
+
+                <div class="row">
+                    <div class="col-xs-12">
+                       <div ng-if="userObj.userList.length>0" class="p shadow-z-1 col-xs-12 bg-white">
+                                    <div class="hidden-xs">
+                                        <div  class="col-xs-2 m-t-sm">
+                                           
+                                             <div class="checkbox">
+                                                <label>
+                                                    <input ng-change="fnSelectAll()"  ng-model="userObj.SelectionAll" type="checkbox">Select All
+                                                </label>
+                                            </div>
+                                        </div>
+                                        <div ng-if="userObj.SelectionAll||(userObj.SelectionAll&&userObj.SelectionAll=='true')" class="col-xs-10 text-left m-t-sm">
+                                                    <a class="btn btn-success text-left" ng-disabled="userObj.SelectionAll=='false'||userObj.SelectionAll==undefined" ng-click="fnAddAllUsers()" translate="{{'Add'|translate}}"></a>
+                                                    
+                                        </div>
+                                    </div>
+                                     <div class="visible-xs">
+                                   
+                                    <div ng-if="userObj.SelectionAll||(userObj.SelectionAll&&userObj.SelectionAll=='true')" class="col-xs-10 text-right m-t-sm">
+                                                <a class="btn btn-success text-left" ng-disabled="userObj.SelectionAll=='false'||userObj.SelectionAll==undefined" ng-click="fnAddAllUsers()" translate="{{'Add'|translate}}"></a>
+                                                
+                                    </div>
+                                     <div  class="col-xs-2 m-t-sm pull-right">
+                                         <div class="checkbox">
+                                            <label>
+                                                <input ng-change="fnSelectAll()"  ng-model="userObj.SelectionAll" type="checkbox">Select All
+                                            </label>
+                                        </div>
+                                    </div>
+                                    </div>
+
+                        </div>
+                        <div ng-if="userObj.userList.length==0" class="p shadow-z-1 col-xs-12 btn-material-red-500">
+                                <h4 translate="{{'No users Found'| translate}}"></h4>    
+                                     
+
+                        </div>
+                        
+                        <div class="p shadow-z-1 col-xs-12 bg-white "ng-repeat="user in userObj.userList" >
+                                    <div class="hidden-xs">
+                                    <div ng-if="allUserSelected"  class="col-xs-2">
+                                        <div class="checkbox no-margin">
+                                            <label>
+                                                <input ng-model="user.Selection" type="checkbox">
+                                            </label>
+                                        </div>
+                                    </div>
+
+                                    <div ng-if="!allUserSelected" class="col-xs-2">
+                                        <div class="checkbox no-margin">
+                                            <label>
+                                                <i ng-click="fnUserSelection(user,$index)" class="mdi-content-add-box text-2x"></i>
+                                            </label>
+                                        </div>
+                                    </div>
+                                    </div>
+                                    <!-- <div class="col-xs-1"> -->
+                                        
+                                        <!-- <i class="iconCustomBg ui-icon fa {{element.Icon}} b-white text-lg b-2x" style="color:{{element.iconColor}}!important;background-color:{{element.iconBackground}}!important;border-radius: 12px;"></i>  -->
+                                        <!-- <i class="ui-icon fa {{element.Icon}} text-lg"></i> -->
+                                    <!-- </div> -->
+                                    <div class="col-xs-10 pull-left">
+                                        <span class="upper font-bold">{{user.profile.firstName}} {{user.profile.lastName}}</span>
+                                        <i  class="mdi-navigation-unfold-less pull-right text-lg link hidden-xs" ng-click="user.expandDetails=!expand;expand=!expand"></i>
+
+                                        <div class="hidden-xs" ng-if="user.expandDetails && user.expandDetails == true">
+                                            <div class="font-bold p-v-xs" translate="{{'User Details'|translate}}"></div>
+                                            <div class="">
+                                                <div class="bg-light p-xs m-b-xs">{{user.userName}}</div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="visible-xs">
+                                    <div ng-if="allUserSelected"  class="col-xs-2 ">
+                                        <div class="checkbox no-margin">
+                                            <label>
+                                                <input ng-model="user.Selection" type="checkbox">
+                                            </label>
+                                        </div>
+                                    </div>
+
+                                    <div ng-if="!allUserSelected" class="col-xs-2">
+                                        <div class="checkbox no-margin">
+                                            <label>
+                                                <i ng-click="fnUserSelection(user,$index)" class="mdi-content-add-box text-2x"></i>
+                                            </label>
+                                        </div>
+                                    </div>
+                                    </div>
+                                    
+                             
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+
+        </div>   
+    </div>
+</div>
+
+</div>

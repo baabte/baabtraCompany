@@ -1,0 +1,245 @@
+<!-- Outer Panel  -->
+<form profile="showAll" nv-file-drop xt-form name="acGenInfo" no-validate class="form-validation ng-pristine ng-invalid ng-invalid-required" role="form">
+<div class="panel panel-default m-t p-md p-v-xs b-b b-5x {{borderClass}}">
+  
+  <!-- Top Header row -->
+  <div class="row">
+  
+      <!-- Heading -->
+     <!--  <div class="bg-white p-sm bg-chocolate">
+            <i class="glyphicon glyphicon-bullhorn text-1x inline"></i>
+            <span class="text-1x font-bold">General Info</span>
+      </div> -->
+      <!-- Heading .end -->
+  
+  </div>
+  <!-- Top header row .End -->
+  <!-- body row -->
+  <div class="row">
+
+    <!-- Left Half -->
+    <div class="col-xs-12 col-sm-6">
+
+      <div class="panel-body">
+
+        <!-- course name -->
+        <div class="row">
+            <div class="form-group">
+              
+                  <input type="text" class="form-control" float-label ng-model="course.Name" name="courseName" xt-validate required placeholder="Name of the {{course.type}}">
+         
+            </div>
+        </div>
+
+        <div class="row" >
+          <div class="form-group" >
+            <!-- <label class="col-lg-2 control-label">Radios</label> -->
+            <div class="col-xs-12">
+                <div class="radio radio-primary">
+                    <label>
+                        <input type="radio" ng-model="course.Delivery" name="optionsRadios" id="optionsRadios1" value="Class room training" checked="">
+                        Class room training
+                    </label>
+                </div>
+                <div class="radio radio-primary">
+                    <label>
+                        <input type="radio" ng-model="course.Delivery" name="optionsRadios" id="optionsRadios2" value="Instructor led training">
+                        Instructor led training
+                    </label>
+                </div>
+                 <div class="radio radio-primary">
+                    <label>
+                        <input type="radio" ng-model="course.Delivery" name="optionsRadios" id="optionsRadios3" value="Instructor led training">
+                        Online training
+                    </label>
+                </div>
+            </div>
+            <!-- <div class="checkbox">
+              <label>
+
+                <input type="checkbox" ng-model="course.Delivery.online" value="course.Delivery.online" checked>
+                <b class="font-normal" translate="{{'Online'|translate}}"></b>
+              </label>
+            </div> 
+
+            <div class="checkbox">
+              <label>
+                <input type="checkbox" ng-model="course.Delivery.offline" value="course.Delivery.offline" checked>
+                <b class="font-normal" translate="{{'Offline'|translate}}"></b>
+               
+              </label>
+
+            </div>-->        
+          <em class="text-muted text-E91E63" translate="{{'(Please specifiy  the mode of delivery of the course)'|translate}}"></em>
+        </div>
+      </div>
+
+
+        <!-- course details viewer -->
+          <course-detail-viewer  course-details="course.courseDetails" editable="true">
+          </course-detail-viewer>
+
+        <!-- dynamic fields directive -->
+        <add-dynamic-fields detail-fields="course.courseDetails">
+        </add-dynamic-fields>
+
+      </div>
+
+    </div>
+    <!-- Left Half .End -->
+
+    <!-- Right half -->
+    <div class="col-xs-12 col-sm-6 m-v-lg" >
+
+      <!-- Course domains -->
+      <hierarchical-selector data="domains" multi-select="true" on-selection-changed="onDomainSelectionChanged(items)" selection="{{course.Domains}}"></hierarchical-selector>
+      <em class="text-muted text-E91E63" translate="{{'Please specify Domains applicable to your course (eg: Accounting, Hospitality etc.)'|translate}}"></em>
+      <!-- Technologies -->
+      <div class="form-group m-t-lg" >
+                  <tags-input class="bootstrap"
+                        ng-model="course.Technologies"
+                        placeholder="Technologies covered (Optional, Recommended)"
+                        replace-spaces-with-dashes="false" 
+                        min-length="1">
+                        <auto-complete source="loadTechnologies($query) | filter:$query" min-length="0" debounce-delay="0" max-results="15"></auto-complete>
+                </tags-input>
+        <em class="text-muted text-E91E63" translate="{{'*Technologies help your course to be shown when people search courses under specific technologies'|translate}}"></em>                
+      </div>
+
+      <!-- Tags -->
+      <div class="form-group" >
+              <tags-input  ng-class="{'no-border':course.tagsToBeSaved.length}" class="bootstrap"
+                        ng-model="course.Tags"
+                        placeholder="Tags (Optional, Recommended)"
+                        replace-spaces-with-dashes="false" 
+                        min-length="1">
+                        <auto-complete source="loadTags($query) | filter:$query"
+                             min-length="0"
+                             debounce-delay="0"                             
+                        max-results="15"></auto-complete>
+                </tags-input>
+                <em class="text-muted text-E91E63" translate="{{'*Tags help your course to be shown when people search courses by tags'|translate}}"></em>  
+      </div>
+
+      <!-- Designation -->
+       <div class="form-group" >
+              <tags-input  ng-class="{'no-border':course.designation.length}" class="bootstrap"
+                        ng-model="course.designation"
+                        placeholder="Designation (Optional, Recommended)"
+                        replace-spaces-with-dashes="false" 
+                        min-length="1">
+                        <auto-complete source="loadDesignation($query) | filter:$query"
+                             min-length="0"
+                             debounce-delay="0"                             
+                        max-results="15"></auto-complete>
+                </tags-input>
+                <em class="text-muted text-E91E63" translate="{{'*Designation help your course to be shown when people search courses by Designation'|translate}}"></em>  
+      </div>
+      
+      <!-- publish course on website -->
+      <div class="form-group">
+        <div class="checkbox">
+          <label>
+            <input type="checkbox" ng-model="course.publishToWebsite"> Publish to your website
+          </label>
+          <label>
+            <input type="checkbox" ng-model="course.publishToBaabtra"> Publish to baabtra.com
+          </label>
+        </div>
+
+      </div>
+
+        <!-- Availability -->
+      <div class="form-group" >
+
+        <div class="radio radio-success pull-left">
+            <label>
+              <input type="radio" name="Branches" ng-click="specificBranches=false" id="inlineRadio1" checked>
+              <b class="font-normal" translate="{{'All Branches'|translate}}"></b>
+              <!-- <span translate="{{'All Branches'|translate}}"></span> -->
+            </label>
+        </div>
+
+        <div class="radio radio-success pull-left m-l" style="padding-top:15px;">
+            <label>
+              <input type="radio" name="Branches" ng-click="specificBranches=true" id="inlineRadio1" value="option1">
+              <b class="font-normal" translate="{{'Specific Branches'|translate}}"></b><!-- 
+               -->
+            </label>
+        </div>
+
+        <em class="text-muted text-E91E63 col-xs-12" translate="{{'(Please specifiy  to which all branches this course is available)'|translate}}"></em>
+        <div class="col-xs-12">
+          <hierarchical-selector ng-if="specificBranches" data="branchDetails" multi-select="true" class="am-fade" on-selection-changed="onBranchSelectionChanged(items)"></hierarchical-selector>
+        </div>
+      </div>
+
+      <div class="form-group col-xs-11 pull-right">
+
+        <div class="radio radio-success pull-left m-l">
+            <label>
+              <input type="radio" name="Accessibility" ng-click="specificAccessibility=false" id="inlineRadio1" value="option1" checked>
+              <b class="font-normal" translate="{{'Public'|translate}}"></b>
+              <!-- <span translate="{{'Public'|translate}}"></span> -->
+            </label>
+        </div>
+        <div class="radio radio-success pull-left m-l" style="padding-top:15px;">
+            <label>
+              <input type="radio" name="Accessibility" ng-click="specificAccessibility=true" id="inlineRadio1" value="option1">
+              <b class="font-normal" translate="{{'Private'|translate}}"></b>
+              <!-- <span translate="{{'Private'|translate}}"></span> -->
+            </label>
+        </div>
+
+        <em class="text-muted text-E91E63 col-xs-12" translate="{{'(Please specify who all in the selected branches has access to the course)'|translate}}"></em>
+
+        <div class="col-xs-12">
+            <hierarchical-selector ng-if="specificAccessibility" ng-model="course.branchDetails" data="rolesDetails" multi-select="true" class="am-fade" on-selection-changed="selectedItem2 = onRoleSelectionChanged(items)"></hierarchical-selector>
+        </div>
+
+      </div>
+
+
+      <!-- Evaluator -->
+      <div class="row">
+      <div class="col-xs-12">
+          <div class="form-group">
+            <label>Evaluator</label>
+            <role-user-loader ng-if="course" role-id="$root.userinfo.ActiveUserData.roleMappingObj.evalRoles[0]" placeholder-value="Please select a person" selection-type="2" ng-model="course.evaluator">
+            </role-user-loader>
+          </div>
+        </div>
+      </div>
+      <!-- course image -->
+       <div class="form-group col-sm-6 no-padding" >
+
+        
+        <input type="text" readonly="" class="form-control floating-label" placeholder="Browse course image...">
+        <input type="file" ng-file-select="courseImageChanged($files)" data-placement="top" data-html="true" data-container="body" data-title="{{'Please select an image to represent the course'|translate}}" bs-tooltip>        
+
+        <!-- <em ng-if="!course.courseImg" class="text-E91E63">Please select an image to represent the course</em> -->
+        
+        <div ng-show="course.courseImg">
+          <img class="img-responsive img-thumbnail w-sm m-xs" ng-src="{{course.courseImg}}" />
+        </div>
+        
+      </div>
+    </div>
+    <!-- Right half .End -->
+  </div>
+  <!-- body row .End -->  
+
+
+<!-- Footer row   -->
+<div class="row">
+  <div class="col-xs-12 m-b">
+    <footer class="text-right">
+     <button type="submit" class="btn btn-info baab-btn" ng-disabled="acGenInfo.$invalid || !valid" disabled="disabled" ng-click="completeStep1(course);"  translate="{{'Next'|translate}}"></button>
+    </footer>   
+  </div>
+</div>
+<!-- footer row .End -->
+
+</div>
+</form>
+<!-- outer panel .End

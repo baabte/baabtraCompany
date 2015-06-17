@@ -1,0 +1,41 @@
+<div class="aside ng-scope top am-slide-top aside-open-backdrop" tabindex="-1" role="dialog" style="display: block;">
+  <div class="aside-dialog">
+    <div class="aside-content">
+      <div set-sub-heading-and-background-color style="position:fixed;width:100%;z-index:100" class="navbar navbar-inverse">
+        <button  type="button" class="close m-t-sm m-r-sm" ng-click="fnCreateQuestionsetModalDeactivate()">×</button>
+        <h4 class="aside-title m-l-sm" translate="{{'Create Question Set'|translate}}"></h4>
+      </div>
+      <div class="aside-body" >
+        <div class="m-t-lg" >
+        <form name="questionMarkField" xtform no-validate>
+                  <input type="text" class="form-control" float-label placeholder="{{'Question Set Name'|translate}}" name="questionBundle.Name" xt-validate required ng-model="questionBundle.Name">
+                  
+                  <a  class="btn btn-info " ng-click="questionShowActivate()" ng-disabled="questionMarkField.$invalid" translate="{{'Add new question to question Set'|translate}}"></a>
+                  
+
+                  <a  class="btn btn-info pull-right" ng-disabled="questionMarkField.$invalid||questionBundle.questions==undefined||(questionBundle.questions!=undefined&&questionBundle.questions.length==0)" ng-click="fnModifyQuestionSet()" translate="{{'Save Question Set'|translate}}"></a>
+                 
+
+
+                  <h3><div ng-if="questionBundle.questions.length>0" class="font-bold" translate="{{'Questions :'|translate}}"></div></h3>
+        </form>
+        </div>
+
+
+        
+          <div class="col-xs-12" ng-repeat="question in questionBundle.questions track by $index">
+            <div class="col-xs-12" >
+              <question-viewer data="{{fnFormatObj(question)}}" index="1" course-element="courseElement"></question-viewer>
+            </div>
+                    
+            <div class="col-xs-12">
+              <i class="pull-right mdi-av-playlist-add text-2x" data-placement="left" bs-dropdown="dropDown($index)"></i>   
+            </div>
+          </div>
+        
+        
+      </div>
+     
+    </div>
+  </div>
+</div>

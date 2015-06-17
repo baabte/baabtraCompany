@@ -1,0 +1,139 @@
+<div >
+			   <div class="row p-sm">
+            <div class="col-md-4 " translate="{{'Alert when'|translate}}">
+                  <span class="pull-right" translate="{{''|translate}}">:</span>
+            </div>
+            
+            <div class="col-md-4">
+                     <div class="radio radio-success">
+                                  <label>
+                                    <input type="radio" ng-model="whenAlert" ng-click="setaletcriteriapopup=true;alertPointsArray=[]" value="Absense" name="whenAlert" required><span class="circle"></span>
+                                    Absense
+                                  </label>
+                    </div>             
+            </div>
+             <div class="col-md-4" >
+                     <div class="radio radio-success">
+                                  <label>
+                                    <input  type="radio" ng-model="whenAlert" value="setalertcriteria" name="whenAlert" required><span class="circle"></span>
+                                    Set Alert Criteria
+                                  </label>
+                    </div>  
+            </div>
+    </div>
+    <div class="row p-sm no-margin callout-info well"  ng-show="whenAlert=='setalertcriteria'&&setaletcriteriapopup==true">
+                     <div class="modal-header">
+                    <h4 class="modal-title text-primary" translate="{{'Set Criteria to send Email/SMS'|translate}}"></h4>
+                   </div>
+                   <div class="modal-body">
+                      <div class="row"> 
+                        <div class="col-xs-12">
+                          <div class="form-group">
+                         
+                          <div class="row p-v-sm">
+                           <em class="p-sm" style="background-color:transparent">(You can set whenever an alert send to the person)</em><br>
+                           <form name="setCriteriaForm" class="ng-pristine ng-valid">
+                              <div class="col-xs-12 p-v-md">
+                                   <select class="form-control" ng-model="endPointPercentage" id="select" ng-change="percentageValueValidation(endPointPercentage,'end')" ng-options="num as num for num in percentageNum" required>
+                                   <option selected="selected"  value="" required >Send Alert When Absence Exceed (in %)</option>
+                                   
+                                  </select>
+                              </div>
+                              <div class="col-xs-6 p-v-md">
+                                   <select class="form-control" ng-model="todoAction" id="select" ng-options="action as action for action in actions"  required>
+                                   <option selected="selected" value="" required >Action to be Done</option>
+                                    
+                                  </select>
+                              </div>                      
+                              <div class="col-xs-6 p-v-md">
+                                     <input type="text" class="form-control hg" placeholder="{{'Message To Send'|translate}}" ng-model="message" required>
+                                    
+                                  </select>
+                              </div>
+                              <div class="col-xs-6 p-v-md">
+                                    <div multi-selectable input-model="alert"  output-model="selectalert" button-label="Name" item-label="Name" tick-property="ticked" helper-elements="all none reset filter" default-label="Alert Through"    name="selectItem"></div>
+                              </div>
+                              <div class="col-xs-12 p-v-md">
+                                <button type="reset" style="padding: 6px 15px;" class="btn btn-primary no-margin"  translate="{{'Cancel'|translate}}" ng-disabled="setCriteriaForm.$pristine"></button>
+                                 <button type="button" class="btn btn-primary no-margin" style="padding: 6px 25px;" ng-click="addAlertPoint();" ng-disabled="setCriteriaForm.$invalid||!selectalert.length>0" translate="{{'Add'|translate}}"></button>
+                              </div>
+                          </form>
+                          </div>
+                         
+                          <div class="row p-v-xs " >
+                              <div class="col-md-12 font-bold well well-sm" ng-repeat="data in alertPointsArray" style="margin-bottom: 6px;">
+                                    <span class="badge" style="padding:3px 8px;margin-right:10px">{{$index+1}}.</span>
+                                    <span class="m-v-xs"> <span ng-repeat="alert in data.alertTrough">{{alert}}<span ng-if="$index+1<data.alertTrough.length">,</span></span> will send when Absense Exceeds <span class="label label-default p-h-sm">{{data.endPoint}}%</span> Absence With <span class="label label-warning">{{data.todoAction}}</span></span>
+                                    <div class="pull-right">
+                                      <a href="" bs-tooltip data-title="Edit"  data-placement="left"><i class="mdi-editor-mode-edit p-v-sm text-2x" ng-click="updateAlertPoint($index)"></i></a>
+                                      <a href="" bs-tooltip data-title="Remove"  data-placement="left" >
+                                      <i class="mdi-action-delete p-v-sm text-2x" ng-click="deleteAlertPoint($index);"></i></a>
+                                    </div>
+                                   
+                              </div>
+                           
+                          </div>
+                          </div>
+                          </div>
+                        </div>
+                      </div>
+                       <button type="button" class="btn no-margin pull-right" ng-disabled="!alertPointsArray.length" ng-click="setaletcriteriapopup=false">Save</button>
+                       <button type="button" class="btn no-margin pull-right"  ng-click="setaletcriteriapopup=false;whenAlert='Absense'">close</button>
+        </div>
+            <div class="row p-v-xs" style="margin-left:5px;margin-right:5px;" ng-show="setaletcriteriapopup==false&&alertPointsArray.length">
+                               <div class="col-md-12 font-bold well well-sm" ng-repeat="data in alertPointsArray" style="margin-bottom: 6px;">
+                                    <span class="badge" style="padding:3px 8px;margin-right:10px">{{$index+1}}.</span>
+                                    <span class="m-v-xs"> <span ng-repeat="alert in data.alertTrough">{{alert}}<span ng-if="$index+1<data.alertTrough.length">,</span></span> will send when Absense Exceeds <span class="label label-default p-h-sm">{{data.endPoint}}%</span> Absence With <span class="label label-warning">{{data.todoAction}}</span></span>
+                                    <div class="pull-right">
+                                      <a href="" bs-tooltip data-title="Edit"  data-placement="left"><i class="mdi-editor-mode-edit p-v-sm text-2x" ng-click="updateAlertPoint($index)"></i></a>
+                                      <a href="" bs-tooltip data-title="Remove"  data-placement="left" >
+                                      <i class="mdi-action-delete p-v-sm text-2x" ng-click="deleteAlertPoint($index);"></i></a>
+                                    </div>
+                                   
+                              </div>
+           </div>
+        <div class="row p-sm" ng-show="whenAlert=='Absense'">
+            <div class="col-md-4 " translate="{{'Message you want to send'|translate}}">
+                  <span class="pull-right">:</span>
+            </div>
+            <div class="col-md-8" style="padding-right:30px;padding-left:23px">
+                    <input type="text" class="form-control" placeholder="{{'Message to be Send'|translate}}" name="message" ng-model="message" required>             
+          </div>
+    </div>
+    <div class="row p-sm" >
+            <div class="col-md-4 " translate="{{'Send Mail/SMS'|translate}}">
+                  <span class="pull-right">:</span>
+            </div>
+            <div class="col-md-8" style="padding-right:30px;padding-left:23px" ng-init="sendOnInterval='Daily'">
+                    <!-- ng-if="whenAlert=='setalertcriteria'" -->
+                     <select ng-if="whenAlert=='setalertcriteria'" class="form-control" id="select" ng-model="sendOnInterval"  ng-options="sendingInterval.time as sendingInterval.time for sendingInterval in sendingIntervals" required>
+                      <option selected="selected" value=""   >select an option</option>
+                    </select> 
+                    <span ng-if="whenAlert!='setalertcriteria'" ng-init="sendOnInterval='Daily'" class="font-bold ">
+                            {{sendOnInterval}}
+                    </span>           
+            </div>
+    </div>
+    <div class="row p-h-sm   p-v">
+          <div class="col-md-4" >
+          Dont Consider Absense
+                <a bs-tooltip data-title="You can ignore days from attendance alerting by picking the options" data-placement="bottom-right" data-type="success"  href class="p-xs" style="top:2px"><i class=" glyphicon glyphicon-info-sign"></i></a>  
+          </div>
+          <div class="col-md-8" style="padding-left:0px">
+                 <div class="checkbox checkbox-inline no-margin"  ng-repeat="day in days" bs-tooltip data-title="{{day.id}}"  value="{{day.text}}">
+                    <label >
+                      <input type="checkbox" ng-model="excludeDays" ng-click="fnExcludedDays(day.id)" ng-checked="excludeDaysArray.indexOf(day.id) > -1" value="day" >{{day.text}}
+                    </label>
+                 </div>
+          </div>
+    </div>
+    <div class="row row p-sm">
+          <div class="col-md-12">
+             <button type="button" class="btn btn-info pull-right"  ng-click="saveAttendanceAlertSettings()" ng-disabled="(!alertPointsArray.length&&!message)||!sendOnInterval||!excludeDaysArray.length"> Done</button>
+
+             <button type="reset" class="btn btn-danger pull-right" style="margin: 10px 3px;"  ng-click="">cancel</button>
+
+          </div>
+    </div>
+
+</div>

@@ -1,0 +1,39 @@
+<div class="row">
+  <div class="col-xs-12">
+    <div class="panel b-t b-E91E63 bg-light dk">
+      <div set-sub-heading-and-background-color class="panel-heading font-bold text-white  p baab-shadow">
+        <span translate="{{'Drafted Courses'|translate}}"></span>
+        <div class="col-xs-2 pull-right">
+          <div class="input-group">
+            <span class="input-group-btn" style="position: relative;top: -6px;left: 5px;">
+              <button type="submit" class="btn btn-sm no-bg btn-icon no-shadow no-padder">
+                <i class="fa fa-search text-white text-md"></i>
+              </button>
+            </span>
+            <input type="text" class="form-control m-b text-white place-white" ng-model="SearchCourse" placeholder="{{'Search Course'|translate}}">
+          </div>
+          <!-- <input type="text" class="form-control m-b text-white place-white" placeholder="Search Course"> -->
+          </div>
+      </div>
+      <div class="panel-body">
+        <div  masonry='{ "transitionDuration" : "0.8s" , "itemSelector" : ".tile"}'>
+          <div masonry-tile class="tile col-xs-12 col-sm-4 col-md-3 col-lg-3 pull-left masonry-brick" ng-repeat="course in draftedCourses | filter:SearchCourse">
+            <div class="panel course-box">
+                 <div class="p">
+                   <button ng-click="deleteCourseDetails(course._id.$oid)" class="btn btn-default pull-right no-margin"><i class="mdi-action-delete text-lg " ></i></button>
+
+                   <button ng-click="editCourseDetails(course._id.$oid)" class="btn btn-default pull-right no-margin"><i class="mdi-image-edit text-lg" ></i></button>
+                 </div>
+                 
+                 <div class="panel-body ">
+                  <img ng-src="{{ course.courseImg }}" >
+                    <div class="font-bold text-black p-v-xs m-h-sm">{{course.Name}}</div>
+                    <div class="text-black  course-description text-muted content-limiter "ng-bind-html="course.Description"></div>
+                  </div>
+            </div>
+           </div>
+           </div>
+      </div>
+    </div>
+  </div>
+</div>

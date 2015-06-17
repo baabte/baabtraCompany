@@ -1,0 +1,30 @@
+<!-- Steps -->
+<div class="row" >
+	<div class="col-xs-3 p bg-E91E63 text-center" style="cursor: pointer;" ng-class="{'shadow-z-4':currentState=='home.main.addCourse.step1'}" ng-click="nextPart('home.main.addCourse.step1', 'b-E91E63')">
+			<i class="fa fa-bullhorn text-2x p-h"></i>
+			<span class="font-bold hidden-xs">General Info</span>
+	</div>
+	<div class="col-xs-3 p bg-00C853 text-center" style="cursor: pointer;" ng-class="{'shadow-z-4':currentState=='home.main.addCourse.step2'}" ng-click="nextPart('home.main.addCourse.step2','b-04B45F')">
+		<i class="fa fa-clock-o text-2x p-h"></i>
+		<span class="font-bold hidden-xs">Duration & Fee Settings</span>
+	</div>
+	<div class="col-xs-3 p btn-material-deep-purple-A400 text-center" style="cursor: pointer;" ng-class="{'shadow-z-4':currentState=='home.main.addCourse.step3'}" ng-click="nextPart('home.main.addCourse.step3','b-03A9F4')">
+		<i class="fa fa-graduation-cap text-2x p-h"></i>
+		<span class="font-bold hidden-xs">Syllabus </span>
+	</div>
+	<div class="col-xs-3 p bg-03A9F4 text-center" style="cursor: pointer;" ng-class="{'shadow-z-4':currentState=='home.main.addCourse.step4'}" ng-click="nextPart('home.main.addCourse.step4','b-03A9F4')">
+		<i class="fa fa-puzzle-piece text-2x p-h"></i>
+		<span class="font-bold hidden-xs">Design <span class="text-name">{{course.type}}</span></span>
+	</div>
+	<div name="addCourse-container"  role="main" ui-view></div>
+</div>
+
+<!-- Steps .End -->
+	<add-dynamic-fields ng-show="not" detail-fields="course.courseDetails">
+    </add-dynamic-fields>
+	
+<div class="p">
+	<!-- course stream line -->
+	<course-streamline course-id="courseId"  preview-data="coursePreviewObject"></course-streamline>
+</div>
+ 

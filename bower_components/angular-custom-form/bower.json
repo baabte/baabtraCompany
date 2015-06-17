@@ -1,0 +1,18 @@
+{
+  "name": "angular-custom-form",
+  "version": "0.1",
+  "homepage": "https://github.com/baabte/baabtra",
+  "authors": [
+    "akshath4u"
+  ],
+  "description": "custom form generator",
+  "main": "custom-form-generator.js",
+  "license": "MIT",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ]
+}

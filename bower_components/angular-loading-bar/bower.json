@@ -1,0 +1,14 @@
+{
+  "name": "angular-loading-bar",
+  "version": "6.0",
+  "homepage": "https://github.com/baabte/baabtra",
+  "main": "loading-bar.js",
+  "license": "MIT",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ]
+}

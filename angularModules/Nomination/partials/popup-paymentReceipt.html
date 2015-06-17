@@ -1,0 +1,22 @@
+<div class="modal" tabindex="-1" role="dialog">
+  <div class="modal-dialog modal-lg">
+    <div class="modal-content">
+      <div class="p bg-info font-bold baab-shadow">
+        Payment Receipt
+      </div>
+      <div class="modal-body">
+        <form class="form-horizontal ng-pristine ng-valid" style="cursor: pointer;">
+          <div class="row">
+            <payment-receipt company-object="data.companOrderForms.companyDetails" receipt-details="paymentReceipt">
+            </payment-receipt>
+          </div>
+        </form>
+      </div>
+      <div class="modal-footer">
+        <button type="button" print-page print-element-id="receipt" class="btn btn-primary baab-btn"><i class="fa fa-print"></i>&nbsp;Print</button>
+        <!-- <button type="button" class="btn btn-primary baab-btn"><i class="fa fa-download" ></i>&nbsp;Download</button> -->
+        <button type="button" class="btn btn-success baab-btn" ng-click="$hide()">Ok</button>
+      </div>
+    </div>
+  </div>
+</div>

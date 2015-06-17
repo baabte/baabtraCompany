@@ -1,0 +1,43 @@
+<div ng-if="previewData.datas.length">
+  <!-- srtreamline header -->
+  <div class="panel bg-warning pos-rlt w sreamline-header text-center">
+    <span class="arrow b-warning bottom"></span>
+    <div class="panel-body">
+      <h3 class="no-margin font-bold">{{previewData.tlSelectedPoint}}</h3>
+    </div>
+  </div>
+
+  <section id="cd-timeline" class="cd-container">
+    <div class="cd-timeline-block" ng-repeat="element in previewData.datas">
+      <!-- course element icon -->
+      <div class="cd-timeline-img text-center p-v" style="background:{{element.iconBackground}}; color:{{element.iconColor}};">
+        <i class="fa {{element.Icon}} text-2x visible-lg"></i>
+        <i class="fa {{element.Icon}} text-lg visible-xs visible-sm  visible-md" style="position: relative;top: -4px;"></i>
+      </div>
+      
+      <!-- course element content -->
+      <div class="cd-timeline-content">
+        <!-- course element name in small screen -->
+        <div class="panel visible-xs visible-sm pos-rlt m-n streamline-header-shadow" style="background:{{element.iconBackground}};color:{{element.iconColor}};margin-top: -15px;">
+          <span class="arrow b-warning left" style="border-color:{{element.iconBackground}}"></span>
+          <div class="panel-body text-lg font-bold p-sm">{{element.Name}}</div>
+        </div>
+
+        <!-- course element details -->
+        <div class="m-t-lg">
+          <course-element-preview course-id="courseId" tl-position="previewData.tlSelectedPoint" preview-data="element"></course-element-preview >
+          <!-- {{element}} -->
+        </div>
+
+        <!-- course element name in large screen -->
+        <span class="cd-date m-v-n hidden-xs hidden-sm">
+          <div class="panel bg-warning pos-rlt" style="background:{{element.iconBackground}}">
+            <span class="arrow b-warning" ng-class="{'left':!$index%2,'right':$index%2}" style="border-color:{{element.iconBackground}}"></span>
+            <div class="panel-body text-lg font-bold">{{element.Name}}</div>
+          </div>
+        </span>
+      </div>
+    </div>
+  </section>
+</div>
+

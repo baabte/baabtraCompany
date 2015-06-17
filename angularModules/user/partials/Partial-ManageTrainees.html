@@ -1,0 +1,33 @@
+<div class="" style="margin-top: -1px;">
+<div class="bg-light p-h">
+
+		<div class="row m-b-lg" style="position:fixed; width:101%; z-index:100;">
+				<div class="col-xs-12 shadow-z-1 bg-white ">
+					<div class="col-xs-6 col-md-3 p">
+						<div class="col-xs-9" >
+							<input type="text" ng-model="searchText" class="form-control " placeholder="{{'Search'|translate}}">
+						</div>
+						<div class="col-xs-3" >
+							<button ng-click="fnSearchBatchMentee(searchText)" class="btn btn-info baab-btn  no-margin" ng-disabled="!searchText.length">Search</button>
+						</div>
+					</div>
+					<div class="col-xs-6 col-md-9 text-right">
+						<div class="btn-group ">
+							<button type="button" ng-disabled="prevButtonDesabled"  class="btn btn-info" ng-click="pagination('prev')"><i class="fa fa-fw fa-angle-left"></i></button>
+							<button type="button" ng-disabled="nextButtonDesabled" class="btn btn-info" ng-click="pagination('next')"><i class="fa fa-fw fa-angle-right"></i></button>
+						</div>
+					</div>
+				</div>
+		</div>
+
+		<div class="row" style="padding-top: 80px;padding-bottom: 15px;">
+			<div class="col-md-push-2 col-xs-push-0 col-md-8 col-xs-12 col-sm-12 col-xs-12 p-xs noselect no-padding"  ng-repeat="mentee in batchObj.menteeList">
+				
+	            <mentee-view mentee-obj="mentee" specific-option="currentOption" action-flag="true"> <!--Directive to load batches -->
+	            </mentee-view>
+			</div>
+		</div>
+	</div>
+</div>
+
+

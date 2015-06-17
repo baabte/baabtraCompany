@@ -1,0 +1,47 @@
+<div class="modal" tabindex="-1" role="dialog">
+  <div class="modal-dialog modal-lg">
+    <div class="modal-content">
+      <div class="p bg-info font-bold baab-shadow">
+        Filter
+      </div>
+      <div class="modal-body">
+        <form class="form-horizontal ng-pristine ng-valid" style="cursor: pointer;">
+          <div class="row">
+            <div class="col-xs-12 b no-padding">
+              <div class="col-xs-4 no-padding">
+                <ul class="nav nav-list bg-white font-bold" ui-nav="">
+                  <li ng-click="selectTab('course')" class="b-l" ng-class="{'b-r':!(selectedFilterTab=='course'),'b-2x':(selectedFilterTab=='course')}"><a href="">By course</a></li>
+                  <li ng-click="selectTab('customer')" class="b-l" ng-class="{'b-r':!(selectedFilterTab=='customer'),'b-2x':(selectedFilterTab=='customer')}"><a href="">By customer type</a></li>
+                  <!-- <li ng-click="selectTab('')" class="b-l b-r"><a href="">Test</a></li> -->
+                </ul>
+              </div>
+              <div class="col-xs-8" >
+                <div ng-show="selectedFilterTab=='course'" class="col-xs-12">
+                  <course-loader ng-model="filter.courses"></course-loader>
+                </div>
+                <div ng-show="selectedFilterTab=='customer'">
+                  
+                  <div class="form-group">
+                    <!-- <label for="select" class="col-lg-2 control-label">Selects</label> -->
+                    <div class="col-lg-10">
+                      <select ng-model="filter.customerType" class="form-control">
+                        <option value="0">Corporate customer</option>
+                        <option value="1">Individual customer</option>
+                      </select>
+                    </div>
+                  </div>
+
+                </div>
+              </div>
+            </div>
+          </div>
+        </form>
+        <div class="col-xs-12">
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-success baab-btn" ng-click="buildFilterObject($hide)">Ok</button>
+      </div>
+    </div>
+  </div>
+</div>

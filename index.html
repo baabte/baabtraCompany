@@ -1,0 +1,473 @@
+<!DOCTYPE html>
+<html lang="en" ng-app="baabtra" class="background-properties {{$root.userinfo.ActiveUserData.appSettings.backgroundColor}}" style = "background-image:{{$root.userinfo.ActiveUserData.appSettings.backgroundImage}};" ng-class="{'default-bg':!$root.userinfo.ActiveUserData.appSettings.backgroundColor}" >
+<head>
+  <meta charset="utf-8" />
+  <title>Baabtra.com</title>
+  <meta name="description" content="app, web app, responsive, responsive layout, admin, admin panel, admin dashboard, flat, flat ui, ui kit, AngularJS, ui route, charts, widgets, components" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
+  <link rel="shortcut" href="images/favicon.png">
+
+  <!-- build:css(.) css/baabtra.min.css -->
+  <!-- bower:css -->
+  <link rel="stylesheet" href="bower_components/template/dist/animate.css" />
+  <link rel="stylesheet" href="bower_components/template/dist/bootstrap.css" />
+  <link rel="stylesheet" href="bower_components/template/dist/bootstrap-additions.css" />
+  <link rel="stylesheet" href="bower_components/template/dist/angular-motion.css" />
+  <link rel="stylesheet" href="bower_components/template/dist/themify-icons.css" />
+  <link rel="stylesheet" href="bower_components/template/dist/font-awesome.min.css" />
+  <link rel="stylesheet" href="bower_components/template/dist/font.css" />
+  <link rel="stylesheet" href="bower_components/template/dist/app.css" />
+  <link rel="stylesheet" href="bower_components/template/dist/loading-bar.css" />
+  <link rel="stylesheet" href="bower_components/template/dist/customstyles.css" />
+  <link rel="stylesheet" href="bower_components/template/dist/timeLine.css" />
+  <link rel="stylesheet" href="bower_components/template/dist/colors.css" />
+  <link rel="stylesheet" href="bower_components/bootstrap-material-design/dist/css/material.css" />
+  <link rel="stylesheet" href="bower_components/bootstrap-material-design/dist/css/ripples.css" />
+  <link rel="stylesheet" href="bower_components/angular-ui-tree/dist/angular-ui-tree.min.css" />
+  <link rel="stylesheet" href="bower_components/angular-ui-tree/demo/css/demo-horizontal.css" />
+  <link rel="stylesheet" href="bower_components/angular-xeditable/dist/css/xeditable.css" />
+  <link rel="stylesheet" href="bower_components/angular-ui-select/dist/select.css" />
+  <link rel="stylesheet" href="bower_components/angular-ui-select/dist/selectize.css" />
+  <link rel="stylesheet" href="bower_components/angular-ui-select/dist/select2.css" />
+  <link rel="stylesheet" href="bower_components/angular-form-gen/dist/angular-form-gen.css" />
+  <link rel="stylesheet" href="bower_components/perfect-scrollbar/min/perfect-scrollbar.min.css" />
+  <link rel="stylesheet" href="bower_components/ng-tags-input/ng-tags-input.min.css" />
+  <link rel="stylesheet" href="bower_components/spectrum/spectrum.css" />
+  <link rel="stylesheet" href="bower_components/quill/dist/quill.snow.css" />
+  <link rel="stylesheet" href="bower_components/bootstrap-social/bootstrap-social.css" />
+  <link rel="stylesheet" href="bower_components/angular-multi-select/angular-multi-select.css" />
+  <link rel="stylesheet" href="bower_components/ngImgCrop/compile/minified/ng-img-crop.css" />
+  <link rel="stylesheet" href="bower_components/angular-datepicker/dist/index.css" />
+  <link rel="stylesheet" href="bower_components/angular-rangeslider/angular.rangeSlider.css" />
+  <link rel="stylesheet" href="bower_components/StreamLine/css/style.css" />
+  <link rel="stylesheet" href="bower_components/ngHierarchicalSelector/dist/ng-hierarchical-selector.0.2.0.css" />
+  <link rel="stylesheet" href="bower_components/intl-tel-input/build/css/intlTelInput.css" />
+  <link rel="stylesheet" href="bower_components/FlipClock/compiled/flipclock.css" />
+  <link rel="stylesheet" href="bower_components/angular-chart.js/dist/angular-chart.css" />
+  <link rel="stylesheet" href="bower_components/angularBaabTreeview/angular.treeview.css" />
+  <!-- endbower -->
+  <!-- endbuild -->
+
+ <!--<style type="text/css">
+    body{
+      direction:rtl;
+    }
+  </style>-->
+
+</head>
+
+<body unresolved>
+
+<div class="container text-center" style="height:85%;" ng-show="hide_when_root_empty
+">
+   <div style="margin-top:25%;"><i class="fa fa-gear fa-spin text-4x row-centered baab-loader" ></i></div>
+   <div style="margin-top:-10px;margin-left:15px;" ><i class="fa fa-gear fa-spin text-4x row-centered baab-loader"></i></div>
+   <div style="margin-top:-65px;margin-left:-60px;"><i class="fa fa-gear fa-spin text-3x row-centered baab-loader"></i></div>
+</div>
+<div ng-hide="hide_when_root_empty">
+
+  <div class="app" ng-class="{'app-header-fixed':app.settings.headerFixed, 'app-aside-top':app.settings.asideTop}" ui-view ng-controller="MainCtrl"></div>
+<!-- build:js(.) js/script.min.js -->
+<!-- bower:js -->
+<script src="bower_components/es5-shim/es5-shim.js"></script>
+<script src="bower_components/jquery/dist/jquery.js"></script>
+<script src="bower_components/angular/angular.js"></script>
+<script src="bower_components/angular-sanitize/angular-sanitize.js"></script>
+<script src="bower_components/angular-animate/angular-animate.js"></script>
+<script src="bower_components/angular-cookies/angular-cookies.js"></script>
+<script src="bower_components/angular-resource/angular-resource.js"></script>
+<script src="bower_components/angular-touch/angular-touch.js"></script>
+<script src="bower_components/angular-ui-router/release/angular-ui-router.js"></script>
+<script src="bower_components/ngstorage/ngStorage.js"></script>
+<script src="bower_components/angular-ui-utils/ui-utils.js"></script>
+<script src="bower_components/angular-strap/angular-strap.js"></script>
+<script src="bower_components/angular-strap/angular-strap.tpl.js"></script>
+<script src="bower_components/oclazyload/ocLazyLoad.js"></script>
+<script src="bower_components/angular-translate/angular-translate.js"></script>
+<script src="bower_components/angular-translate/loader-static-files.js"></script>
+<script src="bower_components/angular-translate/storage-cookie.js"></script>
+<script src="bower_components/angular-translate/storage-local.js"></script>
+<script src="bower_components/angular-loading-bar/loading-bar.js"></script>
+<script src="bower_components/bootstrap/dist/js/bootstrap.js"></script>
+<script src="bower_components/arrive/src/arrive.js"></script>
+<script src="bower_components/bootstrap-material-design/dist/js/material.js"></script>
+<script src="bower_components/bootstrap-material-design/dist/js/ripples.js"></script>
+<script src="bower_components/angular-ui-tree/dist/angular-ui-tree.js"></script>
+<script src="bower_components/angular-local-storage/dist/angular-local-storage.js"></script>
+<script src="bower_components/xtform/xtForm.js"></script>
+<script src="bower_components/angular-xeditable/dist/js/xeditable.js"></script>
+<script src="bower_components/ng-file-upload/angular-file-upload.js"></script>
+<script src="bower_components/jsPlumb/dist/js/jquery.jsPlumb-1.7.2-min.js"></script>
+<script src="bower_components/angular-ui-router-styles/ui-router-styles.js"></script>
+<script src="bower_components/tv4/tv4.js"></script>
+<script src="bower_components/objectpath/lib/ObjectPath.js"></script>
+<script src="bower_components/angular-schema-form/dist/schema-form.min.js"></script>
+<script src="bower_components/angular-schema-form/dist/bootstrap-decorator.min.js"></script>
+<script src="bower_components/angular-ui-select/dist/select.js"></script>
+<script src="bower_components/angular-form-gen/dist/angular-form-gen.js"></script>
+<script src="bower_components/perfect-scrollbar/min/perfect-scrollbar.min.js"></script>
+<script src="bower_components/perfect-scrollbar/min/perfect-scrollbar.with-mousewheel.min.js"></script>
+<script src="bower_components/angular-perfect-scrollbar/src/angular-perfect-scrollbar.js"></script>
+<script src="bower_components/ng-tags-input/ng-tags-input.js"></script>
+<script src="bower_components/spectrum/spectrum.js"></script>
+<script src="bower_components/angular-spectrum-colorpicker/dist/angular-spectrum-colorpicker.js"></script>
+<script src="bower_components/get-style-property/get-style-property.js"></script>
+<script src="bower_components/get-size/get-size.js"></script>
+<script src="bower_components/eventie/eventie.js"></script>
+<script src="bower_components/doc-ready/doc-ready.js"></script>
+<script src="bower_components/eventEmitter/EventEmitter.js"></script>
+<script src="bower_components/matches-selector/matches-selector.js"></script>
+<script src="bower_components/outlayer/item.js"></script>
+<script src="bower_components/outlayer/outlayer.js"></script>
+<script src="bower_components/masonry/masonry.js"></script>
+<script src="bower_components/imagesloaded/imagesloaded.js"></script>
+<script src="bower_components/angular-masonry-directive/src/angular-masonry-directive.js"></script>
+<script src="bower_components/quill/dist/quill.min.js"></script>
+<script src="bower_components/ngquill/src/ng-quill.min.js"></script>
+<script src="bower_components/angular-multi-select/angular-multi-select.js"></script>
+<script src="bower_components/ngImgCrop/compile/minified/ng-img-crop.js"></script>
+<script src="bower_components/qrcode-generator/js/qrcode.js"></script>
+<script src="bower_components/angular-qrcode/qrcode.js"></script>
+<script src="bower_components/angular-datepicker/dist/index.js"></script>
+<script src="bower_components/angular-rangeslider/angular.rangeSlider.js"></script>
+<script src="bower_components/contextMenu/contextMenu.js"></script>
+<script src="bower_components/StreamLine/js/main.js"></script>
+<script src="bower_components/StreamLine/js/modernizr.js"></script>
+<script src="bower_components/ngHierarchicalSelector/dist/ng-hierarchical-selector.0.2.0.js"></script>
+<script src="bower_components/angular-google-chart/ng-google-chart.js"></script>
+<script src="bower_components/angular-gettext/dist/angular-gettext.js"></script>
+<script src="bower_components/hashids/lib/hashids.min.js"></script>
+<script src="bower_components/momentjs/moment.js"></script>
+<script src="bower_components/humanize-duration/humanize-duration.js"></script>
+<script src="bower_components/angular-mocks/angular-mocks.js"></script>
+<script src="bower_components/angular-timer/dist/angular-timer.js"></script>
+<script src="bower_components/intl-tel-input/build/js/intlTelInput.min.js"></script>
+<script src="bower_components/intl-tel-input/lib/libphonenumber/build/utils.js"></script>
+<script src="bower_components/international-phone-number/releases/international-phone-number.js"></script>
+<script src="bower_components/checklist-model/checklist-model.js"></script>
+<script src="bower_components/FlipClock/compiled/flipclock.js"></script>
+<script src="bower_components/angular-flipclock/angular-flipclock.js"></script>
+<script src="bower_components/jspdf/dist/jspdf.min.js"></script>
+<script src="bower_components/Chart.js/Chart.js"></script>
+<script src="bower_components/angular-chart.js/dist/angular-chart.js"></script>
+<script src="bower_components/angularBaabTreeview/angular.treeview.js"></script>
+<script src="bower_components/angular-custom-form/custom-form-generator.js"></script>
+<!-- endbower -->
+
+
+<script src="app.js"></script>
+<script src="translations.js"></script>
+<script src="config.js"></script>
+<script src="config.router.js"></script>
+<script src="config.router.ui.js"></script>
+<script src="config.router.pages.js"></script>
+<script src="config.lazyload.js"></script>
+<script src="angularModules/template/directives/lazyload.js"></script>
+<script src="angularModules/template/directives/ui-jp.js"></script>
+<script src="angularModules/template/directives/ui-nav.js"></script>
+<script src="angularModules/template/directives/ui-fullscreen.js"></script>
+<script src="angularModules/template/directives/ui-scroll.js"></script>
+<script src="angularModules/template/services/ui-load.js"></script>
+<script src="angularModules/main.js"></script>
+<script src="angularModules/roleMenuMapping/partials/Partial-roleMenuMapping.js"></script>
+<script src="angularModules/roleMenuMapping/services/Service-roleMenuMappingSrv.js"></script>
+<script src="angularModules/company/partials/Partial-JobPosting.js"></script>
+<script src="angularModules/company/partials/Partial-ListJobs.js"></script>
+<script src="angularModules/company/services/Service-JobSrv.js"></script>
+<script src="angularModules/company/partials/Partial-viewJobDetailsModal.js"></script>
+<script src="angularModules/company/partials/Partial-editJobDetailsModal.js"></script>
+<script src="angularModules/company/partials/Partial-userMenuMapping.js"></script>
+<script src="angularModules/company/services/Service-userMenuMappingSrv.js"></script>
+<script src="angularModules/login/partials/Partial-Login_view.js"></script>
+<script src="angularModules/login/services/Service-LoginService.js"></script>
+<script src="angularModules/login/partials/Partial-home.js"></script>
+<script src="angularModules/login/services/Service-home.js"></script>
+<script src="angularModules/login/partials/Partial-home.js"></script>
+<script src="angularModules/login/services/Service-home.js"></script>
+<script src="angularModules/company/partials/Partial-manage_user_role.js"></script>
+<script src="angularModules/company/services/Service-manageCompanyRoleService.js"></script>
+<script src="angularModules/common/directives/Directive-fileuploadDir.js"></script>
+<script src="angularModules/company/partials/Partial-company_registration.js"></script>
+<script src="angularModules/company/partials/Partial-company_view.js"></script>
+<script src="angularModules/company/services/Service-companyRegistrationService.js"></script>
+<script src="angularModules/company/services/Service-companyViewService.js"></script>
+<script src="angularModules/login/controllers/Controller-header.js"></script>
+<script src="angularModules/billing/partials/Partial-user_billing_config.js"></script>
+<script src="angularModules/feature/partials/Partial-user_feature_config.js"></script>
+<script src="angularModules/billing/services/Service-userBillingConfigService.js"></script>
+<script src="angularModules/feature/services/Service-userFeatureConfigService.js"></script>
+<script src="angularModules/company/partials/Partial-addMenu.js"></script>
+<script src="angularModules/company/services/Service-addMenu.js"></script>
+<script src="angularModules/company/partials/Partial-viewMenu.js"></script>
+<script src="angularModules/company/services/Service-viewMenuSrv.js"></script>
+<script src="angularModules/company/partials/Partial-manageCompany.js"></script>
+<script src="angularModules/company/services/Service-manageCompanySrv.js"></script>
+<script src="angularModules/company/partials/Partial-companyHome.js"></script>
+<script src="angularModules/Branches/partials/Partial-Branches.js"></script>
+<script src="angularModules/common/directives/Directive-onFinishRender.js"></script>
+<script src="angularModules/Branches/services/Service-branchSrv.js"></script>
+<script src="angularModules/feature/partials/Partial-feature_config.js"></script>
+<script src="angularModules/feature/services/Service-feature_config.js"></script>
+<script src="angularModules/feature/directives/Directive-add_attr_dir.js"></script>
+<script src="angularModules/feature/directives/Directive-ngEnter.js"></script>
+<script src="angularModules/feature/directives/Directive-autoComplete.js"></script>
+<script src="angularModules/billing/partials/Partial-billing_plans.js"></script>
+<script src="angularModules/billing/services/Service-billing_plans.js"></script>
+<script src="angularModules/common/directives/Directive-fileuploadDir.js"></script>
+<script src="angularModules/course/partials/Partial-addCourse.js"></script>
+<script src="angularModules/course/services/Service-addCourseService.js"></script>
+<script src="angularModules/login/services/Service-header.js"></script>
+<script src="angularModules/commonservice/services/Service-commonService.js"></script>
+<script src="angularModules/courseTimeline/directives/Directive-courseTimeline.js"></script>
+<script src="angularModules/login/controllers/Controller-forgot-password.js"></script>
+<script src="angularModules/login/services/Service-forgotPassword.js"></script>
+<script src="angularModules/course/partials/Partial-addCourseElement.js"></script>
+<script src="angularModules/course/services/Service-addCourseElementService.js"></script>
+<script src="angularModules/course/partials/Partial-addCourseDomain.js"></script>
+<script src="angularModules/course/services/Service-addCourseDomainSrv.js"></script>
+<script src="angularModules/common/services/Service-manageTreeStructureSrv.js"></script>
+  <script src="angularModules/common/services/Service-commonSrv.js"></script>
+  <script src="angularModules/course/partials/Partial-addExitCriteria.js"></script>
+  <script src="angularModules/course/services/Service-addExitCriteriaService.js"></script>
+  <script src="angularModules/common/services/Service-fileReader.js"></script>
+  <script src="angularModules/user/partials/Partial-userRegistration.js"></script>
+  <script src="angularModules/user/services/Service-userRegistrationService.js"></script>
+  <script src="angularModules/Reseller/partials/Partial-reseller.js"></script>
+  <script src="angularModules/Reseller/services/Service-resellerSrv.js"></script>
+  <script src="angularModules/common/directives/Directive-customValidations.js"></script>
+  <script src="angularModules/form/partials/Partial-formCustomizer.js"></script>
+  <script src="angularModules/form/services/Service-formCustomizerService.js"></script>
+  <script src="angularModules/courseElementFields/youtubeVideo/directives/Directive-youtubeVideo.js"></script>
+  <script src="angularModules/courseElementPreview/directives/Directive-courseElementPreview.js"></script>
+  <script src="angularModules/courseElementFields/courseElementTitle/directives/Directive-coursElementTitle.js"></script>
+  <script src="angularModules/courseElementFields/docViewer/directives/Directive-docViewer.js"></script>
+  <script src="angularModules/courseElementFields/slideViewer/directives/Directive-slideViewer.js"></script>
+  <script src="angularModules/common/directives/Directive-fileValidations.js"></script>
+  <script src="angularModules/course/partials/Partial-draftedCourses.js"></script>
+  <script src="angularModules/course/services/Service-draftedCourses.js"></script>
+  <script src="angularModules/durationSelector/directives/Directive-durationSelector.js"></script>
+  <script src="angularModules/courseStreamline/directives/Directive-courseStreamline.js"></script>
+  <script src="angularModules/courseElementPreview/directives/Directive-nestedElement.js"></script>
+  <script src="angularModules/common/directives/Directive-fileRenderers.js"></script>
+  <script src="angularModules/common/directives/Directive-checkUserExistence.js"></script>
+  <script src="angularModules/courseElementFields/description/directives/Directive-description.js"></script>
+  <script src="angularModules/common/directives/Directive-branchLoader.js"></script>
+  <script src="angularModules/courseElements/directives/Directive-editCourseElement.js"></script>
+  <script src="angularModules/courseElements/directives/Directive-courseElementBubble.js"></script>
+  <script src="angularModules/course/partials/Partial-PublishedCourse.js"></script>
+  <script src="angularModules/course/services/Service-PublishedCourse.js"></script>
+  <script src="angularModules/course/partials/Partial-viewCourse.js"></script>
+  <script src="angularModules/course/services/Service-viewCourse.js"></script>
+  <script src="angularModules/common/directives/Directive-courseLoader.js"></script>
+  <script src="angularModules/course/partials/Partial-candidateCourseView.js"></script>
+  <script src="angularModules/course/services/Service-candidateCourseView.js"></script>
+  <script src="angularModules/course/partials/Partial-candidateCourseDetail.js"></script>
+  <script src="angularModules/course/services/Service-candidateCourseDetail.js"></script>
+  <script src="angularModules/courseElementFields/paymentCheckpoint/directives/Directive-paymentCheckpoint.js"></script>
+  <script src="angularModules/profile/partials/Partial-userProfile.js"></script>
+  <script src="angularModules/profile/services/Service-userProfile.js"></script>
+  <script src="angularModules/formGenFields/questionField/directives/Directive-questionField.js"></script>
+  <script src="angularModules/common/directives/Directive-radioModel.js"></script>
+  <script src="angularModules/questionRelated/objectiveOptionsField/directives/Directive-objectiveOptionsField.js"></script>
+  <script src="angularModules/courseElementFieldsManaging/partials/Partial-courseElementFieldsManaging.js"></script>
+  <script src="angularModules/courseElementFieldsManaging/services/Service-courseElementFieldsManaging.js"></script>
+  <script src="angularModules/courseElementFields/questionPreview/directives/Directive-questionPreview.js"></script>
+  <script src="angularModules/test/partials/Partial-test.js"></script>
+  <script src="angularModules/common/directives/Directive-iconChooser.js"></script>
+  <script src="angularModules/profile/partials/Partial-updateProfileInfo.js"></script>
+  <script src="angularModules/profile/services/Service-updateProfileInfo.js"></script>
+  <script src="angularModules/common/directives/Directive-fieldsOptionsButton.js"></script>
+  <script src="angularModules/questionRelated/markFieldsInput/directives/Directive-markFieldsInput.js"></script>
+  <script src="angularModules/courseElementFields/questionViewer/directives/Directive-questionViewer.js"></script>
+  <script src="angularModules/questionRelated/objectiveOptions/directives/Directive-objectiveOptions.js"></script>
+  <script src="angularModules/common/directives/Directive-checkModel.js"></script>
+  <script src="angularModules/questionRelated/questionAnswering/services/Service-questionAnswering.js"></script>
+  <script src="angularModules/common/directives/Directive-roleLoader.js"></script>
+  <script src="angularModules/questionRelated/descriptiveAnswer/directives/Directive-descriptiveAnswer.js"></script>
+  <script src="angularModules/common/directives/Directive-randomBackgroundColor.js"></script>
+  <script src="angularModules/course/partials/Partial-courseDetails.js"></script>
+  <script src="angularModules/signUp/partials/Partial-signUp.js"></script>
+  <script src="angularModules/common/directives/Directive-percentIndicator.js"></script>
+  <script src="angularModules/reports/partials/Partial-userReport.js"></script>
+  <script src="angularModules/common/directives/Directive-addDynamicFields.js"></script>
+  <script src="angularModules/common/directives/Directive-courseDetailViewer.js"></script>
+  <script src="angularModules/questionRelated/questionGroup/directives/Directive-questionGroup.js"></script>
+  <script src="angularModules/courseElementFields/questionGroupViewer/directives/Directive-questionGroupViewer.js"></script>
+
+  <script src="angularModules/course/directives/Directive-courseView.js"></script>
+  <script src="angularModules/course/directives/Directive-courseSummary.js"></script>
+  <script src="angularModules/course/directives/Directive-courseByKeywords.js"></script>
+  <script src="angularModules/Batches/partials/Partial-manageBatches.js"></script>
+  <script src="angularModules/Batches/directives/Directive-batchLoader.js"></script>
+ 
+    <script src="angularModules/common/directives/Directive-float-label.js"></script>
+
+  <script src="angularModules/courseElementFields/docViewerFrame/directives/Directive-docViewerFrame.js"></script>
+  <script src="angularModules/courseElementFields/questionGroupViewer/services/Service-testRelated.js"></script>
+  <script src="angularModules/courseElementFields/testQuestionView/directives/Directive-testQuestionView.js"></script>
+  <script src="angularModules/Batches/services/Service-addBatches.js"></script>
+  <script src="angularModules/common/directives/Directive-gTranslate.js"></script>
+  <script src="angularModules/user/partials/Partial-bulkEnrollment.js"></script>
+  <script src="angularModules/user/services/Service-bulkEnrollment.js"></script>
+  <script src="angularModules/user/services/Service-viewUsers.js"></script>
+  <script src="angularModules/user/partials/Partial-viewUsers.js"></script>
+  <script src="angularModules/feedback/feedbackCreator/directives/Directive-feedbackCreator.js"></script>
+  <script src="angularModules/feedback/feedbackField/directives/Directive-feedbackField.js"></script>
+  <script src="angularModules/feedback/feedbackViewer/directives/Directive-feedbackViewer.js"></script>
+  <script src="angularModules/common/directives/Directive-setParentHeight.js"></script>
+  <script src="angularModules/feedback/partials/Partial-createFeedBack.js"></script>
+
+  <script src="angularModules/common/directives/Directive-menteeLoder.js"></script>
+  <script src="angularModules/feedback/services/Service-createFeedback.js"></script>
+  <script src="angularModules/reports/partials/Partial-feedbackReport.js"></script>
+  <script src="angularModules/reports/partials/Partial-feedbackReport.js"></script>
+  <script src="angularModules/feedback/partials/Partial-viewFeedback.js"></script>
+  <script src="angularModules/feedback/services/Service-viewFeedback.js"></script>
+  <script src="angularModules/reports/partials/Partial-feedbackReportList.js"></script>
+  <script src="angularModules/feedback/partials/Partial-feedbackDetails.js"></script>
+  <script src="angularModules/reports/services/Service-feedbackList.js"></script>
+  <script src="angularModules/globalSettings/partials/Partial-globalSettings.js"></script>
+  <script src="angularModules/globalSettings/services/Service-globalSettings.js"></script>
+  <script src="angularModules/Nomination/directives/Directive-orderForm.js"></script>
+  <script src="angularModules/common/directives/Directive-printPage.js"></script>
+  <script src="angularModules/Batches/partials/Partial-menteeEvaluation.js"></script>
+  <script src="angularModules/Batches/partials/Partial-batchEvaluation.js"></script>
+  <script src="angularModules/reports/partials/Partial-menteeAttendanceReport.js"></script>
+  <script src="angularModules/reports/services/Service-menteeAttendanceReport.js"></script>
+  <script src="angularModules/common/directives/Directive-pdfBuilder.js"></script>
+  <script src="angularModules/baabtra.comProfile/partials/Partial-baabtra.comProfile.js"></script>
+
+  <script src="angularModules/baabtra.comProfile/services/Service-baabtraProfile.js"></script>
+  <script src="angularModules/baabtra.comProfile/directives/Directive-baabtraComProfile.js"></script>
+  <script src="angularModules/common/directives/Directive-htmlExport.js"></script>
+  <script src="angularModules/common/directives/Directive-materialPreview.js"></script>
+  <script src="angularModules/common/services/Service-UnigueCodeGenerator.js"></script>
+  <script src="angularModules/themeConfiguration/partials/Partial-themeConfiguration.js"></script>
+  <script src="angularModules/themeConfiguration/services/Service-themeConfigurationSrv.js"></script>
+  <script src="angularModules/courseElementFields/gameLoader/directives/Directive-gameLoader.js"></script>
+  <script src="angularModules/courseElementFields/assignmentCreator/directives/Directive-assignmentCreator.js"></script>
+  <script src="angularModules/common/courseSelector/directives/Directive-courseSelector.js"></script>
+  <script src="angularModules/contextMenu/directives/Directive-contextMenu.js"></script>
+
+  <script src="angularModules/courseElementFieldsManaging/directives/Directive-customFormAttributes.js"></script>
+  <script src="angularModules/user/partials/Partial-allocateCandidate.js"></script>
+  <script src="angularModules/user/services/Service-allocateCandidateService.js"></script>
+  <script src="angularModules/common/directives/Directive-invertColor.js"></script>
+  <script src="angularModules/publicAPIs/course/partials/Partial-companyCourseList.js"></script>
+  <script src="angularModules/publicAPIs/course/services/Service-companyCourseList.js"></script>
+  <script src="angularModules/ILT/partials/Partial-ILTAdmin.js"></script>
+  <script src="angularModules/ILT/partials/Partial-ILTCandidate.js"></script>
+  <script src="angularModules/Batches/partials/Partial-viewBatchWithOption.js"></script>
+  <script src="angularModules/globalSettings/directives/Directive-attendanceAlertConfig.js"></script>
+  <script src="angularModules/common/directives/Directive-paymentReceipt.js"></script>
+  <script src="angularModules/themeConfiguration/directives/Directive-setSubHeadingAndBackgroundColor.js"></script>
+  <script src="angularModules/reports/services/Service-candidateReport.js"></script>
+  <script src="angularModules/reports/partials/Partial-candidateRegistrationReport.js"></script>
+  <script src="angularModules/Nomination/partials/Partial-viewPaymentReport.js"></script>
+  <script src="angularModules/Nomination/services/Service-paymentReport.js"></script>
+  <script src="angularModules/Result/partials/Partial-viewResult.js"></script>
+  <script src="angularModules/Result/directives/Directive-resultView.js"></script>
+  <script src="angularModules/courseElementFields/assignmentViewer/directives/Directive-assignmentViewer.js"></script>
+
+  <script src="angularModules/user/partials/Partial-courseAllocate.js"></script>
+  <script src="angularModules/user/services/Service-courseAllocateService.js"></script>
+  <script src="angularModules/Batches/partials/Partial-allocateEvaluator.js"></script>
+  <script src="angularModules/Batches/partials/Partial-markBatchAttendance.js"></script>
+  <script src="angularModules/Batches/services/Service-batchAttendance.js"></script>
+
+
+  <script src="angularModules/courseElementFields/services/Service-assignmentFunctions.js"></script>
+
+  <script src="angularModules/Batches/services/Service-allocateEvaluator.js"></script>
+  <script src="angularModules/reports/partials/Partial-batchAttendanceReport.js"></script>
+
+  <script src="angularModules/user/partials/Partial-ManageTrainees.js"></script>
+
+  <script src="angularModules/courseElementFields/interviewCreator/directives/Directive-interviewCreator.js"></script>
+  <script src="angularModules/courseElementFields/interviewQuestion/directives/Directive-interviewQuestion.js"></script>
+
+  
+  <script src="angularModules/courseElementFields/interviewViewer/directives/Directive-interviewViewer.js"></script>
+  <script src="angularModules/courseElementFields/physicalTestCreator/directives/Directive-physicalTestCreator.js"></script>
+  <script src="angularModules/courseElementFields/physicalTestViewer/directives/Directive-physicalTestViewer.js"></script>
+  <script src="angularModules/courseElementFields/services/Service-interviewFunctions.js"></script>
+  <script src="angularModules/courseElementFields/physicalTestViewerEv/directives/Directive-physicalTestViewerEv.js"></script>
+
+  <script src="angularModules/courseElementPreview/directives/Directive-courseElementEvaluator.js"></script>
+
+  <script src="angularModules/courseElementFields/interviewViewerEv/directives/Directive-interviewViewerEv.js"></script>
+  <script src="angularModules/courseElementFields/questionViewerEv/directives/Directive-questionViewerEv.js"></script>
+  <script src="angularModules/courseElementFields/questionGroupViewerEv/directives/Directive-questionGroupViewerEv.js"></script>
+  <script src="angularModules/courseElementFields/assignmentViewerEv/directives/Directive-assignmentViewerEv.js"></script>
+  <script src="angularModules/user/manageUsers/partials/Partial-manageUsers.js"></script>
+  <script src="angularModules/courseElementFieldsManaging/directives/Directive-subElement.js"></script>
+  <script src="angularModules/courseElementPreview/directives/Directive-subElementsPreview.js"></script>
+  <script src="angularModules/common/directives/Directive-cefRemoveButton.js"></script>
+  <script src="angularModules/questionBank/partials/Partial-questionBankView.js"></script>
+  <script src="angularModules/questionBank/services/Service-questionBankService.js"></script>
+  <script src="angularModules/formGenFields/assignmentQuestionCreator/directives/Directive-assignmentQuestionCreator.js"></script>
+  <script src="angularModules/courseElementFields/assignmentQuestionViewer/directives/Directive-assignmentQuestionViewer.js"></script>
+  <script src="angularModules/Nomination/partials/Partial-verifyOrderformByCourse.js"></script>
+  <script src="angularModules/courseElementFields/assignmentQuestionViewerEv/directives/Directive-assignmentQuestionViewerEv.js"></script>
+
+  <script src="angularModules/courseElementFields/randomQuestionExam/directives/Directive-randomQuestionExam.js"></script>
+  <script src="angularModules/common/directives/Directive-questionBankLoader.js"></script>
+  <script src="angularModules/markSheet/designMarkSheet/partials/Partial-designMarkSheet.js"></script>
+  <script src="angularModules/markSheet/designMarkSheet/services/Service-markSheetService.js"></script>
+  <script src="angularModules/courseElementFields/randomQuestionExamViewer/directives/Directive-randomQuestionExamViewer.js"></script>
+  <script src="angularModules/courseElementFields/randomQuestionExamViewerEv/directives/Directive-randomQuestionExamViewerEv.js"></script>
+  <script src="angularModules/markSheet/viewMarkSheet/partials/Partial-viewMarkSheet.js"></script>
+  <script src="angularModules/markSheet/viewMarkSheet/directives/Directive-markSheet.js"></script>
+  <script src="angularModules/Certificate/viewCertificate/partials/Partial-viewCertificate.js"></script>
+  <script src="angularModules/Certificate/viewCertificate/services/Service-CertificateSrv.js"></script>
+  <script src="angularModules/publicAPIs/course/partials/Partial-userRegistrationAPI.js"></script>
+
+  <script src="angularModules/user/Registration/partials/Partial-UserRegistration.js"></script>
+  <script src="angularModules/common/formCreator/partials/Partial-formCreator.js"></script>
+  <script src="angularModules/common/formCreator/services/Service-formCreator.js"></script>
+  <script src="angularModules/common/formLoader/partials/Partial-formLoader.js"></script>
+  <script src="angularModules/common/formLoader/services/Service-formLoader.js"></script>
+  <script src="angularModules/Batches/allocateCandidateToBatch/partials/Partial-allocateCandidateToBatch.js"></script>
+  <script src="angularModules/Batches/allocateCandidateToBatch/services/Service-candidateCourse.js"></script>
+  <script src="angularModules/Notification/notificationConfiguration/partials/Partial-notificationConfiguration.js"></script>
+  <script src="angularModules/Notification/notificationConfiguration/services/Service-notificationConfiguration.js"></script>
+  <script src="angularModules/payment/paymentRefund/partials/Partial-paymentRefund.js"></script>
+  <!-- Add New Component JS Above -->
+    <script src="angularModules/common/directives/Directive-notificationCard.js"></script>
+    <script src="angularModules/common/directives/Directive-userCard.js"></script>
+    <script src="angularModules/Batches/partials/Partial-viewBatches.js"></script>
+    <script src="angularModules/common/directives/Directive-batchView.js"></script>
+    <script src="angularModules/Batches/services/Service-viewBatches.js"></script>
+    <script src="angularModules/common/directives/Directive-menteeView.js"></script>
+    <script src="angularModules/course/partials/Partial-assignCourseMaterial.js"></script>
+    <script src="angularModules/course/services/Service-assignCourseMaterial.js"></script>
+    <script src="angularModules/Notification/partials/Partial-notification.js"></script>
+    <script src="angularModules/Notification/services/Service-notification.js"></script>
+    <script src="angularModules/common/directives/Directive-roleUserLoader.js"></script>
+    <script src="angularModules/attendence/directives/attendenceMarker/directives/Directive-attendenceMarker.js"></script>
+    <script src="angularModules/attendence/services/Service-attendenceService.js"></script>
+    <script src="angularModules/common/directives/Directive-courseMultiSelect.js"></script>
+    <script src="angularModules/Department/partials/Partial-department.js"></script>
+    <script src="angularModules/Department/services/Service-department.js"></script>
+    <script src="angularModules/evaluation/partials/Partial-evaluationViewer.js"></script>
+    <script src="angularModules/emailSmsConfig/partials/Partial-emailSmsConfig.js"></script>
+    <script src="angularModules/evaluation/services/Service-evaluationService.js"></script>
+    <script src="angularModules/Batches/partials/Partial-batchAssignment.js"></script>
+    <script src="angularModules/Batches/directives/Directive-batchMenteeList.js"></script>
+    <script src="angularModules/emailSmsConfig/partials/Partial-emailSmsConfig.js"></script>
+    <script src="angularModules/user/partials/Partial-viewUsersForApprove.js"></script>
+    <script src="angularModules/user/services/Service-viewUsersForApprove.js"></script>
+    <script src="angularModules/evaluation/directives/Directive-evaluationLoader.js"></script>
+    <script src="angularModules/Nomination/partials/Partial-nomination.js"></script>
+    <script src="angularModules/Nomination/services/Service-nomination.js"></script>
+    <script src="angularModules/emailSmsConfig/services/Service-emailSmsConfig.js"></script>
+    <script src="angularModules/Batches/partials/Partial-menteeAttendance.js"></script>
+    <script src="angularModules/Batches/partials/Partial-batchAttendance.js"></script>
+    <script src="angularModules/Batches/directives/Directive-attendanceMenteeList.js"></script>
+
+    <!-- Add New Component JS Above -->
+<!-- endbuild -->
+</div>
+
+</body>
+</html>

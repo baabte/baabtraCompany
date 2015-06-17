@@ -1,0 +1,46 @@
+<div class="col-md-12" > <!-- ng-if="feedbackObj.feedbackList" -->
+	 <div class="panel b-t b-00C853 bg-light dk"><div set-sub-heading-and-background-color class="panel-heading font-bold text-white  p baab-shadow" translate="{{'Feedback List'|translate}}"></div>
+		
+		<div class="panel-body col-xs-12 bg-white animated fadeInRight p-sm b-b-danger b-b-3x">
+		<div class="row"><div class="col-xs-12 col-sm-4 col-md-4 col-lg-4  p text-center pull-right">
+            <div class="btn-group col-sm-push-2 col-md-push-2">
+               <button type="button" class="btn btn-success btn-xs" ng-click="prevOne()" title="Previous" ng-disabled="prevButtondisabled"><i class="fa fa-fw fa-angle-left"></i><div class="ripple-wrapper"></div></button>
+              <button type="button" class="btn btn-success btn-xs" ng-click="nextOne()" ng-disabled="feedbackObj.feedbackList.length<9" title="Next"><i class="fa fa-fw fa-angle-right"></i><div class="ripple-wrapper"></div></button>
+           </div> 
+                </div></div>
+          <div  masonry='{ "transitionDuration" : "0.8s" , "itemSelector" : ".tile"}'>
+            <div masonry-tile class="tile col-lg-4 col-md-4 col-sm-6 col-xs-12 p-sm" ng-repeat="feedback in feedbackObj.feedbackList">
+
+            <div class="shadow-z-2 set-full-height" style="cursor: pointer;" ng-click="userState(feedback._id.$oid)">
+
+            	<div class="row">
+            		<div class="col-xs-12">
+            			<div set-parent-height class="col-xs-3 random-background-color text-center h-full" style="display:table-cell;">
+            				 <i class="mdi-action-question-answer text-4x"></i><br/>
+            				 <i class="text-sm"><b>{{feedback.responseCount}} </b><br/><p translate="{{'Response(s)'|translate}}" ></p></i>
+            			</div>
+            			<div class="col-xs-9" style="display:table-cell;">
+            				<div class="row">
+		            				<div class="p b-4x b-light text-1x" ng-class="{'b-success am-fade':userActive==feedback._id.$oid}">
+		                            
+		                            <div class="pull-left font-bold">{{feedback.title}}</div><br/>
+		                            <div ><i>{{feedback.description}}</i> <i class="fa pull-right text-xl text-success b-4x"></i></div>
+		                            <!-- <p></p>
+		                            <div>Course : {{user.Name}}</div> -->
+		                            <i class="fa pull-right text-xl text-success b-4x"></i> <!-- ng-class="{'fa-check':(userActive==user._id.$oid)&&!menudetails,'fa-check-circle':(userActive==user._id.$oid)&&menudetails}" -->
+		                          </div>
+            				</div>
+
+            				<div class="row">
+            					<div class="col-xs-12 text-right">
+				                   <button ng-click="viewFeedbackReport(feedback._id.$oid)" class="btn pull-right no-margin"><i class="fa fa-line-chart text-lg" data-placement="left" data-title="{{'View feedback report'|translate}}" bs-tooltip></i></button>
+                 				</div>
+            				</div>	
+
+            			</div>
+            		</div>
+            	</div>       
+                 </div>
+            </div>
+
+</div></div>

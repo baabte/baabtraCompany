@@ -1,0 +1,29 @@
+{
+  "name": "template",
+  "version": "1.0",
+  "homepage": "https://github.com/baabte/baabtra",
+  "description": "This is the stylesheet definitions of the design template",
+  "main": [
+            "dist/animate.css",
+            "dist/bootstrap.css",
+            "dist/bootstrap-additions.css",
+            "dist/angular-motion.css",
+            "dist/themify-icons.css",
+            "dist/font-awesome.min.css",
+            "dist/font.css",
+            "dist/app.css",
+            "dist/loading-bar.css",
+            "dist/customstyles.css",
+            "dist/timeLine.css",
+            "dist/colors.css"
+            ],
+  "authors": "teamBaabtra",
+  "license": "MIT",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ]
+}

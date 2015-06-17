@@ -1,0 +1,57 @@
+<div ng-class="{'hide-elem':totalDuration==0}">
+<!-- Duration dropdown -->
+<div class="row-fluid"   ng-if="MURID!=$root.userinfo.ActiveUserData.roleMappingObj.fkRoleId	">
+	<div class="col-sm-12">
+        <div  class="col-sm-3 form-group form-group-sm font-bold">
+        	<label class="font-bold">Duration :</label>
+        	{{duration}}
+        	<button ng-if="ddlBindObject!=undefined" type="button" class="btn btn-default btn-sm ng-pristine ng-valid" ng-model="selectedDuration" data-html="1"  ng-change="changeDuration(this.selectedDuration)" ng-options="value.id as value.name for (key, value) in durationIn" bs-select=""></button>
+        </div>
+	</div>
+</div>
+<!-- Duration dropdown .End-->
+
+<!-- Timeline -->
+<div class="row-fluid" >	
+	<div perfect-scrollbar suppress-scroll-y="true" class="col-sm-12 tl-container" style="height:{{containerHeight}}px;">
+			<!-- START -->
+			{{flag}}
+			<span class="badge bg-success pos-rlt pull-left tl-start"><b class="arrow right b-success pull-in"></b>S</span>
+			                
+			<!-- REPEAT -->		
+			<span style="padding-left:{{tlPointMinWidth}}px; top:-12px;border-bottom: 2px #BDBDBD solid;"class="b-b tl-line" ></span>
+								<div ng-mouseover="mouseOverTl=true" ng-mouseleave="mouseOverTl=false" style="display:inline-block;" ng-repeat="tlpoint in tlPointList">
+									
+								<!-- <i  context-menu="popoverObject" ng-click="callbackOfTlPointClick(tlpoint)" class="fa fa-circle-o text-inverse tl-point" ng-class="{'fa-dot-circle-o tl-ripple':mouseOverTl}" style="cursor: pointer;font-weight: bolder;position: relative;z-index: 1;"></i> -->
+								<!-- <div class="icon-button"> -->
+									<i class="mdi-toggle-radio-button-on tl-point" style="font-size:20px; font-weight:bold;" context-menu="popoverObject" ng-click="callbackOfTlPointClick(tlpoint)"></i>
+									<!-- <paper-ripple class="circle recenteringTouch" fit=""></paper-ripple> -->
+									<span style="padding-left:{{tlPointMinWidth}}px;left:-3.6px;z-index: 0; top:-12px;border-bottom: 2px #BDBDBD solid;" class=" tl-line" ></span>
+								<!-- </div> -->
+
+								<!-- tooltip -->
+								<div ng-show="mouseOverTl" style="margin-top: -50px;margin-left:-{{tlPointMinWidth-20}}px" class="tooltip in ng-scope top am-fade-and-scale tooltip-success">
+									<div class="tooltip-inner ng-binding" >{{selectedDurType}} {{$index+1}}</div>
+								</div>
+								<!-- tooltip -->
+
+								<div style="margin-left:1px solid #444444;">
+									<div class="m-b" style="float:left !important;position: absolute;" >
+										<course-element-bubble tl-point="{{tlpoint}}"></course-element-bubble>
+									</div>
+								
+								</div>
+								</div>
+
+
+
+			<!-- END -->
+			<div class="end-of-tl"></div> <!-- used for getting the end of the tl points -->
+			<span class="badge bg-danger pos-rlt tl-end" style="top:-5px;" ng-if="!toBeLoaded"><b class="arrow left b-danger pull-in"></b>E</span>
+			<!-- LOADER	 -->
+			<i class="fa fa-spinner fa-spin " ng-if="toBeLoaded"></i>
+	</div>
+</div>
+<!-- Timeline .End-->
+
+</div>

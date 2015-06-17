@@ -1,0 +1,203 @@
+<div class="col-xl-12 ">
+  <div class="row">
+    <div  class="col-xs-12">
+     <span class="pull-right">
+      <a  class="btn btn-warning baab-btn" ng-href="#/home/main/company" translate="{{'Registered Companies'|translate}}"></a>
+    </span>
+   </div>
+  </div> 
+  <div  class="panel panel-default">
+    <br>   
+      <div  class=" p-sm b-b b-2x b-success " >
+        <h4 class="no-margin" translate="{{'Register a company'|translate}}"></h3>
+    </div>
+    <div class="panel-body">
+      <form name="companyregistrationform" class="form-validation" enctype= "multipart/form-data" ng-submit="fnGetCompanyRegisterDetails(company,selection)"  xt-form novalidate>
+            
+        <div class="row">
+
+            <div class="col-md-12 animated flipInX">
+                  <div class="panel panel-default">
+                    <div set-sub-heading-and-background-color class="panel-heading  font-bold" translate="{{'Company Info'|translate}}">
+                    </div>
+                    <div class="panel-body">
+                      <div >
+                          
+                                    <!-- <div class="form-group col-sm-2" >
+                                    <img ng-bind="company.companyLogo" >
+                                    </div> -->
+                                    <div class="form-group col-sm-2" >
+
+                                        
+                                    <img ng-show="company.companyLogo" render-image file-source="companyLogo" img-to-render="company.companyLogo" ng-model="company.companyLogo" ng-src="{{company.companyLogo}}" class="img-responsive img-thumbnail">
+                                </br class="m-xs">
+                                <input type="text" readonly="" class="form-control m-v-md" float-label placeholder="{{'Please choose a logo...'|translate}}">
+                                        <input type="file" ng-model="company.companyLogo" fileupload-dir="company.companyLogo" name="companyLogo" f-max-size="500" data-placement="top" data-html="true" data-container="body" data-title="Please choose a logo..."  bs-tooltip>
+                                    </div>
+                           
+                                    <div class="form-group col-sm-5" >                                  
+                                    <input type="text" ng-model="company.companyName" class="form-control" float-label id="definput" xt-validate placeholder="{{'Company Name'|translate}}" name="companyName" required>
+                                    </div>                                       
+                                   
+                          
+                                    <div class="form-group col-sm-5">                                   
+                                    <input type="text" ng-model="company.eMail" ng-pattern="emailPattern" class="form-control email" float-label ui-validate=" '$value!==existingEmail' " ui-validate-watch=" 'existingEmail'" msg-pattern='{{emailMsg}}' msg-validator='{{emailEMsg}}'  xt-validate id="definput" placeholder="{{'Company Email Address'|translate}}" name="companyEmail" ng-change="userVal(company)" required>
+                                    </div>
+
+                                    <div class="form-group col-sm-5">                                   
+                                    <input type="text" ng-model="company.alternateEmail" class="form-control" float-label id="definput" placeholder="{{'Alternate E-mail Address'|translate}}"name="alternateEmail" xt-validate msg-pattern='{{emailMsg}}' ng-pattern="emailPattern" required>
+                                    </div>
+
+                                     <div class="form-group col-sm-5">                                  
+                                    <select  class="form-control" float-label placeholder = "Sector" xt-validate name="sector" data-bv-field="sectors" ng-model="selection.sectors" ng-options="sectorNames.sectorName for sectorNames in sectorlist"  required >
+                                    <option value="" translate="{{'Select a Sector'|translate}}"></option>
+                                    <option value="other">Other</option>                         
+                                    </select>
+                                    </div>
+
+                                    <div class="form-group col-md-10 col-xs-12 pull-right" >    
+                                      <input type="text" class="form-control" float-label name="Tagline" ng-model="company.tagLine"  rows="1" placeholder="{{'Company Tagline'|translate}}">
+                                    </div> 
+                            
+                         
+                        </div>
+                    </div>
+                  </div>
+            </div>
+
+            <div class="col-md-6 animated flipInX">
+                  <div class="panel panel-default">
+                    <div set-sub-heading-and-background-color class="panel-heading  font-bold bg-white">
+                      <span translate="{{'Contact Details'|translate}}"></span><br>
+                    </div>
+                    <div class="panel-body">
+
+                      <div class="form-group" >                            
+                            <input type="text" ng-model="company.Phone" class="form-control" float-label id="definput"placeholder="{{'Phone Number'|translate}}" name="Phone" xt-validate ng-pattern="NumberPattern" required>
+                        </div>
+                        <div class="form-group">                           
+                            <input type="text" ng-model="company.Mobile" class="form-control" float-label id="definput" placeholder="{{'Mobile Number'|translate}}" xt-validate name="Mobile" ng-pattern="NumberPattern" required>
+                        </div>
+                       <div class="form-group" >                            
+                            <input type="text" ng-model="company.Fax"class="form-control" float-label id="definput" ng-pattern="NumberPattern" xt-validate placeholder="{{'Fax'|translate}}" name="Fax">
+                        </div>
+                       <div class="form-group" >                            
+                            <input type="text" ng-model="company.webSite" xt-validate class="form-control" float-label id="definput" placeholder="{{'Website url'|translate}}" name="webSite" ng-pattern="urlPattern">
+                        </div>
+                      
+                    </div>
+                  </div>
+            </div>
+            
+
+            <div class="col-md-6 animated flipInX">
+                  <div class="panel panel-default">
+                    <div set-sub-heading-and-background-color class="panel-heading  font-bold bg-white">
+                      <span translate="{{'Company Addresss'|translate}}"></span> 
+                      <br>
+                    </div>
+                    <div class="panel-body">
+
+
+                    
+                        <div class="form-group" >
+                            <select  class="form-control" float-label placeholder="{{'Country'|translate}}" name="country" data-bv-field="country" ng-model="selection.country"  ng-options="countries.countryName for countries in CSDlist" xt-validate required >
+                            <option value="" translate="{{'Select a Country'|translate}}"></option>
+                            </select>
+                        </div>
+                   
+                    
+                        <div class="form-group">
+                            <select  class="form-control" float-label placeholder="{{'State'|translate}}" name="state" data-bv-field="state" ng-model="selection.state" ng-options="state.stateName for state in selection.country.States" xt-validate required >
+                            <option value="" translate="{{'Select a State'|translate}}"></option>
+                            </select>
+                        </div>
+                    
+                    
+                        <div class="form-group" >
+                            <select  class="form-control" float-label placeholder="{{'District'|translate}}" name="district" data-bv-field="district" ng-model="selection.district" ng-options="districts.districtName for districts in selection.state.Districts" xt-validate required >
+                            <option value="" translate="{{'Select a District'|translate}}"></option>
+                            </select>
+                        </div>
+                    
+                    
+                        <div class="form-group" >
+                            <input type="text" ng-model="company.zipCode" class="form-control" float-label id="definput" placeholder="{{'Zip  Code'|translate}}" name="zipCode" ng-pattern="NumberPattern" xt-validate required>
+                        </div>
+                    
+                    <div class="form-group" >    
+                        <textarea class="form-control" float-label name="Address" ng-model="company.Address"  rows="5" placeholder="{{'Address'|translate}}" xt-validate required></textarea>
+                    </div> 
+
+                      
+                      
+                    </div>
+                  </div>
+            </div>
+
+
+            <div class="col-md-6 animated flipInX">
+                  <div class="panel panel-default">
+                    <div set-sub-heading-and-background-color class="panel-heading  font-bold bg-white" >
+                      <span translate="{{'Login Credentials'|translate}}"></span>
+                      <br>
+                    </div>
+                    <div class="panel-body">
+
+                      <div class="form-group" >                   
+                    <input type="text" ng-model="company.eMail" class="form-control" float-label id="definput" placeholder="{{'User Name'|translate}}" readonly  name="eMail" msg-validator='{{emailEMsg}}' xt-validate required>
+                    <!-- <span class="text-error" ng-show="companyregistrationform.companyEmail.$error.alreadyUsed">UserName already in Use!</span> -->
+                    </div>
+                    <div class="form-group" >                   
+                    <input type="password" ng-model="company.password" class="form-control" float-label id="definput" placeholder="{{'Password'|translate}}"name="password" ng-change="checkPassword()" ng-minlength="5" xt-validate required>
+                    </div>
+                    <div class="form-group">                    
+                    <input type="password" ng-model="company.cpassword" class="form-control" float-label id="definput" placeholder="{{'Confirm Password'|translate}}"name="cpassword" xt-validate required  ui-validate=" '$value==company.password' " ui-validate-watch=" 'company.password' ">
+                    </div>
+  
+                    </div>
+                  </div>
+            </div>
+
+            <div class="col-md-6 animated flipInX">
+                  <div class="panel panel-default">
+                    <div set-sub-heading-and-background-color class="panel-heading  font-bold bg-white">
+                      <span translate="{{'Social Profiles'|translate}}"></span>
+                      <br>
+                    </div>
+                    <div class="panel-body">
+                      <div class="form-group" ng-class="{ 'has-error' : companyregistrationform.Facebook.$invalid && !companyregistrationform.Facebook.$pristine}">                                                <input type="text" ng-model="company.Facebook" class="form-control" float-label id="definput" placeholder="{{'Facebook url'|translate}}" name="Facebook" ng-pattern="urlPattern">
+                    </div>
+                    <div class="form-group" ng-class="{ 'has-error' : companyregistrationform.Google.$invalid && !companyregistrationform.Google.$pristine}">                        
+                        <input type="text"  ng-model="company.Google" class="form-control" float-label id="definput" placeholder="{{'gplus url'|translate}}" name="Google" ng-pattern="urlPattern">
+                    </div>
+                    <div class="form-group" ng-class="{ 'has-error' : companyregistrationform.Twitter.$invalid && !companyregistrationform.Twitter.$pristine}">                        
+                        <input type="text" ng-model="company.Twitter" class="form-control" float-label id="definput" placeholder="{{'Twitter url'|translate}}" name="Twitter" ng-pattern="urlPattern">
+                    </div>
+                    <div class="form-group" ng-class="{ 'has-error' : companyregistrationform.LinkedIn.$invalid && !companyregistrationform.LinkedIn.$pristine}">                        
+                        <input type="text" ng-model="company.LinkedIn"class="form-control" float-label id="definput" placeholder="{{'LinkedIn url'|translate}}" name="LinkedIn" ng-pattern="urlPattern">
+                    </div>
+
+                      
+                      
+                    </div>
+                  </div>
+            </div>
+          </div>
+
+            
+
+
+
+
+          <div class="row">
+            <div class="col-xs-12"> 
+              <button type="submit" class="btn btn-info baab-btn" ng-disabled="companyregistrationform.$invalid||companyButtonDisable" translate="{{'Register'|translate}}"></button>
+            </div>
+          </div>
+
+      </form>
+    </div>
+  </div>
+</div>
+

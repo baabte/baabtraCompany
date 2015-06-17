@@ -1,0 +1,51 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: baabtra.com\n"
+"POT-Creation-Date: \n"
+"PO-Revision-Date: \n"
+"Last-Translator: Anoop <anoop@baabte.com>\n"
+"Language-Team: teamBaabtra\n"
+"Language: ml\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: Poedit 1.5.4\n"
+"X-Poedit-SourceCharset: UTF-8\n"
+
+#: angularModules/Reseller/partials/Partial-reseller.html:37
+msgid "% of commission"
+msgstr "കമ്മീഷൻ %"
+
+#: angularModules/Reseller/partials/Partial-reseller.html:6
+msgid "Add a reseller"
+msgstr "ഒരു പുനർവിക്രേതാവിന് ചേർക്കുക"
+
+#: angularModules/course/partials/Partial-courseDetails.html:84
+msgid "Course Summary"
+msgstr "കോഴ്സ് ചുരുക്കം"
+
+#: angularModules/Reseller/partials/Partial-reseller.html:18
+msgid "Email Address"
+msgstr "ഇമെയിൽ വിലാസം"
+
+#: angularModules/course/partials/Partial-courseDetails.html:93
+msgid "Provided By : {{companyDetails.companyName}}"
+msgstr "ലഭ്യമാക്കിയത് :{{CompanyDetails.companyName}}"
+
+#: angularModules/course/partials/Partial-courseDetails.html:14
+msgid "{{course.Name}}"
+msgstr "{{course.Name}}"
+
+#: angularModules/common/directives/Directive-courseDetailViewer.html:31
+msgid "{{newField.help}}"
+msgstr "{{newField.help}}"
+
+#: angularModules/common/directives/Directive-courseDetailViewer.html:3
+msgid ""
+"{{newField.title}}\n"
+"\t\t<a ng-if=\"newField.removable && editable\" href=\"\" data-title="
+"\"Delete this detail\" bs-tooltip=\"\" data-placement=\"right\" ng-click="
+"\"removeThisDetails($index)\">\n"
+"\t\t\t<i class=\"mdi-action-delete text-lg\"></i>\n"
+"\t\t</a>"
+msgstr ""

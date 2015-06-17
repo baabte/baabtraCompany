@@ -1,0 +1,22 @@
+{
+	"name": "bpopup",
+	"main": "./jquery.bpopup.js",
+	"version": "1.2.2",
+	"description": "bPopup is a lightweight jQuery modal popup plugin",
+	"homepage": "https://github.com/dinbror/bpopup",
+	"keywords": [
+		"popup"
+	],
+	"authors": [
+		{
+			"name": "Bjørn Klinggaard",
+			"url": "http://dinbror.dk",
+			"email": "hello@dinbror.dk"
+		}
+	],
+	"license": "MIT",
+	"moduleType": [
+    		"amd"
+	],
+	"ignore": []
+}

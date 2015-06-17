@@ -1,0 +1,193 @@
+<div >
+	<div class="bg-white" >
+	<form name="customiseForm" role="form" class="form-horizontal" xt-form novalidate>
+            
+        <div class="row">
+        	<!-- <div class="col-xs-12 p-md bg-light b-b m-b font-bold" translate="{{'Form Configuration'|translate}}"></div> -->
+            <label for="Formname" class="col-lg-2 control-label" translate="{{'Step name'|translate}}"></label>
+            <div class="col-lg-10">
+            	<!-- {{ng-if="roleId == data.roleId"}} -->
+            <input type="text" id="Formname" name="formName" placeholder="Step name" ng-model="form.formName" ng-required="true" class="form-control" xt-validate required ></div>
+            <div class="col-lg-2"></div><div class="col-lg-10">
+            	<p class="m-t-sm text-danger" translate="{{'[Please enter the step name which you wanted to appear]'|translate}}"></p>
+            </div>
+        </div>
+        <!-- </div> -->
+
+	<div class="row" >
+		<div class="col-xs-offset-3 col-sm-offset-4 col-md-offset-5 m-t">
+			<div class="pull-left m-t-sm m-r-sm" ng-if="fieldList.length" multi-selectable selection-mode="single" input-model="fieldList" output-model="selectedField" button-label="Name" item-label="Name"  tick-property="ticked" on-item-click="fnFieldItemClicked(data)" helper-elements="all none reset filter" default-label="Please select a field">
+			</div><button data-ng-disabled="!selectedField.length" type="submit" class="btn btn-info pull-left" ng-click="addNewField()"><i class="fa fa-plus"></i> <span translate="{{'Add Field'|translate}}"></span></button>
+		</div>
+	</div>
+	<div class="row">
+		<!-- <div class="col-xs-12">
+			<pre>{{fields[0].DisplayName}}</pre>
+		</div> -->
+		<div class="col-xs-12 m-t">
+		<div ng-show="!fields.length" class="alert alert-info">
+			<h2 translate="{{'No Fields selected'|translate}}"></h2>
+			<p class="lead" translate="{{'You can add new fields by clicking above button.'|translate}}"></p>
+		</div>
+        <div ng-model="panels.activePanel" bs-collapse >
+      <!-- ngRepeat: panel in panels -->
+      	<div class="panel panel-info" ng-repeat="field in fields">
+        <div class="panel-heading">
+          <h4 style="cursor:pointer;" bs-collapse-toggle data-toggle="collapse" class="panel-title col-xs-10">          
+              Configur {{field.DisplayName}} field
+          </h4>
+			<div class="btn-toolbar btn-toolbar-right">
+	          	<a class="pull-right m-r" ng-click="deleteField($index)" data-title="Remove this field" bs-tooltip="" data-placement="left">
+				<i class="text-lg text-white fa fa-trash"></i>
+				</a>
+			</div>
+		</div>
+        <div class="panel-collapse" bs-collapse-target>
+          <div class="panel-body">
+			<!-- <form class="form-horizontal"> -->
+		    <fieldset>
+		       
+		        <div class="form-group">
+		            <label for="type" class="col-lg-2 control-label"  translate="{{'Field type'|translate}}"></label>
+		            <div class="col-lg-10">
+		            <input type="text" ng-disabled="true" class="form-control"  ng-model="field.Name" id="type">
+		            </div>
+		        </div>
+		        <div class="form-group">
+		            <label for="displayName" class="col-lg-2 control-label"  translate="{{'Display name'|translate}}"></label>
+		            <div class="col-lg-10">
+		              <input type="text" class="form-control" ng-model="field.DisplayName" id="displayName" ng-change="displayNameChanged(field.DisplayName, $index)" placeholder="Display name" name="displayName" xt-validate required>
+		             
+		            </div>
+		        </div>
+		        <div class="form-group">
+		            <label for="defaultValue" class="col-lg-2 control-label" translate="{{'Field Default Value'|translate}}"></label>
+		            <div class="col-lg-10">
+		                <input type="text" class="form-control" ng-model="field.value" id="defaultValue" placeholder="{{'Default value'|translate}}">
+		            </div>
+		        </div>
+		        <div class="form-group">
+		            <label for="placeholder" class="col-lg-2 control-label" translate="{{'Placeholder'|translate}}"></label>
+		            <div class="col-lg-10">
+		                <input type="text" id="placeholder" class="form-control" ng-model="field.placeholder" placeholder="{{'Placeholder'|translate}}">
+		            </div>
+		        </div>
+		        <div class="form-group">
+		            <label for="tooltip" class="col-lg-2 control-label" translate="{{'Tooltip'|translate}}"></label>
+		            <div class="col-lg-10">
+		                <input type="text" id="tooltip" class="form-control" ng-model="field.tooltip" placeholder="{{'Tooltip'|translate}}">
+		            </div>
+		        </div>
+		        <div class="form-group">
+		            <label class="col-lg-2 control-label" translate="{{'Disable'|translate}}"></label>
+		            <div class="col-lg-10">
+		                <div class="togglebutton">
+		                    <label>
+		                        <input type="checkbox" checked="false" name="disable" ng-model="field.disabled">
+		                        
+		                    </label>
+		                </div>
+		            </div>
+		        </div>
+		        <div class="form-group">
+		            <label for="eleLength" class="col-lg-2 control-label" translate="{{'Element width'|translate}}"></label>
+		            <div class="col-lg-10">
+		                <select id="eleLength" class="form-control" ng-model="field.width" placeholder="{{'Element width'|translate}}">
+		                <option value="" translate="{{'-- choose width --'|translate}}"></option>
+		                <option selected="true" value="col-md-12" translate="{{'100%'|translate}}">
+		                <option value="col-md-6" translate="{{'50%'|translate}}"></select>
+		            </div>
+		        </div>
+		        <div class="form-group">
+		        	<label for="placeholder" class="col-lg-2 control-label" translate="{{'Attribute customization'|translate}}"></label>
+		        	<div class="col-lg-10">
+			        	<ul class="nav nav-tabs">
+						    <li class="active" ng-click="currentTab=field.id+'uneditable'"><a  data-toggle="tab"  translate="{{'Uneditable attributes'|translate}}"></a></li>
+						    <li ng-click="currentTab=field.id+'mandatory'"><a  data-toggle="tab" translate="{{'Mandatory attributes'|translate}}"></a></li>
+						    <li ng-click="currentTab=field.id+'customAtt'" ><a data-toggle="tab" translate="{{'Custom fields'|translate}}"></a></li>
+						    <li ng-click="currentTab=field.id+'optionsfor'"><a  ng-if="field.Name=='select'||field.Name=='radiobuttonlist'||field.Name=='checkboxlist'" data-toggle="tab" translate="{{'Options'|translate}}"></a></li>
+						    <li ng-click="currentTab=field.id+'validation'" ><a data-toggle="tab" translate="{{'Validation'|translate}}"></a></li><!-- class="disabled" -->
+						   
+						</ul>
+						<div id="myTabContent" class="tab-content well bs-component">
+							<!--  tab content here -->
+						    <div class="tab-pane  {{currentTab==''?'fade active in':'fade out'}}" id="{{field.id}}uneditable">
+						        <custom-form-attributes ng-model="field.unEditableAttributes" att-type="'uneditable'"></custom-form-attributes>
+						    </div>
+						    <div class="tab-pane fade {{currentTab==field.id+'mandatory'?'active in':''}}" >
+						        <custom-form-attributes ng-model="field.mandatoryAttributes"  att-type="'mandatory'" parent-form-obj="fields" index-ref="$index"></custom-form-attributes>
+						    </div>
+						    <div class="tab-pane fade {{currentTab==field.id+'customAtt'?'active in':''}}" >
+						        <custom-form-attributes ng-model="field.customAttributes" att-type="'other'"></custom-form-attributes>
+						    </div>
+						    <div class="tab-pane fade {{currentTab==field.id+'validation'?'active in':''}}" > 
+						    <!-- validation tab content goes here -->
+						       	<div class="form-group">
+						            <label for="maxlength" class="col-lg-2 control-label" translate="{{'Max length'|translate}}"></label>
+						            <div class="col-lg-10">
+						                <input type="text" id="maxlength" ng-model="field.validation.maxlength" class="form-control" placeholder="{{'Max length'|translate}}">
+						            </div>
+						        </div>
+						        <div class="form-group">
+						            <label for="minlength" class="col-lg-2 control-label" translate="{{'Min length'|translate}}"></label>
+						            <div class="col-lg-10">
+						                <input type="text" id="minlength" ng-model="field.validation.minlength" class="form-control" placeholder="{{'Min length'|translate}}">
+						            </div>
+						        </div>
+						        <div class="form-group">
+						            <label for="pattern" class="col-lg-2 control-label" translate="{{'Pattern'|translate}}"></label>
+						            <div class="col-lg-10">
+						                <input ng-show="field.otherPattern" type="text" id="pattern" ng-model="field.validation.pattern" class="form-control" placeholder="{{'pattern'|translate}}">
+						       			<select ng-show="!field.otherPattern" type="text" id="pattern" ng-model="field.validation.pattern" class="form-control" data-ng-options="pattern.value as pattern.name for pattern in validationPatterns" placeholder="{{'pattern'|translate}}"></select>
+						       			<div class="checkbox">
+						                    <label>
+						                        <input ng-model="field.otherPattern" type="checkbox"> Other pattern
+						                    </label>
+						                  
+						                </div>
+						                
+						            </div>
+						        </div>
+						        <div class="form-group" ng-if="field.validation.pattern||field.validation.required">
+						        	<label for="message" class="col-lg-2 control-label" translate="{{'Message'|translate}}"></label>
+						            <div class="col-lg-10">
+						                  <input type="text" id="message" ng-model="field.validation.message" class="form-control" placeholder="{{'validation message'|translate}}">
+						            </div>
+						        </div>
+						         <div class="form-group">
+						            <label class="col-lg-2 control-label" translate="{{'Required'|translate}}"></label>
+						            <div class="col-lg-10">
+						                 <div class="checkbox no-padding">
+						                    <label>
+						                        <input ng-model="field.validation.required" type="checkbox">Required
+						                    </label>
+						                </div>
+						            </div>
+						        </div>
+						    </div>
+						    <div class="tab-pane fade" id="{{field.id}}optionsfor">
+						        <custom-form-attributes ng-model="field.options" att-type="'other'">
+						        </custom-form-attributes>
+						    </div>
+						   
+						</div>
+					</div>
+		        </div>
+		       
+		    </fieldset>
+		<!-- </form> -->
+          </div>
+        </div>
+      </div>
+    </div>
+		</div>
+</div>
+<div class="row">
+	<div class="col-xs-12 bg-light b-t b-b m-t font-bold">
+		<button class="btn btn-info pull-right m-l" ng-disabled="customiseForm.$invalid||!fields.length" ng-click="generateCustomiseForm()" type="button" translate="{{'Generate form'|translate}}"></button>
+	</div>
+</div>
+</form>
+	</div>
+
+</div>

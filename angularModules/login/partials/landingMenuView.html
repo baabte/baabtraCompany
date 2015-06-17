@@ -1,0 +1,11 @@
+<div class="jihin col-sm-12 col-md-12 col-lg-12">
+        <span  ng-repeat="menu in userMenus">
+          <a  ng-click="loadDetails(menu)" class="animated fadeInDown text-sm btn btn-lg btn-stroke {{classn[($index+1)%classn.length]}} m-l m-t" >
+          <i class="fa {{menu.menuIcon}} fa-4x"></i>
+          <span class="block clear text-left m-v-xs">
+            <b class="text-lg block font-bold">{{menu.MenuName}}</b><i class="arrow {{classn[($index+1)%classn.length]}} right pull-bottom" ng-show='{{menu.childMenuStructure.length}}'></i>
+          </span>
+        </a>
+        </span>
+        
+        </div>

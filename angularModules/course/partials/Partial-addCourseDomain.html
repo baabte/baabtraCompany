@@ -1,0 +1,34 @@
+<div class="row">
+	<div class="col-xs-12">
+		        <script type="text/ng-template" id="Render_ExMenus.html">
+                                <div style="font-weight:400!important" ui-tree-handle class="tree-node dd-item dd2-item" id="1"> 
+                                    <div class="dd2-content list-group-item b-l-info bg-white" style="border: 1px #cccccc solid;" ng-class="{'lt':node.childrenObj.trim().length}">
+                                        <a data-nodrag ng-click="toggle(this)">
+                                            <span ng-if="node.childrenObj.length" class="glyphicon" ng-class="{'glyphicon-plus': collapsed, 'glyphicon-minus': !collapsed}"></span>
+                                        </a> {{node._id}}
+
+                                        <i title="Add Sub Domain" class="pull-right glyphicon glyphicon-plus m-r" data-nodrag style="cursor: pointer;" ng-click="addSubDomain(this)" ></i>
+                                    </div>
+                                    <ol ui-tree-nodes="" ng-model="node.childrenObj" ng-class="{hidden: collapsed}" class="dd-list">
+                                        <li ng-repeat="node in node.childrenObj" class="dd-item dd2-item" data-id="13"  ui-tree-node ng-include="'Render_ExMenus.html'">
+                                        </li>
+                                    </ol>
+                                </div>  
+                            </script>
+        
+        <div class="panel panel-default">
+        <div class="panel-heading bg-white">
+        	<a class="pull-right" ng-click="addSubDomain('new')">Add A New Domain</a>
+          <h4 class="modal-title text-primary">Domains</h4>
+        </div>
+        <div class="panel-body">
+            <!-- <div ng-show="!tree1.length" class="alert ng-scope alert-warning bg-warning" style="display: block;"><strong>Warning! </strong>&nbsp;<span>Currently No Domains Added</span></div> -->
+          <div ng-show="tree1.length"  id="tree1-root" class="dd dd-draghandle bordered animated fadeInDown" >
+            <ol ui-tree="tree1NodesOptions" ui-tree-nodes ng-model="tree1" class="dd-list " >
+                <li ng-repeat="node in tree1" class="dd-item dd2-item list-group list-group-gap" ui-tree-node ng-include="'Render_ExMenus.html'"></li>
+            </ol>
+          </div>
+        </div>
+      </div>
+	</div>
+</div>

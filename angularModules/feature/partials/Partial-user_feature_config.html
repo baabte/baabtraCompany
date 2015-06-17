@@ -1,0 +1,33 @@
+
+
+<div class="col-xl-12">
+    <div class="panel panel-default ">
+        <div class="panel-heading bg-white font-bold">
+        User Feature Configuration<br>
+        </div>
+        <div class="panel-body">
+        	<div class="col-md-4 m-t-lg">
+         		<div class="font-bold" > 
+           		Features<hr>
+         		</div>
+         		<div class=" list-group  bg-inherit">
+              	<div class="animated flipInX">
+        				<div  class="list-group-item " ng-click="status.selected = $index; fConfig(feature)" ng-repeat="feature in featurelist">
+          				<a class="pull-right text-muted"><i ng-show="status.selected==$index" ng- class=" fa fa-check-circle text-primary"></i></a>
+          			{{feature.featureName}}
+        				</div>
+              	</div>
+      			</div>
+      		</div>
+
+          
+        	<div class="col-md-8 m-t-lg " ng-show="FeatureConfigField">
+         		<div class="font-bold" > 
+           			Configure <span ng-bind="FeatureConfig.featureName"></span><hr>
+         		</div>
+         		<form sf-schema="schema" sf-form="featureForm" sf-model="featuremodel" ng-submit="saveFeature()"></form>
+            
+      		</div>
+		</div>
+   </div>
+</div>

@@ -1,0 +1,24 @@
+<div class="modal" tabindex="-1" role="dialog">
+  <div class="modal-dialog modal-lg">
+    <div class="modal-content">
+      <form name="formbulk" class=" ng-pristine ng-valid"  > 
+      <div class="modal-header modal-header bg-danger"> 
+       <button type="button" class="close" ng-click="$hide()">×</button> 
+        <h4 class="modal-title " translate="{{'There are not enough seats '|translate}}"></h4>
+      </div>
+      <div class="modal-body">
+        <div class="row">
+          <div class="col-xs-12" translate>
+            There are only {{res.seats}} seats left in this batch.Do you Want to register the first {{res.seats}} from the list of {{res.totalRows}}?
+      </div>
+      </div>    
+      </div>
+      <div class="modal-footer">
+         <button type="reset" class="btn btn-primary" translate="{{'No'| translate}}" ng-click="$hide()"></button>
+        <button type="button" class="btn btn-primary" ng-click="fnUploaddetails(res.seats,res.totalRows,$hide)"   ng-disabled="formbulk.$invalid" translate="{{'Yes'|translate}}" ></button>
+
+      </div>
+     </form> 
+    </div>
+  </div>
+</div>

@@ -1,0 +1,14 @@
+{
+  "name": "oclazyload",
+  "version": "3.8",
+  "homepage": "https://github.com/baabte/baabtra",
+  "main": "ocLazyLoad.js",
+  "license": "MIT",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ]
+}

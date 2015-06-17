@@ -1,0 +1,25 @@
+
+
+
+
+
+<div class="container w-xxl p-lg bg-white shadow " >
+    <h4 >New to {{app.name}} ?? <h3>Sign Up</h3></h4>
+    
+    
+     <form name="signupform" ng-submit="fnSignUp()" class="form-validation" role="form" xt-form novalidate >
+    	
+    	<div class="m-t-lg" fg-form fg-form-data="allSync.FormData" form-data="allSync.FormData" sync-data="allSync" fg-schema="formlist.formSchema[1].stepFormSchema">
+        </div>        
+          <div class="row text-center">
+            <button  type="submit" class="btn btn-warning baab-btn" ng-disabled="signupform.$invalid || progress" ><span class="p-h-md">{{btnSignupText}}</span></button>
+             <p class="text-xs"><a ui-sref="login">Already a user, Sign In </a></p>
+          </div>
+           
+
+      </form>
+      <!-- {{allSync.FormData}} -->
+      
+    </div>
+  </div>  
+</div>

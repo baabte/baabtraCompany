@@ -1,0 +1,16 @@
+<div class="p-md ng-scope">
+<div class="row">
+	<div class="col-sm-12" name="companycontent" ui-view>
+        
+    <span  ng-repeat="company in companyDetails" class="hidden-xs">
+      <div ng-click="manageComapny(company)" class="animated fadeInDown m-md text-sm btn b btn-lg bg-light lt m-r m-b">
+          <img src="images/CompanyLogs/baabtra.png" class="w-xs">
+          <span class="block clear text-left m-v-xs"><b class="text-lg block pull-left">{{company.companyName}}</b>
+          </span>
+        </div>
+        </span>
+	</div>
+</div>
+<div class="row" >
+</div>
+</div>

@@ -1,0 +1,25 @@
+
+
+<div class="modal  fade w-auto-xs" tabindex="-1" role="dialog" >
+	<div class="modal-dialog modal-xl">
+    	<div class="modal-content">
+    		<div class="modal-header" >
+        		<button type="button" class="close" ng-click="$hide()">×</button>
+        		<h4 class="modal-title ng-binding" ng-bind-html="title" translate="{{'Test Submit'|translate}}" ></h4>
+        		
+      		</div>
+      		<div ng-hide="startSubmit" class="modal-body" translate="{{ 'Are you sure you want to Submit ?' | translate}}">
+      			<h4 ng-show="startSubmit" class="modal-title ng-binding" ng-bind-html="title" translate="{{'Please Wait Submiting Test...'|translate}}" ></h4>
+     		</div>
+     		<div ng-show="startSubmit" class="modal-body" >
+     			<h4 class="modal-title ng-binding" ng-bind-html="title" translate="{{'Please Wait Submiting Test...'|translate}}" ></h4>
+     		</div>
+     		<div class="modal-footer">
+        		<button type="button" class="btn btn-default" ng-hide="startSubmit" ng-click="$hide()" translate="{{'Close'|translate}}"></button>
+        		<button type="button" class="btn btn-primary" ng-hide="startSubmit" ng-click="submitTest()" translate="{{'Submit'|translate}}"></button>
+      		</div>   
+   		</div>
+	</div> 
+</div>      
+
+

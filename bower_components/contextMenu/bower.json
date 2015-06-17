@@ -1,0 +1,29 @@
+{
+  "name": "contextMenu",
+  "version": "0.0.0",
+  "homepage": "https://github.com/baabte/baabtra",
+  "authors": [
+    "lijin <lijin@baabte>"
+  ],
+  "description": "Context menu directive : mainly used in course timeline",
+  "main": "contextMenu.js",
+  "keywords": [
+    "context",
+    "menu",
+    "ui",
+    "context",
+    "menu",
+    "ui",
+    "bootstrap",
+    "context",
+    "menu"
+  ],
+  "license": "MIT",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ]
+}

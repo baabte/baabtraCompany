@@ -1,0 +1,27 @@
+<div class="col-xs-12">
+	<div ng-if="!feedbackShow" class="btn btn-primary pull-right" ng-disabled="questionMarkField.$invalid" ng-click="feedbackShowActivate()" >
+        <span translate="{{'Add Feedback Question' | translate}}" ></span>
+    <div class="ripple-wrapper"></div>
+	</div>
+	<div class="col-xs-12" ng-if="feedbackShow">
+			<form name="feedbackFrom" xtform no-validate>
+        		<feedback-field ng-model="feedbackModel"></feedback-field>
+
+                 <div ng-if="feedbackModel" class="pull-right" style="margin-top:-41px; margin-right:19px;">
+        	     <div class="btn btn-warning" ng-click="feedbackShowDeactivate()" >
+
+                <span translate="{{'Discard' | translate}}"></span>
+
+                 <div class="ripple-wrapper"></div>
+        		 </div>
+        		<div class="btn btn-primary" ng-disabled="feedbackFrom.$invalid||feedbackModel.options[0].value==undefined||feedbackModel.options[0].value.length<=0" ng-click="addFeedback(feedbackModel)" >
+
+                    <span translate="{{'Add to Feedback' | translate}}"></span>
+
+                <div class="ripple-wrapper"></div>
+        		</div>
+                </div>
+        	</form>  	
+    </div>
+    
+</div>

@@ -1,0 +1,11 @@
+<div class="formgen-dropdown" >
+
+<div ng-show = "!multi">	
+	<select placeholder="{{'Select a Course'|translate}}"  data-animation="am-fade-and-slide-top"  ng-options="course.Name for course in courselist" ng-model="ngModel"  class="form-control"  data-html="true" bs-select>
+	</select>
+</div>
+<div class="col-xs-12" ng-show = "multi">
+	<div multi-selectable input-model="courselist" output-model="ngModel" button-label="Name" item-label="Name" tick-property="ticked" helper-elements="all none reset filter" default-label="Please Select Courses">
+	</div>
+</div>
+</div>	

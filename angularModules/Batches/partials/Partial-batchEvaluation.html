@@ -1,0 +1,61 @@
+<div class="" style="margin-top: -1px;">
+	<div class="bg-light p-h">
+		
+		<div class="row " style="position:fixed; width:101%; z-index:100;">
+			<div class="col-xs-12 shadow-z-1 bg-white">
+				<div class="p-v-sm" ng-if="!batchObj.selectedCourse">
+					<div class="col-xs-6 col-md-3 p-v">
+						<input type="text" class="form-control" placeholder="Search trainees">
+					</div>
+					<div class="col-xs-6 col-md-9 text-right">
+						<div class="btn-group ">
+							<button type="button" ng-disabled="true" class="btn btn-info"><i class="fa fa-fw fa-angle-left"></i></button>
+							<button type="button" ng-disabled="true" class="btn btn-info" n><i class="fa fa-fw fa-angle-right"></i></button>
+						</div>
+					</div>
+					<!-- <div multi-selectable selection-mode="single"  ng-show="batchObj.materialList.length" input-model="batchObj.materialList" output-model="batchObj.selectedCourseMaterial" button-label="Name" item-label="Name"  tick-property="ticked" helper-elements="all none reset filter" default-label="Please select a course material" on-item-click="cousrseMaterialSelected(data)">	
+					</div> -->
+				</div>
+				<div class="p-v-sm" ng-if="batchObj.selectedCourse">
+					<div class="text-name col-xs-6 p-v-sm">
+						<user-card user-id="batchObj.selectedCourse.fkUserRoleMappingId.$oid">
+						</user-card>
+					</div>
+					<div class="upper font-bold col-xs-6 p-v-sm text-right">{{batchObj.selectedCourse.Name}}</div>
+				</div>
+			</div>
+		</div>
+
+		<div class="row p-v"  style="padding-top: 80px;padding-bottom: 15px;" ng-if="!batchObj.selectedCourse">
+			<div class="col-md-push-2 col-xs-push-0 col-md-8 col-xs-12 col-sm-12 col-xs-12">
+				<div class="col-xs-12 shadow-z-1 bg-white p" ng-repeat="course in batchObj.courseDetails">
+					<div class="col-xs-9">
+						<div class="text-name">
+							<user-card user-id="course.fkUserRoleMappingId.$oid">
+							</user-card>
+						</div>
+						<div class="upper font-bold">
+							{{course.Name}}
+						</div>
+					</div>
+
+					<div class="col-xs-3 text-right">
+						<a href="" class="btn btn-info" ng-click="evaluateTrainee(course)">Evaluate</a>
+					<div>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+<div class="row p-v"  ng-if="batchObj.selectedCourse" style="padding-top: 80px;padding-bottom: 15px;">
+			<div class="col-md-push-2 col-xs-push-0 col-md-8 col-xs-12 col-sm-12 col-xs-12">
+				<div  ng-repeat="element in batchObj.elementOrderArray" >
+					<evaluation-loader course-timeline="batchObj.selectedCourse.courseTimeline" element-order="batchObj.selectedCourse.elementOrder[element]" evaluator-id="rm_id" course-mapping-id="batchObj.selectedCourse._id.$oid" evaluable-element="batchObj.evaluableElement"></evaluation-loader>
+			</div>
+			<div ng-if="!batchObj.evaluableElement" class="col-xs-12 shadow-z-1 p bg-warning font-bold">
+				There are no evaluable element found .!
+			</div>
+	</div>
+</div>
+	</div>
+</div>

@@ -1,0 +1,25 @@
+{
+  "name": "ngLinkedIn",
+  "version": "0.1.2",
+  "homepage": "https://github.com/boketto/ngLinkedIn",
+  "authors": [
+    "Roman <roman@boket.to>"
+  ],
+  "description": "LinkedIn API wrapper for AngularJS",
+  "main": "ngLinkedIn.js",
+  "keywords": [
+    "angularjs",
+    "linkedin",
+    "nglinkedin",
+    "api",
+    "service"
+  ],
+  "license": "MIT",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ]
+}

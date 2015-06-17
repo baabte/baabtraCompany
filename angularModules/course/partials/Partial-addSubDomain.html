@@ -1,0 +1,26 @@
+<div class="aside w-sm b-l" role="dialog" style="top:0px!important;">
+  <div class="box">
+    <div class="p" style="position: absolute;right: 5px;z-index: 1;">
+      <a ng-click="$hide()" class="pull-right text-muted"><i class="fa fa-times"></i></a>
+    </div>
+    <div class="box-row">
+      <div class="box-cell">
+        <div class="box-inner">
+          <div class="pane">
+        <div class="panel-heading bg-white">
+          <h4 class="modal-title text-primary" translate="{{'Add a Domain'|translate}}"></h4>
+        </div>
+        <div class="panel-body">
+          <form role="form" class="ng-pristine ng-valid">
+            <div class="form-group">
+              <input type="text" ng-model="domain.name" class="form-control" float-label id="DomainName" placeholder="{{'Domain Name'|translate}}">
+            </div>
+            <button type="submit" ng-click="AddDomain(domain)" class="btn btn-info baab-btn" translate="{{'Add Domain'|translate}}"></button>
+          </form>
+        </div>
+      </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

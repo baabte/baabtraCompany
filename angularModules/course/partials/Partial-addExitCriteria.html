@@ -1,0 +1,95 @@
+<div class="col-md-12">
+
+	<div class="panel b-light">
+        <div class="panel-heading m-b b-light" set-sub-heading-and-background-color>
+          <strong>Exit Criteria</strong>
+        </div>
+        <div class="panel-body">
+
+
+
+
+
+<form name="exit_criteria_form" class="form-validation" enctype= "multipart/form-data"  xt-form novalidate>
+            <div class="col-md-7 form-group">
+			   <div class="col-md-7 form-group">
+              		<label  class="font-bold pull" for="definpu" >Exit Criteria Name</label>   
+              		<input type="text" ng-model="exitCriteria.Name"class="form-control" id="definput" xt-validate required placeholder="Enter Exit Criteria Name" name="Name" >
+            	</div>	               
+      		</div>
+
+         
+      <div class="col-md-4 font-bold form-group">
+             <a ng-show="EditExitCriteriaText" ng-click="updateExitCriteriaFetch(exit_criteria_form)" >
+            Edit Exsisting Exit Criteria 
+            </a>
+            <a ng-show="AddExitCriteriaText" ng-click="AddExitCriteria(exit_criteria_form)" >
+            Add New Exit Criteria 
+            </a>
+
+            <div ng-show="AddExitCriteriaText" class=" m-t-lg">
+              <div class="font-bold" > 
+                <!-- data-placement="top" data-type="info" data-html="true" data-animation="am-fade-and-scale" bs-tooltip="FeatureConfigTT" -->
+              Exit Criteria<hr>
+              </div>
+              <div class=" list-group  bg-inherit">
+              <div class="animated flipInX">
+              <div  class="list-group-item" ng-repeat="exitCriteriaSel in exitcriterialist" >
+                <!-- ng-repeat="exitCriteriaSel in exitCriterialist" -->
+                <span class="pull-right text-muted"><i ng-click="exitCriteriaConfig(exitCriteriaSel)" class=" fa fa-edit"></i> <i ng-click="deleteExitCriteria(exitCriteriaSel)" class="glyphicon glyphicon-trash"></i></span>
+                {{exitCriteriaSel.Name}}
+              </div>
+              </div>
+            </div>
+
+          </div>
+
+      </div>  
+
+
+       
+        
+          
+ 
+ <div class="col-md-12 form-group">
+             
+             <button ng-show="exitCriteriaSavebtn" class="btn btn-info pull-right" ng-click="saveExitCriteria(exit_criteria_form)" ng-disabled="exit_criteria_form.$invalid||exitCriteria.schema.fields[0]==undefined">Save Exit Criteria</button>
+              <button ng-show="exitCriteriaUpdatebtn" class="btn btn-info pull-right" ng-click="saveExitCriteria(exit_criteria_form)" ng-disabled="exit_criteria_form.$invalid||exitCriteria.schema.fields[0]==undefined">Update Exit Criteria</button>
+
+            
+</div>
+
+
+  
+
+
+
+
+</form>
+
+
+
+
+
+
+      
+<form class="form-horizontal">
+  <div fg-edit fg-schema="exitCriteria.schema"></div>
+</form>
+
+
+
+
+<!-- {{exitCriteria.schema}}
+ -->
+
+        </div>
+      </div>
+
+
+
+
+
+
+
+</div>

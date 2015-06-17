@@ -1,0 +1,13 @@
+{
+  "id": "",
+  "Name": "",
+  "Icon": "",
+  "menuDisplayName": "",
+  "courseElementTemplate": ,
+  "exitCriteria": {
+    "passed (just for example)": {},
+    "passedWith": {
+      "minimumMarks": ""
+    }
+  }
+}

@@ -1,0 +1,68 @@
+<div>
+	<div class="row">
+		<div class="col-xs-12 ">
+
+			<div ng-repeat="answeredquestion in result.data.value.testModel">
+         		<div class="col-xs-12 ">
+
+					<div class="col-xs-12 m-t-md">
+						<div class="col-xs-1 course-description ">
+							<i class=" line fa fa-question pull-left" style="font-size:24;font-weight:bold; text-decoration:underline; margin-top:13px;color: #ff4081;"></i>
+						</div>
+
+						<div class="col-xs-11 course-description no-padding "ng-bind-html="answeredquestion.question">
+						</div>
+						<div ng-repeat="(key, value) in answeredquestion.userAnswer[0].primaryAnswer">
+							
+							
+								<div class="col-xs-1 course-description ">
+									<i class=" line pull-left" style="font-weight:bold; text-decoration:underline; margin-top:10px;color: #ff4081;">Ans: </i>
+								</div>
+							
+								<div class="col-xs-11 no-padding course-description m-t-xs" ng-bind-html="answeredquestion.userAnswer[0].primaryAnswer[key]">
+								</div>
+
+						
+						</div>
+					</div>
+
+					<div class="col-xs-12 m-t-md b-b">
+						<div class="col-xs-12 m-b-md">
+							<div class="col-md-6 col-xs-12">
+								<em translate="{{'Answer Key Points & Mark Weightage' | translate}}"></em>
+								<div ng-repeat="markCriteria in answeredquestion.mark.markCriteria">
+									<div ng-if="markCriteria" class="col-xs-12 font-bold">
+								 		{{markCriteria.criteria}} : {{markCriteria.mark}}
+									</div>
+									<div ng-if="!markCriteria" class="font-bold text-danger">
+									No Criteria Defined
+								    </div>
+								</div>
+									
+							</div>	
+							<div class="col-md-6 col-xs-12 ">
+								<div class=" font-bold">
+								 Total Mark : {{answeredquestion.mark.totalMark}}
+									<div ng-if="answeredquestion.type=='objective'">
+									 Mark Scored : {{answeredquestion.markScored}}
+									</div>
+								</div>
+								
+								<div  ng-if="answeredquestion.type=='descriptive'" class="col-md-4 pull-left">
+									
+								<input type="number" placeholder="{{' Mark Scored '|translate}}" xt-validate required class="form-control" min='0' ng-change="markChanged(answeredquestion.markScored, $index)" ui-validate=" '$value <= answeredquestion.mark.totalMark' " float-label name="markScored"  ng-model="answeredquestion.markScored" >
+								</div>
+								
+
+							</div>
+						</div>					
+					</div>
+					
+				</div>
+			</div>	
+
+	
+				
+		</div>
+	</div>
+</div>

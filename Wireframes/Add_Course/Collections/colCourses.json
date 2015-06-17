@@ -1,0 +1,114 @@
+{
+  "id": "",
+  "companyId": "",
+  "Name": "",
+  "Icon": "",
+  "Image": "",
+  "Description": "",
+  "Benefits": "",
+  "Duration": {
+    "durationDetails": {},
+    "durationInDays": "",
+    "startsOn": "",
+    "endsOn": ""
+  },
+  "exitPoints": {
+    "exitPointList": [
+      "<timeinmins>":{
+	"arcadeMode": "true",
+        "exitCriteria": {
+          "criteria1": {
+            "courseElementId": {
+              "passed(just For Example)": {},
+              "passedWith": {
+                "minimumMarks": ""
+              }
+            }
+          }
+        }
+      }
+    ]
+  },
+  "Fees": {
+    "free": "false",
+    "totalAmount": "",
+    "currency": "",
+    "payment": {
+      "oneTime": true
+          "mode": "",
+          "dateOfPayment": ""
+      },
+      "Installments": {
+        "arcadeMode": "true",
+        "paymentCheckPoints": {
+          "paymentCheckPoint": {
+            "timeLinePoint": "",
+            "Amount": ""
+          }
+        }
+      }
+    }
+  },
+  "Technologies": [],
+  "Tags": [],
+  "Domains" :[],
+  "Delivery":{
+	"online": "true",
+	"offline": "false"
+   },
+  "extraDetails": {
+    "Field1": {
+      "Label": "",
+      "Value": ""
+    },
+    "Field2": {
+      "Label": "",
+      "Value": ""
+    }
+  },
+  "Availability": {
+    "Branch1": {
+      "Roles": [],
+      "Users": []
+    }
+  },
+  "Trainers": [],
+  "Reviewers": [],
+  "courseElementTemplate": {
+    "field1": {
+      "label": "",
+      "inputType": "",
+      "validations": [],
+      "allowedValues": [],
+      "atrributes": {
+        "attr1": "",
+        "attr2": ""
+      },
+      "userConfigurable": "true/false"
+    },
+    "field2": {
+      "label": "",
+      "inputType": "",
+      "validations": [],
+      "allowedValues": [],
+      "atrributes": {
+        "attr1": "",
+        "attr2": ""
+      },
+      "userConfigurable": "true/false"
+    }
+  },
+  "courseTimeline": {
+    <timeInMins>:{
+     "Elem1": {
+      "id": "",
+      "Name": "",
+      "startDate": "",
+      "endDate": "",
+      "Trainer": "",
+      "Reviewer": "",
+      "details": {}
+    }
+  }
+  }
+}

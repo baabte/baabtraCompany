@@ -1,0 +1,72 @@
+<div class="row">
+  <div class="col-sm-8 col-sm-offset-2">
+
+    <div class="panel">
+  
+      <div class="text-center panel-heading bg-white">
+          <h3 translate="{{'Registration'|translate}}"></h3>
+          
+          <div ng-hide="currentState=='home.main.userRegistration.step5'" id="status-buttons" class="text-center">
+              <a ui-sref-active="active" ng-class="{'active':status.selected === $index+1}" ng-repeat="i in formlist.formSchema " ng-click="status.selected=$index+1"><span>{{$index+1}}</span></a>
+          </div>
+         
+      </div>
+
+      <div class="panel-body">
+        <form  name="userRegistrationForm" ng-submit="fnUserRegister()" class="form" xt-form editable-form novalidate>
+         
+          <div fg-form fg-form-data="allSync.FormData" form-data="allSync.FormData" sync-data="allSync" fg-schema="formlist.formSchema[status.selected].stepFormSchema">
+          </div>
+
+<!--  -->
+          <div ng-show="status.selected===1&&status.selected!==stepCount" class="col-xs-6 col-xs-offset-3">
+              <a ng-click="status.selected = status.selected+1" ng-disabled="!userRegistrationForm.$valid||formlist=='undefined'" class="btn btn-block btn-info"> Next Section <span class="glyphicon glyphicon-circle-arrow-right"></span></a>
+          </div>
+          <!-- ng-disabled="userRegistrationForm.$invalid" -->
+          <div ng-show="status.selected<stepCount&&status.selected>1">
+           <div class="col-xs-4 col-xs-offset-2">
+              <a ng-click="status.selected = status.selected-1" ng-disabled="userRegistrationForm.$invalid" class="btn btn-block btn-info"><span class="glyphicon glyphicon-circle-arrow-left"></span> Previous Section </a>
+          </div>
+          <div class="col-xs-4 ">
+              <a ng-click="status.selected = status.selected+1" ng-disabled="userRegistrationForm.$invalid" class="btn btn-block btn-info" > Next Section <span class="glyphicon glyphicon-circle-arrow-right"></span></a>
+          </div>
+          </div>
+          <!-- ng-disabled="userRegistrationForm.$invalid" -->
+
+          <div ng-show="status.selected===stepCount" class="col-xs-12 text-center">
+    
+            <button ng-disabled="userRegistrationForm.$invalid" type="submit" class="btn btn-danger baab-btn">Submit</button>
+          <!-- ng-disabled="userRegistrationForm.$invalid" -->
+
+    <!-- <a href="https://www.instamojo.com/baabte/proceed-to-payment/?data_email={{formData.userInfo.eMail}}&data_name={{formData.personalInfo.firstName+' '+formData.personalInfo.lastName}}&data_readonly=data_amount&data_readonly=data_email&data_amount=100" rel="im-checkout" data-behavior="remote" data-style="flat" data-text="Proceed to pay ?" data-token="83820d4b552a6170ee7f06e69fb84d82"></a><script src="https://d2xwmjc4uy2hr5.cloudfront.net/im-embed/im-embed.min.js"></script> -->
+          </div>
+
+        </form>
+       <!--  <br>
+        <br>
+                <br>
+        <br> -->
+        <!-- <pre>Form Data {{allSync.FormData}}</pre> -->
+          <!-- <pre>eMail valid:invalid {{userRegistrationForm.eMail.$valid}} : {{userRegistrationForm.eMail.$invalid}}</pre>
+          <pre>dob valid:invalid {{userRegistrationForm.dob.$valid}} : {{userRegistrationForm.dob.$invalid}}</pre>
+          <pre>firstName valid:invalid {{userRegistrationForm.firstName.$valid}} : {{userRegistrationForm.firstName.$invalid}}</pre>
+          <pre>lastName valid:invalid {{userRegistrationForm.lastName.$valid}} : {{userRegistrationForm.lastName.$invalid}}</pre>
+          <pre>Branch valid:invalid {{userRegistrationForm.Branch.$valid}} : {{userRegistrationForm.Branch.$invalid}}</pre> -->
+          <!-- <pre>course valid:invalid {{userRegistrationForm.course.$valid}} : {{userRegistrationForm.course.$invalid}}</pre>
+          <pre>role valid:invalid {{userRegistrationForm.role.$valid}} : {{userRegistrationForm.role.$invalid}}</pre>
+           <pre>password valid:invalid {{userRegistrationForm.password.$valid}} : {{userRegistrationForm.password.$invalid}}</pre>
+ -->
+          <!-- <pre>{{formlist.formSchema[status.selected].stepName}}</pre> -->
+
+          <!-- <pre>{{userRegistrationForm.$error}}</pre> -->
+
+
+      </div>
+
+  	
+    </div>	
+ 
+  </div>
+</div>
+
+

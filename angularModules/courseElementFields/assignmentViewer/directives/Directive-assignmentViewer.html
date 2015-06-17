@@ -1,0 +1,44 @@
+<div>
+
+
+<div class="row m-b" ng-if="totalMarks!=0">
+<div class="col-xs-12">
+<span class="font-bold" translate="{{'Marks: ' | translate}}"> </span>&nbsp;{{totalMarks}}
+</div>
+</div>
+
+<div class="row m-b">
+<div class="col-xs-12">
+<span class="font-bold" translate="{{'Duration: ' | translate}}"> </span>&nbsp;{{data.value.duration.duration}}&nbsp;{{data.value.duration.durationUnit}}
+</div>
+</div>
+
+<div class="row" class="row m-b" ng-if="data.value.penaltyArray.length">
+<div class="col-xs-12 font-bold">
+	Penalty Rules
+</div>
+</div>
+
+<div class="col-xs-12" ng-repeat="rule in data.value.penaltyArray">	
+				<div class="col-xs-12 col-md-12 m-t-xs">
+					<i class="text-danger">
+					{{$index + 1}}. When {{rule.submissionMode}} {{fnShowByDate(rule.submissionMode, rule.lateTime, rule.lateTimeUnits)}},{{fnShowBlockSubmission(rule.blockSubmission)}} reduce {{rule.reductionUnits}}{{rule.penaltyCalculationUnit}} {{fnSHowPenaltyFrequency(rule)}}
+					</i>
+				</div>
+				
+</div>
+
+<div class="row">
+	
+		<div class="col-xs-12">
+			<div class="col-xs-12 col-md-4 pull-right">
+				<div class="bg-danger text-white p font-bold" ng-if="blockSubmission"><i>{{penaltyMessage}}</i></div>
+				<button class="btn btn-success  baab-btn pull-right" bs-tooltip data-title="Submit" data-placement="top" translate="{{'Submit Assignment' | translate }}" ng-click="askConfirmation()" ng-disabled="blockSubmission"></button>
+				<button class="btn  btn-material-amber-A700 baab-btn pull-right" bs-tooltip data-title="Save Draft" data-placement="top" translate="{{'Save Draft' | translate }}" ng-click="submitAssignment('draft')" ng-disabled="blockSubmission"></button>
+			</div>
+		</div>
+	</div>
+
+
+
+</div>

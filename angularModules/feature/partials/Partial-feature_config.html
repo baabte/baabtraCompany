@@ -1,0 +1,211 @@
+
+<div class="p-h-sm p-v " set-sub-heading-and-background-color>
+	<h3 class="no-margin">Features</h3>
+</div>
+<div class="bg-white" >
+
+	<form name="feature_form" class="form-horizontal form-validation"  xt-form novalidate>
+		<div class="panel panel-default">
+			<div class="panel-heading bg-white">
+				<strong>Basic constraints</strong>
+			</div>
+			<div class="panel-body p-lg">    
+				<div class="form-group">
+				
+						<input type="text" class="form-control" float-label ng-model="featureName" xt-validate required ng-minlength="5" name="featureName" placeholder="{{'Name of the feature'|translate}}">
+				
+				</div>
+				<div class="form-group">
+				
+						<textarea type="text" row="5" class="form-control" float-label ng-model="featureDescription" xt-validate required ng-minlength="5" name="featureDescription" placeholder="{{'description'|translate}}"></textarea>
+					
+				</div>
+				<div class="form-group">
+					
+						<input type="number" class="form-control" float-label ng-model="price" xt-validate required  name="price" placeholder="{{'price'|translate}}">
+					
+				</div>
+				<div class="form-group">
+					
+						<input type="number" class="form-control" float-label ng-model="units" xt-validate required  name="units" placeholder="{{'No. of units'|translate}}">
+					
+				</div>
+
+				<div class="form-group">
+					
+						<input type="number" class="form-control" float-label ng-model="minUnits" xt-validate required  name="minUnits" placeholder="{{'Min. No. of units'|translate}}">
+					
+				</div>
+
+				<div class="form-group" >					
+						<select class="form-control" ng-model="billing" ng-change="BillingPlan()" xt-validate required  name="billing">
+						<option value="" selected="">Select a billing frequency</option>
+						<option value="yearly">Yearly Billing</option>
+						<option value="monthly">Monthly Billing</option>
+						<option value="custom" >Custom Billing</option>
+						</select>
+				
+				</div>
+
+				<div  ng-show="customBilling">
+				<div class="form-group ">
+					<label class="col-sm-3 control-label"></label>
+					<div class="col-sm-4">
+					<div class="form-group ">
+						<div class="col-sm-9">
+						<select class="form-control" name="years" ng-options="number for number in yearNumbers" ng-model="years"  ng-init="years = 1">
+						<option value="" >Years</option>
+						</select>
+
+						</div>
+					</div>
+					<div class="form-group">
+						<div class="col-sm-9">
+						<select class="form-control" name="months" ng-options="number for number in monthNumbers" ng-model="months" ng-init="months = 0">	
+						<option value="" >Months</option>				
+						</select>
+						</div>
+					</div>
+					<div class="form-group">
+						<div class="col-sm-9">
+						<select class="form-control" name="days" ng-options="number for number in weekNumbers" ng-model="days" ng-init="days = 0">
+						<option value="" >Days</option>						
+						</select>
+						</div>
+					</div>
+			    </div>
+				
+			</div>
+			</div>
+			</div>
+
+		<div class="shadow-z-2 m">	
+			<div class="panel-heading bg-white">
+				<strong>Custom Details</strong>
+			</div>
+	
+			<div class="panel-body p-lg">
+				<div class="form-group">
+					
+						<input type="text" class="form-control" float-label ng-model="labels"
+						 name="label" xt-validate required ng-minlength="5" placeholder="{{'Label for the piece of detail'|translate}}" >
+					
+				</div> 
+
+				<div class="form-group">
+					
+						<select class="form-control" ng-options="c.inputtypes for c in InputTypes"  ng-model="typeOfInput" name="typeOfInput" xt-validate required >
+						<option value="" selected="">select an input type</option>			
+						</select>
+				
+				</div> 
+				<div class="form-group">
+					
+						<div class="col-sm-6 " style="padding-left:0">
+							<input type="text" class="form-control" data-ng-model="item.avail_validations" placeholder="{{'Validation'|translate}}" ng-enter="fun_validations(item)" list="validation_list" name="validations" xt-validate required>
+							<span ng-repeat="validation in validations" class="btn  btn-primary " style="border:solid"><label class="m-h-sm">{{validation}}</label><i class="fa fa-times" ng-click="remove_validation($index)"></i></span>
+							<!--  -->
+							<datalist id="validation_list" >
+    						<option  data-ng-repeat="validation in avail_validations" value="{{validation}}" >
+  							</datalist>
+							<!--  -->
+						
+						<div class="col-sm-6" style="padding-right:0" ng-show="allowedvalu">
+							<input type="text" class="form-control" float-label ng-model="allowedvalue" placeholder="{{'Allowed  values'|translate}}" >
+
+						</div>
+					</div>
+				 
+				</div>
+				<div class="form-group p-lg" id="getattrs">
+				
+					
+					<div class="col-xs-12 " >
+						<div class="col-xs-12 col-md-6" >
+						
+							<input type="text" class="form-control" float-label placeholder="{{'Custom attribute name'|translate}}" ng-model="attributename" name="attributename" xt-validate required>
+						
+						</div>
+
+						<div class="col-xs-8 col-md-5 " >
+							<input type="text" class="form-control" float-label placeholder="{{'Custom attribute value'|translate}}" ng-model="attributevalue" name="attributevalue" xt-validate required>
+							
+						</div>
+
+						<div class="col-xs-3 col-md-1" >
+							<button class="btn btn-default" bs-tooltip="addAttrTooltip" ng-click="createDivForAddAttr()">
+						 		<i  class="fa fa-plus"  ></i>
+							</button>
+						</div>
+					
+					
+						<div class="col-xs-12 " ng-repeat="objAttrib in atrributes">
+							
+							<div class="col-xs-12 col-md-6" ng-repeat="(atrributeN,atrributeV) in objAttrib" >{{atrributeN}}</div>
+
+							<div class="col-xs-8 col-md-5" ng-repeat="(atrributeN,atrributeV) in objAttrib" >{{atrributeV}}</div>
+
+	       					<div class="col-xs-3 col-md-1 m-v-n" style="padding-left:0">
+	       						<button class="btn btn-default" ng-click="removeAttr($index)" bs-tooltip="RemoveAttrTooltip">
+		       					 <i href class="glyphicon glyphicon-remove" ></i>
+		       					</button>
+	       					</div>
+
+					
+					
+					</div>
+					
+					
+				</div>
+
+
+				<div class="form-group">
+				
+						<div class="checkbox">
+						    <label>
+						      <input type="checkbox" value="option1" ng-model="userConfigurable"> User Configurable
+						    </label>
+						</div>						
+				
+				</div>
+				<div class="form-group">
+				
+						<button type="button" class="btn btn-info baab-btn" ng-click="addField()" ng-disabled="feature_form.label.$invalid||feature_form.typeOfInput.$invalid ||feature_form.validations.$invalid ||feature_form.attributename.$invalid||feature_form.attributevalue.$invalid||attribut_length">Add Field</button>
+					
+				
+				</div> 
+		</div>
+		</div>
+				<div class="form-group p-lg">					
+				
+							<table  class="table table-bordered table-striped">
+								<thead>
+									<tr>
+										<th>Label</th>
+										<th>Input types</th>
+										<th>validations</th>
+										<th>Allowed values</th>
+
+									</tr>
+								</thead>
+								<tbody>
+								<tr  ng-repeat="field  in fields" st-select-row="row" class="ng-scope ng-isolate-scope">
+									<td >{{field.label}}</td>
+									<td >{{field.InputType}}</td>
+									<td ><span ng-repeat="validation in validations" class=" m-xs"><label >{{validation}}</label></span></td>
+									<td ></td>
+								</tbody>
+							</table>
+					
+				
+				</div> 
+
+			</div>
+			<footer class="panel-footer text-right">
+				<button type="button" class="btn btn-info baab-btn" ng-disabled="feature_form.featureName.$invalid||feature_form.featureDescription.$invalid ||feature_form.price.$invalid || feature_form.units.$invalid || feature_form.minUnits.$invalid || feature_form.billing.$invalid||field_length||progress" ng-click="createFeature()">Save Feature</button>
+				<!-- ng-click="createFeature()" -->
+			</footer>
+		</div>
+	</form>
+</div>
+

@@ -1,0 +1,94 @@
+<!--Created By:Jihin
+Created On:12/11/2014 -->
+
+<aside id="aside" ng-if="$root.userinfo.ActiveUserData.modernView == 'modern' && linkPath.length" class="app-aside {{$root.userinfo.ActiveUserData.appSettings.asideColor}} text-lg fixedBc shadow-z-2" ng-include="'views/aside.html'"  style="margin-top:20px;" ng-class="{'btn-material-blue-grey-900':$root.userinfo.ActiveUserData.appSettings.asideColor == undefined , 'am-fade-and-slide-top':navBar,'ng-hide':!navBar}">
+</aside>
+<!-- ng-style="($root.userinfo.ActiveUserData.modernView != 'modern') && {'margin-bottom':'46px'}" -->
+<div >
+  <a ng-if="$root.userinfo.ActiveUserData.modernView != 'modern'" class="visible-xs p-sm {{$root.userinfo.ActiveUserData.menuColor.menuPrimaryColor}}"  ng-click="viewMobileMenu()">
+         <i class="mdi-action-view-headline text-white text-2x m-b" ></i>
+  </a>
+  <div class="{{$root.userinfo.ActiveUserData.menuColor.menuPrimaryColor}} shadow-z-3 menu-outer" bs-affix data-offset-top="-71" style="font-size: 15px;z-index: 1049;width: 100%;"  ng-if="$root.userinfo.ActiveUserData.modernView != 'modern'" ng-class="{'bg-white':$root.userinfo.ActiveUserData.menuColor.menuPrimaryColor, 'hidden-xs':!viewMenu, 'am-fade-and-slide-left p-v-lg':viewMenu }">
+           
+      <nav class="" >
+        <div class="container-fluid ">
+          <div >
+            <ul class="nav navbar-nav" >
+
+                <li ng-click="goHome()" class="dropdown p-v-sm " ng-class="{'animated fadeInDown':navBar,'ng-hide':!navBar}" ui-sref-active="active">
+                  <a class="{{$root.userinfo.ActiveUserData.menuColor.menuPrimaryColor}} no-padding">
+                    <i class="fa fa-home text-2x" ></i>
+                  </a>
+                </li>
+
+             
+                
+                <li class="dropdown p-v-xs" id="{{$index+1}}" ng-repeat="menus in userMenusOrigin"  ng-if="(menus.canView || (menus.canView == undefined)) ">
+
+
+                <div style="color: inherit;cursor: pointer;" class="dropdown-toggle p-sm" data-toggle="dropdown" ><i class="fa {{menus.menuIcon}} fa-md" ></i>&nbsp;{{menus.MenuName}}<span class="caret" ng-if="menus.childMenuStructure.length"></span></div>
+                <ul class="dropdown-menu am-fade-and-slide-left {{$root.userinfo.ActiveUserData.menuColor.menuPrimaryColor}} menu-item" ng-if="menus.childMenuStructure.length">
+                  <li><div  ng-class="{'{{$root.userinfo.ActiveUserData.menuColor.menuSecondaryColor}}':listHover}" style="min-width: 200px;cursor: pointer;" ng-mouseover="listHover=true" ng-mouseleave="listHover=false" class="p-sm"  ng-repeat="menu in menus.childMenuStructure"  ng-if="menu.canView || (menu.canView == undefined)" ng-click="loadDetails(menu, $event)"><i class="fa {{menu.menuIcon}} fa-md"></i>&nbsp;{{menu.MenuName}}</div></li>
+                </ul>
+              </li>
+              
+            </ul>
+          </div>
+        </div>
+      </nav>
+</div>
+</div>
+<div class="p-sm"  >
+	<div ng-style="($root.userinfo.ActiveUserData.modernView != 'modern') && {'margin-top':'46px'}"  class="row p-v-xs" name="innercontent" ui-view>
+    <div ng-if="$root.userinfo.ActiveUserData.modernView == 'modern' " class="col-xs-12"  masonry='{ "transitionDuration" : "0.8s" , "itemSelector" : ".tile"}'>
+      <div ng-if="(menu.canView || (menu.canView == undefined)) && userMenus.length" masonry-tile  ng-repeat="menu in userMenus" class="text-center p-sm pull-left tile masonry-brick" style="width:140px; margin-bottom:0px;" >
+
+
+      <!-- fixed color -->
+      <div ng-if="$root.userinfo.ActiveUserData.menuColor != 'random' && $root.userinfo.ActiveUserData.menuColor" ng-mouseover="menuHover=true" ng-mouseleave="menuHover=false" ng-click="loadDetails(menu)" class="text-sm btn text-dark btn-lg  btn-stroke  text-center col-xs-12 {{$root.userinfo.ActiveUserData.menuColor.menuPrimaryColor}} invert-color" style="padding-bottom:0px; margin-bottom:0px; margin-top:0px;color:#fff;"  >
+        
+              <div class="row text-center">
+                <i class="fa {{menu.menuIcon}} fa-2x" ></i>
+              </div>
+
+              <div class="row text-center">
+                <span class="block clear m-v-xs word-wrap" text-to-translate = "{{menu.MenuName}}" translate>{{menu.MenuName}}</span>
+
+              <div class="row text-right" style="margin-bottom:0px;"  ng-show="{{menu.childMenuStructure.length}}">
+                <!-- <button class="btn btn-xs"> -->
+                  <i class="mdi-navigation-chevron-right text-2x"></i>
+                <!-- </button> -->
+                
+              </div>
+
+        </div>
+
+        </div> 
+
+        <!-- random color -->
+        <div ng-if="$root.userinfo.ActiveUserData.menuColor == 'random' || !$root.userinfo.ActiveUserData.menuColor" ng-click="loadDetails(menu)" class="text-sm btn text-dark btn-lg bg-light lt  btn-stroke  text-center col-xs-12 {{colorArray[($index+1)%colorArray.length]}} " style="padding-bottom:0px; margin-bottom:0px; margin-top:0px;"  >
+        
+              <div class="row text-center">
+                <i class="fa {{menu.menuIcon}} fa-2x" ></i>
+              </div>
+
+              <div class="row text-center">
+                <span class="block clear m-v-xs word-wrap" text-to-translate = "{{menu.MenuName}}" translate>{{menu.MenuName}}</span>
+
+              <div class="row text-right" style="margin-bottom:0px;"  ng-show="{{menu.childMenuStructure.length}}">
+                <!-- <button class="btn btn-xs"> -->
+                  <i class="mdi-navigation-chevron-right text-2x"></i>
+                <!-- </button> -->
+                
+              </div>
+
+        </div>
+
+        </div>
+
+
+      </div>
+	</div>
+
+</div>
+</div>

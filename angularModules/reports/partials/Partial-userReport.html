@@ -1,0 +1,70 @@
+<div class="tab-container col-md-12"> <div class="panel b-t b-00C853 bg-light dk"><div set-sub-heading-and-background-color class="panel-heading font-bold text-white  p baab-shadow" translate="{{'Candidate Course Report'|translate}}"></div>
+<div class="panel-body col-md-12 bg-white animated fadeInRight p-sm b-b-danger b-b-3x"  >
+	
+ 
+  <div class="col-sm-12 col-md-12">
+           <div class="btn-group  pull-right">
+                        <button type="button" class="btn btn-default"  title="Weekly" data-template="angularModules/reports/partials/dateParams.tpl.html" data-animation="am-flip-x" placement="bottom" trigger="click" bs-popover>weekly</button>
+
+                        <button type="button" class="btn btn-default"  title="Monthly" data-template="angularModules/reports/partials/dateParams.tpl.html" data-animation="am-flip-x" placement="bottom"  bs-popover>Monthly</button>
+
+                        <button type="button" class="btn btn-default"  title="DateRange" data-template="angularModules/reports/partials/dateParams.tpl.html" data-animation="am-flip-x" placement="bottom-right"   bs-popover>Date Range</button>
+           </div>
+  </div>
+   <div class="col-sm-12 col-md-12" ng-if="total">
+    <div class="col-md-4"></div>
+    <div class="col-md-4"><div class="panel p"><span class="font-bold">Total Number of Candidate : {{total}}</div></div>
+  </div>
+  <div class="col-sm-2 col-md-2">
+                     <ul class="list-group">
+                        <li class="list-group-item" >
+                          <img src="../images/chart_icons/chart_pie.png" ng-class="{'b-b b-success b-2x':type=='Pie'}" placement="right" bs-tooltip data-title="Pie Chart" ng-click="changeChartType('Pie')">
+                        </li>
+                         <li class="list-group-item">
+                          <img src="../images/chart_icons/doughnutChart.png" ng-class="{'b-b b-success b-2x':type=='Doughnut'}" placement="right" bs-tooltip data-title="Doughnut Chart" ng-click="changeChartType('Doughnut')">
+                        </li>
+                        <li class="list-group-item">
+                          <img src="../images/chart_icons/chart_column.png" ng-class="{'b-b b-success b-2x':type=='Bar'}" placement="right" bs-tooltip data-title="Bar Chart" ng-click="changeChartType('Bar')">
+                        </li>
+                         <li class="list-group-item">
+                          <img src="../images/chart_icons/chart_line.png" ng-class="{'b-b b-success b-2x':type=='Line'}" placement="right" bs-tooltip data-title="Line Chart" ng-click="changeChartType('Line') ">
+                      <!--  <li class="list-group-item">
+                          <img src="../images/chart_icons/chart_dashboard.png" ng-class="{'b-b b-success b-2x':candidateReport.type=='BarChart'}"  placement="right" bs-tooltip data-title="Bar Chart" ng-click="candidateReport.type='BarChart'">
+                        </li>
+                        <li class="list-group-item">
+                          <img src="../images/chart_icons/chart_table.png" ng-class="{'b-b b-success b-2x':candidateReport.type=='Table'}" placement="right" bs-tooltip data-title="Table" ng-click="candidateReport.type='Table'">
+                        </li> 
+                      </ul>-->
+    
+  </div>
+  <div class="col-sm-6 col-md-6" ng-show="hideOrShowChart">
+     <!-- <div google-chart chart="candidateReport" style="{{cssStyle}}"> -->
+
+    <canvas id="base"  class="chart-base" chart-type="type" data="data" labels="labels" legend="true" ></canvas> 
+     <!-- <canvas id="line" class="chart chart-line" data="data"
+  labels="labels"></canvas> --> 
+  
+
+  </div>
+  <div class="col-sm-4 col-md-4" ng-show="hideOrShowChart&&(type=='Bar'||type=='Line')">
+  <div set-sub-heading-and-background-color class="panel-heading font-bold text-white  baab-shadow" translate="{{'Course'|translate}}" style="padding-bottom:10px"></div>
+    <div ng-repeat="label in labelname" class="list-group b"  style="margin-bottom: 0px;">
+      <a href="" class="list-group-item" ng-click="addOrRemoveItemFromTheList($index)"  style="padding-top: 3px!important; padding-bottom: 3px!important;">
+      <!-- <span class="pull-left b"><i class="fa fa-circle text-xs"></i></span> -->
+        {{label}}<span>({{tempArrarlabels[$index]}})</span>
+      </a>
+    </div>
+   
+    
+  </div>
+  <div class="col-sm-6 col-md-6" ng-hide="hideOrShowChart">
+   <div  class="alert alert-danger " style="position:fixed; width:50%">
+        <strong translate="{{'There are no data found .!!'|translate}}"></strong> 
+    </div>
+  </div>
+ 
+
+</div>
+</div>
+</div>
+</div>

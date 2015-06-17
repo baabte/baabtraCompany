@@ -1,0 +1,42 @@
+<div style="position: relative;top: -5px;right: 1px;">
+	<ul ng-if="!elementOrderNewFormat[tlpoint] &&  data.moveable" class="timeline-outer-container m-b hover-content" ng-class="{'timeline-center': center,'hide-dropdown':data.moveable}">
+		<li class="link" style="z-index: 1;position: relative;left: 5px;">
+			<i ng-click="moveTo(tlpoint, 'new')" class="ui-icon fa b-2x text-lg bg-white" style=""><span style="position: relative;z-index: 1;"></span></i>
+		</li>
+	</ul>
+	<ul ng-repeat="elements in elementOrderNewFormat[tlpoint]" class="timeline-outer-container m-b hover-content" ng-class="{'timeline-center': center}">
+
+			<!--{{timeLineView[tlpoint][elements[0]][elements[1]]}} -->
+
+		<li ng-class="{'hide-dropdown':data.moveable}" bs-dropdown="dropdown" data-html="true"  data-animation="am-flip-x" data-placement="right" ng-click="manageCourseElement(element,tlpoint,$index);" class="timeline-item " style="z-index: 1;position: relative;" ng-repeat="element in timeLineView[tlpoint][elements[0]]" >
+			<i ng-if="$index==elements[1] && !data.moveable" data-title="{{element.elements[0].value}}"  bs-tooltip data-placement="left" data-html="true" class="iconCustomBg ui-icon fa {{element.Icon}}  b-2x text-lg bg-info am-fade" style="border-color:{{element.iconBackground}}!important;background-color: {{element.iconBackground}}!important; color: {{element.iconColor}}!important;border-radius: 9px;"></i>
+
+			<i bs-dropdown="moveDropdown" data-html="true"  data-animation="am-flip-x" data-placement="left" title="{{element.elements[0].value}}" class="ui-icon fa b-2x text-lg bg-white" ng-class="{'text-danger hide-dropdown':element.moveable}" style="" ng-if="$index==elements[1] && data.moveable" ng-click="moveTo(element)"><span ng-class="{'text-sm font-bold':element.order > 99}" style="position: relative;z-index: 1;">{{element.order}}</span></i>
+
+		</li>
+	</ul>
+	
+</div>
+
+<!-- commented by arun to make timeline according to the elementorder -->
+<!-- <div>
+	<ul ng-repeat="elements in timeLineView[tlpoint]" class="timeline-outer-container m-b hover-content" ng-class="{'timeline-center': center}">
+		
+		<li bs-dropdown="dropdown" data-html="true" bs-show="false" data-animation="am-flip-x" data-placement="right" ng-click="manageCourseElement(element,tlpoint,$index);" class="timeline-item hide-ul" ng-class="{'hover-content-child animated fadeInLeft':($index>0)}" ng-repeat="element in elements " >
+
+				<i data-title="{{element.elements[0].value}}"  bs-tooltip data-placement="left" class="iconCustomBg ui-icon fa {{element.Icon}} b-white b-2x text-lg bg-info am-fade" style="background-color: {{element.iconBackground}}!important; color: {{element.iconColor}}!important;border-radius: 12px;"></i>
+
+			<b ng-if="elements.length > 1" class="hover-content-child-hide badge bg-danger up bubble-nottification" style="margin-left: 15px;position: relative;z-index: 1;">
+			{{elements.length}}</b>
+		</li>
+	</ul>
+
+</div> -->
+
+<!-- commented by arun to make timeline according to the elementorder ends -->
+
+<!-- style="float:left !important;width:0px !important;margin-left: -13px !important;margin-bottom: 15px;!important;margin-right:{{count*5}}px;" -->
+
+<!-- data-animation="am-fade" data-template="angularModules/courseTimeline/templates/courseElemContextMenu.html" data-placement="right" bs-dropdown="dropdown"-->
+
+<!-- ng-mouseenter="viewAllBubble(elements.length,elements[0].Name)" ng-mouseleave="viewAllBubble(1)" -->

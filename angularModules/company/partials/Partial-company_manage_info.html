@@ -1,0 +1,64 @@
+
+
+ <div class="bg-white" >
+    <div ng-show="superadminView" class="p-md  b-b font-bold">Company Info</div>
+    <div ng-hide="superadminView" class="p-md  b-b font-bold">Company Profile</div>
+    <div class="p-md" >
+      <div class="form-group">
+        <label>Name</label>
+        <br>
+        <span editable-text="companySelected.companyName "class=" font-bold" onaftersave="editCompany('companyName',$data)">{{companySelected.companyName||'Company Name' }}</span>
+      </div>
+      <div class="form-group">
+        <label>Alternate Email</label>
+        <br>
+        <span editable-text="companySelected.alternateEmail "class=" font-bold" onaftersave="editCompany('alternateEmail', $data)">{{companySelected.alternateEmail||'Alternate Email' }}</span>
+      </div>
+      <div class="form-group">
+        <label>Phone</label>
+        <br>
+        <span editable-text="companySelected.Phone "class=" font-bold" onaftersave="editCompany('Phone',$data)">{{companySelected.Phone||'Phone Number'}}</span>
+      </div>
+      <div class="form-group">
+        <label>Mobile</label>
+        <br>
+        <span editable-text="companySelected.Mobile "class=" font-bold" onaftersave="editCompany('Mobile',$data)">{{companySelected.Mobile|| 'Mobile Number'}}</span>
+      </div>
+      <div class="form-group">
+        <label>Fax</label>
+        <br>
+        <span editable-text="companySelected.Fax "class=" font-bold" onaftersave="editCompany('Fax',$data)">{{companySelected.Fax ||'Fax' }}</span>
+      </div>
+      <div class="form-group">
+        <label>Address</label>
+        <br>
+        <span editable-text="companySelected.Address "class=" font-bold" onaftersave="editCompany('Address',$data)">{{companySelected.Address ||'Address'}}</span>
+      </div>
+       <div class="form-group">
+        <label>Zip Code</label>
+        <br>
+        <span editable-text="companySelected.zipCode "class=" font-bold" onaftersave="editCompany('zipCode',$data)">{{companySelected.zipCode||'Zip Code' }}</span>
+      </div>
+      <div class="form-group">
+        <label>WebSite</label>
+        <br>
+        <span editable-text="companySelected.webSite "class=" font-bold" onaftersave="editCompany('webSite',$data)">{{companySelected.webSite ||'Web site'}}</span>
+      </div>
+      <div class="form-group">
+        <label>facebook</label>
+        <br>
+        <span editable-text="companySelected.facebook "class=" font-bold"onaftersave="editCompany('facebook',$data)">{{companySelected.facebook||'facebook' }}</span>
+      </div>
+      <div class="form-group">
+        <label>Google+</label>
+        <br>
+        <span editable-text="companySelected.gplus "class=" font-bold"onaftersave="editCompany('gplus',$data)">{{companySelected.gplus ||'G+'}}</span>
+      </div>
+      <div class="form-group">
+        <label>twitter</label>
+        <br>
+        <span editable-text="companySelected.twitter "class=" font-bold"onaftersave="editCompany('twitter',companySelected.twitter)">{{companySelected.twitter ||'twitter'}}</span>
+      </div>
+      <button ng-show="superadminView" ng-click="deleteCompany(companySelected)" class="btn btn-info m-t">Delete</button>
+    </div>
+  </div>

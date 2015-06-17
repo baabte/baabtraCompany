@@ -1,0 +1,100 @@
+<div  class="panel b-t b-00C853 bg-light dk">
+
+<div class="" style="margin-top: -1px;">
+    <div class="bg-light p-h">
+        <div class="row m-b-lg" style="position:fixed; width:101%; z-index:100;">
+            <div ng-if="classic" set-sub-heading-and-background-color  class="panel-heading font-bold text-white  p baab-shadow"   translate="{{'Question Bank'|translate}}">
+            </div>
+            <div  class="col-xs-12 shadow-z-1 bg-white" >
+                <div class="col-md-6 col-xs-9 no-padding text-left">
+                    <div class="m-t-md ">
+                        <div class="input-group m-b pull-left col-xs-12">
+                            <span class="input-group-addon"><i class="mdi-action-search text-2x"></i></span>
+                            <input type="text"  ng-model="questionBundles.searchKey" class="form-control" placeholder="Search Question Set" autocomplete="off">
+                            {{questionBundles.searchKey}}
+                        </div>                                
+                    </div>
+                </div>
+                <!-- <div class="col-md-6 hidden-xs m-t-md text-right">
+                    <div class="btn-group no-margin">
+						<button type="button" class="btn btn-info" ng-click="prevOne()" ><i class="fa fa-fw fa-angle-left"></i></button>						
+						<button type="button" class="btn btn-info" ng-click="nextOne()"><i class="fa fa-fw fa-angle-right"></i></button>
+					</div>
+                </div>
+                <div class="col-xs-3 visible-xs m-t-md no-padding text-right">
+					<a class="text-2x " ng-click="prevOne()" title="Previous" ng-disabled="prevButtondisabled"><i class="fa fa-chevron-circle-left"></i></a>
+                    <a class="text-2x " ng-click="nextOne()" ng-disabled="userObj.userList.length<9" title="Next"><i class="fa fa-chevron-circle-right"></i></a>
+                                
+                </div> -->
+            </div>
+        </div>
+
+
+         <div class="row" style="padding-top: 80px;padding-bottom: 15px;">
+            <div class="m-t-lg col-md-push-2 col-xs-push-0 col-md-8 col-xs-12 col-sm-12 col-xs-12">
+                <div class="row">
+                    <div class="col-xs-12">
+
+                    	<!--  <div class="p shadow-z-1 col-xs-12 bg-white">
+                             <div class="col-xs-12"></div>      
+                                    
+
+                        </div>
+                        <div  class="p shadow-z-1 col-xs-12 btn-material-red-500">
+                                <h4 translate="{{'No question banks found'| translate}}"></h4>    
+                                     
+
+                        </div> -->
+
+                        <div class="p shadow-z-1 col-xs-12 bg-white "  >                                    
+                            <div class="col-xs-12 pull-left">
+                                <a  class="btn btn-info" ng-click="fnCreateQuestionsetModalActivate()" translate="{{'Create New Question Set'|translate}}"></a>
+
+                            </div>                              
+                        </div>
+
+                        <div ng-if="questionBundles.length==0" class="p shadow-z-1 col-xs-12 btn-material-red-500">
+                                <h4 translate="{{'No Question Set Found'| translate}}"></h4>    
+                        </div>
+                        <div ng-repeat="questionSet in  questionBundles |filter:questionBundles.searchKey">
+
+                            <div ng-if="questionSet" class="p shadow-z-1 col-xs-12 bg-white "  >
+                                                                        
+                                <div class="col-xs-12 pull-left">
+                                    <span class="upper font-bold">{{questionSet.Name}}</span>
+                                   
+                                    <i ng-if="!questionSet.expandDetails || questionSet.expandDetails == false" class="btn no-padding mdi-navigation-unfold-more pull-right text-lg link " ng-click="questionSet.expandDetails=!expand;expand=!expand"></i>
+                                    <i ng-if="questionSet.expandDetails && questionSet.expandDetails == true" class="btn no-padding mdi-navigation-unfold-less pull-right text-lg link " ng-click="questionSet.expandDetails=expand;expand=!expand"></i>
+                                     <i class="btn no-padding mdi-editor-mode-edit pull-right text-lg link " ng-click="fnEditQuestionBundle($index)"></i>
+                                </div> 
+                                <div  ng-if="questionSet.expandDetails && questionSet.expandDetails == true"
+                                ng-repeat="question in questionSet.questions track by $index">
+                                    <div ng-if="questionSet" class="p shadow-z-1 col-xs-12 bg-light "  >
+                                                                            
+                                    <div class="col-xs-12 pull-left">
+                                        <span class="upper font-bold" ng-bind-html="question.question"></span>
+
+                                    </div> 
+                                   
+
+                                    </div>
+                                 
+                                </div>
+
+                                </div>
+                                 
+                            </div>
+                        </div>
+
+                    </div>
+   				</div>
+			</div>
+		</div>
+
+
+
+
+
+    </div>
+   </div>
+</div>

@@ -1,0 +1,23 @@
+{
+  "name": "StreamLine",
+  "version": "1.0",
+  "homepage": "https://github.com/baabte/baabtra",
+  "authors": [
+    "Jihin <jihin@baabte.com>"
+  ],
+  "description": "course streamline",
+  "main": ["css/style.css","js/main.js","js/modernizr.js"],
+  "keywords": [
+    "angular",
+    "vertical",
+    "streamline"
+  ],
+  "license": "MIT",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ]
+}

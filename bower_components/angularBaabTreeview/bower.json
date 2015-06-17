@@ -1,0 +1,24 @@
+{
+  "name": "angularBaabTreeview",
+  "version": "0.0.1",
+  "homepage": "https://github.com/baabte/baabtra",
+  "authors": [
+    "jihin <jihin@baabte.com>"
+  ],
+  "description": "tree view",
+  "main": ["angular.treeview.js", "angular.treeview.css"],
+  "moduleType": [
+    "globals"
+  ],
+  "keywords": [
+    "angular-treeview"
+  ],
+  "license": "MIT",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ]
+}

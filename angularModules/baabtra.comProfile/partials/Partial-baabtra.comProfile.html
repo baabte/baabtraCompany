@@ -1,0 +1,22 @@
+<div class="p-h-md p-v bg-white box-shadow pos-rlt" >
+  <h3 class="no-margin " translate="{{'baabtra.com Profile'|translate}}">baabtra.com Profile</h3>
+</div>
+<div class="box bg-white" >
+   <div class="col-md-3" >
+   		 <div style="background:url({{profileData.avatar}}) center center; background-size:cover; " >
+	      <div class="p-lg bg-white-opacity text-center">
+	        <a href class="w-sm inline m-t-md">
+	          <img ng-src="{{profileData.avatar}}" class="img-circle img-responsive">
+	         
+	        </a>
+	        <div class="m-b p-v-lg h4">
+	          <span class="text-black">{{profileData.userInfo.profile.firstName}} {{profileData.userInfo.profile.lastName}}</span>
+	        </div>
+	      </div>
+	     
+    	</div>  
+   </div>
+   <div class="col-md-9 bg-white b-l ">
+   			<baabtra-com-profile user-login-id="userLoginId"></baabtra-com-profile>
+   </div>
+</div>

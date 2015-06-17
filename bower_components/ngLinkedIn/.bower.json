@@ -1,0 +1,35 @@
+{
+  "name": "ngLinkedIn",
+  "version": "0.1.4",
+  "homepage": "https://github.com/boketto/ngLinkedIn",
+  "authors": [
+    "Roman <roman@boket.to>"
+  ],
+  "description": "LinkedIn API wrapper for AngularJS",
+  "main": "ngLinkedIn.js",
+  "keywords": [
+    "angularjs",
+    "linkedin",
+    "nglinkedin",
+    "api",
+    "service"
+  ],
+  "license": "MIT",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "_release": "0.1.4",
+  "_resolution": {
+    "type": "version",
+    "tag": "v0.1.4",
+    "commit": "74e6c9c5c11f44c4009320fb561db075ff92fe2f"
+  },
+  "_source": "git://github.com/aromka/ngLinkedIn.git",
+  "_target": "~0.1.4",
+  "_originalSource": "ngLinkedIn",
+  "_direct": true
+}

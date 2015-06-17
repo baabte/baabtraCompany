@@ -1,0 +1,15 @@
+{
+  "inputType": "",
+  "validations": {
+    "validation1": {
+      "name": "",
+      "parameters": "",
+      "class": ""
+    },
+    "validation2": {
+      "name": "",
+      "parameters": "",
+      "class": ""
+    }
+  }
+}

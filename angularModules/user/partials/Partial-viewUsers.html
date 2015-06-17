@@ -1,0 +1,45 @@
+<div class="col-xs-12">
+
+  <div class="row bg-white baab-shadow fixed-tab">
+    <div class="col-xs-12 p-sm">
+      <div class="col-xs-3">
+        <input type="text" ng-change="searchUser()" ng-model="data.usersObject.searchKey" class="form-control" placeholder="Search Users" autocomplete="off">
+      </div>
+      <div class="col-xs-9 text-right">
+        <a class="btn btn-rounded btn-stroke btn-primary no-margin" ng-click="prevOne()"><i class="fa fa-angle-left text-white font-bold"></i></a>
+        <a ng-click="nextOne()" class="btn btn-rounded btn-stroke btn-primary no-margin"><i class="fa fa-angle-right text-white font-bold"></i></a>
+      </div>
+    </div>
+    <!-- <div class="col-xs-12 p-h p-v-sm bg-white b-b fixed-tab">
+
+      <div class="row">
+        <div class="col-xs-2">
+          <input type="text" ng-change="searchUser()" ng-model="userObj.searchKey" class="form-control" placeholder="Search Users" autocomplete="off">
+        </div>
+        <div class="col-xs-12 col-sm-6">
+
+
+      </div>
+      </div>
+    </div> -->
+  </div>
+
+  <div class="row bg-light" style="margin-top:56px;">
+    <div class="col-xs-12 p-v">
+      <div class="col-md-push-2 col-md-8 col-xs-12 col-sm-12 p-h-sm shadow-z-1  pull-left bg-white p-v" ng-repeat="user in data.usersObject.userList" style="cursor: pointer;">
+        <div class="col-xs-2">
+
+          <i ng-if="!user.profile.userPic" class="mdi-action-assignment-ind text-lg  random-background-color img-circle p-xs  btn-material-purple-500"></i>
+
+          <div class="w-thumb-sm" ng-if="user.profile.userPic"><img src="{{user.profile.userPic}}" class="img-responsive rounded"></div>
+
+        </div>
+        <div class="col-xs-4 text-name">{{user.profile.firstName}}&nbsp;{{user.profile.lastName}}</div>
+        <div class="col-xs-5">{{user.userName}}</div>
+        <div class="col-xs-1" bs-dropdown="data.userDropdown" data-html="true" data-placement="bottom-right">
+          <a ><i class="text-xl mdi-navigation-more-vert"></i></a>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

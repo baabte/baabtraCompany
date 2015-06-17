@@ -1,0 +1,146 @@
+<div class="p-md m-v-md  col-xs-12 {{$parent.field.schema.uniqueId}}">
+
+
+
+<!-- style="background:#F3E5F5;border:1px solid #ff4081" class="p-sm"  -->
+
+
+<div class="shadow-z-1 pull-left col-xs-12 no-padding b" style="border:2px solid #009587;">
+
+
+<ul class="nav nav-tabs p">
+  <li   role="presentation" ng-class="{'b-b b-yellow b-2x':selectedTab=='question'}" ng-click="selectedTab='question'"><a ><span class="text-lg font-bold m-t-xs">1</span><span class="hidden-xs hidden-sm m-t-xs" translate="{{'. Question'|translate}}"></span> <div class="m-l-xs pull-right"><i  class="text-2x m-v-n mdi-hardware-keyboard-arrow-right"></i></div></a></li>
+  <li   role="presentation" ng-class="{'b-b b-yellow b-2x':selectedTab=='answerType'}" ng-click="selectedTab='answerType'"><a ><span class="text-lg m-t-xs">2</span><span class="hidden-xs hidden-sm m-t-xs" translate="{{'. Answer  type '|translate}}"></span><div class="m-l-xs pull-right"><i  class="text-2x m-v-n mdi-hardware-keyboard-arrow-right"></i></div></a></li>
+  <li   role="presentation" ng-class="{'b-b b-yellow b-2x':selectedTab=='answers'}" ng-click="selectedTab='answers'"><a ><span class="text-lg m-t-xs">3</span><span class="hidden-xs hidden-sm m-t-xs" translate="{{'. Answers'|translate}}"></span> <div class="m-l-xs pull-right"><i  class="text-2x m-v-n mdi-hardware-keyboard-arrow-right"></i></div></a></li>
+  <li   role="presentation" ng-class="{'b-b b-yellow b-2x':selectedTab=='marks'}" ng-click="selectedTab='marks'"><a ><span class="text-lg m-t-xs">4</span><span class="hidden-xs hidden-sm m-t-xs" translate="{{'. Marks'|translate}}"></span></a></li>
+</ul>
+
+
+	<!-- <paper-tabs selected="0" class="pink">
+	  <paper-tab ng-click="selectedTab='question'">Question </paper-tab>
+	  <div  class="icon-container-inactive" ng-class="{'icon-container-active':selectedTab=='question'}"><core-icon icon="arrow-forward"></core-icon></div>
+	  <paper-tab ng-click="selectedTab='answerType'">Answer type</paper-tab>
+	  <div  class="icon-container-inactive" ng-class="{'icon-container-active':selectedTab=='answerType'}"><core-icon icon="arrow-forward"></core-icon></div>
+	  <paper-tab ng-click="selectedTab='answers'">Answers</paper-tab>
+	  <div  class="icon-container-inactive" ng-class="{'icon-container-active':selectedTab=='answers'}"><core-icon icon="arrow-forward"></core-icon></div>
+	  <paper-tab ng-click="selectedTab='marks'">Marks</paper-tab>
+	</paper-tabs> -->
+
+
+
+
+
+				<div ng-show="selectedTab=='question'" class="p-xs">
+
+					<em class="visible-xs visible-sm m-v-xs">Please add a question</em>
+				
+      					<!-- <input class="form-control" float-label type="text" placeholder="Question Title (optional)" name="questionTitle" ng-model="question.title"> -->
+    		
+    					<div class="m-v-lg">
+	    					<em class="text-muted" translate="{{'Question'|translate}}"></em>
+	      					 <ng-quill-editor name="questionDesc" ng-model="question.question"  toolbar="true" link-tooltip="true" image-tooltip="true" toolbar-entries="font size bold list bullet italic underline strike align color background link image" required xt-validate editor-required="true" error-class="input-error"></ng-quill-editor>
+	      				</div>
+	    			
+				</div>
+
+				<div class="col-xs-12 pull-left p-v" ng-show="selectedTab=='answerType'" >
+
+					<em class="visible-xs visible-sm m-v-xs">Please select an answer type for the question</em>
+						<!-- <pre>{{question.type}}</pre> -->
+						 <div class="radio radio-success">
+				            <label>
+				              <input type="radio" required xt-validate ng-checked="question.type=='objective'" ng-change="questionTypeChange('objective')" value="objective"  ng-model="question.type"  name="questionType">
+				              <b class="font-normal" translate="{{'Objective'|translate}}"></b>
+				            </label>
+				        </div>
+
+				        <div class="radio radio-success">
+				            <label>
+				              <input type="radio" required xt-validate ng-change="questionTypeChange('descriptive')" ng-checked="question.type=='descriptive'" value="descriptive" ng-model="question.type"   name="questionType">
+				              <b class="font-normal" translate="{{'Descriptive'|translate}}"></b>
+				            </label>
+				        </div>
+
+
+						<div class="col-xs-12 p" ng-if="question.type=='objective'">
+
+							<div class="radio radio-success">
+					            <label>
+					              <input type="radio" required xt-validate ng-checked="question.answerType=='singleAnswer'" value="singleAnswer"  ng-model="question.answerType"  name="answerType">
+					              <b class="font-normal" translate="{{'Single Answer'|translate}}"></b>					             
+					            </label>
+					        </div>
+
+					        <div class="radio radio-success">
+					            <label>
+					              <input type="radio" required xt-validate  ng-checked="question.answerType=='multiAnswer'" value="multiAnswer"  ng-model="question.answerType" name="answerType">
+					              <b class="font-normal" translate="{{'Multi Answer'|translate}}"></b>					              
+					            </label>
+					        </div>
+
+						</div>
+				</div>
+
+
+				<div class="col-xs-12 pull-left" ng-show="selectedTab=='marks'">
+					<div class="col-xs-12 m-v">
+
+						<em class="visible-xs visible-sm m-v-xs">Please provide the total marks to be provided for the correct answer</em>
+
+						<mark-fields-input custom-marks="question.type=='descriptive'" mark-obj="question.mark" ></mark-fields-input>
+					</div>
+				</div>
+
+
+				<div class="col-xs-12 pull-left"  ng-show="selectedTab=='answers'">
+
+					<em class="visible-xs visible-sm m-v-xs">Please configure an answering pattern for the question</em>
+
+						<div class="col-xs-12">
+							<objective-options-field ng-if="question.type=='objective'" answers="question.options"></objective-options-field>
+
+
+							<div ng-if="question.type=='objective'&&question.answerType=='multiAnswer'" class="col-xs-12 m-v-xs">
+								<div  multi-selectable input-model="optionsTemp" output-model="question.answer" button-label="Name" item-label="Name" tick-property="ticked" helper-elements="all none reset filter">
+		      					</div>
+							</div>
+							
+	      					<div ng-if="question.type=='objective'&&question.answerType=='singleAnswer'" class="col-xs-12 m-v-xs">
+								<div class="paper-dropdown">
+								<select required xt-validate placeholder="{{'Select an answer'|translate}}" data-animation="am-fade-and-slide-top"  ng-model="question.answer[0]" ng-options="value.Name for (key, value) in optionsTemp" data-html="true" bs-select></select>
+								</div>
+							</div>
+
+							<div ng-if="question.type=='descriptive'" class="col-xs-12 m-v-lg">
+								<div class="p-v-sm">
+									<span translate="{{'Primary answer template:'|translate}}"></span><br>
+									<em translate="{{'(Primary answer template will be shown to the candidate when he tries to answer this question.)'|translate}}"></em>
+									<!-- <div class="paper-dropdown">
+										<select  placeholder="Select a primary answer field"  ng-model="question.primaryAnswer" required xt-validate ng-options="value.Name for (key, value) in answerTypes" data-html="true" bs-select></select>
+		      						</div> -->
+		      							<div  multi-selectable ng-if="answerTypesSecond" input-model="answerTypes" output-model="question.primaryAnswer" button-label="Name" item-label="Name" required xt-validate tick-property="ticked" helper-elements="all none reset filter">
+		      							</div>
+										<br>
+									</div>
+									
+								</div>
+								<div ng-if="question.type=='descriptive'" class=" col-xs-12 p-v-sm">
+									<div class="p-v-sm">
+
+										<span translate="{{'Embeddable fields:'|translate}}"></span><br>
+										<em translate="{{'(Embeddable fields can be added to the answer template by the candidate if needed.)'|translate}}"></em>
+										<div  multi-selectable ng-if="answerTypesSecond" input-model="answerTypesSecond" required xt-validate output-model="question.secondaryAnswer" button-label="Name" item-label="Name" tick-property="ticked" helper-elements="all none reset filter">
+			      						</div>
+			      					</div>	
+		      					</div>
+								
+							</div>
+						</div>
+
+				</div>
+
+
+</div>			
+
+
+</div>

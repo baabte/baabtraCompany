@@ -1,0 +1,61 @@
+<div class="modal" tabindex="-1" role="dialog">
+  <div class="modal-dialog modal-lg">
+    <div class="modal-content">
+      <div class="p bg-info font-bold baab-shadow" translate="{{'Enroll User'|translate}}">
+        
+      </div>
+      <div class="modal-body">
+        <form class="form-horizontal ng-pristine ng-valid" style="cursor: pointer;" name="enroll" xt-form novalidate>
+          <fieldset>
+                                    
+            <div class="form-group">
+                <label for="doj" class="col-lg-2 control-label" translate="{{'Date of Join'|translate}}"></label>
+                <div class="col-lg-10">
+                    <input type="text" class="form-control" id="doj" placeholder="{{'Date of join'|translate}}"  data-date-format="dd-MM-yyyy" data-placement="bottom" data-date-type="date" data-autoclose="true" data-min-date="today"  name="doj" bs-datepicker ng-model="candidateObj.doj">
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="inputEmail" class="col-lg-2 control-label" translate="{{'Batch'|translate}}"></label>
+                <div class="col-lg-10">
+                <batch-loader selection-mode="single" name="batch" courseobj="candidateObj" ng-model="candidateObj.batch" xt-validate required>
+                </batch-loader>
+
+              </div>
+            </div>
+              <div ng-if="candidateObj.coursetype&&candidateObj.coursetype!='selfPaced'">
+             <!--  <div class="form-group ">
+                          <label class="col-lg-2 control-label" translate="{{'Course material assignment'|translate}}"></label>
+                          <div class="col-lg-10">
+                            <div class="radio radio-primary col-xs-2" style="margin-top: 0px;">
+                                  <label>
+                                      <input type="radio" name="materialAssignment" ng-model="userRegister.materialAssignment" value="automatic" >
+                                      Automatic
+                                  </label>
+                              </div>
+                              <div class="radio radio-primary col-xs-2" style="margin-top: 0px;">
+                                  <label>
+                                      <input type="radio" name="materialAssignment" ng-model="userRegister.materialAssignment" value="cascade" >
+                                      Cascade
+                                  </label>
+                              </div>
+                              <div class="radio radio-primary col-xs-2" style="margin-top: 0px;">
+                                  <label>
+                                      <input type="radio" name="materialAssignment" ng-model="userRegister.materialAssignment"  value="manual">
+                                      Manual
+                                  </label>
+                              </div>
+                          </div>       
+                  </div> -->
+              </div>
+          </fieldset>
+        </form>
+      </div>
+      <div class="modal-footer">
+        <button  ng-if="type=='single'" ng-disabled="!candidateObj.batch.length" ng-click="fnEnrollCandidate(data,$hide,type)" type="button" print-page print-element-id="orderForm" class="btn btn-primary baab-btn"><i class="fa fa-print"></i>&nbsp;Enroll</button>
+        <button ng-if="type=='bulk'" ng-disabled="!(candidateObj.batch.length&&selectedCandidates.length)||hideButtonEnrollFlag" ng-click="fnEnrollCandidate(data,$hide,type)" type="button" print-page print-element-id="orderForm" class="btn btn-primary baab-btn"><i class="fa fa-print"></i>&nbsp;Enroll</button>
+        <!-- <button type="button" class="btn btn-primary baab-btn"><i class="fa fa-download" ></i>&nbsp;Download</button> -->
+        <button type="button" class="btn btn-success baab-btn" ng-click="$hide()">Close</button>
+      </div>
+    </div>
+  </div>
+</div>

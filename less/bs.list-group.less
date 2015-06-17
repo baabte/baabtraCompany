@@ -1,0 +1,97 @@
+.list-group{
+  border-radius: @border-radius-base;  
+  &.no-radius {
+    .list-group-item{
+      border-radius: 0 !important;
+    }
+  }
+  &.no-borders {
+    .list-group-item{
+      border: none;
+    }
+  }
+  &.no-border{
+    .list-group-item{
+      border-width: 1px 0;
+    }
+  }
+  &.no-bg{
+    .list-group-item{
+      background-color: transparent;
+    }
+  }
+  &.bg-inherit{
+    .list-group-item{
+      background-color: transparent;
+      border-color: rgba(0, 0, 0, 0.075);
+      &:hover,
+      &:focus,
+      &.active,
+      &.active:hover,
+      &.active:focus{
+        background-color: rgba(0, 0, 0, 0.075);
+        border-color: rgba(0, 0, 0, 0.1);
+      }
+    } 
+  }
+}
+
+.list-group-item{
+  border-color: @list-group-item-border;
+  padding-right: 15px;  
+  a&{
+    &:hover,
+    &:focus,
+    &.hover{
+      background-color: @list-group-item-hover;
+    }
+  }
+  &.media {
+    margin-top: 0;
+  }
+  &.active,
+  &.active:hover,
+  &.active:focus{
+    color: #fff;
+    border-color: @list-group-active-color;
+    background-color: @list-group-active-color;
+    .text-muted{
+      color: lighten(@list-group-active-color, 40%);
+    }
+    a{
+      color: #fff;
+    }
+  }
+  &.focus{
+    background-color: @list-group-item-focus;
+  }
+  &.select{
+    position: relative;
+    z-index: 1;
+    background-color: @list-group-select-color;
+    border-color: darken( @list-group-select-color , 5%);
+  }
+  
+  .list-group-alt & {
+    &:nth-child(2n+2){
+      background-color: rgba(0,0,0,0.02);
+    }
+    &.active:nth-child(2n+2){
+      background-color:  @list-group-active-color;
+    }
+  }
+  .list-group-lg & {
+    padding: 15px 25px;
+  }
+  .list-group-md & {
+    padding-top: 15px;
+    padding-bottom: 15px;
+  }
+  .list-group-sm & {
+    padding: 6px 10px;
+  }
+  .list-group-gap & {
+    margin-bottom: 5px;
+    border-radius: 3px;
+  }
+}

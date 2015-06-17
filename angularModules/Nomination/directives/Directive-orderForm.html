@@ -1,0 +1,59 @@
+<div class="col-xs-12 lt" id="orderForm">
+    <div class="row">
+        
+        <div class="col-xs-10">
+            <div class="font-bold text-lg">{{companyObject.companyName}}</div>
+            <div ng-repeat="addressDetails in companyObject.Address.split(',')">{{addressDetails}}<br></div>
+            <div class="font-bold" ng-if="companyObject.Phone">Phone&nbsp;:&nbsp;<span class="font-normal">{{companyObject.Phone}}</span></div>
+            <div class="font-bold" ng-if="companyObject.Fax">Fax&nbsp;:&nbsp;<span class="font-normal">{{companyObject.Fax}}</span></div>
+            <div class="font-bold" ng-if="companyObject.eMail">Email&nbsp;:&nbsp;<span class="font-normal">{{companyObject.eMail}}</span></div>
+        </div>
+        <div class="col-xs-2">
+            <img  class="img-responsive" height="100" src="{{companyObject.companyLogo}}">
+        </div>
+    </div>
+    <div class="row">
+    	<table  class="table table-striped table-hover b b-dark">
+            <thead>
+                <!-- <tr style="width:100%;" >
+                    <td style="text-decoration: underline;" class="text-center font-bold text-2x pull-center">ORDER FORM</td>
+                </tr> -->
+                <div class="text-center p-sm">
+                    <h3 class="no-margin font-bold" style="text-decoration: underline;">ORDER FORM</h3>
+                    
+                </div>
+                <tr >
+                    <th style="border-bottom: 1px #000 solid;" colspan="2">Order form ID&nbsp;:&nbsp;{{orderObject.customCompanyCode}}</th>
+                    <!-- <th style="border-bottom: 1px #000 solid;"></th> -->
+                    <th style="border-bottom: 1px #000 solid;"></th>
+                    <th style="border-bottom: 1px #000 solid;"></th>
+                    <th style="border-bottom: 1px #000 solid;">Date&nbsp;:&nbsp;{{orderObject.createdDate.$date | date:'MM/dd/yyyy'}}</th>
+                </tr>
+                <tr class="text-lg text-dark info">
+                    <th style="border-bottom: 1px #000 solid;border-right: 1px #000 solid;">Order No:</th>
+                    <th style="border-bottom: 1px #000 solid;border-right: 1px #000 solid;">Description</th>
+                    <th style="border-bottom: 1px #000 solid;border-right: 1px #000 solid;">No. Of Cantidates</th>
+                    <th style="border-bottom: 1px #000 solid;border-right: 1px #000 solid;">Unit Charge</th>
+                    <th style="border-bottom: 1px #000 solid;border-right: 1px #000 solid;">Total Amount</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr  ng-repeat="course in orderObject.orderDetails">
+                    
+                    <td class="font-bold b-b b-t b-dark">{{$index + 1}}</td>
+                    <td class="b b-dark">{{course.Name}}</td>
+                    <td class="b b-dark">{{course.userCount}}</td>
+                    <td class="b b-dark">{{course.coursePrice}}&nbsp;{{course.currencyType}}</td>
+                    <td class="b b-dark" ng-if="course.coursePrice =='free'">free</td>
+                    <td class="b b-dark" ng-if="course.coursePrice !='free'" ng-init="data.grandTotal = data.grandTotal + course.userCount*course.coursePrice">{{course.userCount*course.coursePrice}}</td>
+                </tr>
+                <tr>
+                	<th colspan="4">Grand Total</th>
+                	<th ng-if="data.grandTotal">{{data.grandTotal}}&nbsp;{{orderObject.orderDetails[0].currency}}</th>
+                    <th ng-if="!data.grandTotal">free</th>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</div>
+

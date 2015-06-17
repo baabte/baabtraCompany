@@ -1,0 +1,67 @@
+angular.module('baabtra').controller('ManageUserRoleCtrl',['$scope','manageCompanyRoleService','localStorageService','$location',function($scope,manageCompanyRoleService,localStorageService,$location){
+	
+	
+	var loginInfo=localStorageService.get('loginInfo');
+	$scope.companyId=loginInfo.userLoginId.$oid;
+	var roleMappingObj=loginInfo.roleMappingObj;
+	$scope.crmId=roleMappingObj[0].crmId;
+    $scope.urmId=roleMappingObj[0].urmId;
+	$scope.btnRoleAdd='add';
+	manageCompanyRoleService.RetrieveUserRole($scope);
+
+
+
+$scope.AddCompanyRole=function(){
+	// $scope.progress=true;
+	$scope.btnRoleAdd='In progress';
+	manageCompanyRoleService.addUserRole($scope);
+	$scope.Form_Adding_form.$setPristine();
+	$scope.roleName="";$scope.RoleDesc="";
+};
+ $scope.deleteRole=function(RollData,arrayindex_for_delete) //it wil edit roles from database
+    {
+       $scope.arrayindex_for_delete=arrayindex_for_delete;
+       RollData._id=RollData._id.$oid;
+       manageCompanyRoleService.DeleteCompanyRole($scope,RollData); // calling service function
+    };
+      
+
+
+// call back functions
+$scope.fnAddNewRollCallBack=function(data){ //callback function for handle Add new role of the company         
+  data=angular.fromJson(JSON.parse(data));
+  if(data=="success")
+    {
+    	$scope.notifications("Succesfully added","success");}
+  else if (data=="error"||data=="failed") 
+    {$scope.notifications("Failed to Create role","warning");}; 
+     $scope.roleLoading=false;
+    $scope.roleButtonShow=true;            
+}
+
+$scope.fnRertrivecompanyRoleCallBack=function(data){ //callback function for handle Edit role of the company         
+ // console.log(data);
+ $scope.roles=angular.fromJson(JSON.parse(data));
+ console.log($scope.roles);
+ if($scope.roles=="error"||$scope.roles=="failed"){
+   alert("Error in loading");
+ } 
+ else if($scope.roles.length<1) 
+ {
+  alert("you have no roles");
+}             
+};
+// $scope.fnDeleteRoleCallBack=function(data){ //callback function for handle Edit role of the company         
+//  data=angular.fromJson(JSON.parse(data));
+//  if(data=="success")
+//  {
+//   $scope.roles.splice($scope.arrayindex_for_delete, 1);
+//   $scope.notifications("Succesfully Deleted","success");}
+//   else if (data=="error"||data=="failed") 
+//    {$scope.notifications("Failed to Create role","warning");};                        
+// }
+
+}]);
+
+
+

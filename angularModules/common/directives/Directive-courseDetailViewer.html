@@ -1,0 +1,35 @@
+<div ng-class="{'b-r':!editable}">
+	<div class="form-group" ng-repeat="newField in courseDetails">
+	<div ng-if="newField.value.length" class="text-2x font-bold p-xs b-b" ng-class="{'text-md':editable}">{{newField.title}}
+		<a ng-if="newField.removable && editable" href="" data-title="Delete this detail"  bs-tooltip data-placement="right" ng-click="removeThisDetails($index)">
+			<i class="mdi-action-delete text-lg" ></i>
+		</a>
+	</div>
+
+	<!-- descreption - courseDetailViewer -->
+	<div class="row">
+		<div class="col-xs-12">
+			<div ng-if="(newField.type == 'content' || newField.type == undefined) && editable" class="m-t" ng-include="newField.template"></div>
+			<div  ng-if="(newField.type == 'content' || newField.type == undefined) && !editable" class="course-description" ng-bind-html="newField.value"></div>
+		</div>
+	</div>
+
+	<!-- video viewer - courseDetailViewer -->
+	<div class="row">
+		<div class="col-xs-12 text-center">
+			<video ng-if="newField.type == 'video'" class="m-t col-xs-12" ng-class="{'col-xs-12 col-sm-6':!editable}" controls>
+				<source ng-src="{{trustSrc(newField.value)}}" type="video/mp4">
+			</video>
+		</div>
+	</div>
+
+	<!-- document viewer - courseDetailViewer -->
+	<div class="row">
+		<div class="col-xs-12 text-center">
+			<iframe ng-class="{'col-xs-12 col-sm-6':!editable}"  ng-if="newField.type == 'application'" ng-src="{{trustSrc('http://docs.google.com/gview?url='+newField.value+'&amp;embedded=true')}}" class="m-v col-xs-12" height="445"  frameborder="0"></iframe>
+		</div>
+	</div>
+
+	<span ng-if="editable" class="help-block text-muted text-E91E63">{{newField.help}}</span>
+	</div>
+</div>

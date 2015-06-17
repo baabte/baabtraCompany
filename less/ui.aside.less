@@ -1,0 +1,42 @@
+.aside {
+  min-width: 300px;
+  .aside-dialog {
+    .aside-header{
+      background-color: transparent;
+      color: @text-color;
+      padding-top: 1px;
+      padding-bottom: 1px;
+      .close{
+        padding-top: 8px;
+        color: @text-color;
+      }
+    }
+  } 
+}
+
+.aside-backdrop.am-fade{
+  background: rgba(0,0,0,0);
+  .aside-open-backdrop &{
+    background: rgba(0,0,0,0.5);
+  }
+}
+
+.aside-open-inner{
+  .aside{
+    top: @header-height;
+  }
+}
+
+.aside.top{
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: auto;
+}
+
+.aside.bottom{
+  top: auto;
+  left: 0;
+  right: 0;
+  bottom: 0;
+}

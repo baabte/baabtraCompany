@@ -1,0 +1,72 @@
+<div>
+
+	<!-- question -->
+	<div class="row">
+		<div class="col-xs-12">
+			<div class="col-xs-12">
+				<question-field ng-if="ngModel.question" ng-model="ngModel.question"></question-field>
+			</div>
+		</div>
+	</div>
+
+	
+
+	<!-- Input & output-->
+	<div class="row m-b-lg">
+		<div class="col-xs-12">
+			
+			<div class="col-xs-6">
+					<div class="col-xs-12">
+					<textarea class="form-control floating-label" ng-model="ngModel.input"  placeholder="{{'Input'| translate}}"></textarea>
+				</div>
+			</div>
+			<div class="col-xs-6">
+						<div class="col-xs-12">
+					<textarea class="form-control floating-label" ng-model="ngModel.output"  placeholder="{{'Output'| translate}}"></textarea>
+				</div>
+			</div>
+
+		</div>
+	</div>
+
+	<!-- Input & output images -->
+	<div class="row m-b-md">
+		<div class="col-xs-12">			
+			<div class="col-xs-6 p-lg">
+				<input type="text" readonly="" class="form-control floating-label" placeholder="Input image">
+        		<input type="file" ng-file-select="imageChanged($files, 'input')" data-placement="top" data-html="true" data-container="body" data-title="{{'Please select an image'|translate}}" bs-tooltip>
+		        <div ng-show="ngModel.inputImage">
+		          <img class="img-responsive img-thumbnail w-sm m-xs" ng-src="{{ngModel.inputImage}}" />
+		        </div>
+			</div>
+			<div class="col-xs-6 p-lg">				
+				<input type="text" readonly="" class="form-control floating-label" placeholder="Output image">
+        		<input type="file" ng-file-select="imageChanged($files, 'output')" data-placement="top" data-html="true" data-container="body" data-title="{{'Please select an image'|translate}}" bs-tooltip>
+		        <div ng-show="ngModel.outputImage">
+		          <img class="img-responsive img-thumbnail w-sm m-xs" ng-src="{{ngModel.outputImage}}" />
+		        </div>
+			</div>
+
+		</div>
+	</div>
+
+	<!-- Answer and Hint-->
+	<div class="row m-b-lg">
+		<div class="col-xs-12 m-b-lg">
+			
+			<div class="col-xs-6">
+				<div class="col-xs-12">
+					<textarea class="form-control floating-label" ng-model="ngModel.answer"  placeholder="{{'Answer'| translate}}"></textarea>
+				</div>
+			</div>
+			<div class="col-xs-6">
+				<div class="col-xs-12">
+					<textarea class="form-control floating-label" ng-model="ngModel.hint"  placeholder="{{'Hint'| translate}}"></textarea>
+				</div>
+			</div>
+
+		</div>
+	</div>
+
+
+</div>
