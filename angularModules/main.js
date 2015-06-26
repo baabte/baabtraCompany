@@ -97,12 +97,23 @@ angular.module('baabtra')
       
       if($window.location.host.split(".").length > 2){
         var domainName = $window.location.host.split(".")[0];
+        if(angular.equals(domainName, 'www')){
+          var domainName = $window.location.host.split(".")[1];
+        }
         var checkDomainExitsResponse = companyRegistrationService.fnCheckDomainExits(domainName);
            checkDomainExitsResponse.then(function(response){
               var res = angular.fromJson(JSON.parse(response.data));
+             
               if(angular.equals(res.result,'Exits')){
-                $rootScope.userinfo = {};
-                $rootScope.userinfo.ActiveUserData = {};
+                if(angular.equals($rootScope.userinfo,undefined)){
+                  $rootScope.userinfo = {};
+                }
+                
+                if(angular.equals($rootScope.userinfo.ActiveUserData,undefined)){
+                  $rootScope.userinfo.ActiveUserData = {};
+                }
+
+                
                 $rootScope.userinfo.ActiveUserData.appSettings = res.appSettings; 
               }
               else{
