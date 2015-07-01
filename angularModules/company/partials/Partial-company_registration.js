@@ -152,6 +152,29 @@ fnUserNameValidCallBack.then(function(data){
 
       }
   };
+
+  var searchTimeOut;
+  $scope.checkDomainExits = function(){
+    if(searchTimeOut) {
+    clearTimeout(searchTimeOut);
+    }
+    searchTimeOut=setTimeout(function(){
+      try{
+         if($scope.company.domainName.length){
+           var checkDomainExitsResponse = companyRegistrationService.fnCheckDomainExits($scope.company.domainName);
+           checkDomainExitsResponse.then(function(response){
+              var result = angular.fromJson(JSON.parse(response.data));
+              if(angular.equals(result.result,'Exits')){
+                $scope.notifications('Already in use','This Domain name is already in use','warning');
+              }
+             })
+        }
+      }
+      catch(e){
+        $scope.notifications('Invalid','Invalid Domain name','warning');
+      }
+    },500);
+  };
  
 
 

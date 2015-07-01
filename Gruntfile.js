@@ -58,6 +58,7 @@ module.exports = function (grunt) {
     connect: {
       main: {
         options: {
+          hostname:"jim.baabtra.in",
           port: 9001
         }
       }

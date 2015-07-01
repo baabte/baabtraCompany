@@ -1,7 +1,7 @@
 <!--Created By:Jihin
 Created On:12/11/2014 -->
 
-<aside id="aside" ng-if="$root.userinfo.ActiveUserData.modernView == 'modern' && linkPath.length" class="app-aside {{$root.userinfo.ActiveUserData.appSettings.asideColor}} text-lg fixedBc shadow-z-2" ng-include="'views/aside.html'"  style="margin-top:20px;" ng-class="{'btn-material-blue-grey-900':$root.userinfo.ActiveUserData.appSettings.asideColor == undefined , 'am-fade-and-slide-top':navBar,'ng-hide':!navBar}">
+<aside id="aside" ng-if="$root.userinfo.ActiveUserData.modernView == 'modern' && linkPath.length" class="app-aside {{$root.userinfo.ActiveUserData.appSettings.asideColor}} text-lg fixedBc shadow-z-2" ng-include="'views/aside.html'"  style="margin-top:21px;" ng-class="{'btn-material-blue-grey-900':$root.userinfo.ActiveUserData.appSettings.asideColor == undefined , 'am-fade-and-slide-top':navBar,'ng-hide':!navBar}">
 </aside>
 <!-- ng-style="($root.userinfo.ActiveUserData.modernView != 'modern') && {'margin-bottom':'46px'}" -->
 <div >
@@ -39,7 +39,7 @@ Created On:12/11/2014 -->
 </div>
 </div>
 <div class="p-sm"  >
-	<div ng-style="($root.userinfo.ActiveUserData.modernView != 'modern') && {'margin-top':'46px'}"  class="row p-v-xs" name="innercontent" ui-view>
+  <div ng-style="($root.userinfo.ActiveUserData.modernView != 'modern') && {'margin-top':'46px'}"  class="row p-v-xs" name="innercontent" ui-view>
     <div ng-if="$root.userinfo.ActiveUserData.modernView == 'modern' " class="col-xs-12"  masonry='{ "transitionDuration" : "0.8s" , "itemSelector" : ".tile"}'>
       <div ng-if="(menu.canView || (menu.canView == undefined)) && userMenus.length" masonry-tile  ng-repeat="menu in userMenus" class="text-center p-sm pull-left tile masonry-brick" style="width:140px; margin-bottom:0px;" >
 
@@ -88,7 +88,7 @@ Created On:12/11/2014 -->
 
 
       </div>
-	</div>
+  </div>
 
 </div>
 </div>
