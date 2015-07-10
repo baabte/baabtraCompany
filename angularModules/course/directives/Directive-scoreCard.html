@@ -1,0 +1,14 @@
+<div>
+	<div class="col-xs-6" ng-repeat="children in scoreCard.markSheet[0].children">
+		<div class="col-xs-12 score-card-box m-t p-v">
+			<div class="col-xs-9 font-bold text-md">{{children.name}}</div>
+			<div class="col-xs-3 text-right font-bold text-md text-pdf-success" ng-if="children.mark.markScored">{{children.mark.markScored}}/{{children.mark.maxMark}}</div>
+			<div class="col-xs-3 text-right font-bold text-md"  ng-if="!children.mark.markScored">NA</div>
+			<div class="col-xs-12" ng-repeat="nexChildren in children.children">
+				<div class="col-xs-10 ">{{nexChildren.name}}</div>
+				<div class="col-xs-2 no-padding-h text-right" ng-if="nexChildren.mark.markScored">{{nexChildren.mark.markScored}}/{{children.mark.maxMark}}</div>
+				<div class="col-xs-2 no-padding-h text-right" ng-if="!nexChildren.mark.markScored">NA</div>
+			</div>
+		</div>
+	</div>
+</div>

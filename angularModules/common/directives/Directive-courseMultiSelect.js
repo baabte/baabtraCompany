@@ -30,7 +30,7 @@ angular.module('baabtra').directive('courseMultiSelect',['$rootScope','commonSrv
 			}
 
 			scope.loadMaterials=function(){
-				var courseMaterialResponse
+				var courseMaterialResponse;
 					if(angular.equals(scope.batchMappingId,undefined)){
 						courseMaterialResponse = commonSrv.loadCourseMaterial(scope.courseId,scope.userId);
 					}else{

@@ -1,13 +1,12 @@
-angular.module('baabtra').directive('courseLoader',['addCourseService','$rootScope', function(addCourseService,$rootScope) {
+angular.module('baabtra').directive('testLoader',['addCourseService','$rootScope', function(addCourseService,$rootScope) {
 	return {
 		restrict: 'E',
-		require:'ngModel',
+		replace: true,
 		scope: {
 			ngModel:"="
 		},
-		templateUrl: 'angularModules/common/directives/Directive-courseLoader.html',
-		link: function(scope, element, attrs, ctrls) {
-			
+		templateUrl: 'angularModules/common/directives/Directive-testLoader.html',
+		link: function(scope, element, attrs, fn) {
 			scope.multi = false;
 		
 			if(!angular.equals(attrs.multiSelect,undefined)){
@@ -21,7 +20,7 @@ angular.module('baabtra').directive('courseLoader',['addCourseService','$rootSco
 			  
 			}
 
-			scope.type='all';
+			scope.type='test';
 					
 		//service call for course fetch
 			var courseFetchData={fkcompanyId:companyId,type:scope.type};
@@ -46,7 +45,7 @@ angular.module('baabtra').directive('courseLoader',['addCourseService','$rootSco
 					scope.ngModel=course;
 					ctrls.$setValidity('courseLoader',true);				
 			};
-        
+
 
 		}
 	};

@@ -100,7 +100,6 @@
                   } 
                 }
               })
-
               .state('page.profile', {
                 url: '/profile',
                 templateUrl: 'views/pages/profile.html'
@@ -123,6 +122,33 @@
                 url: '/main',
                 templateUrl: 'angularModules/login/partials/Partial-home.html',
                 controller:'HomeCtrl'
+              })
+              .state('home.main.newParent', {
+                url: '/newParent',
+                views:{
+                  'innercontent':{
+                    templateUrl: 'angularModules/manageParent/newParent/partials/Partial-registerParent.html',
+                    controller:'RegisterparentCtrl'
+                  }
+                }
+              })
+              .state('home.main.addCandidate', {
+                url: '/addCandidate',
+                views:{
+                  'innercontent':{
+                    templateUrl: 'angularModules/manageParent/addCandidate/partials/Partial-addCandidateUnderParent.html',
+                    controller:'AddcandidateunderparentCtrl'
+                  }
+                }
+              })
+              .state('home.main.viewRelatedCandidates', {
+                url: '/viewRelatedCandidates',
+                views:{
+                  'innercontent':{
+                    templateUrl: 'angularModules/parent/viewCandidates/partials/Partial-viewCandidatesForParent.html',
+                    controller:'ViewcandidatesforparentCtrl'
+                  }
+                }
               })
               .state('home.main.company.manage.role', {
                 url: '/role',
@@ -509,7 +535,7 @@
                 
               })
               .state('home.main.baabtraProfile', {
-                url: '/baabtraProfile/:userLoginId',
+                url: '/baabtraProfile/:type/:userLoginId',
                 views:{
                   'innercontent':{
                     templateUrl: 'angularModules/baabtra.comProfile/partials/Partial-baabtra.comProfile.html',
@@ -955,6 +981,45 @@
                 url: '/courseUserRegistration/:courseId',
                 templateUrl: 'angularModules/common/formLoader/partials/Partial-formLoader.html',
                 controller:'FormloaderCtrl'
+              })
+
+                .state('home.main.paymentRefund', {
+                url: '/paymentRefund/:key',
+                 views:{
+                  'innercontent':{
+                templateUrl: 'angularModules/payment/paymentRefund/partials/Partial-paymentRefund.html',
+                controller:'PaymentrefundCtrl'
+                  }
+                }
+              })
+
+                .state('home.main.refundRequest', {
+                url: '/refundRequest/:ofId',
+                 views:{
+                  'innercontent':{
+                templateUrl: 'angularModules/payment/refundRequest/partials/Partial-refundRequest.html',
+                controller:'RefundrequestCtrl'
+                  }
+                }
+              })
+
+                 .state('home.main.manageOrderForms', {
+                url: '/manageOrderForms/',
+                 views:{
+                  'innercontent':{
+                templateUrl: 'angularModules/orderForm/manageOrderForms/partials/Partial-manageOrderForms.html',
+                controller:'ManageorderformsCtrl'
+                  }
+                }
+              })
+                 .state('home.main.resultReport', {
+                url: '/resultReport/',
+                 views:{
+                  'innercontent':{
+                templateUrl: 'angularModules/result/resultReport/partials/Partial-resultReport.html',
+                controller:'ResultreportCtrl'
+                  }
+                }
               })
 
               .state('page.document', {

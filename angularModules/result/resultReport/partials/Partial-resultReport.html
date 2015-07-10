@@ -1,0 +1,52 @@
+<div class="col-xs-12">
+
+  <div class="row bg-white baab-shadow fixed-tab">
+    <div class="col-xs-12 p-sm">
+      	<div class="col-md-2 col-xs-12 m-t-sm">
+            <test-loader ng-if="reportObj" ng-model="reportObj.selectedTest"></test-loader>        
+      	</div>
+      	<div class="col-md-3 col-xs-12 m-t-md">
+        	<input type="text" ng-model="reportObj.searchKey" class="form-control" placeholder="Search College" autocomplete="off">
+      	</div>
+	    <div class="col-md-4 col-xs-12 m-t-md">
+	    	<div class="col-xs-6">
+
+                           <input  type="text" class="form-control" placeholder="From Date"  ng-model="fromDate" data-date-format="dd-MM-yyyy" ng-change="fromDateChange()" data-placement="bottom" data-date-type="date" data-autoclose="true" data-max-date="today" name="date1" bs-datepicker required >
+	    	</div>
+
+	    	<div class="col-xs-6 m-b-xs">
+
+                           <input  type="text" class="form-control" placeholder="To Date" ng-model="toDate" data-date-format="dd-MM-yyyy" data-placement="bottom" data-date-type="date" data-autoclose="true" data-min-date="{{fromDateFormated}}" data-max-date="today" name="date2" bs-datepicker required >
+	    	</div>
+
+
+	    </div>
+	    <div class="col-md-3 col-xs-12 text-right m-t-xs ">
+	        <div class="btn-group">
+			    <a  class="btn btn-info" ng-disabled="!reportObj.searchKey||!reportObj.selectedTest[0]._id" ng-click="searchUser()">Generate Report</a>
+			    <a class="btn btn-info dropdown-toggle" data-toggle="dropdown"><span class="caret"></span></a>
+			    <ul class="dropdown-menu">
+			        <li><a ng-click="generateReport()" ng-disabled="!reportObj.searchKey||!reportObj.selectedTest[0]._id">Export to Spreadsheet</a></li>
+			    </ul>
+			</div>    
+	    </div>
+    </div>
+  </div>
+
+  <div class="row bg-light" style="margin-top:70px;">
+    <div class="col-xs-12 p-v" ng-if="reportObj.userList&&reportObj.userList.length>0">
+
+      <div class="col-md-push-2 col-md-8 col-xs-12 col-sm-12 p-h-sm shadow-z-1  pull-left bg-white p-v font-bold" style="cursor: pointer;">
+      	 <div class="col-xs-4">Name</div>
+        <div class="col-xs-6 text-name">College</div>
+        <div class="col-xs-2">Mark</div>
+      </div>	
+      <div class="col-md-push-2 col-md-8 col-xs-12 col-sm-12 p-h-sm shadow-z-1  pull-left bg-white p-v" ng-repeat="user in reportObj.userList" style="cursor: pointer;">
+        <div class="col-xs-4">{{user[0]}}</div>
+        <div class="col-xs-6 text-name">{{user[1]}}</div>
+        <div class="col-xs-2">{{user[2]}}</div>
+      </div>
+
+    </div>
+  </div>
+</div>

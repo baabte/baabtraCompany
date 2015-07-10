@@ -1,0 +1,71 @@
+<div  class="modal modal-full-width" tabindex="-1" role="dialog">
+    <div class="modal-dialog-full-width  modal-full-width">
+      <div class="modal-content">
+        <div class="p bg-info font-bold baab-shadow">
+          Search and select candidates.
+        </div>
+        <div class="modal-body">
+          <!-- <pre>{{elementsOfSelectedNode}}</pre> -->
+          <div class="col-xs-12">
+            <div class="form-group col-xs-6 col-md-3">
+                <input class="form-control floating-label" type="text" ng-model="data.candidateSearchKey" placeholder="Search" data-hint="You can search any key-word that mathces a candidate, like e-mail,First name , Last name... etc.">
+            </div>
+            <div class="form-group col-xs-6 col-md-3">
+                 <button ng-click="searchUser()" class="btn btn-primary">Search</button>
+            </div>
+
+          </div>
+          <div class="col-xs-12 col-md-3 p">
+            <div class="col-xs-12 p shadow-z-1 bg-danger" ng-if="!data.candidateList.length">
+              There are no candidates mapped with this parent..!
+            </div>
+            <div class="col-xs-12 p shadow-z-1 bg-success" ng-if="data.candidateList.length">
+              Candidates mapped with this parent
+            </div>
+            <div class="col-xs-12 p shadow-z-1" ng-if="data.candidateList.length" ng-repeat="candidate in data.candidateList">
+              <div class="p" style="position: absolute;right: 15px;">
+                        <a ng-click = "removeCandidate($index)"><i class="mdi-content-clear text-xl" ></i></a>
+
+              </div>
+              <span class="font-bold">{{candidate.profile.firstName}}&nbsp;{{candidate.profile.lastName}}</span><br>
+              <span>{{candidate.userName}}</span>
+                
+            </div>
+
+          </div>
+          <div class="col-xs-12 col-md-9 p b-l" masonry='{ "transitionDuration" : "0.8s" , "itemSelector" : ".tile"}'>
+            <div class="col-xs-12 p shadow-z-1 bg-danger" ng-if="data.usersObject.userList&&!data.usersObject.userList.length">
+              There are no matching candidates for searched key words..!
+            </div>
+                <div  ng-if="checkCandidate(user.fkUserLoginId)" masonry-tile class="tile col-xs-12 col-sm-4 col-md-4 col-lg-3 pull-left masonry-brick" ng-repeat="user in data.usersObject.userList">
+                 <div class="panel " >
+                      <div class="p" style="position: absolute;right: 15px;">
+                        <a ng-click = "addCandidate(user)"><i class="mdi-content-add text-xl" ></i></a>
+
+                      </div>
+                      <div >
+                       
+                         <div style="max-height: 226px;  overflow: hidden;">
+                           <img class="img-responsive" ng-if="!user.profile.userPic" style="min-height: 226px;"  src="images/default_person.png">
+                            <img  class="img-responsive" ng-if="user.profile.userPic" style="min-height: 226px;  overflow: hidden;" src="{{user.profile.userPic}}">
+                         </div>
+                         <div class="panel-body">
+                         <div class="font-bold text-black  m-h-sm text-name show-in-one-line">{{user.profile.firstName}}&nbsp;{{user.profile.lastName}}</div>
+                         <div class="text-black m-h-sm show-in-one-line" >{{user.userName}}</div>
+                         <div class="text-black m-h-sm " >DOB:&nbsp;{{user.profile.dob | date:'dd/MMM/yyyy'}}</div>
+                           </div>
+                      </div>
+                 
+                </div>
+              </div>
+          </div>
+          
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-primary baab-btn" ng-click="$hide()">Close</button>
+          <!-- <button type="button" class="btn btn-primary baab-btn"><i class="fa fa-download" ></i>&nbsp;Download</button> -->
+          <!-- <button type="button" class="btn btn-success baab-btn" ng-click="saveMarksheetToDb($hide)">Save</button> -->
+        </div>
+      </div>
+    </div>
+</div>

@@ -4,18 +4,23 @@
 		<div class="upper font-bold text-md">{{batch.batchName}}</div>
 		<div>Starting date: {{dateConvertion(batch.startDate.$date)}}</div>
 		<div class="row">
+			<div class="col-xs-12 text-name">Material Assignment Type&nbsp;:&nbsp;{{batch.materialAssignment}}</div>
+		</div>
+		<div class="row">
 			<div class="col-xs-6">Total joinings: {{batch.totalJoining}}</div>
+
 			<div ng-if="batch.status" class="col-xs-12">
             	<span  class="label label-success text-u-c">{{batch.status}}</span>
             </div>
 			<div class="col-xs-6 visible-md visible-xs">
 				<a ng-if="specificOption" class="btn btn-success baab-btn " ng-click="executeFunction(actions[specificOption-1].click)" ng-bind-html="actions[specificOption-1].text"></a>
-				<a ng-if="actionFlag" href="" html="true" data-placement="left" bs-dropdown="actions" class="pull-right no-margin"><i class="mdi-action-list text-xl"></i><div class="ripple-wrapper"></div></a>
+				<a ng-if="actionFlag" href="" html="true" data-placement="bottom" bs-dropdown="actions" class="pull-right no-margin"><i class="mdi-action-list text-xl"></i><div class="ripple-wrapper"></div></a>
 			</div>
 		</div>
+		
 	</div>
 	<div class="col-xs-6 text-right hidden-md hidden-xs" >
 		<a ng-if="specificOption" ng-disabled="disableButton" class="btn btn-success baab-btn " ng-click="executeFunction(actions[specificOption-1].click)" ng-bind-html="actions[specificOption-1].text"></a>
-		<a ng-if="actionFlag" ng-disabled="disableButton" html="true" data-placement="left" bs-dropdown="actions" class="pull-right no-margin"><i class="mdi-action-list text-xl"></i><div class="ripple-wrapper"></div></a>
+		<a ng-if="actionFlag" ng-disabled="disableButton" html="true" data-placement="bottom-right" bs-dropdown="actions" class="pull-right no-margin"><i class="mdi-action-list text-xl"></i><div class="ripple-wrapper"></div></a>
 	</div>
 </div>

@@ -1,12 +1,12 @@
 <div class="col-xs-12 m-h-n shadow-z-1 p m-b" ng-show="data!=undefined">
 	<div clas="row">
-		<div class="col-xs-2 no-padding"><i class="ui-icon m-r m-t pull-left fa {{data.Icon}}" style="color:{{data.iconBackground}} !important;"></i></div>
+		<div class="col-xs-2 no-padding"><i class="ui-icon m-r p-v-sm pull-left fa {{data.Icon}}" style="color:{{data.iconBackground}} !important;"></i></div>
 		<div class="col-xs-10 no-padding">
-			<em>{{data.elements[0].value}}</em><br/>
+			<div title="{{data.elements[0].value}}" class="text-warning show-in-one-line">{{data.elements[0].value}}</div>
 
-			<small>{{data.Name}}</small>
-			<div  ng-if="!buttonShow">
-			<a ng-click="elementPreview()"><i bs-tooltip data-title="{{'Element preview'}}" data-placement="left" class="mdi-action-visibility pull-right text-lg"></i></a>
+			<div class="col-xs-10 no-padding text-sm">{{data.Name}}</div>
+			<div class="col-xs-2"  ng-if="!buttonShow">
+				<a ng-click="elementPreview()"><i bs-tooltip data-title="{{'Element preview'}}" data-placement="left" class="mdi-action-visibility pull-right text-lg"></i></a>
 			</div>
 
 			<div ng-if="buttonShow">
@@ -27,4 +27,4 @@
 		</div>
 
 	</div>
-</div>in
+</div>

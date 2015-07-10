@@ -1,22 +1,153 @@
-<div class="p-h-md p-v bg-white box-shadow pos-rlt" >
-  <h3 class="no-margin " translate="{{'baabtra.com Profile'|translate}}">baabtra.com Profile</h3>
+<div class="col-xs-12 bg-light p-v" >
+
+  <!-- header -->
+  <div id="summeryWithContact">
+  <div class="col-xs-push-1 col-md-push-2 col-md-8 col-xs-10 p shadow-z-1 bg-white " >
+    <div class="">
+      <div class="col-xs-2 font-bold text-lg p-v text-right" >
+        <img  src="{{$root.userinfo.ActiveUserData.appSettings.logo}}" class="img-responsive" style="max-height: 40px !important;">
+        Profile
+      </div>
+
+      <div class="col-xs-8 p-v-sm baabtra-profile-bg" >
+        
+        <div class="text-xl text-name text-pdf-white" ng-class="{'blurry-text':baabtraProfile.showId}" >{{baabtraProfile.userDetails.profile.firstName}}&nbsp;{{baabtraProfile.userDetails.profile.lastName}}
+        </div>
+
+        <div><a class="text-pdf-white" ng-class="{'blurry-text':baabtraProfile.showId}">{{baabtraProfile.userDetails.userName}}</a></div>
+
+        <div class="text-pdf-white" ng-if="baabtraProfile.userDetails.profile.mobile || baabtraProfile.userDetails.profile.contactNoMob" ng-class="{'blurry-text':baabtraProfile.showId}">{{baabtraProfile.userDetails.profile.mobile}}{{baabtraProfile.userDetails.profile.contactNoMob}}
+        </div>
+
+        <div class="col-xs-6 no-padding-h text-pdf-white" ng-if="baabtraProfile.userDetails.profile.dob" ng-class="{'blurry-text':baabtraProfile.showId}">Age&nbsp;:&nbsp;{{calculateAge(baabtraProfile.userDetails.profile.dob)}}&nbsp;</div>
+
+        <div class="col-xs-6 no-padding-h text-right font-bold text-pdf-white" ng-if="baabtraProfile.userDetails.profile.userCode" >ID&nbsp;:&nbsp;{{baabtraProfile.userDetails.profile.userCode}}</div>
+      </div>
+
+      <!-- profile picture -->
+      <div class="col-xs-2 text-right" style="padding-right: 0px;max-height: 114px;overflow: hidden;">
+        <img class="img-responsive" ng-if="!baabtraProfile.userDetails.profile.userPic"   src="images/default_person.png">
+        <img  class="img-responsive blur-bgimage" ng-if="baabtraProfile.userDetails.profile.userPic" src="{{baabtraProfile.userDetails.profile.userPic}}">
+      </div>
+
+    </div>
+  </div>
+
+  <div  class="col-xs-push-1 col-md-push-2 col-md-8 col-xs-10 p shadow-z-1 bg-white " >
+    <!-- left side border -->
+    <div class="col-xs-1 baabtra-profile-bg p" style="overflow: hidden;" set-parent-height>
+      <img ng-repeat="i in ['1', '2', '3', '4', '5']" style="margin-bottom: 100px;" src="../images/baabtra-rotate.png" >
+    </div>
+    
+    <!-- right side  -->
+    <div class="col-xs-11  set-full-height" >
+
+      <!-- test summary -->
+      <div ng-if="baabtraProfile.tests.length">
+        <div class="col-xs-12 font-bold no-padding-h m-b">Screening : List of the tests attended here</div>
+        <table class="table table-bordered bg-white">
+          <thead>
+            <tr  class="baabtra-profile-bg">
+              <th>#</th>
+              <th>Name</th>
+              <th>Score</th>
+              <th>Date of appearing</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr ng-if="course.type == 'test'" ng-repeat="course in baabtraProfile.tests">
+              <td>{{$index+1}}</td>
+              <td>{{course.Name}}</td>
+              <td>{{course.markScored}}&nbsp;/&nbsp;{{course.totalMark}}</td>
+              <td>{{convertDate(course.createdDate) | date:'dd/MMM/yyyy'}}</td>
+              </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <!-- course summary -->
+      <div ng-if="baabtraProfile.courses.length">
+        <div class="col-xs-12 font-bold no-padding-h m-b">Courses/Projects Prepared</div>
+        <div class="table-responsive">
+          <table class="table table-bordered bg-white">
+            <thead class="baabtra-profile-bg">
+              <tr>
+                <th>#</th>
+                <th >Name</th>
+                <th>Score</th>
+                <th>Duration</th>
+                <th>Status</th>
+                <th>Date of Completion</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr ng-if="course.type == 'course'" ng-repeat="course in baabtraProfile.courses">
+                <td>{{$index+1}}</td>
+                <td>{{course.Name}}</td>
+                <td>{{course.markScored}}&nbsp;/&nbsp;{{course.totalMark}}</td>
+                <td>{{getCourseDuration(course.Duration.DurationDetails)}}</td>
+                <td>NA</td>
+                <td>NA</td>
+                </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+
+      <div  class="col-xs-12 font-bold no-padding-h p-v" ng-if="!baabtraProfile.showId">Personal Details</div>
+      <div class="table-responsive" ng-if="!baabtraProfile.showId">
+        <table class="table table-bordered bg-white">
+          <tbody>
+            <tr ng-if="['firstName', 'lastName', 'CollegeName', 'gender', 'course' , 'State', 'YearOfPassing', 'Location', 'location', 'branch', 'Country', 'District', 'address'].indexOf(key) != -1" ng-repeat="(key, data) in baabtraProfile.userDetails.profile">
+              <td class="font-bold text-name">{{key}}</td>
+              <td ng-if="['location'].indexOf(key) == -1">{{data}}</td>
+               <td ng-if="['location'].indexOf(key) == 0"><span class="text-name"  ng-repeat="value in data">{{value}}&nbsp;<i class="fa fa-caret-right" ></i>&nbsp;</span></td>
+              </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <div ng-if="baabtraProfile.type =='detailed'" class="col-xs-12 font-bold no-padding-h p-v">Detailed Score</div>
+      
+      <div ng-if="baabtraProfile.tests.length">
+         <div ng-if="test.syllabus"  class="col-xs-12 no-padding-h" ng-repeat="test in baabtraProfile.tests">
+          <div class="col-xs-12 font-bold text-md baabtra-profile-bg  p-v-sm no-padding-h">
+            <div  class="col-xs-7 text-pdf-white" >{{test.Name}}</div>
+            <div class="col-xs-3">
+              <div ng-if="test.syllabus[0].mark.markScored  && baabtraProfile.showInPrint" star-rating rating-value="{{test.syllabus[0].mark.markScored}}" max="{{test.syllabus[0].mark.maxMark}}" ></div>
+            </div>
+            <div class="col-xs-2 text-pdf-white">{{test.syllabus[0].mark.markScored}}/{{test.syllabus[0].mark.maxMark}}</div>
+          </div>
+            <score-card score-obj="test.syllabus">
+            </score-card>
+         </div>
+      </div>
+
+      <div  ng-if="baabtraProfile.courses.length">
+         <div  ng-if="course.syllabus" class="col-xs-12 no-padding-h m-t" ng-repeat="course in baabtraProfile.courses">
+          <div class="col-xs-12 font-bold text-md baabtra-profile-bg p-v-sm no-padding-h">
+            <div  class="col-xs-7 text-pdf-white" >{{course.Name}}</div>
+            <div class="col-xs-3">
+              <div ng-if="course.syllabus[0].mark.markScored && baabtraProfile.showInPrint" star-rating rating-value="{{course.syllabus[0].mark.markScored}}" max="{{course.syllabus[0].mark.maxMark}}" ></div>
+            </div>
+            <div class="col-xs-2 text-pdf-white">{{course.syllabus[0].mark.markScored}}/{{course.syllabus[0].mark.maxMark}}</div>
+          </div>
+          <score-card score-obj="course.syllabus">
+           </score-card>
+         </div>
+      </div>
+
+  </div>
+
 </div>
-<div class="box bg-white" >
-   <div class="col-md-3" >
-   		 <div style="background:url({{profileData.avatar}}) center center; background-size:cover; " >
-	      <div class="p-lg bg-white-opacity text-center">
-	        <a href class="w-sm inline m-t-md">
-	          <img ng-src="{{profileData.avatar}}" class="img-circle img-responsive">
-	         
-	        </a>
-	        <div class="m-b p-v-lg h4">
-	          <span class="text-black">{{profileData.userInfo.profile.firstName}} {{profileData.userInfo.profile.lastName}}</span>
-	        </div>
-	      </div>
-	     
-    	</div>  
-   </div>
-   <div class="col-md-9 bg-white b-l ">
-   			<baabtra-com-profile user-login-id="userLoginId"></baabtra-com-profile>
-   </div>
 </div>
+    <div class="col-xs-push-1 col-md-push-2 col-md-8 col-xs-10 p shadow-z-1 bg-white m-t">
+    <a href="" style="white-space: normal;" class="btn btn-material-purple-A400 col-xs-4 p-v text-center no-margin" ng-click="fullPrint()" >Export as PDF (With Contact) BP Summery</a>
+    
+    <a href="" style="white-space: normal;" class="btn btn-material-deep-purple-A400 col-xs-4 p-v text-center no-margin" ng-click="showId()">Export as PDF (without Contact)BP Summary</a>
+
+    <a href="" id="myElement" ng-show="false" print-page print-element-id="summeryWithContact" ng-click="baabtraProfile.showId = false;baabtraProfile.showInPrint = true;"></a>
+    <a href="" style="white-space: normal;" class="btn btn-material-light-blue-A400 col-xs-4 p-v text-center no-margin">Export as PDF (with Contact) Detailed BP</a>
+  </div>
+</div>
+<!-- <div ng-if="test.syllabus[0].mark.markScored" class="pull-right" star-rating rating-value="{{test.syllabus[0].mark.markScored}}" max="{{test.syllabus[0].mark.maxMark}}" ></div> -->
