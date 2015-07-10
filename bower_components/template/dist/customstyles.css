@@ -908,7 +908,7 @@ body {
 
   position: fixed;
   width: 100.4%;
-  z-index: 1050;
+  z-index: 1040;
 }
 
 .btn-container > button{
@@ -924,3 +924,53 @@ body {
   display: none!important;
 }
   
+.show-in-one-line {
+   overflow: hidden;
+   text-overflow: ellipsis;
+   display: -webkit-box;
+   -webkit-box-orient: vertical;
+   -webkit-line-clamp: 1; /* number of lines to show */
+   line-height: 16px;        /* fallback */
+   max-height: 16px;       /* fallback */
+}
+
+.rating {
+    color: #a9a9a9;
+    margin: 0!important;
+    padding: 0!important;
+}
+ul.rating {
+    display: inline-block!important;
+}
+.rating li {
+ display: inline!important;
+}
+.text-yellow{
+    color: yellow!important;
+}
+.score-card-box{
+  border: 2px #5484be dashed;
+  border-radius: 20px;
+}
+
+.baabtra-profile-bg{
+  background-color: rgba(19, 53, 95, 0.84)!important;
+  color: #FFFFFF!important;
+}
+.text-pdf-white{
+  color: #FFFFFF!important;
+}
+.text-pdf-success{
+  color: #0f9d58!important;
+}
+.text-pdf-red{
+  color: red!important;
+}
+
+.blurry-text {
+  color: transparent!important;
+  text-shadow: 0 0 10px rgba(255, 255, 255, 1)!important;
+}
+.bg-white{
+  background: #fff!important;
+}

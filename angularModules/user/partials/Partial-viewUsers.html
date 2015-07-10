@@ -3,43 +3,70 @@
   <div class="row bg-white baab-shadow fixed-tab">
     <div class="col-xs-12 p-sm">
       <div class="col-xs-3">
-        <input type="text" ng-change="searchUser()" ng-model="data.usersObject.searchKey" class="form-control" placeholder="Search Users" autocomplete="off">
+        <input type="text"  ng-model="data.profile.firstName" class="form-control" placeholder="Search Users" autocomplete="off">
       </div>
       <div class="col-xs-9 text-right">
-        <a class="btn btn-rounded btn-stroke btn-primary no-margin" ng-click="prevOne()"><i class="fa fa-angle-left text-white font-bold"></i></a>
-        <a ng-click="nextOne()" class="btn btn-rounded btn-stroke btn-primary no-margin"><i class="fa fa-angle-right text-white font-bold"></i></a>
+        <a class="btn btn-rounded btn-stroke btn-primary no-margin" ng-disabled="data.prevButtondisabled" ng-click="prevOne()"><i class="fa fa-angle-left text-white font-bold"></i></a>
+        <a ng-click="nextOne()" ng-disabled="data.nextButtondisabled" class="btn btn-rounded btn-stroke btn-primary no-margin"><i class="fa fa-angle-right text-white font-bold"></i></a>
       </div>
     </div>
-    <!-- <div class="col-xs-12 p-h p-v-sm bg-white b-b fixed-tab">
-
-      <div class="row">
-        <div class="col-xs-2">
-          <input type="text" ng-change="searchUser()" ng-model="userObj.searchKey" class="form-control" placeholder="Search Users" autocomplete="off">
-        </div>
-        <div class="col-xs-12 col-sm-6">
-
-
-      </div>
-      </div>
-    </div> -->
   </div>
 
   <div class="row bg-light" style="margin-top:56px;">
     <div class="col-xs-12 p-v">
-      <div class="col-md-push-2 col-md-8 col-xs-12 col-sm-12 p-h-sm shadow-z-1  pull-left bg-white p-v" ng-repeat="user in data.usersObject.userList" style="cursor: pointer;">
-        <div class="col-xs-2">
-
-          <i ng-if="!user.profile.userPic" class="mdi-action-assignment-ind text-lg  random-background-color img-circle p-xs  btn-material-purple-500"></i>
-
-          <div class="w-thumb-sm" ng-if="user.profile.userPic"><img src="{{user.profile.userPic}}" class="img-responsive rounded"></div>
-
+      <div ng-if="data.Feilds.length" class="col-xs-12 col-sm-2 text-left p-v m-b bg-white shadow-z-1">
+        <label class="col-xs-12 control-label" style="padding-left: 0px;">Gender</label>
+        
+                <div class="radio radio-primary">
+          <label>
+            <input type="radio" ng-model="data.profile.gender" name="optionsRadios" value="">
+            All
+          </label>
         </div>
-        <div class="col-xs-4 text-name">{{user.profile.firstName}}&nbsp;{{user.profile.lastName}}</div>
-        <div class="col-xs-5">{{user.userName}}</div>
-        <div class="col-xs-1" bs-dropdown="data.userDropdown" data-html="true" data-placement="bottom-right">
-          <a ><i class="text-xl mdi-navigation-more-vert"></i></a>
+        
+        <div class="radio radio-primary">
+          <label>
+            <input type="radio" ng-model="data.profile.gender" name="optionsRadios" value="Male" checked="">Male
+          </label>
         </div>
+        <div class="radio radio-primary">
+          <label>
+            <input type="radio" ng-model="data.profile.gender" name="optionsRadios" value="Female">
+            Female
+          </label>
+        </div>
+
+
+      <div class="m-b-xs" ng-repeat="feild in data.Feilds">
+        <input type="text" ng-model="data.profile[feild.model]" class="form-control " id="inputEmail" placeholder="{{feild.text}}">
       </div>
+        </div>
+      <div class="col-xs-12 " ng-class="{'text-center':!data.Feilds.length,'col-xs-10':data.Feilds.length}">
+        <div  masonry='{ "transitionDuration" : "0.8s" , "itemSelector" : ".tile"}'>
+           <div masonry-tile class="tile col-xs-6 col-sm-4 col-md-4 col-lg-3 pull-left masonry-brick" ng-repeat="user in data.usersObject track by user._id.$oid">            
+            <div class="panel " >
+                 <div class="p" style="position: absolute;right: 15px;">
+                   <a  data-placement="bottom-right" data-html="true" bs-dropdown="data.userDropdown"><i class="mdi-navigation-more-vert text-xl" ></i></a>
+
+                 </div>
+                 <div >
+                  
+                    <div style="max-height: 226px;  overflow: hidden;">
+                      <img class="img-responsive" ng-if="!user.profile.userPic" style="min-height: 226px;"  src="images/default_person.png">
+                       <img  class="img-responsive" ng-if="user.profile.userPic" style="min-height: 226px;  overflow: hidden;" src="{{user.profile.userPic}}">
+                    </div>
+                    <div class="panel-body">
+                    <div class="font-bold text-black  m-h-sm text-name show-in-one-line">{{user.profile.firstName}}&nbsp;{{user.profile.lastName}}</div>
+                    <div class="text-black m-h-sm show-in-one-line" >{{user.userName}}</div>
+                    <div class="text-black m-h-sm " >DOB:&nbsp;{{user.profile.dob | date:'dd/MMM/yyyy'}}</div>
+                      </div>
+                 </div>
+            
+           </div>
+           </div>
+           </div>
+      </div>
+      
     </div>
   </div>
 </div>

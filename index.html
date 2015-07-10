@@ -2,10 +2,10 @@
 <html lang="en" ng-app="baabtra" class="background-properties {{$root.userinfo.ActiveUserData.appSettings.backgroundColor}}" style = "background-image:{{$root.userinfo.ActiveUserData.appSettings.backgroundImage}};" ng-class="{'default-bg':!$root.userinfo.ActiveUserData.appSettings.backgroundColor}" >
 <head>
   <meta charset="utf-8" />
-  <title>Baabtra.com</title>
+  <title>99LMS</title>
   <meta name="description" content="app, web app, responsive, responsive layout, admin, admin panel, admin dashboard, flat, flat ui, ui kit, AngularJS, ui route, charts, widgets, components" />
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
-  <link rel="shortcut" href="images/favicon.png">
+  <link rel="shortcut icon" type="image/x-icon" href="{{$root.userinfo.ActiveUserData.appSettings.logo?$root.userinfo.ActiveUserData.appSettings.logo:'images/favicon.png'}}">
 
   <!-- build:css(.) css/baabtra.min.css -->
   <!-- bower:css -->
