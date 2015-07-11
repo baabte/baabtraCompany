@@ -113,7 +113,7 @@
                 templateUrl: 'views/pages/blank.html'
 
               })
-		          .state('login', {
+              .state('login', {
                 url: '/login',
                 templateUrl: 'angularModules/login/partials/Partial-Login_view.html',
                 controller:'LoginViewCtrl'
