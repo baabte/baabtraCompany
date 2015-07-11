@@ -114,7 +114,7 @@ angular.module('baabtra')
                   $rootScope.userinfo.ActiveUserData = {};
                 }
 
-                
+                $rootScope.userinfo.ActiveUserData.companyName = res.companyName;
                 $rootScope.userinfo.ActiveUserData.appSettings = res.appSettings; 
                 $location.path('/login')
               }

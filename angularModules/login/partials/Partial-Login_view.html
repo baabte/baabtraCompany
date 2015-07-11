@@ -1,12 +1,10 @@
 
 
 
-
-
 <div class="container w-xxl p-lg bg-white shadow" >
 <!-- <button type="button" class="close" ui-sref="forgot-password"><code>×</code></button> -->
-  <div class="" >
-    <h4><span translate="{{'Sign in to'|translate}}"></span> {{app.name}}</h4>
+  <div class="" ng-if="$root.userinfo">
+    <h4><span translate="{{'Sign in to'|translate}}"></span>&nbsp;{{$root.userinfo.ActiveUserData.companyName}}</h4>
     <div class="p-v-sm"></div>
 <!--     <div>
       <a class="btn btn-block btn-social btn-facebook btn-material-indigo-A400 p" ng-click="facebook_login()" ng-enabled="isLoggedIn" style="background:#3A5791;">
@@ -42,7 +40,7 @@
             <button  type="submit" class="btn btn-warning baab-btn" ng-disabled="signinform.$invalid || progress" ><span class="p-h-md">{{btnSignupText}}</span></button>
 
             <p class="text-xs"><a ui-sref="forgot-password" translate="{{'Forgot password?'|translate}}"></a></p>
-            <p class="text-md"><a ui-sref="signup" translate="{{'SignUp'|translate}}"></a></p>
+           <!--  <p class="text-md"><a ui-sref="signup" translate="{{'SignUp'|translate}}"></a></p> -->
 
           </div>
       </form>
