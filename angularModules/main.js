@@ -105,6 +105,7 @@ angular.module('baabtra')
               var res = angular.fromJson(JSON.parse(response.data));
              
               if(angular.equals(res.result,'Exits')){
+
                 if(angular.equals($rootScope.userinfo,undefined)){
                   $rootScope.userinfo = {};
                 }
@@ -115,9 +116,10 @@ angular.module('baabtra')
 
                 
                 $rootScope.userinfo.ActiveUserData.appSettings = res.appSettings; 
+                $location.path('/login')
               }
               else{
-                $location.path('/404')
+                $location.path('/404');
               }
               //$scope.notifications('Success','This Domain name is already in use','success');
               
