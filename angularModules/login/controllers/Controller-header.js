@@ -19,7 +19,7 @@ angular.module('baabtra').controller('header',['$scope','$rootScope','$state','l
 			};
 		//call back functions of LOGOUT
 		$scope.fnCallbackLogout=function(data){
-				logoutObject=angular.fromJson(JSON.parse(data));
+				var logoutObject=angular.fromJson(JSON.parse(data));
 				// console.log(logoutObject);
 				if(logoutObject.numberOfSessions>1){
 						$scope.numberOfSessions=logoutObject.numberOfSessions;
@@ -32,13 +32,17 @@ angular.module('baabtra').controller('header',['$scope','$rootScope','$state','l
 						// if(logoutObject.msg=="success"){
 							localStorageService.set('logDatas','{}');//resetting the userinfo before logout 
 			   				$rootScope.loggedIn=false;
-			   				$rootScope.userinfo=undefined;
+			   				var appSettings = $rootScope.userinfo.ActiveUserData.appSettings;
+			   				var companyName = $rootScope.userinfo.ActiveUserData.companyName;			   				$rootScope.userinfo = {};
+			   				$rootScope.userinfo.ActiveUserData = {};
+			   				$rootScope.userinfo.ActiveUserData.appSettings = appSettings;
+			   				$rootScope.userinfo.ActiveUserData.companyName = companyName;
 							$state.go('login');//redirecting path into login
 						// }
 					}
    				
 
-			}
+			};
 		$scope.confirmLogout=function(logoutMode){
 			$scope.logData=localStorageService.get('logDatas');
 			$scope.Frequenzy=2;
@@ -49,7 +53,7 @@ angular.module('baabtra').controller('header',['$scope','$rootScope','$state','l
 			}
 			$scope.logDatas={"logData":$scope.logData,"Frequenzy":$scope.Frequenzy=2,"logoutMode":$scope.logoutMode};
 			header.logout($scope);
-		}
+		};
 				
    		$scope.details=function(){
    			$scope.ips=$rootScope.userinfo.ActiveUserData.ip_address;
@@ -62,6 +66,6 @@ angular.module('baabtra').controller('header',['$scope','$rootScope','$state','l
    		$scope.navigateToProfile=function(){
 
    			$state.go('home.main.userProfile',{userId:''});
-   		}
+   		};
 
 }]);
