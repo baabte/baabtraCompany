@@ -20,7 +20,6 @@ angular.module('baabtra').controller('header',['$scope','$rootScope','$state','l
 		//call back functions of LOGOUT
 		$scope.fnCallbackLogout=function(data){
 				var logoutObject=angular.fromJson(JSON.parse(data));
-				// console.log(logoutObject);
 				if(logoutObject.numberOfSessions>1){
 						$scope.numberOfSessions=logoutObject.numberOfSessions;
 						$modal({ scope: $scope,
