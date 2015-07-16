@@ -1,4 +1,4 @@
-angular.module('baabtra').controller('header',['$scope','$rootScope','$state','localStorageService','header','commonService','$modal', function($scope,$rootScope,$state,localStorageService,header,commonService,$modal) {
+angular.module('baabtra').controller('header',['$scope','$rootScope','$state','localStorageService','header','commonService','$modal', 'bbConfig', function($scope,$rootScope,$state,localStorageService,header,commonService,$modal, bbConfig) {
 		
 		if($rootScope.userinfo){
 			$scope.loggedUserInfo=$rootScope.userinfo.ActiveUserData;
@@ -7,6 +7,14 @@ angular.module('baabtra').controller('header',['$scope','$rootScope','$state','l
   					return $rootScope.userinfo;
 		}, function() {
 				if($rootScope.userinfo){
+					
+					var whoCantAccessThis = [bbConfig.MURID, bbConfig.PUSRID, bbConfig.RURID];
+				      
+				      if(!angular.equals(whoCantAccessThis.indexOf($rootScope.userinfo.ActiveUserData.roleMappingObj.fkRoleId), -1)){
+				        $scope.logout();
+				        //$scope.logData.result = false;
+				      }
+
 					$scope.loggedUserInfo=$rootScope.userinfo.ActiveUserData;
 				}
 		}, true);		
@@ -20,7 +28,6 @@ angular.module('baabtra').controller('header',['$scope','$rootScope','$state','l
 		//call back functions of LOGOUT
 		$scope.fnCallbackLogout=function(data){
 				var logoutObject=angular.fromJson(JSON.parse(data));
-				// console.log(logoutObject);
 				if(logoutObject.numberOfSessions>1){
 						$scope.numberOfSessions=logoutObject.numberOfSessions;
 						$modal({ scope: $scope,
