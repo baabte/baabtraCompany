@@ -19,6 +19,9 @@ angular.module('baabtra').directive('courseElementEvaluator',['$compile', functi
 				$(element).find('#elementContent'+scope.rand).html('');
 				if(!angular.equals(scope.previewData,undefined)){
 
+					if(!angular.equals(scope.previewData.markScored, undefined)){
+						scope.elementMark = scope.previewData.markScored;
+					}
 								
 					angular.forEach(scope.previewData.elements, function(data,key){//looping through each type of course elements at this point in the object
 							if(data instanceof Object){
