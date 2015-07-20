@@ -776,15 +776,7 @@ display: block;
 /*basic reset*/
 * {margin: 0; padding: 0;}
 
-html {
-  height: 100%;
-  /*Image only BG fallback*/
-  background: url('http://thecodeplayer.com/uploads/media/gs.png');
-  /*background = gradient + image pattern combo*/
-  background: 
-    linear-gradient(rgba(196, 102, 0, 0.2), rgba(155, 89, 182, 0.2)), 
-    url('http://thecodeplayer.com/uploads/media/gs.png');
-}
+
 
 body {
   font-family: montserrat, arial, verdana;
