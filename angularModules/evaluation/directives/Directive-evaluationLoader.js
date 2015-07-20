@@ -41,7 +41,6 @@ angular.module('baabtra').directive('evaluationLoader',['evaluationService', '$a
 
 				scope.evaluated = function(element, elementTotalMarks, outElement, elementOrder, courseMappingId, evaluatorId){
 					console.clear();
-					console.log(elementTotalMarks);
 
 					element.evalDetails = {};
 					var result = angular.copy(outElement);
@@ -70,7 +69,6 @@ angular.module('baabtra').directive('evaluationLoader',['evaluationService', '$a
 							var evaluationResponse = evaluationService.evaluateAnswer(courseMappingId, element, elementOrder);
 							evaluationResponse.then(function(response){
 								var result = angular.fromJson(JSON.parse(response.data));
-
 								if(angular.equals(result.result, "Added")){
 									$alert({title: 'Evaluated!', content: element.Name + ' evaluated successfuly', placement: 'top-right', type: 'success', duration:3, show: true});
 								}

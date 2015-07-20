@@ -41,6 +41,11 @@
                   }
                 }
               })
+              .state('home.redirect', {
+                url: '/redirect',
+                templateUrl: 'angularModules/redirect/partials/Partial-redirect.html',
+                controller:'RedirectCtrl'
+              })
               .state('home.main.company', {
                 url: '/company',
                 views:{
@@ -113,7 +118,7 @@
                 templateUrl: 'views/pages/blank.html'
 
               })
-		          .state('login', {
+              .state('login', {
                 url: '/login',
                 templateUrl: 'angularModules/login/partials/Partial-Login_view.html',
                 controller:'LoginViewCtrl'
