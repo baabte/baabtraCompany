@@ -754,7 +754,7 @@ display: block;
   cursor: pointer;
 }
 .link-hover:hover{
-  text-decoration: underline;
+  box-shadow: rgb(50, 46, 46) 0px 0px 9px 0px;
 }
 .upper{
   text-transform: uppercase;
@@ -970,7 +970,4 @@ ul.rating {
 .blurry-text {
   color: transparent!important;
   text-shadow: 0 0 10px rgba(255, 255, 255, 1)!important;
-}
-.bg-white{
-  background: #fff!important;
 }

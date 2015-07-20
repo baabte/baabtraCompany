@@ -1,4 +1,4 @@
-angular.module('baabtra').controller('ViewusersCtrl',['$scope','commonService','$rootScope','$state','courseAllocateService','viewUsers',function($scope,commonService,$rootScope,$state, courseAllocateService, viewUsers){
+angular.module('baabtra').controller('ViewusersCtrl',['$scope','commonService','$rootScope','$state','courseAllocateService','viewUsers', 'addCourseService',function($scope,commonService,$rootScope,$state, courseAllocateService, viewUsers, addCourseService){
 
 	/*login detils start*/
 	if(!$rootScope.userinfo){
@@ -16,8 +16,9 @@ angular.module('baabtra').controller('ViewusersCtrl',['$scope','commonService','
 	/*login detils ends*/
 
 	$scope.data = {};
-	$scope.data.profile = {};
-	$scope.data.profile.gender = "";
+	$scope.data.searchKey = {};
+	$scope.data.searchKey.profile = {};
+	$scope.data.searchKey.profile.gender = "";
 	$scope.value = "State";
 	$scope.data.userDropdown = [{"text" : "<i class=\"fa fa-fw fa-user\"></i>&nbsp;View Profile Summary",
     							"click":"viewProfile(user.fkUserLoginId.$oid, 'summary')"},
@@ -30,16 +31,23 @@ angular.module('baabtra').controller('ViewusersCtrl',['$scope','commonService','
 	var fetchFormFeildsResp = viewUsers.fnFetchFormFeildsForSearch("User test registration", companyId);
 	fetchFormFeildsResp.then(function(response){
 		$scope.data.Feilds = angular.fromJson(JSON.parse(response.data));
-	});
+	})
+
+	var courseFetchData={fkcompanyId:companyId,type:'all'};
+	var FetchCourseListCallBack = addCourseService.fnFetchCourseList(courseFetchData);
+
+	FetchCourseListCallBack.then(function(response){
+		$scope.data.courseList = angular.fromJson(JSON.parse(response.data));
+	})
 
 	var searchTimeOut;
-	$scope.$watch('data.profile', function(){
-		if(!angular.equals($scope.data.profile,undefined)){
+	$scope.$watch('data.searchKey', function(){
+		if(!angular.equals($scope.data.searchKey.profile,undefined)){
 				if(searchTimeOut) {
 					clearTimeout(searchTimeOut);
 				}
 				searchTimeOut=setTimeout(function(){
-			    var fetchUsersToCourseAllocateCallback = viewUsers.fnFetchUsersByDynamicSearch(companyId,'','','initial',$scope.data.profile); 
+			    var fetchUsersToCourseAllocateCallback = viewUsers.fnFetchUsersByDynamicSearch(companyId,'','','initial',$scope.data.searchKey); 
 			    fetchUsersToCourseAllocateCallback.then(function(data){
 			        $scope.data.result = angular.fromJson(JSON.parse(data.data));
 			        $scope.data.usersObject = $scope.data.result.users;
@@ -49,11 +57,11 @@ angular.module('baabtra').controller('ViewusersCtrl',['$scope','commonService','
 			    });
 			    },500);
 			}
-		}, true);
+		}, true)
 
 	$scope.nextOne=function(){//event  for showing next 12 items
 	  
-	   var fetchUsersToCourseAllocateCallback = viewUsers.fnFetchUsersByDynamicSearch(companyId,$scope.data.firstUserId,$scope.data.lastUserId,'next',$scope.data.profile); 
+	   var fetchUsersToCourseAllocateCallback = viewUsers.fnFetchUsersByDynamicSearch(companyId,$scope.data.firstUserId,$scope.data.lastUserId,'next',$scope.data.searchKey); 
     	fetchUsersToCourseAllocateCallback.then(function(data){
 	        $scope.data.result = angular.fromJson(JSON.parse(data.data));
 	        if(!angular.equals($scope.data.firstUserId, $scope.data.result.firstUserId)){
@@ -71,7 +79,7 @@ angular.module('baabtra').controller('ViewusersCtrl',['$scope','commonService','
 	//event  for showing previous 9 items
 $scope.prevOne=function(){
 	  
-	 var fetchUsersToCourseAllocateCallback = viewUsers.fnFetchUsersByDynamicSearch(companyId,$scope.data.firstUserId,$scope.data.lastUserId,'prev',$scope.data.profile); 
+	 var fetchUsersToCourseAllocateCallback = viewUsers.fnFetchUsersByDynamicSearch(companyId,$scope.data.firstUserId,$scope.data.lastUserId,'prev',$scope.data.searchKey); 
     	fetchUsersToCourseAllocateCallback.then(function(data){
 	        $scope.data.result = angular.fromJson(JSON.parse(data.data));
 	        if(!angular.equals($scope.data.firstUserId, $scope.data.result.firstUserId)){
@@ -86,21 +94,26 @@ $scope.prevOne=function(){
     	});
 };
 
-	
-
-
-
-
-
-
-
-
-    var searchUserTimeOut;
-	$scope.searchUser=function(){
-		if(searchUserTimeOut) {
-		clearTimeout(searchUserTimeOut);
+	$scope.courseSelectionChanged = function(courseId){
+		if(!$scope.data.searchKey.coursesSelected){
+			$scope.data.searchKey.coursesSelected = [];
 		}
-		searchUserTimeOut=setTimeout(function(){
+		
+
+		if(angular.equals($scope.data.searchKey.coursesSelected.indexOf(courseId), -1)){
+			$scope.data.searchKey.coursesSelected.push(courseId);
+		}
+		else{
+			$scope.data.searchKey.coursesSelected.splice($scope.data.searchKey.coursesSelected.indexOf(courseId), 1);
+		}
+	};
+
+    var searchTimeOut;
+	$scope.searchUser=function(){
+		if(searchTimeOut) {
+		clearTimeout(searchTimeOut);
+		}
+		searchTimeOut=setTimeout(function(){
 			var fetchUsersToCourseAllocateCallback = courseAllocateService.fnfetchUsersToCourseAllocate(companyId,'', 'initial', '', $scope.data.usersObject.searchKey);
 		   fetchUsersToCourseAllocateCallback.then(function(data){
 		   	$scope.data.usersObject = angular.fromJson(JSON.parse(data.data));
