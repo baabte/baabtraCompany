@@ -1,0 +1,98 @@
+<div class="modal" tabindex="-1" role="dialog">
+  <div class="modal-dialog modal-lg">
+    <div class="modal-content">
+      <div class="p bg-info font-bold baab-shadow" translate="{{'Manage Status'|translate}}">
+        
+      </div>
+      <div class="modal-body">
+        <form class="form-horizontal ng-pristine ng-valid" style="cursor: pointer;" name="enroll" xt-form novalidate>
+          <ul class="nav nav-pills">
+             <li class="active btn no-padding"><a class='font-bold' ng-click="fnChangeTab('Account')" data-toggle="tab">Account</a></li>
+             <li class="btn no-padding"><a class='font-bold' ng-click="fnChangeTab('Course')" data-toggle="tab">Course</a></li>
+             <li class="btn no-padding"><a class='font-bold'  ng-click="fnChangeTab('Job')" data-toggle="tab">Job</a></li>
+
+          </ul>
+<div class="tab-content b-t m-t-xs">
+    <div class="tab-pane active in font-bold" ng-if="tab=='Account'">
+        <p>Account</p>
+
+        <div class="m-b-lg">
+                <label for="select" class="col-xs-4 control-label font-bold">Account Status</label>
+                <div class="col-md-5 col-xs-8">
+                  <!-- status of the batch course mapping -->
+                    <select class="form-control" ng-model="status.Account" id="select">
+                        <option value="">Select Status</option>
+                        <option value="Registered">Registered</option>
+                        <option value="Attending Course">Attending Course</option>
+                        <option value="Searching Job">Searching Job</option>
+                        <option value="Interview Attended">Interview Attended</option>
+                        <option value="Going for Higher Studies">Going for Higher Studies</option>
+                    </select>
+                </div>
+        </div>
+        <br>
+
+    </div>
+    <div class="tab-pane  active in font-bold"  ng-if="tab=='Course'">
+        <p>Course</p>
+        <div class="col-xs-12 p-h-sm shadow-z-1  pull-left bg-white p-v" ng-repeat="courseStatus in courseStatusList" style="cursor: pointer;">
+          <div class="col-xs-8" class="m-b-lg">
+
+                  <label class="col-xs-12 font-bold pull-left">{{courseStatus.Name}}</label>
+                  <div class="col-xs-12 ">
+                    <label for="select" class="col-xs-4 control-label font-bold pull-left">Status</label>
+                    <div class="col-md-5 col-xs-8 " >
+                      <!-- status of the batch course mapping -->
+                        <select class="form-control" ng-init="status.Course[courseStatus._id.$oid].status=courseStatus.status" ng-model="status.Course[courseStatus._id.$oid].status" id="select">
+                            <option value="">Select Status</option>                        
+                            <option value="Attending Course">Attending Course</option>
+                            <option value="Course Completed">Course Completed</option>
+                            <option value="Project Completed">Project Completed</option>
+                            <option value="Test Attended">Test Attended</option>
+                            <option value="B.P Attended">B.P Attended</option>
+                            <option value="Pending Payment">Pending Payment</option>
+                            <option value="Suspended">Suspended</option>
+                        </select>
+                    </div>
+                  </div>
+          </div>
+          <div class="col-xs-4" class="m-b-lg">
+                <button ng-disabled="!status.Course[courseStatus._id.$oid].status" ng-click="fnChangeStatus(tab,courseStatus._id.$oid)" type="button" class="btn btn-primary baab-btn"><i class="mdi-content-save"></i>&nbsp;Save</button>
+          
+          </div>
+
+        </div>
+        <br>
+    </div>
+    <div class="tab-pane  active in font-bold"  ng-if="tab=='Job'">
+        <p>Job</p>
+        <div class="m-b-lg">
+                <label for="select" class="col-xs-4 control-label font-bold">Job Status</label>
+                <div class="col-md-5 col-xs-8">
+                  <!-- status of the batch course mapping -->
+                    <select class="form-control" ng-model="status.Job" id="select">
+                        <option value="">Select Status</option>                        
+                        <option value="Working">Working</option>
+                        <option value="Looking for Job Change">Looking for Job Change</option>
+                        <option value="Ready for Job Change">Ready for Job Change</option>
+                        <option value="Not Interested in Job">Not Interested in Job</option>
+                        <option value="Offer Received">Offer Received</option>
+                        <option value="Offer Delayed">Offer Delayed</option>                       
+                    </select>
+                </div>
+        </div>
+        <br>
+    </div>    
+</div>
+
+        </form>
+      </div>
+      <div class="modal-footer" >
+        <div ng-if="tab!='Course'">
+        <button type="button" class="btn btn-success baab-btn" ng-click="$hide()">Close</button>
+        <button ng-disabled="" ng-click="fnChangeStatus(tab)" type="button" class="btn btn-primary baab-btn"><i class="mdi-content-save"></i>&nbsp;Save</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

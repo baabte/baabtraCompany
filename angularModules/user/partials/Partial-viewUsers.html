@@ -47,6 +47,10 @@
               </div>
             </div>
 
+            <div class="col-xs-12 b-b p-v" ng-if="(data.searchKey.coursesSelected.length == 1) && data.courseList.length && (data.selectedCourse.totalMark > 0)">
+              <span class="font-bold">Mark Range</span>
+               <div style="margin: 10px 0 10px;" range-slider min="1" max="data.selectedCourse.totalMark" model-min="data.searchKey.course.minMark" model-max="data.searchKey.course.maxMark"></div>     
+            </div>
             <!-- course based -->
             <div class="col-xs-12 b-b p-v" ng-if="data.courseList.length">
               <div class="font-bold">Courses & Tests ({{data.courseList.length}})</div>
@@ -54,10 +58,44 @@
                 <div class="sample1" ng-repeat="course in data.courseList">
                   <div class="checkbox show-in-one-line" style="line-height: 19px;max-height: 25px;">
                     <label title="{{course.Name}}">
-                      <input  type="checkbox"  ng-model="data.coures[$index]" ng-change="courseSelectionChanged(course._id.$oid)"> {{course.Name}}
+                      <input  type="checkbox"  ng-model="data.coures[$index]" ng-change="courseSelectionChanged(course)"> {{course.Name}}
                     </label>
                   </div>
                 </div>
+              </div>
+            </div>
+
+             <!-- form feilds -->
+            <div class="col-xs-12 b-b p-v">
+              <div class="font-bold">Account Status</div>
+              <div  class="box-cell scrollable hover" style="max-height: 170px;">
+               <!-- <input type="text" class="form-control floating-label" ng-model="data.searchKey.status.Account" class="form-control" placeholder="{{feild.text}}"> -->
+               <select class="form-control m-t-xs" ng-model="data.searchKey.status.Account" id="select">
+                        <option value="">Select Status</option>
+                        <option value="Registered">Registered</option>
+                        <option value="Attending Course">Attending Course</option>
+                        <option value="Searching Job">Searching Job</option>
+                        <option value="Interview Attended">Interview Attended</option>
+                        <option value="Going for Higher Studies">Going for Higher Studies</option>
+                    </select>
+              </div>
+            </div>
+
+              <!-- form feilds -->
+            <div class="col-xs-12 b-b p-v">
+              <div class="font-bold">Job Status</div>
+              <div  class="box-cell scrollable hover" style="max-height: 170px;">
+               <!-- <input type="text" class="form-control floating-label" ng-model="data.searchKey.status.Job" class="form-control" placeholder="{{feild.text}}">  -->
+                <select class="form-control m-t-xs" ng-model="data.searchKey.status.Job" id="select">
+                        <option value="">Select Status</option>                        
+                        <option value="Working">Working</option>
+                        <option value="Looking for Job Change">Looking for Job Change</option>
+                        <option value="Ready for Job Change">Ready for Job Change</option>
+                        <option value="Not Interested in Job">Not Interested in Job</option>
+                        <option value="Offer Received">Offer Received</option>
+                        <option value="Offer Delayed">Offer Delayed</option>                       
+                    </select>   
+                                           
               </div>
             </div>
 
@@ -70,6 +108,8 @@
                 </div>
               </div>
             </div>
+
+            
 
 
           </div>
@@ -88,7 +128,7 @@
               <div class="panel b-light link-hover link">
         <div class="panel-heading text-center">
           <div class="p" style="position: absolute;right: 15px;">
-                   <a  data-placement="bottom-right" data-html="true" bs-dropdown="data.userDropdown"><i class="mdi-navigation-more-vert text-xl text-dark" ></i></a>
+                   <a  data-placement="bottom-right" data-html="true" bs-dropdown="data.userDropdown"><i class="mdi-navigation-more-vert text-xl text-dark btn no-padding" ></i></a>
 
                  </div>
           <div style="max-height: 150px;  overflow: hidden;">
