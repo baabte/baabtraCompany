@@ -10,32 +10,17 @@ angular.module('baabtra').controller('ResultreportCtrl',['$scope','commonService
 		$state.go('login');
 	}
 
-
-	//
-var companyId;
-var rm_id;
-var roleId;
-$rootScope.$watch('userinfo',function(){
-	if(!angular.equals($rootScope.userinfo, undefined)){
-		if(!angular.equals($rootScope.userinfo.ActiveUserData.roleMappingId, undefined)){
-			var rm_id = $rootScope.userinfo.ActiveUserData.roleMappingId.$oid;
-			var roleId = $rootScope.userinfo.ActiveUserData.roleMappingObj.fkRoleId;
-			var companyId = $rootScope.userinfo.ActiveUserData.roleMappingObj.fkCompanyId.$oid;
-			/*login details ends*/
-
-			$scope.reportObj={};
-			$scope.reportObj.selectedTest={};
-			$scope.reportObj.date={};
-
-		}	
-	}
-
-});
+	var rm_id = $rootScope.userinfo.ActiveUserData.roleMappingId.$oid;
+	var roleId = $rootScope.userinfo.ActiveUserData.roleMappingObj.fkRoleId;
+	var companyId = $rootScope.userinfo.ActiveUserData.roleMappingObj.fkCompanyId.$oid;
+	/*login details ends*/
 
 
-	
 
-	
+	$scope.reportObj={};
+	$scope.reportObj.selectedTest={};
+	$scope.reportObj.date={};
+
 	//====================================
 //this is to manage the progress popup
 $scope.loaderProgressTab=0;
@@ -101,7 +86,7 @@ $scope.saveContent=function(fileContents){
     link.href = fileContents;
     link.click();
 };
-
+	//funtion to generate report 
 	$scope.generateReport=function(){
 		if(!angular.equals($scope.fromDate,undefined)){
 		$scope.reportObj.date.fromDate=$scope.DateFormatChange($scope.fromDate);
