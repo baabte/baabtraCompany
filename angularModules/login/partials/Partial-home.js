@@ -9,38 +9,39 @@ $scope.viewMenu = false;//for controll menu view in mobile
 
 $rootScope.$watch('userinfo',function(){
   if($rootScope.userinfo){
-    if($rootScope.userinfo.ActiveUserData.roleMappingId){
-      $scope.rm_id = $rootScope.userinfo.ActiveUserData.roleMappingId.$oid;
-      $scope.userinfo = $rootScope.userinfo;
-      if(angular.equals($rootScope.userinfo.ActiveUserData.modernView,undefined)){
-        $rootScope.userinfo.ActiveUserData.modernView = "modern";
-      }
-      
-      if(angular.equals($rootScope.userinfo.ActiveUserData.roleMappingObj.avatar,undefined)){
-        $rootScope.userinfo.ActiveUserData.roleMappingObj.avatar = '';
-      }
-      
-      if(angular.equals($scope.userMenus,undefined)){
-        var response = home.FnLoadMenus($scope);//Load Menus for logged user
-        response.then(function(data){
+    
+    $scope.rm_id = $rootScope.userinfo.ActiveUserData.roleMappingId.$oid;
+    $scope.userinfo = $rootScope.userinfo;
 
-          $scope.userMenus = [];
-          
-          $scope.userMenus = $scope.userMenusOrigin = angular.fromJson(JSON.parse(data.data)).menuStructure[0].regionMenuStructure;
-          
-          // calling service for geting user notification
-          var userNotificationResponse = notification.fnLoadUserNotification($scope.rm_id);
-          userNotificationResponse.then(function(response){
-            $rootScope.data = {};
-            $rootScope.data.userNotification = angular.fromJson(JSON.parse(response.data));
-            if(!angular.equals($rootScope.data.userNotification,null)){
-              $rootScope.data.userNotification.notification = $rootScope.data.userNotification.notification.reverse();
-            }
-          });
+    if(angular.equals($rootScope.userinfo.ActiveUserData.modernView,undefined)){
+      $rootScope.userinfo.ActiveUserData.modernView = "modern";
+    }
+    
+    if(angular.equals($rootScope.userinfo.ActiveUserData.roleMappingObj.avatar,undefined)){
+      $rootScope.userinfo.ActiveUserData.roleMappingObj.avatar = '';
+    }
+    
+    if(angular.equals($scope.userMenus,undefined)){
+      var response = home.FnLoadMenus($scope);//Load Menus for logged user
+      response.then(function(data){
 
+        $scope.userMenus = [];
+        
+        $scope.userMenus = $scope.userMenusOrigin = angular.fromJson(JSON.parse(data.data)).menuStructure[0].regionMenuStructure;
+        
+        // calling service for geting user notification
+        var userNotificationResponse = notification.fnLoadUserNotification($scope.rm_id);
+        userNotificationResponse.then(function(response){
+          $rootScope.data = {};
+          $rootScope.data.userNotification = angular.fromJson(JSON.parse(response.data));
+          if(!angular.equals($rootScope.data.userNotification,null)){
+            $rootScope.data.userNotification.notification = $rootScope.data.userNotification.notification.reverse();
+          }
         });
-      }
-   } 
+
+      });
+    }
+    
 }
 else{
 
@@ -82,7 +83,9 @@ if(angular.equals($rootScope.loggedIn,false)){
 
 $scope.changeProfilePic = function(avatarImg, $hide){
       $scope.btnName = "Uploading...";
-      var response = commonSrv.fnUploadProfilePic(avatarImg, $scope.rm_id);
+
+      
+      var response = commonSrv.fnUploadProfilePic(avatarImg, $rootScope.userinfo.ActiveUserData.userLoginId);
       response.then(function(data){
         $scope.btnName = "Change";
         $hide();
@@ -131,6 +134,8 @@ $scope.$watch('userMenusOrigin',function(){
     $localStorage.linkPath=[];
     $scope.linkPath = $localStorage.linkPath;
     $rootScope.menuExist=false;
+    
+
     getMenuByLink($scope.userMenusOrigin,null,null,$state.current.name, function(){
       if(!$rootScope.menuExist){
       $state.go('home.main');
@@ -277,57 +282,63 @@ $rootScope.$on('$stateChangeStart', function(event, toState, toParams, fromState
 
 
   function getMenuByLink(menu,sub,path_obj,state, fnCallback){
-    
+   
     if (sub==null) {
       sub=0;
     }
-    if(!angular.equals(menu, undefined)){
-      if(!angular.equals(menu[sub],undefined)){
-        getMenuByLink(menu,sub+1,path_obj,state, fnCallback);
-        if(menu[sub].childMenuStructure.length){
+    
+
+    if(!angular.equals(menu[sub],undefined)){
+      getMenuByLink(menu,sub+1,path_obj,state, fnCallback);
+      if(menu[sub].childMenuStructure.length){
+        if(path_obj==null){
+          path_obj=[];
+        }
+          if(!angular.equals(menu[sub].fkMenuId,undefined)){
+            path_obj.push(menu[sub]);
+          }
+          else{
+              path_obj.push(menu[sub]);
+          }
+          getMenuByLink(menu[sub].childMenuStructure,null,path_obj,state, fnCallback);
+        }
+        else{
           if(path_obj==null){
             path_obj=[];
           }
-            if(!angular.equals(menu[sub].fkMenuId,undefined)){
+
+          for (var action in menu[sub].actions){
+
+            var stateParams = '';
+            if(!angular.equals($state.params.key, undefined)){
+              stateParams = '|key:'+$state.params.key;
+            }
+            if (angular.equals(menu[sub].actions[action].stateName,(state+stateParams))&&(angular.equals(menu[sub].MenuName,$localStorage.currentMenuName))) {
+              $rootScope.menuExist = true;
               path_obj.push(menu[sub]);
-            }
-            else{
-                path_obj.push(menu[sub]);
-            }
-            getMenuByLink(menu[sub].childMenuStructure,null,path_obj,state, fnCallback);
-          }
-          else{
-            if(path_obj==null){
-              path_obj=[];
-            }
-            for (var action in menu[sub].actions){
-
-              if (angular.equals($scope.stateSplitAll(menu[sub].actions[action].stateName),state)&&(angular.equals(menu[sub].MenuName,$localStorage.currentMenuName))) {
-                $rootScope.menuExist = true;
-                path_obj.push(menu[sub]);
-                $scope.navBar=true;
-                $localStorage.linkPath=path_obj;
-                $scope.linkPath=$localStorage.linkPath;
-                fnCallback();
-                break;
-
-              }
-
-              else if(angular.equals($scope.stateSplitAll(menu[sub].actions[action].stateName),state)&&(!angular.equals($localStorage.currentMenuLink,$scope.linkSeprate(state)))){
-                $rootScope.menuExist=true;
-                path_obj.push(menu[sub]);
-                $scope.navBar=true;
-                $localStorage.linkPath=path_obj;
-                $scope.linkPath=$localStorage.linkPath;
-                fnCallback();
-                break;
-              }
+              $scope.navBar=true;
+              $localStorage.linkPath=path_obj;
+              $scope.linkPath=$localStorage.linkPath;
+              fnCallback();
+              break;
 
             }
+
+            else if(angular.equals(menu[sub].actions[action].stateName,(state+stateParams))&&(!angular.equals($localStorage.currentMenuLink,$scope.linkSeprate(state)))){
+              $rootScope.menuExist=true;
+              path_obj.push(menu[sub]);
+              $scope.navBar=true;
+              $localStorage.linkPath=path_obj;
+              $scope.linkPath=$localStorage.linkPath;
+              fnCallback();
+              break;
+            }
+
           }
         }
-
       }
+
+      
     }
 
     // setting a watch for enabling the perfect scrol on exceeding the length of breadcrumb 
@@ -342,7 +353,7 @@ $rootScope.$on('$stateChangeStart', function(event, toState, toParams, fromState
 
 
     $scope.menuHover = function(element){
-      console.log(getComputedStyle(element));
+     // console.log(getComputedStyle(element));
     };
 
     $scope.viewMobileMenu = function(){
