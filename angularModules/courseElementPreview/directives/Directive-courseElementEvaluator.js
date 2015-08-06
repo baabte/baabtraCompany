@@ -33,10 +33,12 @@ angular.module('baabtra').directive('courseElementEvaluator',['$compile', functi
 							 				elementToBeCreated.attr(keyAttrib,data.customAttributes[keyAttrib]);
 							 			}
 							 		}
+
 							 		elementToBeCreated.attr('data',JSON.stringify(data));
 							 		elementToBeCreated.attr('course-element',JSON.stringify(scope.previewData));
 							 		elementToBeCreated.attr('index',key);
 							 		elementToBeCreated.attr('course-id','courseId');
+							 		elementToBeCreated.attr('course-mapping-id',JSON.stringify(scope.courseMappingId));
 							 		elementToBeCreated.addClass('elementField');
 
 							 		scope.result[key] = {};	

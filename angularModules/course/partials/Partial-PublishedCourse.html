@@ -18,7 +18,7 @@
     <div set-sub-heading-and-background-color
      class="panel-heading font-bold text-white  p baab-shadow">Published Course</div>
     <div  class="panel-body">
-      <div class="row">
+      <div class="row hidden-xs">
         <div class="col-xs-3">
             <input class="form-control" float-label id="focusedInput" type="text" ng-model="searchCourse" ng-change="searchCoursesAvailable(searchCourse, '')"  placeholder="Search for a course" >
         </div>
@@ -28,6 +28,22 @@
           </div>
         </div>
         <div class="col-xs-3 m-v">
+          <div class="btn-group pull-right" >
+               <button type="button" class="btn btn-xs btn-material-purple-500" ng-click="prevOne()"  title="Previous" ng-disabled="prevButtondisabled" ><i class="fa fa-fw fa-angle-left"></i><div class="ripple-wrapper"></div></button>
+              <button type="button" class="btn btn-xs btn-material-purple-500" ng-click="nextOne()" ng-disabled="publishedCourses.courseLength<12" title="Next"><i class="fa fa-fw fa-angle-right"></i><div class="ripple-wrapper"></div></button>
+           </div>
+        </div>
+      </div>
+      <div class="row visible-xs">
+        <div class="col-xs-12">
+            <input class="form-control" float-label id="focusedInput" type="text" ng-model="searchCourse" ng-change="searchCoursesAvailable(searchCourse, '')"  placeholder="Search for a course" >
+        </div><br>
+        <div class="col-xs-7 text-center m-v">
+          <div class="btn btn-raised btn-sm btn-material-purple-500" ng-click="showNavMenu=!showNavMenu; searchCourse=''">
+            <i class="mdi-navigation-menu"></i>Browse Course
+          </div>
+        </div>
+        <div class="col-xs-5 m-v">
           <div class="btn-group pull-right" >
                <button type="button" class="btn btn-xs btn-material-purple-500" ng-click="prevOne()"  title="Previous" ng-disabled="prevButtondisabled" ><i class="fa fa-fw fa-angle-left"></i><div class="ripple-wrapper"></div></button>
               <button type="button" class="btn btn-xs btn-material-purple-500" ng-click="nextOne()" ng-disabled="publishedCourses.courseLength<12" title="Next"><i class="fa fa-fw fa-angle-right"></i><div class="ripple-wrapper"></div></button>

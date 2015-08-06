@@ -1,8 +1,8 @@
         <!-- navbar header ng-class="{'box-shadow-inset dk':app.settings.headerShadow}"  -->
       <!-- navbar header ng-class="{'box-shadow-inset dk':app.settings.headerShadow}"  -->
 
-      <div class="navbar-header p-v-xs" ng-class="{'box-shadow-inset dk':app.settings.headerShadow}">
-
+      <div class="navbar-header p-v-xs " ng-class="{'box-shadow-inset dk':app.settings.headerShadow}">
+     
         <button class="pull-right visible-xs" bs-aside="aside" data-template="angularModules/login/partials/Partial-sm_User_Menu.html" data-placement="right" data-animation="am-slide-right aside-open-inner modal-open" data-container="body">
           <!-- <span class="visible-xs m-r pull-left">{{userinfo.ActiveUserData.username}}</span> -->
          
@@ -99,7 +99,7 @@
           </li> -->
           <li ng-if="roleId == $root.userinfo.ActiveUserData.roleMappingObj.fkRoleId">
              
-            <a href bs-tooltip data-title="Settings"  data-placement="left">
+            <a href bs-tooltip data-title="Settings"  data-placement="left" class="hidden-xs">
               <i class="mdi-action-settings text-2x m-t-xs" style="font-size:25px" ng-click="redirectToGlobalSettings()"></i>
               <!-- <b class="badge badge-xs bg-warning up">3</b> -->
     <!--           <span class="visible-xs-inline">Notifications</span> -->

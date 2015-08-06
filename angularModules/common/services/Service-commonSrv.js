@@ -138,11 +138,20 @@ this.FnLoadGlobalValues=function(key)
   return promise;
  };
 
-  this.LoadInterviewQuestionBank=function(companyId, noQuestion){ 
+  this.LoadInterviewQuestionBank=function(interviewQuestionObj){ 
     var promise = $http({
         method: 'POST',
         url: bbConfig.BWS + 'LoadInterviewQuestionBank/',
-        data:{companyId:companyId, noQuestion:noQuestion}
+        data:{interviewQuestionObj:interviewQuestionObj}
+     });
+    return promise;
+  }; 
+
+  this.checkUserIdExistence=function(userId){ 
+    var promise = $http({
+        method: 'POST',
+        url: bbConfig.BWS + 'checkUserIdExistence/',
+        data:{userId:userId}
      });
     return promise;
   }; 

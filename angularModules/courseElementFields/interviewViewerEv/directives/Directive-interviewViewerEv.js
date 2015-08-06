@@ -1,4 +1,4 @@
-angular.module('baabtra').directive('interviewViewerEv',['$rootScope', 'commonSrv', function($rootScope, commonSrv) {
+angular.module('baabtra').directive('interviewViewerEv',['$rootScope', 'commonSrv', '$alert', function($rootScope, commonSrv, $alert) {
 	return {
 		restrict: 'E',
 		replace: true,
@@ -15,15 +15,26 @@ angular.module('baabtra').directive('interviewViewerEv',['$rootScope', 'commonSr
 			if(angular.equals(scope.result, undefined)){
 				scope.result = scope.$parent.result[parseInt(attrs.index)];
 				scope.result.data = angular.copy(scope.data);
+				 
 				
 				if(angular.equals(scope.result.data.value.questionSelection.type, 'manual')){
 					scope.questionArray = scope.result.data.value.questionArray;
 					
 				}
 				else if(angular.equals(scope.result.data.value.questionSelection.type, 'automatic')){
-					var QuestionBankResponse = commonSrv.LoadInterviewQuestionBank(cmp_id, scope.result.data.value.questionSelection.noOfQuestions);
+					var courseElement = JSON.parse(attrs.courseElement);
+					var elementOrder = courseElement.tlPointInMinute+"."+courseElement.Name+"."+courseElement.index
+					var interviewQuestionObj = {courseMappingId:attrs.courseMappingId.replace(/["']/g,''),elementOrder:elementOrder, index:parseInt(attrs.index), cmp_id:cmp_id, noOfQuestions:scope.result.data.value.questionSelection.noOfQuestions};
+					var QuestionBankResponse = commonSrv.LoadInterviewQuestionBank(interviewQuestionObj);
 					QuestionBankResponse.then(function(response){
-						scope.questionArray = angular.fromJson(JSON.parse(response.data));
+						
+						var result = angular.fromJson(JSON.parse(response.data));
+						if(angular.equals(result, "Error")){
+							$alert({title: 'Warning !', content: 'Something went wrong while loading<br>' + courseElement.elements[0].value, placement: 'top-right', type: 'warning', show: true, duration:3});
+						}else{
+							console.clear();
+							scope.questionArray = result;
+						}
 					});
 				}
 			}

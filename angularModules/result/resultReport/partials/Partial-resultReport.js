@@ -86,7 +86,7 @@ $scope.saveContent=function(fileContents){
     link.href = fileContents;
     link.click();
 };
-
+	//funtion to generate report 
 	$scope.generateReport=function(){
 		if(!angular.equals($scope.fromDate,undefined)){
 		$scope.reportObj.date.fromDate=$scope.DateFormatChange($scope.fromDate);
