@@ -1,4 +1,4 @@
-angular.module('baabtra').directive('courseTimeline',['$state','$rootScope','$popover','$templateCache','$aside','addCourseService','addCourseElementService','courseElementFieldsManaging','bbConfig', '$modal', function($state,$rootScope,$popover,$templateCache,$aside,addCourseService,addCourseElementService,courseElementFieldsManaging,bbConfig, $modal) {
+angular.module('baabtra').directive('courseTimeline',['$state','$rootScope','$popover','$templateCache','$aside','addCourseService','addCourseElementService','courseElementFieldsManaging','bbConfig', '$modal', '$alert', function($state,$rootScope,$popover,$templateCache,$aside,addCourseService,addCourseElementService,courseElementFieldsManaging,bbConfig, $modal, $alert) {
 	return {
 		restrict: 'E', // to use as an element . Use 'A' to use as an attribute
 		scope: {
@@ -357,7 +357,7 @@ angular.module('baabtra').directive('courseTimeline',['$state','$rootScope','$po
 
             	 	}
             	 }
-            	
+
              	if(!angular.equals(scope.syncData.courseTimeline[scope.selectedTpoint][scope.courseElement.Name][scope.selectedIndex].syllabus, undefined)){
  				 var keyArray = scope.syncData.courseTimeline[scope.selectedTpoint][scope.courseElement.Name][scope.selectedIndex].syllabus.key.split('.');
  				// console.log(keyArray);
@@ -442,9 +442,14 @@ angular.module('baabtra').directive('courseTimeline',['$state','$rootScope','$po
             	
             	removeCourseTimelineElementCallback.then(function(data){
 				var updatedElementOrder = angular.fromJson(JSON.parse(data.data));
-				scope.syncData.elementOrder=updatedElementOrder;
-            	scope.syncData.courseTimeline[scope.selectedTpoint][selectedCourseElement.Name].splice(scope.selectedIndex,1);
-				
+				if(angular.equals(updatedElementOrder,"Error")){
+					$alert({title: 'Error', content: 'Something went wrong :)', placement: 'top-right', type: 'danger', duration:3,show: true});
+				}
+				else{
+					scope.syncData.elementOrder=updatedElementOrder;
+	            	//scope.syncData.courseTimeline=updatedElementOrder.courseTimeline;
+	            	scope.syncData.courseTimeline[scope.selectedTpoint][selectedCourseElement.Name].splice(scope.selectedIndex,1);
+            	}
 				});
             };
 
@@ -466,6 +471,7 @@ angular.module('baabtra').directive('courseTimeline',['$state','$rootScope','$po
             		}
             		else{
 	            		//[element.tlPointInMinute][element.Name][element.Name]
+
 	            		var elemIndex = 0;
 	            		var elementTo = element.tlPointInMinute + '.' + element.Name + '.' + element.index;
 	            		var elementFrom = scope.data.selectedElement.tlPointInMinute + '.' + scope.data.selectedElement.Name + '.' + scope.data.selectedElement.index;
@@ -477,7 +483,6 @@ angular.module('baabtra').directive('courseTimeline',['$state','$rootScope','$po
             			//scope.syncData.courseTimeline = course.courseTimeline;
             			//scope.syncData.elementOrder = course.elementOrder;
             			//scope.data.moveable = false;
-            			console.log(course);
             			
             		})
             	}
