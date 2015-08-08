@@ -1,5 +1,28 @@
-angular.module('baabtra').controller('BaabtraComprofileCtrl',['$scope','$rootScope','$stateParams','baabtraProfile',function ($scope,$rootScope,$stateParams,baabtraProfile){
+angular.module('baabtra').controller('BaabtraComprofileCtrl',['$scope', '$rootScope', '$stateParams', 'baabtraProfile', 'bbConfig', 'commonService', '$state', 'viewBatches', function ($scope,$rootScope,$stateParams,baabtraProfile, bbConfig, commonService, $state, viewBatches){
 
+	/*login detils start*/
+	if(!$rootScope.userinfo){
+		commonService.GetUserCredentials($scope);
+		$rootScope.hide_when_root_empty=false;
+	}
+
+	if(angular.equals($rootScope.loggedIn,false)){
+		$state.go('login');
+	}
+
+	var rm_id = $rootScope.userinfo.ActiveUserData.roleMappingId.$oid;
+	var roleId = $rootScope.userinfo.ActiveUserData.roleMappingObj.fkRoleId;
+	var companyId = $rootScope.userinfo.ActiveUserData.roleMappingObj.fkCompanyId.$oid;
+	/*login detils ends*/
+
+
+
+if(angular.equals(bbConfig.MURID, roleId)){
+	$stateParams.userLoginId = $rootScope.userinfo.ActiveUserData.userLoginId;
+	$stateParams.type = 'detailed';
+	//$state.go('home.main.baabtraProfile',{type:$stateParams.type, userLoginId:$stateParams.userLoginId});
+
+}
 
 $scope.baabtraProfile = {};
 $scope.baabtraProfile.type = $stateParams.type;
@@ -10,18 +33,51 @@ userData.then(function (data) {
 	$scope.baabtraProfile.userDetails = $scope.baabtraProfile.result.userDetails;
 	$scope.baabtraProfile.courses = [];
 	$scope.baabtraProfile.tests = [];
-	for(var course in $scope.baabtraProfile.result.courses){
-		
-		if(angular.equals($scope.baabtraProfile.result.courses[course].type, 'course') || angular.equals($scope.baabtraProfile.result.courses[course].type, undefined)){
-			$scope.baabtraProfile.result.courses[course].type = 'course';
-			$scope.baabtraProfile.courses.push($scope.baabtraProfile.result.courses[course]);
-		}
-		else if(angular.equals($scope.baabtraProfile.result.courses[course].type, 'test')){
-			$scope.baabtraProfile.tests.push($scope.baabtraProfile.result.courses[course]);
-		}
-		
-	}
+	$scope.baabtraProfile.courseDropdown = [];
+	$scope.buildBaabtraProfile($scope.baabtraProfile.result.courses, '');
+	console.clear();
 });
+
+$scope.buildBaabtraProfile = function(courses, loadingType){
+	for(var course in courses){
+		var singleCourse = courses[course];
+		if(angular.equals($scope.baabtraProfile.type, 'byCourse')){
+			var courseDetails = {Name:singleCourse.Name, Type:singleCourse.type?singleCourse.type:'Course',courseId:singleCourse.fkCourseId.$oid, userId:$scope.baabtraProfile.userDetails.roleMappingId};
+			if(!angular.equals(loadingType, 'single')){
+				$scope.baabtraProfile.courseDropdown.push(courseDetails);
+			}
+			else if(angular.equals(loadingType, 'single')){
+				$scope.baabtraProfile.courses = [];
+				$scope.baabtraProfile.tests = [];
+			}
+		}
+		if(singleCourse.activeFlag){
+			if(angular.equals(courses[course].type, 'course') || angular.equals(courses[course].type, undefined)){
+				courses[course].type = 'course';
+				$scope.baabtraProfile.courses.push(courses[course]);
+			}
+			else if(angular.equals(courses[course].type, 'test')){
+				$scope.baabtraProfile.tests.push(courses[course]);
+			}
+		}
+	}
+
+	if(angular.equals($scope.baabtraProfile.courseDropdown.length, 1)){
+		$scope.loadCourseDetailsById($scope.baabtraProfile.courseDropdown[0].userId.$oid,$scope.baabtraProfile.courseDropdown[0].courseId);
+	}
+};
+
+var lastCourseId = "";
+$scope.loadCourseDetailsById = function(userId, courseId){
+	if(!angular.equals(lastCourseId, courseId)){
+		lastCourseId = courseId;
+		var courseDetailsResponse = viewBatches.LoadUserCourseDetails([userId], courseId);
+	  	courseDetailsResponse.then(function(response){
+	  		var course = angular.fromJson(JSON.parse(response.data));
+	  		$scope.buildBaabtraProfile(course, 'single');
+	  	});
+  	}
+};
 
 $scope.calculateAge = function calculateAge(birthday) { // birthday is a date
 	birthday = new Date(birthday);
@@ -54,7 +110,6 @@ $scope.fullPrint = function fullPrint(){
 	angular.element('#myElement').click();
 }, 5);
 };
-
 
 
 $scope.baabtraProfile.current = 4;

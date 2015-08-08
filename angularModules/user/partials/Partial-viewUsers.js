@@ -21,6 +21,7 @@ angular.module('baabtra').controller('ViewusersCtrl',['$scope','commonService','
 
 
 	$scope.data = {};
+	$scope.data.clickOnExport = false;
 	$scope.data.searchKey = {};
 	$scope.data.searchKey.course = {};
 	$scope.data.searchKey.course.minMark = 1;
@@ -29,11 +30,16 @@ angular.module('baabtra').controller('ViewusersCtrl',['$scope','commonService','
 	$scope.data.searchKey.profile = {};
 	$scope.data.searchKey.profile.gender = "";
 	$scope.value = "State";
+
 	$scope.data.userDropdown = [{"text" : "<i class=\"fa fa-fw fa-user\"></i>&nbsp;View Profile Summary",
     							"click":"viewProfile(user.fkUserLoginId.$oid, 'summary')"},
     							{"text" : "<i class=\"fa fa-fw fa-user\"></i>&nbsp;View Detailed Profile",
-    							"click":"viewProfile(user.fkUserLoginId.$oid, 'detailed')"},{"text" : "<i class=\"mdi-av-repeat\"></i>&nbsp;Change User Status",
+    							"click":"viewProfile(user.fkUserLoginId.$oid, 'detailed')"},
+    							{"text" : "<i class=\"fa fa-fw fa-user\"></i>&nbsp;View Profile By Course",
+    							"click":"viewProfile(user.fkUserLoginId.$oid, 'byCourse')"},
+    							{"text" : "<i class=\"mdi-av-repeat\"></i>&nbsp;Change User Status",
     							"click":"changeStatus(user.fkUserLoginId.$oid)"}];
+    
 
 // {"text" : "<i class=\"fa fa-fw fa-rotate-left\"></i>&nbsp;Refund Request","click" : "refundRequest(user.fkUserLoginId)"}
 
@@ -60,6 +66,12 @@ angular.module('baabtra').controller('ViewusersCtrl',['$scope','commonService','
 			    var fetchUsersToCourseAllocateCallback = viewUsers.fnFetchUsersByDynamicSearch(companyId,'','','initial',$scope.data.searchKey); 
 			    fetchUsersToCourseAllocateCallback.then(function(data){
 			        $scope.data.result = angular.fromJson(JSON.parse(data.data));
+
+			        console.log($scope.data.result);
+
+			        $scope.data.usersCountFrom = 1;
+			        $scope.data.usersCountTo = (($scope.data.result.usersCount <= 12)?$scope.data.result.usersCount:12); 
+			        
 			        $scope.data.usersObject = $scope.data.result.users;
 			        $scope.data.firstUserId = $scope.data.result.firstUserId;
 			        $scope.data.lastUserId = $scope.data.result.lastUserId;
@@ -74,7 +86,11 @@ angular.module('baabtra').controller('ViewusersCtrl',['$scope','commonService','
 	   var fetchUsersToCourseAllocateCallback = viewUsers.fnFetchUsersByDynamicSearch(companyId,$scope.data.firstUserId,$scope.data.lastUserId,'next',$scope.data.searchKey); 
     	fetchUsersToCourseAllocateCallback.then(function(data){
 	        $scope.data.result = angular.fromJson(JSON.parse(data.data));
+
 	        if(!angular.equals($scope.data.firstUserId, $scope.data.result.firstUserId)){
+		        $scope.data.usersCountFrom = $scope.data.usersCountFrom + 12;
+			    $scope.data.usersCountTo = (($scope.data.result.usersCount-$scope.data.usersCountFrom) > 12) ? ($scope.data.usersCountTo + 12):$scope.data.result.usersCount;
+
 		        $scope.data.usersObject = $scope.data.result.users;
 		        $scope.data.firstUserId = $scope.data.result.firstUserId;
 		        $scope.data.lastUserId = $scope.data.result.lastUserId;
@@ -87,22 +103,25 @@ angular.module('baabtra').controller('ViewusersCtrl',['$scope','commonService','
 	};
 
 	//event  for showing previous 9 items
-$scope.prevOne=function(){
-	  
-	 var fetchUsersToCourseAllocateCallback = viewUsers.fnFetchUsersByDynamicSearch(companyId,$scope.data.firstUserId,$scope.data.lastUserId,'prev',$scope.data.searchKey); 
-    	fetchUsersToCourseAllocateCallback.then(function(data){
-	        $scope.data.result = angular.fromJson(JSON.parse(data.data));
-	        if(!angular.equals($scope.data.firstUserId, $scope.data.result.firstUserId)){
-		        $scope.data.usersObject = $scope.data.result.users.reverse();
-		        $scope.data.firstUserId = $scope.data.result.lastUserId;
-		        $scope.data.lastUserId = $scope.data.result.firstUserId;
-		       
-	    	}
-	    	else{
-	    		$scope.data.prevButtondisabled = true;
-	    	}
-    	});
-};
+	$scope.prevOne=function(){
+		var fetchUsersToCourseAllocateCallback = viewUsers.fnFetchUsersByDynamicSearch(companyId,$scope.data.firstUserId,$scope.data.lastUserId,'prev',$scope.data.searchKey); 
+	    	fetchUsersToCourseAllocateCallback.then(function(data){
+		        $scope.data.result = angular.fromJson(JSON.parse(data.data));
+		        if(!angular.equals($scope.data.firstUserId, $scope.data.result.firstUserId)){
+			        
+			        $scope.data.usersCountFrom = $scope.data.usersCountFrom - 12;
+			    	$scope.data.usersCountTo = $scope.data.usersCountFrom + 11;
+
+			        $scope.data.usersObject = $scope.data.result.users.reverse();
+			        $scope.data.firstUserId = $scope.data.result.lastUserId;
+			        $scope.data.lastUserId = $scope.data.result.firstUserId;
+			       
+		    	}
+		    	else{
+		    		$scope.data.prevButtondisabled = true;
+		    	}
+	    	});
+	};
 
 	$scope.courseSelectionChanged = function(course){
 		
@@ -154,108 +173,106 @@ $scope.prevOne=function(){
 
 
 	// Pre-fetch an external template populated with a custom scope
-var statusChangeModal = $modal({scope:$scope,placement:'top', template: 'angularModules/user/partials/modal-changeStatus.html', show: false});//call aside for add new department
-// Show when some event occurs (use $promise property to ensure the template has been loaded)
+	var statusChangeModal = $modal({scope:$scope,placement:'top', template: 'angularModules/user/partials/modal-changeStatus.html', show: false});//call aside for add new department
+	// Show when some event occurs (use $promise property to ensure the template has been loaded)
+
+	$scope.showStatusChange =function(){
+		statusChangeModal.$promise.then(statusChangeModal.show);
+		$scope.fnChangeTab('Account');
+	};
+
+	$scope.hideStatusChange =function(){
+		statusChangeModal.hide();
+	};    
+
+	$scope.fnChangeTab = function(tab){
+		$scope.tab=tab;
+		// $scope.status={};
+
+		if(angular.equals(tab,'Account')){
+			// console.log(tab,$scope.selectedUserId,companyId);
+			var fnFetchCurrentStatusCallback=statusChangeSrvc.fnFetchCurrentStatus(tab,$scope.selectedUserId,companyId);
+			fnFetchCurrentStatusCallback.then(function(data){
+				var result= angular.fromJson(JSON.parse(data.data));
+				$scope.status[tab]=result.status[tab];
+				// console.log($scope.status[tab]);
+			});
+
+		}else if(angular.equals(tab,'Course')){
+			// console.log(tab,$scope.selectedUserId,companyId);
+
+			var fnFetchCurrentStatusCallback=statusChangeSrvc.fnFetchCurrentStatus(tab,$scope.selectedUserId,companyId);
+			fnFetchCurrentStatusCallback.then(function(data){
+				 $scope.courseStatusList= angular.fromJson(JSON.parse(data.data));
+				// console.log($scope.courseStatusList);
+			});
+
+		}else if (angular.equals(tab,'Job')){
+			// console.log(tab,$scope.selectedUserId,companyId);
+
+			var fnFetchCurrentStatusCallback=statusChangeSrvc.fnFetchCurrentStatus(tab,$scope.selectedUserId,companyId);
+			fnFetchCurrentStatusCallback.then(function(data){
+				var result= angular.fromJson(JSON.parse(data.data));
+				$scope.status[tab]=result.status[tab];
+				// console.log(result);
+			});
+
+		}
+
+	};
+
+	$scope.fnChangeStatus = function(tab,courseId){
+		$scope.tab=tab;
+		if(angular.equals(tab,'Account')){
+			// console.log($scope.status,tab,$scope.selectedUserId,companyId);
+
+			var fnSetStatusCallback=statusChangeSrvc.fnSetStatus($scope.status,tab,$scope.selectedUserId,companyId,rm_id);
+			fnSetStatusCallback.then(function(data){
+				var result= angular.fromJson(JSON.parse(data.data));
+				// console.log(result)
+			});
+
+		}else if(angular.equals(tab,'Course')){
+			// console.log($scope.status,tab,$scope.selectedUserId,companyId);
+			var status=angular.copy($scope.status);
+			status.Course=status.Course[courseId];
+			status.Course._id=courseId;
+
+			var fnSetStatusCallback=statusChangeSrvc.fnSetStatus(status,tab,$scope.selectedUserId,companyId,rm_id);
+			fnSetStatusCallback.then(function(data){
+				var result= angular.fromJson(JSON.parse(data.data));
+				// console.log(result);
+			});
+
+		}else if (angular.equals(tab,'Job')){
+			// console.log($scope.status,tab,$scope.selectedUserId,companyId);
+
+			var fnSetStatusCallback=statusChangeSrvc.fnSetStatus($scope.status,tab,$scope.selectedUserId,companyId,rm_id);
+			fnSetStatusCallback.then(function(data){
+				var result= angular.fromJson(JSON.parse(data.data));
+				// console.log(result);
+			});
+
+		}
+		delete courseId;
+
+	};
 
 
-$scope.showStatusChange =function(){
-statusChangeModal.$promise.then(statusChangeModal.show);
-$scope.fnChangeTab('Account');
+	$scope.changeStatus = function(userId){
+			$scope.selectedUserId=userId;
+		 	$scope.showStatusChange();
 
-};
+	};
 
-$scope.hideStatusChange =function(){
-statusChangeModal.hide();
-};    
-
-$scope.fnChangeTab = function(tab){
-	$scope.tab=tab;
-	// $scope.status={};
-
-	if(angular.equals(tab,'Account')){
-		// console.log(tab,$scope.selectedUserId,companyId);
-		var fnFetchCurrentStatusCallback=statusChangeSrvc.fnFetchCurrentStatus(tab,$scope.selectedUserId,companyId);
-		fnFetchCurrentStatusCallback.then(function(data){
-			var result= angular.fromJson(JSON.parse(data.data));
-			$scope.status[tab]=result.status[tab];
-			// console.log($scope.status[tab]);
+	$scope.exportToSpreadsheet = function(){
+		
+		var fetchUsersToCourseAllocateCallback = viewUsers.fnFetchUsersReportBasedOnDynamicSearch(companyId,'','','initial',$scope.data.searchKey); 
+		fetchUsersToCourseAllocateCallback.then(function(response){
+			var result= angular.fromJson(JSON.parse(response.data));
+			console.log(result);
 		});
 
-	}else if(angular.equals(tab,'Course')){
-		// console.log(tab,$scope.selectedUserId,companyId);
-
-		var fnFetchCurrentStatusCallback=statusChangeSrvc.fnFetchCurrentStatus(tab,$scope.selectedUserId,companyId);
-		fnFetchCurrentStatusCallback.then(function(data){
-			 $scope.courseStatusList= angular.fromJson(JSON.parse(data.data));
-			// console.log($scope.courseStatusList);
-		});
-
-	}else if (angular.equals(tab,'Job')){
-		// console.log(tab,$scope.selectedUserId,companyId);
-
-		var fnFetchCurrentStatusCallback=statusChangeSrvc.fnFetchCurrentStatus(tab,$scope.selectedUserId,companyId);
-		fnFetchCurrentStatusCallback.then(function(data){
-			var result= angular.fromJson(JSON.parse(data.data));
-			$scope.status[tab]=result.status[tab];
-			// console.log(result);
-		});
-
-	}
-
-};
-
-$scope.fnChangeStatus = function(tab,courseId){
-	$scope.tab=tab;
-	if(angular.equals(tab,'Account')){
-		// console.log($scope.status,tab,$scope.selectedUserId,companyId);
-
-		var fnSetStatusCallback=statusChangeSrvc.fnSetStatus($scope.status,tab,$scope.selectedUserId,companyId,rm_id);
-		fnSetStatusCallback.then(function(data){
-			var result= angular.fromJson(JSON.parse(data.data));
-			// console.log(result)
-		});
-
-	}else if(angular.equals(tab,'Course')){
-		// console.log($scope.status,tab,$scope.selectedUserId,companyId);
-
-		var status=angular.copy($scope.status);
-		status.Course=status.Course[courseId];
-		status.Course._id=courseId;
-
-		var fnSetStatusCallback=statusChangeSrvc.fnSetStatus(status,tab,$scope.selectedUserId,companyId,rm_id);
-		fnSetStatusCallback.then(function(data){
-			var result= angular.fromJson(JSON.parse(data.data));
-			// console.log(result);
-
-
-		});
-
-	}else if (angular.equals(tab,'Job')){
-		// console.log($scope.status,tab,$scope.selectedUserId,companyId);
-
-		var fnSetStatusCallback=statusChangeSrvc.fnSetStatus($scope.status,tab,$scope.selectedUserId,companyId,rm_id);
-		fnSetStatusCallback.then(function(data){
-			var result= angular.fromJson(JSON.parse(data.data));
-			// console.log(result);
-		});
-
-	}
-	delete courseId;
-
-};
-
-
-$scope.changeStatus = function(userId){
-		$scope.selectedUserId=userId;
-	 	$scope.showStatusChange();
-
-};
-
-
-
-
-
-
-
+	};
 
 }]);
