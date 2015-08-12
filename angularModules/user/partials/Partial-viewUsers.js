@@ -31,11 +31,13 @@ angular.module('baabtra').controller('ViewusersCtrl',['$scope','commonService','
 	$scope.data.searchKey.profile.gender = "";
 	$scope.value = "State";
 
-	$scope.data.userDropdown = [{"text" : "<i class=\"fa fa-fw fa-user\"></i>&nbsp;View Profile Summary",
+	$scope.data.userDropdown = [{"text" : "<i class=\"mdi-action-account-box\"></i>&nbsp;View Profile",
+    							"click":"$state.go(\"home.main.userProfile\",{userId:user.fkUserLoginId.$oid})"},
+    							{"text" : "<i class=\"fa fa-fw fa-user\"></i>&nbsp;View BP Summary",
     							"click":"viewProfile(user.fkUserLoginId.$oid, 'summary')"},
-    							{"text" : "<i class=\"fa fa-fw fa-user\"></i>&nbsp;View Detailed Profile",
+    							{"text" : "<i class=\"fa fa-fw fa-user\"></i>&nbsp;View Detailed BP",
     							"click":"viewProfile(user.fkUserLoginId.$oid, 'detailed')"},
-    							{"text" : "<i class=\"fa fa-fw fa-user\"></i>&nbsp;View Profile By Course",
+    							{"text" : "<i class=\"fa fa-fw fa-user\"></i>&nbsp;View BP By Course",
     							"click":"viewProfile(user.fkUserLoginId.$oid, 'byCourse')"},
     							{"text" : "<i class=\"mdi-av-repeat\"></i>&nbsp;Change User Status",
     							"click":"changeStatus(user.fkUserLoginId.$oid)"}];

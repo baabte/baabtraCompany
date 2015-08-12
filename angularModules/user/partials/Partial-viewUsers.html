@@ -73,6 +73,19 @@
               </div>
             </div>
 
+            <!-- Date Search-->
+            <div class="col-xs-12 b-b p-v" ng-if="data.courseList.length">
+              <div class="font-bold">Date Search</div>
+                <div class="sample1">
+                  <div class="inputs p-v-xs ">
+                    <input type="text" class="form-control" ng-model="data.searchKey.course.fromDate" placeholder="From Date" autocomplete="off"  data-date-format="dd-MM-yyyy" data-date-type="date" data-autoclose="true" data-max-date="today" onkeydown="return false" bs-datepicker="" autocomplete="off" placeholder="From date">
+                  </div>
+                   <div class="inputs p-v-xs ">
+                    <input type="text" class="form-control " ng-model="data.searchKey.course.toDate" placeholder="To Date" autocomplete="off"  data-date-format="dd-MM-yyyy" data-date-type="date" data-autoclose="true" data-max-date="today" onkeydown="return false" bs-datepicker="" autocomplete="off" placeholder="From date">
+                   </div>
+                </div>
+            </div>
+
              <!-- Account Status -->
             <div class="col-xs-12 b-b p-v">
               <div class="font-bold">Account Status</div>
