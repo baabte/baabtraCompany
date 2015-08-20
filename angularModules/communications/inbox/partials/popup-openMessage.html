@@ -1,0 +1,54 @@
+<div  class="modal modal-full-width scrollable" tabindex="-1" role="dialog" >
+    <div class="modal-dialog-full-width  modal-full-width">
+      <div class="modal-content">
+
+          <div class="col-xs-12 bg-light">
+            <div class="row bg-white shadow-z-1 p-v-sm fixed-tab">
+              <div class="col-xs-12 ">
+                <div class="row">
+                  <div class="col-sm-2 hidden-xs text-left font-bold">
+                    From: <get-user-name login-id="data.thisMessage.from"></get-user-name>
+                  </div>
+                  <div class="col-xs-9 text-right">
+                    
+                  </div>
+                  <div class="col-xs-1 text-right">
+                    <span class="mdi-action-highlight-remove text-2x link" ng-click="$hide()">
+                    </span>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div style="margin-top:56px;"></div>
+            
+            <div class="row p" >
+
+              <div class="col-xs-12 bg-white p ">
+                <div class="col-xs-12 font-bold">
+                  {{data.thisMessage.subject}}
+                </div>
+                <div class="col-xs-12 p" ng-bind-html="data.thisMessage.message|breakFilter">
+                </div>
+              </div>
+
+              <div class="col-xs-12 bg-white p text-right">
+                <button class="btn btn-success pull-right" ng-click="openReplyWindow()">Reply</button>
+              </div>
+
+
+              <div ng-if="data.thisMessage.parentId" class="col-xs-12 p">
+                In reply to:
+                <div class="col-xs-12 bg-white">
+                  <div class="col-xs-12 font-bold">
+                  {{data.parentOfThisMsg.subject}}
+                  </div>
+                  <div class="col-xs-12 p" ng-bind-html="data.parentOfThisMsg.message|breakFilter">
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+      </div>
+    </div>
+</div>

@@ -1,12 +1,13 @@
-<ul class="dropdown-menu b-white shadow-z-1 w-lg"  style="max-height: 297px;
+<ul class="dropdown-menu b-white shadow-z-1 w-lg no-padding" ng-class="{'hide-dropdown':!$root.data.userNotification.notifications.length}"  style="max-height: 297px;
   overflow-y: auto;">
-  <li ng-repeat="notification in $root.data.userNotification.notification">
-    <div ng-class="{'b-b':$index+1 <  $root.data.userNotification.notification.length}">
-      <div title="Feedback" class="baab-list-item p-xs" ui-sref="home.main.viewDetails({feedBackId:notification.typeId.$oid})" ng-if="notification.type == 'feedback'">
-      <a href="" class="pull-left w-thumb m-r"><img src="images/CompanyLogs/company.png" class="img-responsive"></a>
+  <li ng-repeat="notification in $root.data.userNotification.notifications">
+    <div ng-class="{'bg-light':!notification.read}" class="b-b">
+      <div class="baab-list-item p-xs" ng-click="notificationLink(notification,$root.data.userNotification)">
+        <!-- ui-sref="{{notification.link.state}}({{notification.link.params}})" -->
+      <!-- <a href="" class="pull-left w-thumb m-r"></a> -->
         <div>{{notification.message}}</div>
         <i class="text-muted mdi-editor-insert-comment"></i>
-        <span class="text-muted text-xs">{{notification.date.$date |  date:"MM/dd/yyyy 'at' h:mma"}}</span>
+        <span class="text-muted text-xs">{{notification.createdDate.$date |  date:"MM/dd/yyyy 'at' h:mma"}}</span>
       </div>
       <!-- <div class="">
         <a href="" class="pull-left w-thumb m-r"><img src="images/CompanyLogs/company.png" class="img-responsive"></a>
@@ -16,5 +17,8 @@
         <div class="text-muted text-xs text-right">{{notification.date.$date |  date:"MM/dd/yyyy 'at' h:mma"}}</div>
       </div> -->
     </div>
+  </li>
+  <li>
+    <a class="bg-light text-center text-info p-v-sm" ui-sref="home.main.notifications">See All</a>
   </li>
 </ul>

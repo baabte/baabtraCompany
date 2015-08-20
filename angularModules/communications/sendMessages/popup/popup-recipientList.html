@@ -1,0 +1,14 @@
+<div  class="modal" tabindex="-1" role="dialog" >
+    <div class="modal-dialog modal-lg">
+      <div class="modal-content">
+        <div class="modal-body p">
+          <div class="row">
+              <div class="col-xs-12 p-xs m-xs bg-light" ng-repeat="recipient in data.mailingList">
+                {{recipient.profile.firstName+' '+recipient.profile.lastName}}
+                <b class="badge m-l-xs pull-right link" ng-click="removeFromList(recipient)">X</b>
+              </div>
+          </div>
+        </div>
+      </div>
+    </div>
+</div>

@@ -1,0 +1,43 @@
+<div class="row m-t-n">
+	<div class="col-xs-12 bg-light h-full m-t-md" style="min-height:800px;">
+		<div class="col-sm-2 hidden-xs p h-full b-r bg-white"  style="min-height:800px;">
+			<div class="col-xs-12 b-b p link baab-list-item dk">
+				<span class="fa fa-folder-open">&nbsp;</span>
+				Sent
+			</div>
+
+			<div class="col-xs-12 b-b p link baab-list-item" ng-click="composeNew()">
+				<span class="fa fa-paper-plane">&nbsp;</span>
+				Compose
+			</div>
+		</div>
+		<div class="col-xs-12 visible-xs p b-r bg-white">
+			<div class="col-xs-2 b p link baab-list-item">
+				<span class="fa fa-folder-open">&nbsp;</span>
+				Sent
+			</div>
+
+			<div class="col-xs-2 b p link baab-list-item">
+				<span class="fa fa-paper-plane">&nbsp;</span>
+				Compose
+			</div>
+		</div>
+		<div class="col-xs-12 col-sm-10 p">
+
+			<div ng-repeat="message in data.messages" class="bg-white col-md-push-2 col-md-8 col-xs-12 col-sm-12 p-h-sm shadow-z-1  pull-left baab-list-item" style="cursor: pointer;" >
+				<div class="p-xs">
+			        <div class="p-xs">
+				        <div>{{message.subject}}</div>
+				        <i class="text-muted mdi-editor-insert-comment"></i>
+				        <span class="text-muted text-xs">{{message.createdDate.$date |  date:"MM/dd/yyyy 'at' h:mma"}}</span>
+			        </div>
+		        </div>
+			</div>
+
+
+		</div>
+	</div>
+	<!-- <div class="col-xs-12 bg-light h-full p-v" style="min-height:800px;">
+
+	</div> -->
+</div>

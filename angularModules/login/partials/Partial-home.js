@@ -360,4 +360,45 @@ $rootScope.$on('$stateChangeStart', function(event, toState, toParams, fromState
       $scope.viewMenu = !$scope.viewMenu;
     };
 
+
+    /*
+This area is for keeping code for managing notifications, please add the other codes before this line.
+Here we are defining all the socket.oi listeners and broadcastings, so that we can get all the things in all pages and
+can manage it at single place.
+*/
+
+if($rootScope.userinfo){
+
+var socketio = notification.socket();
+// console.log('notification'+$rootScope.userinfo.userLoginId);
+socketio.removeEventListener('notification'+$rootScope.userinfo.userLoginId); /* For avoiding duplicate listener
+                                                                                */
+socketio.on('notification'+$rootScope.userinfo.userLoginId,function (data) {
+  // console.log(data);
+  $rootScope.data.userNotification.notifications.splice(0,0,data.notification);
+  $rootScope.data.userNotification.unreadCount = $rootScope.data.userNotification.unreadCount+1;
+  $rootScope.$digest();
+});
+
+
+
+$rootScope.notificationLink = function (notificationObj,mainObj) {
+  var link = notificationObj.link;
+  var id = notificationObj._id.$oid;
+  // console.log(link,id);
+  if(notificationObj.read==0){
+    var updated = notification.markNotificationAsRead($scope.userinfo.userLoginId,id);
+      updated.then(function (response) {
+        notificationObj.read = 1;
+        if(!angular.equals(mainObj,undefined)){
+          mainObj.unreadCount = mainObj.unreadCount-1;
+        }
+      });  
+  }
+  //notification.newNotification({companyId:'54d836934ed3269b80684843',fkLoginId:'559393aa65f384694144b65b',message:'testing notification',link:{state:'home.main',params:{}},crmId:'559393aa65f384694144b65a'});
+  $state.go(link.state,link.params);
+};
+
+}
+
 }]);

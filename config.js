@@ -68,6 +68,8 @@ angular.module('baabtra')
     //"BWS": "http://server.baabtra.in/",//server-test
     "BWS": "http://service.99lms.com/",//server-test
     //"BWS": "http://services.baabtra.com/",//server - production
+      "socketServer":'http://104.215.190.103:1555',//production
+      // "socketServer":'http://127.0.0.1:1555',
 
      "SARID":1, // SuperAdminRoleID
      "CURID":2, // CompanyUser

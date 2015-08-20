@@ -1,0 +1,17 @@
+<div  class="modal" tabindex="-1" role="dialog" >
+    <div class="modal-dialog modal-lg">
+      <div class="modal-content">
+        <div class="modal-body p">
+          <div class="row">
+              <div class="col-xs-12 p-xs m-xs bg-light" ng-repeat="parent in data.parents">
+                {{parent.profile.firstName+' '+parent.profile.lastName}}
+                <b class="badge m-l-xs pull-right link" ng-click="addToList(parent)">+</b>
+              </div>
+              <div class="col-xs-12 p-xs m-xs bg-danger" ng-if="data.parents.length==0">
+                This candidate have no registered parent.
+              </div>
+          </div>
+        </div>
+      </div>
+    </div>
+</div>

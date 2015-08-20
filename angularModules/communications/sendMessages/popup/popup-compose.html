@@ -1,0 +1,194 @@
+<div  class="modal modal-full-width scrollable" tabindex="-1" role="dialog" >
+    <div class="modal-dialog-full-width  modal-full-width">
+      <div class="modal-content">
+
+          <div class="col-xs-12 bg-light">
+            <div class="row bg-white shadow-z-1 p-v-sm fixed-tab">
+              <div class="col-xs-12 ">
+                <div class="row">
+                  <div class="col-sm-2 hidden-xs text-left font-bold">
+                    Add users to mailing list.
+                  </div>
+                  <div class="col-xs-9 text-right">
+                    <a class="font-bold" ng-if="data.result.usersCount">{{data.usersCountFrom}}-{{data.usersCountTo}} Of {{data.result.usersCount}}</a>&nbsp;
+                    <a class="btn btn-rounded btn-stroke btn-info no-margin" ng-disabled="data.prevButtondisabled" ng-click="prevOne()"><i class="fa fa-angle-left text-white font-bold"></i></a>
+                    <a ng-click="nextOne()" ng-disabled="data.nextButtondisabled" class="btn btn-rounded btn-stroke btn-info no-margin"><i class="fa fa-angle-right text-white font-bold"></i></a>
+                  </div>
+                  <div class="col-xs-1 text-right">
+                    <span class="mdi-action-highlight-remove text-2x link" ng-click="$hide()"></span>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div style="margin-top:56px;"></div>
+            <div ng-if="data.mailingList.length" class="am-fade-and-slide-top col-xs-12 bg-success p">
+              <div ng-if="$index>(data.mailingList.length-6)" class="col-xs-12 col-sm-2 p-xs m-r-xs btn-success" ng-repeat="recipient in data.mailingList">
+                {{recipient.profile.firstName+' '+recipient.profile.lastName}}
+                <b class="badge m-l-xs pull-right link" ng-click="removeFromList(recipient)">X</b>
+              </div>
+              <div ng-click="showRecipients()" class="label bg-success pos-rlt m-r-xs link" ng-if="data.mailingList.length>5">{{data.mailingList.length-5}} More</div>
+              <div ng-click="composeMessage()" class="col-xs-1 pull-right text-right text-white link"><span class="text-2x mdi-content-send"></span></div>
+            </div>
+            <div class="row" >
+              <div class="col-xs-12 col-md-3 b-r p-v">
+                  <div class="col-xs-12 bg-white shadow-z-1 ">
+                    <div class="row">
+                      
+                      <!-- username -->
+                      <div class="col-xs-12 b-b p-v">
+                         <input type="text" class="form-control floating-label"ng-model="data.searchKey.userName" placeholder="Search Users" autocomplete="off">
+                      </div>
+
+                      <!-- gender -->
+                      <div class="col-xs-12 b-b p-v">
+                        <div class="font-bold">Gender</div>
+                        <div class="sample2">
+                          <div class="radio radio-primary">
+                            <label>
+                              <input type="radio" title="All" ng-model="data.searchKey.profile.gender" value="" checked="">
+                              All
+                            </label>
+                          </div>
+                          <div class="radio radio-primary">
+                            <label>
+                              <input type="radio" ng-model="data.searchKey.profile.gender" value="Male">
+                             Male
+                            </label>
+                          </div>
+                          <div class="radio radio-primary">
+                            <label>
+                              <input type="radio" ng-model="data.searchKey.profile.gender" value="Female">
+                              Female
+                            </label>
+                          </div>
+                        </div>
+                      </div>
+
+                      <div class="col-xs-12 b-b p-v" ng-if="(data.searchKey.coursesSelected.length == 1) && data.courseList.length && (data.selectedCourse.totalMark > 0)">
+                        <span class="font-bold">Mark Range</span>
+                         <div style="margin: 10px 0 10px;" range-slider min="1" max="data.selectedCourse.totalMark" model-min="data.searchKey.course.minMark" model-max="data.searchKey.course.maxMark"></div>     
+                      </div>
+
+                      <!-- course based -->
+                      <div class="col-xs-12 b-b p-v" ng-if="data.courseList.length">
+                        <div class="font-bold">Courses & Tests ({{data.courseList.length}})</div>
+                        <div  class="box-cell scrollable hover" style="max-height: 170px;">
+                          <div class="sample1" ng-repeat="course in data.courseList">
+                            <div class="checkbox show-in-one-line" style="line-height: 19px;max-height: 25px;">
+                              <label title="{{course.Name}}">
+                                <input  type="checkbox"  ng-model="data.coures[$index]" ng-change="courseSelectionChanged(course)"> {{course.Name}}
+                              </label>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+
+                      <!-- Date Search-->
+                      <div class="col-xs-12 b-b p-v" ng-if="data.courseList.length">
+                        <div class="font-bold">Date Search</div>
+                          <div class="sample1">
+                            <div class="inputs p-v-xs ">
+                              <input type="text" class="form-control" ng-model="data.searchKey.course.fromDate" placeholder="From Date" autocomplete="off"  data-date-format="dd-MM-yyyy" data-date-type="date" data-autoclose="true" data-max-date="today" onkeydown="return false" bs-datepicker="" autocomplete="off" placeholder="From date">
+                            </div>
+                             <div class="inputs p-v-xs ">
+                              <input type="text" class="form-control " ng-model="data.searchKey.course.toDate" placeholder="To Date" autocomplete="off"  data-date-format="dd-MM-yyyy" data-date-type="date" data-autoclose="true" data-max-date="today" onkeydown="return false" bs-datepicker="" autocomplete="off" placeholder="From date">
+                             </div>
+                          </div>
+                      </div>
+
+                       <!-- Account Status -->
+                      <div class="col-xs-12 b-b p-v">
+                        <div class="font-bold">Account Status</div>
+                        <div  class="box-cell scrollable hover" style="max-height: 170px;">
+                         <select class="form-control m-t-xs" ng-model="data.searchKey.status.Account" id="select">
+                            <option value="">Select Status</option>
+                            <option value="Registered">Registered</option>
+                            <option value="Attending Course">Attending Course</option>
+                            <option value="Searching Job">Searching Job</option>
+                            <option value="Interview Attended">Interview Attended</option>
+                            <option value="Going for Higher Studies">Going for Higher Studies</option>
+                          </select>
+                        </div>
+                      </div>
+
+                      <!-- Job Status -->
+                      <div class="col-xs-12 b-b p-v">
+                        <div class="font-bold">Job Status</div>
+                        <div  class="box-cell scrollable hover" style="max-height: 170px;">
+                          <select class="form-control m-t-xs" ng-model="data.searchKey.status.Job" id="select">
+                                  <option value="">Select Status</option>            
+                                  <option value="Working">Working</option>
+                                  <option value="Looking for Job Change">Looking for Job Change</option>
+                                  <option value="Ready for Job Change">Ready for Job Change</option>
+                                  <option value="Not Interested in Job">Not Interested in Job</option>
+                                  <option value="Offer Received">Offer Received</option>
+                                  <option value="Offer Delayed">Offer Delayed</option>
+                              </select>           
+                        </div>
+                      </div>
+                      <!--/ Job Status -->
+
+                      <!-- form feilds -->
+                      <div class="col-xs-12 b-b p-v">
+                        <div class="font-bold">Custom fields</div>
+                        <div  class="box-cell scrollable hover" style="max-height: 170px;">
+                          <div class="inputs p-v-xs" ng-repeat="feild in data.Feilds">
+                            <input type="text" class="form-control floating-label" ng-model="data.searchKey.profile[feild.model]" class="form-control" placeholder="{{feild.text}}">
+                          </div>
+                        </div>
+                      </div>
+                      <!--/ form feilds -->
+
+                    </div>
+                  </div>
+              </div>
+
+              <!-- users list view -->
+              <div class="col-xs-12 col-md-9 p-v">
+                <div class="row">
+                  <div class="col-xs-12 ">
+                    <div  masonry='{ "transitionDuration" : "0.8s" , "itemSelector" : ".tile"}'>
+                      <div class="col-xs-12 bg-warning p-v shadow-z-1 font-bold" ng-if="!data.usersObject.length && data.usersObject != undefined">
+                            Sorry, no results containing all your search terms were found
+                      </div>
+                      <div masonry-tile class="tile col-xs-12 col-sm-5 col-md-5 col-lg-5 pull-left masonry-brick" ng-repeat="user in data.usersObject track by user._id.$oid">
+                        <div class="panel b-light link-hover link">
+                          <div class="panel-heading text-center">
+                            <div class="p" style="position: absolute;right: 15px;">
+                              <a  data-placement="bottom-right" data-html="true" bs-dropdown="data.userDropdown">
+                                <i class="mdi-navigation-more-vert text-xl text-dark btn no-padding" ></i>
+                              </a>
+                            </div>
+
+                            <div style="max-height: 150px;  overflow: hidden;">
+                              <img class="img-responsive" ng-if="!user.profile.userPic" style="min-height: 150px;margin-top: -20px;"  src="images/default_person.png">
+                              <img  class="img-responsive" ng-if="user.profile.userPic" style="min-height: 150px;  overflow: hidden;" src="{{user.profile.userPic}}">
+                            </div>
+                          </div>
+
+                          <div class="progress progress-xxxs no-margin no-radius bg-white">
+                            <div class="progress-bar bg-light" style="width:20%"></div>
+                          </div>
+
+                          <div class="panel-body p-sm">
+                            <div class="clear">
+                              <div class="font-bold text-name show-in-one-line">{{user.profile.firstName}}&nbsp;{{user.profile.lastName}}</div>
+                              <small class="text-muted show-in-one-line">{{user.userName}}</small>
+                              <small class="text-muted" ng-if="user.profile.mobile">Ph:&nbsp;{{user.profile.mobile}}</small>
+                              <small class="text-muted" ng-if="!user.profile.mobile">DOB:&nbsp;{{user.profile.dob | date:'dd/MMM/yyyy'}}</small>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <!--/ users list view -->
+
+            </div>
+          </div>
+
+      </div>
+    </div>
+</div>
