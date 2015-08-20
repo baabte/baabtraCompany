@@ -57,6 +57,35 @@
                 
               })
 
+               .state('home.main.inbox', {
+                url: '/inbox',
+                views:{
+                  'innercontent':{
+                    templateUrl: 'angularModules/communications/inbox/partials/Partial-inbox.html',
+                    controller:'InboxCtrl'
+                  }
+                }
+              })
+              .state('home.main.send', {
+                url: '/send',
+                views:{
+                  'innercontent':{
+                    templateUrl: 'angularModules/communications/sendMessages/partials/Partial-sendMessage.html',
+                    controller:'SendmessageCtrl'
+                  }
+                }
+              })
+              .state('home.main.notifications', {
+                url: '/notifications',
+                views:{
+                  'innercontent':{
+                    templateUrl: 'angularModules/Notification/partials/Partial-notification.html',
+                    controller: 'NotificationCtrl'
+                  }
+                }
+                
+              })
+
               .state('home.main.company.registration', {
                 url: '/registration',
                 views:{
