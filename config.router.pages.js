@@ -41,11 +41,6 @@
                   }
                 }
               })
-              .state('home.redirect', {
-                url: '/redirect',
-                templateUrl: 'angularModules/redirect/partials/Partial-redirect.html',
-                controller:'RedirectCtrl'
-              })
               .state('home.main.company', {
                 url: '/company',
                 views:{
@@ -54,35 +49,6 @@
                 controller:'CompanyViewCtrl'
                                   }
                       }
-                
-              })
-
-               .state('home.main.inbox', {
-                url: '/inbox',
-                views:{
-                  'innercontent':{
-                    templateUrl: 'angularModules/communications/inbox/partials/Partial-inbox.html',
-                    controller:'InboxCtrl'
-                  }
-                }
-              })
-              .state('home.main.send', {
-                url: '/send',
-                views:{
-                  'innercontent':{
-                    templateUrl: 'angularModules/communications/sendMessages/partials/Partial-sendMessage.html',
-                    controller:'SendmessageCtrl'
-                  }
-                }
-              })
-              .state('home.main.notifications', {
-                url: '/notifications',
-                views:{
-                  'innercontent':{
-                    templateUrl: 'angularModules/Notification/partials/Partial-notification.html',
-                    controller: 'NotificationCtrl'
-                  }
-                }
                 
               })
 
@@ -157,12 +123,35 @@
                 templateUrl: 'angularModules/login/partials/Partial-home.html',
                 controller:'HomeCtrl'
               })
+              .state('home.redirect', {
+                url: '/redirect',
+                templateUrl: 'angularModules/redirect/partials/Partial-redirect.html',
+                controller:'RedirectCtrl'
+              })
               .state('home.main.newParent', {
                 url: '/newParent',
                 views:{
                   'innercontent':{
                     templateUrl: 'angularModules/manageParent/newParent/partials/Partial-registerParent.html',
                     controller:'RegisterparentCtrl'
+                  }
+                }
+              })
+              .state('home.main.inbox', {
+                url: '/inbox',
+                views:{
+                  'innercontent':{
+                    templateUrl: 'angularModules/communications/inbox/partials/Partial-inbox.html',
+                    controller:'InboxCtrl'
+                  }
+                }
+              })
+              .state('home.main.send', {
+                url: '/send',
+                views:{
+                  'innercontent':{
+                    templateUrl: 'angularModules/communications/sendMessages/partials/Partial-sendMessage.html',
+                    controller:'SendmessageCtrl'
                   }
                 }
               })
@@ -272,7 +261,6 @@
                 }
                 
               })
-
                .state('home.main.addCourseElement', {
                 url: '/courseElement',
                 views:{
@@ -300,9 +288,7 @@
                     controller: 'AddexitcriteriaCtrl'
                   }
                 }
-                
               })
-
               .state('home.main.addMenu', {
                 url: '/addMenu',
                 views:{
@@ -311,7 +297,6 @@
                     controller: 'AddmenuCtrl'
                   }
                 }
-                
               })
               .state('home.main.addCourse', {
                 url: '/addCourse',
@@ -321,7 +306,6 @@
                     controller: 'AddcourseCtrl'
                   }
                 }
-                
               })
 
               .state('home.main.draftedCourses', {
@@ -332,7 +316,16 @@
                     controller: 'DraftedcoursesCtrl'
                   }
                 }
-                
+              })
+
+              .state('home.main.manageHomeScreen', {
+                url: '/manageHomeScreen',
+                views:{
+                  'innercontent':{
+                    templateUrl: 'angularModules/homeScreen/partials/Partial-configureHomeScreen.html',
+                    controller: 'ConfigurehomescreenCtrl'
+                  }
+                }
               })
 
               .state('home.main.course', {
@@ -676,6 +669,16 @@
                     controller: 'NotificationconfigurationCtrl'
                   }
                 }
+              })
+
+              .state('home.main.notifications', {
+                url: '/notifications',
+                views:{
+                  'innercontent':{
+                    templateUrl: 'angularModules/Notification/partials/Partial-notification.html',
+                    controller: 'NotificationCtrl'
+                  }
+                }
                 
               })
 
@@ -819,7 +822,7 @@
                 
               })
               .state('home.main.menteeAttendance', {
-                url: '/menteeAttendance/:userId',
+                url: '/menteeAttendance/:userId/:batchId',
                 views:{
                   'innercontent':{
                     templateUrl: 'angularModules/Batches/partials/Partial-menteeAttendance.html',
@@ -1052,6 +1055,36 @@
                   'innercontent':{
                 templateUrl: 'angularModules/result/resultReport/partials/Partial-resultReport.html',
                 controller:'ResultreportCtrl'
+                  }
+                }
+              })
+
+                 .state('home.main.collegeRegistration', {
+                url: '/collegeRegistration/',
+                 views:{
+                  'innercontent':{
+                templateUrl: 'angularModules/college/collegeRegistration/partials/Partial-collegeRegistration.html',
+                controller:'CollegeregistrationCtrl'
+                  }
+                }
+              })
+
+                    .state('home.main.offlineSyncCourse', {
+                url: '/offlineSyncCourse/',
+                 views:{
+                  'innercontent':{
+                templateUrl: 'angularModules/offlineSync/offlineSyncCourse/partials/Partial-offlineSyncCourse.html',
+                controller:'OfflinesynccourseCtrl'
+                  }
+                }
+              })
+
+               .state('home.main.Registration', {
+                url: '/Registration/:key',
+                 views:{
+                  'innercontent':{
+                templateUrl: 'angularModules/Registration/partials/Partial-multiRegistration.html',
+                controller:'MultiregistrationCtrl'
                   }
                 }
               })
