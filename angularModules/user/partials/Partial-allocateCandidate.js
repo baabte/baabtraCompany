@@ -4,6 +4,13 @@ angular.module('baabtra').controller('AllocatecandidateCtrl',['$scope', '$rootSc
 	$scope.selectAll=false;
 	$scope.data.viewBox = {};
 	$scope.courseBasedUserList={};
+	var childCompanyId='';
+	if($rootScope.userinfo){
+		if($rootScope.userinfo.ActiveUserData.roleMappingObj.childCompanyId){
+		 childCompanyId=	$rootScope.userinfo.ActiveUserData.roleMappingObj.childCompanyId.$oid;
+		console.log(childCompanyId);
+		}
+	};
 
 	$scope.buildUsersObjectByCourse=function (responseData) {
 			for(key in $scope.courseBasedUserList){
@@ -200,6 +207,9 @@ angular.module('baabtra').controller('AllocatecandidateCtrl',['$scope', '$rootSc
 					
 			  		$scope.selectedUser.loggedusercrmid=$scope.crmId;
 			  		$scope.selectedUser.companyId=$scope.companyId;
+			  		if(!angular.equals(childCompanyId,'')){
+					$scope.selectedUser.childCompanyId = childCompanyId;
+					};
 			  		$scope.selectedUser.role={};
 			  		$scope.selectedUser.role.roleId=3; //initialising the role id as mentee
 
@@ -248,6 +258,9 @@ angular.module('baabtra').controller('AllocatecandidateCtrl',['$scope', '$rootSc
 					
 			  		$scope.orderFormsData[key].selectedUser.loggedusercrmid=$scope.crmId;
 			  		$scope.orderFormsData[key].selectedUser.companyId=$scope.companyId;
+			  		if(!angular.equals(childCompanyId,'')){
+					$scope.orderFormsData[key].selectedUser.childCompanyId = childCompanyId;
+					};
 			  		$scope.orderFormsData[key].selectedUser.role={};
 			  		$scope.orderFormsData[key].selectedUser.role.roleId=3; //initialising the role id as mentee
 				}

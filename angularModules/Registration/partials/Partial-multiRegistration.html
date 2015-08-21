@@ -1,0 +1,387 @@
+<div class="col-xs-12">
+    <!-- <div  set-sub-heading-and-background-color  class="panel-heading font-bold text-white  p baab-shadow">Register a {{currentDetails.title}}</div> -->
+
+    <!-- <div class="row p-h ">
+	    <form name="multiRegistraion" ng-submit="fnRegister()" class="form" xt-form editable-form novalidate>
+
+		</form>    
+	</div>
+ -->
+	<!-- form.html -->
+
+	<div class="row">
+<div class="col-sm-10 col-sm-offset-1">
+
+    <div id="form-container" class="">
+
+        <div class="page-header text-center">
+            <div class="text-2x text-dark">Register a {{currentDetails.title}}</div>
+            
+            <!-- the links to our nested states using relative paths -->
+            <!-- add the active class if the state matches our ui-sref -->
+            <div id="status-buttons" class="text-center" >
+                <a ng-repeat="step in currentDetails.steps" ng-class="{'active':status.selected === $index+1}" ng-click="status.selected=$index+1" ><span>{{$index+1}}</span>{{step.name}}</a>               
+            </div>
+        </div>
+        
+        <!-- use ng-submit to catch the form submission and use our Angular function -->
+	    <div id="signup-form" >   
+
+
+	        <!--form for company registration   -->
+	        <div ng-if="currentDetails.title=='Company'">
+	            <!-- form-profile.html -->
+	            <form name="multiRegistraion1" class="row" ng-show="status.selected=='1'" class="form" xt-form editable-form novalidate>
+	            	<div class="form-group">
+						<input type="text" class="form-control" float-label placeholder="Company Name" name="name" ng-model="formData.companyName" xt-validate required>
+					</div>
+					<div class="form-group">
+						 <input type="text" ng-model="formData.eMail" ng-pattern="emailPattern" class="form-control email" float-label ui-validate=" '$value!==existingEmail' " ui-validate-watch=" 'existingEmail'" msg-pattern='{{emailMsg}}' msg-validator='{{emailEMsg}}'  xt-validate placeholder="{{'Email Address'|translate}}" name="eMail" ng-change="userVal(formData)" required>
+					</div>
+					<div class="form-group">
+						<input type="text" class="form-control" float-label placeholder="{{'Domain Name'|translate}}" ng-pattern="domainPattern"  name="domainName"  ng-change="checkDomainExits()" ui-validate=" '$value!==existingDomain' " ui-validate-watch=" 'existingDomain'" msg-pattern='{{domainMsg}}' msg-validator='{{domainEMsg}}'  ng-model="formData.domainName" xt-validate required>
+					</div>
+					<div class="form-group">
+						<input type="text" class="form-control" float-label placeholder="{{'Company Tagline'|translate}}" name="tagLine" ng-model="formData.tagLine">
+					</div>
+					<div class="form-group" >                   
+                    	<input type="password" ng-model="formData.password" class="form-control" float-label placeholder="{{'Password'|translate}}"name="password" ng-change="checkPassword()" ng-minlength="5" xt-validate required>
+                    </div>
+                    <div class="form-group">                    
+                    	<input type="password" ng-model="cpassword" class="form-control" float-label placeholder="{{'Confirm Password'|translate}}"name="cpassword" xt-validate required  ui-validate=" '$value==formData.password' " ui-validate-watch=" 'formData.password' ">
+                    </div>
+					<div class="form-group row">
+						<div class="col-xs-12 text-center">
+					    	<button  ng-click="next()" ng-disabled="multiRegistraion1.$invalid" class="btn btn-info">Next &nbsp;<i class="glyphicon glyphicon-circle-arrow-right"></i></button>					    
+						</div>
+					</div>
+				</form>
+
+				<!-- form-interests.html -->
+				<form name="multiRegistraion2" class="row" ng-show="status.selected=='2'" xt-form editable-form novalidate>	
+					<div class="form-group">
+						<input type="text" class="form-control" float-label placeholder="{{'Location'|translate}}" name="location" ng-model="formData.location">
+					</div>
+
+					<div class="form-group">
+						<textarea rows="3" class="form-control" float-label placeholder="{{'Address'|translate}}" name="tagLine" ng-model="formData.address">></textarea>
+					</div>
+
+
+
+					<div class="form-group">
+						<div class="font-bold">Contact Person</div>
+			            <div ng-repeat="contactPerson in formData.contactPersons track by $index">
+			                <div class="col-xs-12 shadow-z-2 m-t-sm   ">
+			                    <div class="col-md-5 col-xs-12   ">
+			                        <input type="text"  float-label ng-model="contactPerson.Name" class="form-control " placeholder="Name" required xt-validate name="contactPersonName">
+			                    </div>
+			                    <div class="col-md-5 col-xs-8   ">
+			                        <input type="number"  float-label ng-model="contactPerson.Phone" class="form-control" placeholder="Phone" required xt-validate name="contactPersonPhone">              
+			                    </div>
+			                    <div class="col-md-2 col-xs-4 row m-t-lg    pull-right"> 
+			                        <i ng-click="removeContact($index)" class="btn no-padding fa fa-minus-square text-2x " ng-if="formData.contactPersons.length>1"></i>                
+			                        <i ng-click="addContact()" class="btn no-padding fa fa-plus-square text-2x " ng-if="$index+1==formData.contactPersons.length"></i>
+			                    </div>
+			                </div>
+			            </div>
+		            </div>
+		                
+
+
+					<div class="form-group row m-t-lg">
+
+						<div class="col-xs-12 text-center">
+							<button ng-click="previous()" class="btn btn-info"><i class="glyphicon glyphicon-circle-arrow-left"></i> &nbsp; Previous</button>
+						    <button ng-click="next()" class="btn btn-info" ng-disabled="multiRegistraion2.$invalid" >Next &nbsp;<i class="glyphicon glyphicon-circle-arrow-right"></i></button>					    
+					    						    
+						</div>
+					</div>
+				</form>
+				
+
+				<!-- form-payment.html -->
+				<form name="multiRegistraion3" ng-show="status.selected=='3'" xt-form editable-form novalidate>	
+					<div class="form-group row">
+						<div class=" m-t-lg" >
+                              <tags-input class="bootstrap" ng-model="formData.technologies" placeholder="Technologies Used" replace-spaces-with-dashes="false" min-length="1" name="Courses" required xt-validate >
+                                  <auto-complete source="loadTechnologies($query) | filter:$query" min-length="0" debounce-delay="0" max-results="15"></auto-complete>
+                              </tags-input>
+                        <em class="text-muted text-E91E63" translate="{{'* Technologies Used'|translate}}"></em>                
+                      </div>    
+					</div>	
+					<div class="form-group">
+						<textarea rows="2" class="form-control" float-label placeholder="{{'Remarks'|translate}}" name="remarks" ng-model="formData.remarks">></textarea>
+					</div>	
+					<div class="form-group row">
+						<div class="col-xs-12 text-center">
+					    	<button ng-click="fnRegister()" data-ng-disabled="multiRegistraion3.$invalid||multiRegistraion2.$invalid||multiRegistraion1.$invalid||formData.technologies.length==0" type="submit" class="btn btn-danger">Submit</button>		    
+						</div>
+					</div>
+				</form>
+
+			</div>
+	        <!--form for company registration ends  -->
+
+	        <!--form for Talent Supplier registration   -->
+	        <div ng-if="currentDetails.title=='Talent Supplier'">
+	        	<!-- form-profile.html -->
+	            <form name="multiRegistraion1" ng-show="status.selected=='1'" xt-form editable-form novalidate>
+	            	<div class="form-group">
+						<input type="text" class="form-control" float-label placeholder="Company Name" name="name" ng-model="formData.companyName" required xt-validate>
+					</div>
+					<div class="form-group">
+						 <input type="text" ng-model="formData.eMail" ng-pattern="emailPattern" class="form-control email" float-label ui-validate=" '$value!==existingEmail' " ui-validate-watch=" 'existingEmail'" msg-pattern='{{emailMsg}}' msg-validator='{{emailEMsg}}'  xt-validate placeholder="{{'Email Address'|translate}}" name="eMail" ng-change="userVal(formData)" required>
+					</div>
+					<div class="form-group">
+						<input type="text" class="form-control" float-label placeholder="{{'Domain Name'|translate}}" ng-pattern="domainPattern"  name="domainName"  ng-change="checkDomainExits()" ui-validate=" '$value!==existingDomain' " ui-validate-watch=" 'existingDomain'" msg-pattern='{{domainMsg}}' msg-validator='{{domainEMsg}}'  ng-model="formData.domainName" required xt-validate>
+					</div>
+					<div class="form-group">
+						<select  class="form-control " float-label  placeholder="{{'Company Type'|translate}}"  xt-validate name="companyType"  ng-model="formData.companyType"   required >
+                        	<option value="" translate="{{'Select Talent Supplier Type'|translate}}"></option>
+                            <option value="RA" >Recruitment Agency</option>
+                            <option value="TI" >Training Institute</option>
+                            <option value="SC" >School</option>  
+                            <option value="CO" >College</option>                        
+                        </select>
+					</div>
+
+					<div class="form-group">
+						<input type="text" class="form-control" float-label placeholder="{{'Company Tagline'|translate}}" name="tagLine" ng-model="formData.tagLine">
+					</div>
+					<div class="form-group" >                   
+                    	<input type="password" ng-model="formData.password" class="form-control" float-label placeholder="{{'Password'|translate}}"name="password" ng-change="checkPassword()" ng-minlength="5" xt-validate required>
+                    </div>
+                    <div class="form-group">                    
+                    	<input type="password" ng-model="cpassword" class="form-control" float-label placeholder="{{'Confirm Password'|translate}}"name="cpassword" xt-validate required  ui-validate=" '$value==formData.password' " ui-validate-watch=" 'formData.password' ">
+                    </div>
+					<div class="form-group row">
+						<div class="col-xs-12 text-center">
+					    	<button  ng-click="next()" ng-disabled="multiRegistraion1.$invalid" class="btn btn-info">Next &nbsp;<i class="glyphicon glyphicon-circle-arrow-right"></i></button>					    
+						</div>
+					</div>
+				</form>
+
+				<!-- form-interests.html -->
+				<form name="multiRegistraion2" ng-show="status.selected=='2'" xt-form editable-form novalidate>	
+						
+					<div class="form-group">
+						<input type="text" class="form-control" float-label placeholder="{{'Location'|translate}}" name="location" ng-model="formData.location" required xt-validate>
+					</div>
+
+					<div class="form-group">
+						<textarea rows="3" class="form-control" float-label placeholder="{{'Address'|translate}}" name="tagLine" ng-model="formData.address" required xt-validate></textarea>
+					</div>
+
+
+
+					<div class="form-group">
+						<div class="font-bold">Contact Person</div>
+			            <div ng-repeat="contactPerson in formData.contactPersons track by $index">
+			                <div class="col-xs-12 shadow-z-2 m-t-sm   ">
+			                    <div class="col-md-5 col-xs-12   ">
+			                        <input type="text"  float-label ng-model="contactPerson.Name" class="form-control " placeholder="Name" required xt-validate name="contactPersonName">
+			                    </div>
+			                    <div class="col-md-5 col-xs-8   ">
+			                        <input type="number"  float-label ng-model="contactPerson.Phone" class="form-control" placeholder="Phone" required xt-validate name="contactPersonPhone">              
+			                    </div>
+			                    <div class="col-md-2 col-xs-4 row m-t-lg    pull-right"> 
+			                        <i ng-click="removeContact($index)" class="btn no-padding fa fa-minus-square text-2x " ng-if="formData.contactPersons.length>1"></i>                
+			                        <i ng-click="addContact()" class="btn no-padding fa fa-plus-square text-2x " ng-if="$index+1==formData.contactPersons.length"></i>
+			                    </div>
+			                </div>
+			            </div>
+		            </div>
+		                
+
+
+					<div class="form-group row m-t-lg">
+
+						<div class="col-xs-12 text-center">
+							<button ng-click="previous()" class="btn btn-info"><i class="glyphicon glyphicon-circle-arrow-left"></i> &nbsp; Previous</button>
+						    <button ng-click="next()" ng-disabled="multiRegistraion2.$invalid" class="btn btn-info">Next &nbsp;<i class="glyphicon glyphicon-circle-arrow-right"></i></button>					    
+					    						    
+						</div>
+					</div>
+				</form>
+				
+
+				<!-- form-payment.html -->
+				<form name="multiRegistraion3" ng-show="status.selected=='3'" xt-form editable-form novalidate>	
+					<div ng-if="formData.companyType=='CO'">
+					<div class="form-group row">
+						<div class=" m-t-lg" >
+                              <tags-input class="bootstrap" ng-model="college.mandatoryData.Courses" placeholder="Courses Offered" replace-spaces-with-dashes="false" min-length="1" name="Courses" required xt-validate >
+                                  <auto-complete source="loadCourses($query) | filter:$query" min-length="0" debounce-delay="0" max-results="15"></auto-complete>
+                              </tags-input>
+                        	<em class="text-muted text-E91E63" translate="{{'*Courses must be selected from the List '|translate}}"></em>            
+                      	</div>    
+					</div>
+					<div class="form-group" >
+						<div class="font-bold">Departments</div>
+						<div  ng-repeat="department in formData.departments track by $index">
+                      <div class="col-xs-12 shadow-z-2 m-t-sm ">
+                        <div class="col-xs-10 pull-left">
+                            <div class="col-xs-12">
+                                    <input type="text"  float-label ng-model="department.Name" class="form-control " placeholder="Department"  required xt-validate name="departmentName">
+                            </div>
+                            <div class="col-xs-12">
+                                    <input type="text"  float-label ng-model="department.Hod" class="form-control " placeholder="Name of Hod" required xt-validate name="departmentHod" >
+                            </div>
+                            <div class="col-xs-6">
+                                    <input type="text" float-label ng-model="department.eMail" class="form-control" placeholder="Email ID"  required ng-pattern="emailPattern" msg-pattern='{{emailMsg}}' xt-validate name="departmentHodEmail" >
+                            </div>
+                            <div class="col-xs-6">
+                                    <input type="number"  float-label ng-model="department.phone" class="form-control" placeholder="Phone" required xt-validate name="departmentHodPhone"  >
+                            </div>
+                        </div>
+                        <div class="col-xs-2 row text-right">
+                            <!-- {{$index}} -->
+                            <i ng-click="removeDepartment($index)" class="btn no-padding fa fa-minus-square text-2x" ng-if="formData.departments.length>1"></i>                
+                            <i ng-click="addDepartment()" class="btn no-padding fa fa-plus-square text-2x" ng-if="$index+1==formData.departments.length"></i>
+                        </div>
+                       
+
+
+	                    </div>            
+	                  </div>   
+						
+					</div>
+
+					</div>
+					<div ng-if="formData.companyType=='TI'">
+						<div class="form-group row">
+							<div class=" m-t-lg" >
+	                              <tags-input class="bootstrap" ng-model="formData.technologies" placeholder="Training Technologies" replace-spaces-with-dashes="false" min-length="1" name="Courses" required xt-validate >
+	                                  <auto-complete source="loadTechnologies($query) | filter:$query" min-length="0" debounce-delay="0" max-results="15"></auto-complete>
+	                              </tags-input>
+	                        <em class="text-muted text-E91E63" translate="{{'* Technologies in which they provide training'|translate}}"></em>                
+	                      	</div>    
+						</div>	
+						<div class="form-group">
+							 <input type="number"  float-label ng-model="formData.capacity" class="form-control " placeholder="Student Capacity"  xt-validate name="capacity">               
+						</div>	
+
+
+					</div>
+
+					<div class="form-group">
+						<textarea rows="2" class="form-control" float-label placeholder="{{'Remarks'|translate}}" name="remarks" ng-model="formData.remarks"></textarea>
+					</div>				
+					<div class="form-group row">
+						<div class="col-xs-12 text-center">
+					    	<button ng-click="fnRegister()" ng-disabled="multiRegistraion3.$invalid||multiRegistraion2.$invalid||multiRegistraion1.$invalid||formData.technologies.length==0" type="submit" class="btn btn-danger">Submit</button>		    
+						</div>
+					</div>
+				</form>
+
+	            
+
+			</div>
+	        <!--form for Talent Supplier registration ends  -->
+
+	        <!--form for Distributer registration   -->
+	        <div ng-if="currentDetails.title=='Distributer'">
+	            <!-- form-profile.html -->
+	            <form name="multiRegistraion1" ng-show="status.selected=='1'" xt-form editable-form novalidate>
+	            	<div class="form-group">
+						<input type="text" class="form-control" float-label placeholder="Company Name" name="name" ng-model="formData.companyName" required xt-validate>
+					</div>
+					<div class="form-group">
+						 <input type="text" ng-model="formData.eMail" ng-pattern="emailPattern" class="form-control email" float-label ui-validate=" '$value!==existingEmail' " ui-validate-watch=" 'existingEmail'" msg-pattern='{{emailMsg}}' msg-validator='{{emailEMsg}}'  xt-validate placeholder="{{'Email Address'|translate}}" name="eMail" ng-change="userVal(formData)" required>
+					</div>
+					<div class="form-group">
+						<input type="text" class="form-control" float-label placeholder="{{'Domain Name'|translate}}" ng-pattern="domainPattern"  name="domainName"  ng-change="checkDomainExits()" ui-validate=" '$value!==existingDomain' " ui-validate-watch=" 'existingDomain'" msg-pattern='{{domainMsg}}' msg-validator='{{domainEMsg}}'  ng-model="formData.domainName" required xt-validate>
+					</div>
+					<div class="form-group">
+						<input type="text" class="form-control" float-label placeholder="{{'Company Tagline'|translate}}" name="tagLine" ng-model="formData.tagLine">
+					</div>
+					<div class="form-group" >                   
+                    	<input type="password" ng-model="formData.password" class="form-control" float-label placeholder="{{'Password'|translate}}"name="password" ng-change="checkPassword()" ng-minlength="5" xt-validate required>
+                    </div>
+                    <div class="form-group">                    
+                    	<input type="password" ng-model="cpassword" class="form-control" float-label placeholder="{{'Confirm Password'|translate}}"name="cpassword" xt-validate required  ui-validate=" '$value==formData.password' " ui-validate-watch=" 'formData.password' ">
+                    </div>
+					<div class="form-group row">
+						<div class="col-xs-12 text-center">
+					    	<button  ng-click="next()" ng-disabled="multiRegistraion1.$invalid" class="btn btn-info">Next &nbsp;<i class="glyphicon glyphicon-circle-arrow-right"></i></button>					    
+						</div>
+					</div>
+				</form>
+
+				<!-- form-interests.html -->
+				<form name="multiRegistraion2" ng-show="status.selected=='2'" xt-form editable-form novalidate>	
+						
+					<div class="form-group">
+						<input type="text" class="form-control" float-label placeholder="{{'Location'|translate}}" name="location" ng-model="formData.location" required xt-validate>
+					</div>
+
+					<div class="form-group">
+						<textarea rows="3" class="form-control" float-label placeholder="{{'Address'|translate}}" name="tagLine" ng-model="formData.address" required xt-validate></textarea>
+					</div>
+
+
+
+					<div class="form-group">
+						<div class="font-bold">Contact Person</div>
+			            <div ng-repeat="contactPerson in formData.contactPersons track by $index">
+			                <div class="col-xs-12 shadow-z-2 m-t-sm   ">
+			                    <div class="col-md-5 col-xs-12   ">
+			                        <input type="text"  float-label ng-model="contactPerson.Name" class="form-control " placeholder="Name" required xt-validate name="contactPersonName">
+			                    </div>
+			                    <div class="col-md-5 col-xs-8   ">
+			                        <input type="number"  float-label ng-model="contactPerson.Phone" class="form-control" placeholder="Phone" required xt-validate name="contactPersonPhone">              
+			                    </div>
+			                    <div class="col-md-2 col-xs-4 row m-t-lg    pull-right"> 
+			                        <i ng-click="removeContact($index)" class="btn no-padding fa fa-minus-square text-2x " ng-if="formData.contactPersons.length>1"></i>                
+			                        <i ng-click="addContact()" class="btn no-padding fa fa-plus-square text-2x " ng-if="$index+1==formData.contactPersons.length"></i>
+			                    </div>
+			                </div>
+			            </div>
+		            </div>
+		                
+
+
+					<div class="form-group row m-t-lg">
+
+						<div class="col-xs-12 text-center">
+							<button ng-click="previous()" class="btn btn-info"><i class="glyphicon glyphicon-circle-arrow-left"></i> &nbsp; Previous</button>
+						    <button ng-click="next()" ng-disabled="multiRegistraion2.$invalid" class="btn btn-info">Next &nbsp;<i class="glyphicon glyphicon-circle-arrow-right"></i></button>					    
+					    						    
+						</div>
+					</div>
+				</form>
+				
+
+				<!-- form-payment.html -->
+				<form name="multiRegistraion3" ng-show="status.selected=='3'" xt-form editable-form novalidate>	
+					<div class="form-group">
+						<textarea rows="2" class="form-control" float-label placeholder="{{'Remarks'|translate}}" name="remarks" ng-model="formData.remarks">></textarea>
+					</div>				
+					<div class="form-group row">
+						<div class="col-xs-12 text-center">
+					    	<button ng-click="fnRegister()" ng-disabled="multiRegistraion3.$invalid||multiRegistraion2.$invalid||multiRegistraion1.$invalid" type="submit" class="btn btn-danger">Submit</button>		    
+						</div>
+					</div>
+				</form>	            
+
+			</div>
+	        <!--form for Distributer registration ends  -->
+
+        </div>
+
+    </div>
+
+    <!-- show our formData as it is being typed -->
+   <!--  <pre>
+        {{ formData }}
+    </pre> -->
+
+
+</div>
+</div>
+
+
+  </div>
+
+</div>

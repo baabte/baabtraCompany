@@ -18,6 +18,15 @@ $rootScope.$watch('userinfo',function(){
     	$scope.classic=true;
     }
     var searchKey='';
+
+    $scope.childCompanyId='';
+	if($rootScope.userinfo){
+		if($rootScope.userinfo.ActiveUserData.roleMappingObj.childCompanyId){
+		 $scope.childCompanyId=	$rootScope.userinfo.ActiveUserData.roleMappingObj.childCompanyId.$oid;
+		console.log($scope.childCompanyId);
+		}
+	};
+
     var fetchUsersToCourseAllocateCallback=courseAllocateService.fnfetchUsersToCourseAllocate($scope.companyId,'','initial','',searchKey); 
     fetchUsersToCourseAllocateCallback.then(function(data){
         $scope.userObj=angular.fromJson(JSON.parse(data.data));
@@ -26,6 +35,7 @@ $rootScope.$watch('userinfo',function(){
         $scope.firstUser=$scope.userObj.firstId;
     });
 });
+
 
 
 $scope.courseAllocate={};
@@ -138,6 +148,9 @@ $scope.fnAllocateUser=function(){
 var today = new Date();
 $scope.courseAllocate.date = today.toISOString();
 $scope.courseAllocate.companyId = $scope.companyId;
+if(!angular.equals($scope.childCompanyId,'')){
+			$scope.courseAllocate.childCompanyId = $scope.childCompanyId;
+};
 $scope.courseAllocate.loggedusercrmid=$scope.loggedusercrmid;
 var fnAllocateUsersToCourseCallback=courseAllocateService.fnAllocateUsersToCourse($scope.courseAllocate);
 fnAllocateUsersToCourseCallback.then(function(data){

@@ -7,7 +7,7 @@ angular.module('baabtra').controller('header',['$scope','$rootScope','$state','l
   					return $rootScope.userinfo;
 		}, function() {
 				if($rootScope.userinfo){
-					
+					if($rootScope.userinfo.userLoginId){
 					var whoCantAccessThis = [bbConfig.MURID, bbConfig.PUSRID, bbConfig.RURID];
 				      
 				      if(!angular.equals(whoCantAccessThis.indexOf($rootScope.userinfo.ActiveUserData.roleMappingObj.fkRoleId), -1)){
@@ -16,6 +16,7 @@ angular.module('baabtra').controller('header',['$scope','$rootScope','$state','l
 				      }
 
 					$scope.loggedUserInfo=$rootScope.userinfo.ActiveUserData;
+				}
 				}
 		}, true);		
 

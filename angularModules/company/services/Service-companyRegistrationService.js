@@ -136,4 +136,20 @@ this.fnCheckDomainExits =function(domainName){
   return promise;
 };
 
+
+this.fnCheckRegDomainExits =function(domainName){
+  var promise=  $http({
+    url: bbConfig.BWS+'checkRegDomainExits/',
+    data: {domainName:domainName},
+    method: 'POST',
+    withCredentials: false,
+    contentType:'application/json',
+    dataType:'json',
+  })
+  return promise;
+};
+
+
+
+
 }]);

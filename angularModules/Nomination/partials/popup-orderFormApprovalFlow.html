@@ -30,7 +30,7 @@
                       </div>                                          
                       <div class="col-xs-12 col-md-4" style="margin-top:-10px;" ng-show="currency.amount > 0 ||  (currency.discount > 0 && currency.discount <= 100)">
                         <div class="col-xs-10 no-padding">
-                          <input class="form-control" ng-change="updateDiscount(currency)" type="number" ng-model="currency.discount" placeholder="Discount" ui-validate=" '$value <= 100' " float-label></input>&nbsp;
+                          <input class="form-control" ng-change="updateDiscount(currency)" type="number" ng-model="currency.discount" min=0 max=100 placeholder="Discount" float-label></input>&nbsp;
                         </div>
                         <div class="col-xs-2 font-bold text-light text-left m-h-n" style="padding-top:40px;">
                           %
