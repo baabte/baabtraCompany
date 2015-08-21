@@ -1,180 +1,63 @@
-<div class="" style="margin-top: -1px;">
-	<div class="bg-light p-h">
-		<div class="row m-b-lg" style="position:fixed; width:101%; z-index:100;">
-						<div class="col-xs-12 shadow-z-1 bg-white">
-							<div class="col-md-3 col-xs-12">
-								<div class="m-t-sm">
-									<span class="font-bold">
-										
-										<span ng-if="mode==0">
-											Date:&nbsp;{{attendance.date|date:'MM-dd-yyyy'}}
-										</span>
-										<span ng-if="mode==1">
-											<input type="text" class="form-control"  float-label ng-model="attendance.filterDate" data-date-format="dd-MM-yyyy" data-date-type="date" data-autoclose="true" data-max-date="today" name="doj" bs-datepicker="" autocomplete="off" placeholder="Date">
-										</span>
-										<!-- <span ng-if="mode==1">
-											<input class="form-control" type="datetime" date-time ng-model="attendance.filterDate"  format="dd-MM-yyyy" min-view="date" max-view="year" auto-close="true" max-date="today" placeholder="Date" autocomplete="off">
-										</span> -->
-
-										<!--attendance.date mode -->
-									</span>
-								</div>
-							</div>
-							<div class="col-md-6 col-xs-12 text-center">
-								<div class="m-t" ng-show="obj.menteeList.length">
-									<div class="checkbox no-margin col-xs-6">
-			                    		<span class="m-r">Select all</span>
-			                    		<label>
-			                        		<input type="checkbox" ng-change="changeSelectAll()" ng-model="selectedAll">
-			                    		</label>
-			                		</div>
-			                		<div class="col-xs-6">
-			                			<select ng-model="commonStatus" ng-init="commonStatus='Present'" class="form-control" ng-change="changeCommonStatus()">
-						                         <option value="Present">Present</option>
-						                         <option value="Planned leave">Planned leave</option>
-						                         <option value="Absent">Absent</option>
-						                </select>
-			                		</div>
-			                	</div>
-							</div>
-
-							<div class="col-md-3 col-xs-12 text-right">
-								<a class="btn btn-success" ng-disabled="!attendance.filterDate" ng-show="mode==1" ng-click="getMenteeListBlindly()">Get list</a>
-								<a class="btn btn-success" ng-hide="obj.menteeList&&obj.menteeList.length==0" ng-click="saveCandidatesAttandence()">Save</a>
-								<a class="btn btn-success" ng-show="obj.menteeList&&markedUrmIds.length" ng-click="updateAttendance()">Update</a>
-							</div>
-						</div>
-				</div>
-		<div class="row" style="padding-top: 80px;padding-bottom: 15px;">
-			<!-- <div class="col-xs-3 bg-white p">
-				<div ng-if="$root.userinfo.ActiveUserData.roleMappingObj.evalRoles.length">
-					<label>Evaluator</label>
-					<role-user-loader role-id="$root.userinfo.ActiveUserData.roleMappingObj.evalRoles[0]" placeholder-value="Please select a evaluator" selection-type="1" ng-model="data.evaluator">
-					</role-user-loader>
-				</div>
-				<div class="p bg-danger lt" ng-if="!$root.userinfo.ActiveUserData.roleMappingObj.evalRoles.length">You have not yet configured your evaluator&nbsp;<a ui-sref="home.main.globalSettings" class="text-md link-hover">Click here to configure</a></div>
-			</div> -->
-			<div class="col-md-push-2 col-xs-push-0 col-md-8 col-xs-12 col-sm-12 col-xs-12">
-				<div class="row">
-					<div class="col-xs-12">
-						<div >
-							<div>
-
-								<!-- batch details -->
-								<div class="p shadow-z-1 col-xs-12 bg-white" ng-show="batchDetails">
-									<div class="font-bold text-left col-md-8 col-xs-12">
-										Batch name : {{batchDetails.batchName}}
-									</div>
-									<div class="col-md-4 col-xs-12 input-group">
-
-										<span class="input-group-addon"><i class="fa fa-search "></i></span>
-										<input class="form-control" placeholder="Search" type="text" ng-model="obj.searchKey">
-									</div>
-								</div>
-								
-								<!-- end of batch details -->
-								<!-- here we will have list of all candidates to mark attandence -->
-								<div class="p shadow-z-1 col-xs-12 bg-white"  ng-repeat="mentee in obj.menteeList|filter:obj.searchKey">
-									<div class="col-md-2 col-xs-4">
-										<div  class="col-xs-6">
-										<div class="checkbox no-margin">
-			                    			<label>
-			                        			<input ng-model="selectedList[$index]" type="checkbox" >
-			                    			</label>
-			                			</div>
-			                			</div>
-										<div class="col-xs-6">
-											
-											<!-- <i class="iconCustomBg ui-icon fa {{element.Icon}} b-white text-lg b-2x" style="color:{{element.iconColor}}!important;background-color:{{element.iconBackground}}!important;border-radius: 12px;"></i>  -->
-											 <i ng-if="!mentee.avatar" class="mdi-action-assignment-ind text-2x  random-background-color img-circle p-xs"></i>
-	                       					 <img ng-if="mentee.avatar" height="50" width="50" class="img-resposive img-circle p-xs" src="{{mentee.avatar}}"/>
-										</div>
-									</div>
-									<div class="col-md-10 col-xs-8" >
-										<div class="col-md-6 col-md-12">
-											<span class="col-xs-12 upper font-bold">
-												<span >
-												{{mentee.profile.firstName}}
-												</span>
-												<span >
-												{{mentee.profile.lastName}}
-												</span>
-											</span>
-											<span class="col-xs-12">
-												{{mentee.userName}}
-											</span>
-										</div>
-										
-										<!-- <i class="mdi-navigation-unfold-less pull-right text-lg link" ></i> -->
-										<div class="col-md-6 col-xs-12">
-											<div class="col-md-6 hidden-xs text-right font-bold p-v-xs">Status</div>
-											<div class="col-md-6 col-xs-12">
-												<select ng-model="mentee.status" ng-init="mentee.status='Present'" class="form-control">
-						                         <option value="Present">Present</option>
-						                         <option value="Planned leave">Planned leave</option>
-						                         <option value="Absent">Absent</option>
-						                      	</select>
-											</div>
-										</div>
-									</div>
-								</div>
-								<!-- end of candidates list to mark attandence -->
-
-								<div class="p shadow-z-1 col-xs-12 bg-success" ng-show="obj.menteeList&&(markedUrmIds.length!=0)">
-									<div class="font-bold text-center text-white">
-										You have already marked attendance for 
-										<b>{{attendance.date|date:'MM-dd-yyyy'}}</b> 
-										<!-- <span class="p"></span>
-										<div class="btn btn-white">Update now</div> -->
-									</div>
-								</div>
-
-
-								<!-- mentees list to update attendance -->
-								<div class="p shadow-z-1 col-xs-12 bg-white"  ng-repeat="mentee in obj.menteesListToUpdate|filter:obj.searchKey">
-									<div class="col-md-2 col-xs-6">
-										<div  class="col-xs-6">
-										<div class="checkbox no-margin">
-			                    			<!-- <label>
-			                        			<input ng-model="selectedListMarked[$index]" type="checkbox" >
-			                    			</label> -->
-			                			</div>
-			                			</div>
-										<div class="col-xs-6">
-											 <i ng-if="!mentee.avatar" class="mdi-action-assignment-ind text-2x  random-background-color img-circle p-xs"></i>
-	                       					 <img ng-if="mentee.avatar" height="50" width="50" class="img-resposive img-circle p-xs" src="{{mentee.avatar}}"/>
-										</div>
-									</div>
-									<div class="col-md-10 col-xs-8" >
-										<div class="col-md-6 col-md-12">
-											<span class="col-xs-12 upper font-bold">
-											{{mentee.profile.firstName+' '+mentee.profile.lastName}}
-											</span>
-											<span class="col-xs-12">
-												{{mentee.userName}}
-											</span>
-										</div>
-										
-										<!-- <i class="mdi-navigation-unfold-less pull-right text-lg link" ></i> -->
-										<div class="col-md-6 col-xs-12">
-											<div class="col-md-6 hidden-xs text-right font-bold p-v-xs">Status</div>
-											<div class="col-md-6 col-xs-12">
-												<select ng-model="mentee.status" class="form-control">
-						                         <option value="Present">Present</option>
-						                         <option value="Planned leave">Planned leave</option>
-						                         <option value="Absent">Absent</option>
-						                      	</select>
-											</div>
-										</div>
-									</div>
-								</div>
-								<!-- end of update list -->
-							</div>
-						</div>
-					</div>
-				</div>
-			</div>
-		</div>
-		
-	</div>
+<div class="col-xs-12 bg-light">
+  <div class="row bg-white shadow-z-1 p-v-sm fixed-tab visible-xs">
+    <div class="col-xs-12 ">
+      <div class="row">
+        <div class="col-xs-12 text-right">
+          <div class="">
+           <i class="fa fa-calendar"></i> {{batchAttendance.attendanceTakingDate  | date:'EEEE, MMMM dd, yyyy'}}
+          </div>
+          <div class="btn-group no-margin hidden-xs">
+            <button type="button" class="btn btn-xs btn-default"><i class="fa fa-fw fa-angle-left"></i></button>
+            <button type="button" class="btn btn-xs btn-default"><i class="fa fa-fw fa-angle-right"></i></button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="row bg-white m-t-lg" >
+    <div class="col-xs-12 p-v">
+      <!-- <div class="row">
+        <div class="col-xs-12 text-right">
+          <a class="btn btn-success baab-btn" style="line-height: 14px;">Submit Attendance</a>
+        </div>
+      </div> -->
+      <div class="row">
+        <div class="col-xs-2 hidden-xs  text-xl text-center">
+          <i class="fa fa-calendar"></i>
+          <div>
+            {{batchAttendance.attendanceTakingDate  | date:'EEEE, MMMM dd, yyyy'}}
+          </div>
+        </div>
+        <div class="col-xs-12 col-md-10 b-l">
+          <div class="table-responsive">
+    <table class="table table-bordered bg-white" ng-if="batchAttendance.userDetails">
+      <thead>
+        <tr>
+          <th>#</th>
+          <th>Name</th>
+          <th ng-class="{'hidden-xs':batchAttendance.today != dayInWeek.date}" ng-repeat="dayInWeek in batchAttendance.dayInWeek">{{getWeekDate(dayInWeek) | date:'EEE dd'}}</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr ng-repeat="student in batchAttendance.userDetails">
+          <td>{{$index + 1}}</td>
+          <td>
+            <div class="text-name">{{student.profile.firstName}}&nbsp;{{student.profile.lastName}}</div>
+            <div class="text-muted text-sm">{{student.userName}}</div>
+          </td>
+          <td ng-class="{'bg-light':batchAttendance.today == dayInWeek.date, 'hidden-xs':batchAttendance.today != dayInWeek.date}" ng-repeat="dayInWeek in batchAttendance.dayInWeek">
+            <select class="form-control" ng-model="student.attendanceTrack[dayInWeek.date]" ng-change="attendanceChanged(student.attendance, dayInWeek, student.attendanceTrack, student._id.$oid, student.fkUserLoginId.$oid, student.profile)">
+              <option value="Present">Present</option>
+              <option value="Planned leave">Planned leave</option>
+              <option value="Absent">Absent</option>
+            </select>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+        </div>
+      </div>
+    </div>
+  </div>
 </div>

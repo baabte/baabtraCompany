@@ -13,12 +13,12 @@ angular.module('baabtra').service('batchAttendance',['$http','bbConfig',function
 		var promise = $http({
 	 	method: 'POST',
 	    url: bbConfig.BWS+'fnLoadMenteesMarkedAttendanceFromBatch/',
-	    data:{"batchMappingId":batchMappingId,date:date}
+	    data:{batchMappingId:batchMappingId}
 	 });
 	return promise;
 	};
 
-	this.saveCandidatesAttandence=function (dataObj) {
+	this.saveCandidatesAttendance=function (dataObj) {
 		var promise = $http({
 	 	method: 'POST',
 	    url: bbConfig.BWS+'saveCandidatesAttendance/',

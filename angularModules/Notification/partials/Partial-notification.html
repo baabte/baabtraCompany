@@ -1,4 +1,28 @@
-<div class="col-md-12">
+<div class="row m-t-n">
+	<div class="col-xs-12 bg-light h-full p-v" style="min-height:800px;">
+
+		<span class="col-md-push-2 col-xs-push-1 col-md-8 col-xs-12 col-sm-12 font-bold no-padding m-b m-t" style="text-transform:uppercase;">Notifications</span>
+
+		<div ng-if="!data.userNotification.notifications.length&&data.userNotification.notifications" class="col-md-push-2 col-md-8 col-xs-12 col-sm-12 p-sm shadow-z-1 alert alert-danger">
+      	<strong translate="{{'No new notifications.!'|translate}}"></strong> 
+		</div>
+
+		<div ng-repeat="notification in data.userNotification.notifications" class="col-md-push-2 col-md-8 col-xs-12 col-sm-12 p-h-sm shadow-z-1  pull-left baab-list-item" ng-class="{'btn-material-blue-grey-50':notification.read,'bg-white':!notification.read}" style="cursor: pointer;">
+			<div class="p-xs" ng-click="notificationLink(notification,$root.data.userNotification)">
+				<!-- ui-sref="{{notification.link.state}}({{notification.link.params}})" -->
+		        <div>{{notification.message}}</div>
+		        <i class="text-muted mdi-editor-insert-comment"></i>
+		        <span class="text-muted text-xs">{{notification.createdDate.$date |  date:"MM/dd/yyyy 'at' h:mma"}}</span>
+	        </div>
+		</div>
+
+		<div ng-if="data.userNotification.notifications&&data.userNotification.notifications.length" class="btn col-md-push-2 col-md-8 col-xs-12 col-sm-12 p-h-sm shadow-z-1  pull-left baab-list-item" ng-class="{'btn-material-blue-grey-50':notification.read,'bg-white':!notification.read}" style="cursor: pointer;" ng-click="loadMore()">
+			<div class="p-xs text-center">
+				<!-- ui-sref="{{notification.link.state}}({{notification.link.params}})" -->
+		        <div>See More</div>
+	        </div>
+		</div>
 
 
+	</div>
 </div>

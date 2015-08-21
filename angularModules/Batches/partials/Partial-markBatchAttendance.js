@@ -1,173 +1,116 @@
-angular.module('baabtra').controller('MarkbatchattendanceCtrl',['$scope','$rootScope','commonService','batchAttendance','$state','$alert',function($scope,$rootScope,commonService,batchAttendance,$state,$alert){
+angular.module('baabtra').controller('MarkbatchattendanceCtrl',['$scope','$rootScope','commonService','batchAttendance','$state','$alert','notification', 'communications',function($scope,$rootScope,commonService,batchAttendance,$state,$alert, notification, communications){
 
+    /*login detils start*/
     if(!$rootScope.userinfo){
-    commonService.GetUserCredentials($scope);
-    $rootScope.hide_when_root_empty=false;
+        commonService.GetUserCredentials($scope);
+        $rootScope.hide_when_root_empty=false;
+        return;
     }
+
     if(angular.equals($rootScope.loggedIn,false)){
-    $state.go('login');
+        $state.go('login');
     }
 
-    $scope.mode=$state.params.mode;
-    //today's date for marking attendance
-    var today=new Date(); //'04-24-2015'
-    	today.setHours(0, 0, 0, 0);
-    //object for storing selected items status
-    $scope.selectedList={};
-
-    $scope.attendance={};
-    $scope.attendance.date=today.toISOString();
-
-    //role mapping id and company id of logged user
-    $scope.roleMappingId=$rootScope.userinfo.ActiveUserData.roleMappingId.$oid;
-    $scope.companyId=$rootScope.userinfo.ActiveUserData.roleMappingObj.fkCompanyId.$oid;
-
-    // batch mapping id from url
-    $scope.batchMappingId=$state.params.batchMappingId;
-
-    $scope.obj={};
-    //function for getting full candidate's list under this batch
-    // whose attendance is already marked
-    $scope.getMenteeListForUpdate = function (){
-
-    	var gotMarkedMenteesList = batchAttendance.fnLoadMenteesMarkedAttendanceFromBatch($scope.batchMappingId,$scope.attendance.date);
-
-    	    gotMarkedMenteesList.then(function (data) {
-    	    	$scope.obj.menteesListToUpdate = angular.fromJson(JSON.parse(data.data)).userList;
-    	    	$scope.tmpCopyOfMenteeListToUpdate=angular.fromJson(JSON.parse(data.data)).userList;
-    	    });
-    	
-    };
-    //function for getting full candidate's list under this batch
-    $scope.getMenteeListBlindly = function () {
-    	if($scope.mode==1){
-    		$scope.attendance.date=$scope.attendance.filterDate;
-    	}
-    	    var gotMenteesList = batchAttendance.getAllCandidates($scope.batchMappingId,$scope.attendance.date);
-
-		    gotMenteesList.then(function (data) {
-		    	$scope.obj.menteeList=angular.fromJson(JSON.parse(data.data)).userDetails;
-
-		    	$scope.batchDetails=angular.fromJson(JSON.parse(data.data)).batchList;
-
-		    	$scope.markedUrmIds=angular.fromJson(JSON.parse(data.data)).markedUrmIds;
-
-		    	// if there have mentees who have already marked attendance
-		    	if(angular.fromJson(JSON.parse(data.data)).markedUrmIds.length){
-		    		$scope.getMenteeListForUpdate();
-		    	}
-		    	else{
-		    		delete $scope.obj.menteesListToUpdate;
-					delete $scope.tmpCopyOfMenteeListToUpdate;
-		    	}
-		    });
-    };
-
-    if($scope.mode==0){
-    	$scope.getMenteeListBlindly();	
-    }
+    var rm_id = $rootScope.userinfo.ActiveUserData.roleMappingId.$oid;
+    var roleId = $rootScope.userinfo.ActiveUserData.roleMappingObj.fkRoleId;
+    var companyId = $rootScope.userinfo.ActiveUserData.roleMappingObj.fkCompanyId.$oid;
+    var username = $rootScope.userinfo.ActiveUserData.username?$rootScope.userinfo.ActiveUserData.username:"";
+    /*login detils ends*/
     
 
-    // function to select all candidates
-    $scope.changeSelectAll = function(){
-    	if($scope.selectedAll){
-    		for(key in $scope.obj.menteeList){
-    			$scope.selectedList[key]=true;
-    		}
-    	}
-    	else{
-    		for(key in $scope.obj.menteeList){
-    			$scope.selectedList[key]=false;
-    		}
-    	}
-    	
+    $scope.batchAttendance = {};
+    var today = new Date();
+    $scope.batchAttendance.attendanceTakingDate = today.toISOString();
+    $scope.batchAttendance.batchId = $state.params.batchMappingId;
+    $scope.batchAttendance.today = Date.parse((today.getMonth()+1)+'-'+today.getDate()+'-'+today.getFullYear());
+
+    var first = today.getDate() - today.getDay(); // First day is the day of the month - the day of the week
+    var last = first + 6; // last day is the first day + 6
+
+    $scope.batchAttendance.weekFirstDay = new Date(today.setDate(first)).toISOString();
+    $scope.batchAttendance.weekLastDay = new Date(today.setDate(last)).toISOString();
+    $scope.batchAttendance.dayInWeek = [{day:0, date:""}, {day:1, date:""}, {day:2, date:""}, {day:3, date:""}, {day:4, date:""}, {day:5, date:""}, {day:6, date:""}];
+    //console.log(firstday, lastday);
+
+    var menteesListResponse = batchAttendance.fnLoadMenteesMarkedAttendanceFromBatch($scope.batchAttendance.batchId);
+    menteesListResponse.then(function(response){
+        var result = angular.fromJson(JSON.parse(response.data));
+        $scope.batchAttendance.userDetails = result;
+       
+    });
+
+    $scope.batchAttendance.batchAttendanceDropdown = [{key:'Present'}, {key:'Planned leave'}, {key:'Absent'}];
+
+    $scope.getWeekDate = function(dayInWeek){
+        var currentDate = new Date(today.setDate(first));
+        currentDate.setDate(currentDate.getDate()+(1 * dayInWeek.day));
+        var dd = currentDate.getDate();
+        var mm = currentDate.getMonth()+1; //January is 0!
+        var yyyy = currentDate.getFullYear();
+        dayInWeek.date = Date.parse(mm+'-'+dd+'-'+yyyy);
+        return currentDate;
     };
 
-    // function for changing status of selected users
-    $scope.changeCommonStatus=function () {
-    	for(key in $scope.selectedList){
-    		if($scope.selectedList[key]){
-    			$scope.obj.menteeList[key].status=$scope.commonStatus;
-    		}
-    	}
+    $scope.attendanceChanged = function(attendanceObj, dayInWeek, attendanceTrack, cndAtdnsId, cndLoginId, cndProfile){
+        
+        var date = new Date(today.setDate(first));
+        date.setDate(date.getDate()+(1 * dayInWeek.day));
+
+        var attendanceObjLength = attendanceObj.length;
+        
+        if(angular.equals(attendanceTrack[dayInWeek.date],'Absent')){
+            var message = "DEAR PARENT: Your child "+ cndProfile.firstName +" "+ cndProfile.lastName +" is absent today – "+username;
+            var gotParents = communications.fnLoadParent(cndLoginId);
+            var parentsLoginIds = [];
+            gotParents.then(function (response) {
+                var result = angular.fromJson(JSON.parse(response.data));
+                for(var parent in result){
+                    parentsLoginIds.push(result[parent].fkUserLoginId.$oid);
+                }
+                if(parentsLoginIds.length){
+                    notification.newNotification({companyId:companyId,fkLoginIds:['55d435f465f384694144b808'], message:message,link:{state:'home.main.menteeAttendance',params:{userId:cndLoginId, batchId:$state.params.batchMappingId}},crmId:rm_id});
+                } 
+            });
+        }
+
+
+        
+        for(var attendance in attendanceObj){
+            if(angular.equals(attendanceObj[attendance].attendanceTrackKey, dayInWeek.date+'')){
+                attendanceObj[attendance].attendanceStatus =  attendanceTrack[dayInWeek.date];
+                attendanceObj[attendance].markedOn = new Date().toISOString();
+                attendanceObj[attendance].markedBy = rm_id;
+                break;
+            }
+            if(angular.equals(attendanceObjLength, parseInt(attendance)+1)){
+                var attendanceDetail = {};
+                attendanceDetail.attendanceStatus =  attendanceTrack[dayInWeek.date];
+                attendanceDetail.date = date.toISOString();
+                attendanceDetail.attendanceStatusHistory = [];
+                attendanceDetail.markedOn = new Date().toISOString();
+                attendanceDetail.markedBy = rm_id;
+                attendanceDetail.attendanceTrackKey = dayInWeek.date+'';
+                attendanceObj.push(attendanceDetail);
+            }
+        }
+        if(!attendanceObjLength){
+            var attendanceDetail = {};
+            attendanceDetail.attendanceStatus =  attendanceTrack[dayInWeek.date];
+            attendanceDetail.date = date.toISOString();
+            attendanceDetail.attendanceStatusHistory = [];
+            attendanceDetail.markedOn = new Date().toISOString();
+            attendanceDetail.markedBy = rm_id;
+            attendanceDetail.attendanceTrackKey = dayInWeek.date+'';
+            attendanceObj.push(attendanceDetail);
+        }
+        
+        var objectToBeSavedInDb = {cndAtdnsId:cndAtdnsId, attendanceObj:attendanceObj, attendanceTrack:attendanceTrack};
+        var attendanceMarkResponse = batchAttendance.saveCandidatesAttendance(objectToBeSavedInDb);
+        attendanceMarkResponse.then(function(response){
+            var result = angular.fromJson(JSON.parse(response.data));
+        });
+
+        // console.log(JSON.stringify($scope.batchAttendance.userDetails));
     };
-
-
-    // function for saving attendance for candidates
-    $scope.saveCandidatesAttandence=function () {
-
-
-    	// here we creates a new object for sending it to database
-    	var createdDate = new Date();
-    		createdDate = createdDate.toISOString();
-
-    	var dataObj={};
-    		dataObj.userList=angular.copy($scope.obj.menteeList);
-    		for(key in dataObj.userList){
-    			dataObj.userList[key].userCourseMappingId=dataObj.userList[key]._id.$oid;
-    			delete dataObj.userList[key]._id;
-    			dataObj.userList[key].fkUserLoginId=dataObj.userList[key].fkUserLoginId.$oid;
-    			dataObj.userList[key].fkUserRoleMappingId=dataObj.userList[key].fkUserRoleMappingId.$oid;
-    		}
-    		dataObj.batchMappingId=$scope.batchMappingId;
-    		dataObj.courseId=$scope.batchDetails.fkCourseId.$oid;
-    		dataObj.companyId=$scope.companyId;
-    		dataObj.date=$scope.attendance.date;
-    		dataObj.createdDate = createdDate;
-    		dataObj.updatedDate = createdDate;
-    		dataObj.urmId = $scope.roleMappingId;
-    		dataObj.crmId = $scope.roleMappingId;
-    	var savedAttandence = batchAttendance.saveCandidatesAttandence(dataObj);
-    		savedAttandence.then(function () {
-
-    			$alert({title: 'Done..!', content: 'Attendance saved..', placement: 'top-right', type: 'success', show: true,duration:3});
-    			$scope.getMenteeListBlindly();
-    		});
-    };
-
-    $scope.updateAttendance = function () {
-    	var updatedDate = new Date();
-    		updatedDate = updatedDate.toISOString();
-    	var menteeArrayForUpdate = angular.copy($scope.obj.menteesListToUpdate);
-    	for(key in menteeArrayForUpdate){
-    		menteeArrayForUpdate[key]._id = menteeArrayForUpdate[key]._id.$oid;
-    		menteeArrayForUpdate[key].fkUserRoleMappingId = menteeArrayForUpdate[key].fkUserRoleMappingId.$oid;
-    		menteeArrayForUpdate[key].fkUserLoginId = menteeArrayForUpdate[key].fkUserLoginId.$oid;
-    		menteeArrayForUpdate[key].date = menteeArrayForUpdate[key].date.$date;
-    		menteeArrayForUpdate[key].crmId = menteeArrayForUpdate[key].crmId.$oid;
-    		menteeArrayForUpdate[key].urmId = $scope.roleMappingId;
-    		menteeArrayForUpdate[key].updatedDate = updatedDate;
-
-    		// creating status history
-    		if(angular.equals(menteeArrayForUpdate[key].statusHistory,undefined)){
-    			menteeArrayForUpdate[key].statusHistory=[];
-    		}
-
-    		if(!angular.equals(menteeArrayForUpdate[key].status,$scope.tmpCopyOfMenteeListToUpdate[key].status))
-    		{
-    					    var statusChange={
-							    "statusChangedOn" : $scope.tmpCopyOfMenteeListToUpdate[key].updatedDate,
-							    "previousStatus" : $scope.tmpCopyOfMenteeListToUpdate[key].status,
-							    "statusChangedby" : $scope.tmpCopyOfMenteeListToUpdate[key].crmId.$oid,
-							    "statusChangedTo" : menteeArrayForUpdate[key].status
-							 };
-			menteeArrayForUpdate[key].statusHistory.push(statusChange);
-    		}
-
-    		// end of status history
-
-    	}
-
-    	var dataObj = {};
-    		dataObj.userList=menteeArrayForUpdate;
-    	var updatedAttandence = batchAttendance.updateCandidatesAttandence(dataObj);
-    		updatedAttandence.then(function () {
-
-    			$alert({title: 'Done..!', content: 'Attendance updated..', placement: 'top-right', type: 'success', show: true,duration:3});
-    			$scope.getMenteeListForUpdate();
-    		});
-    };
-
-
 
 }]);

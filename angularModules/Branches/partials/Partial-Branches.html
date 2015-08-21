@@ -1,39 +1,22 @@
-     <script type="text/ng-template" id="nodes_renderer.html">
-          <div ui-tree-handle class="tree-node tree-node-content" id="{{node._id}}">{{node.$root}}
-            {{node._id}}&nbsp; &nbsp;
-            <div class="pull-right">
-              <div class="pull-left m-r">
-                <a href="" class="icon-grey m-l-xs" ng-if="node.parent" data-nodrag ng-click="editBranch(this)" bs-tooltip data-title="Click to edit branch" data-placement="left"><i class="fa fa-edit" ></i></a>
-                <a href="" class="icon-grey m-l-xs" ng-if="node.parent" data-nodrag ng-click="removeBranch(this)"  bs-tooltip data-title="Click to remove branch" data-placement="left"><i class="fa fa-trash-o" ></i></a>
-              </div>
-              <div class="pull-left">
-                <a href="" bs-tooltip data-title="Click to add branch" data-placement="left" class="icon-grey" data-nodrag ng-click="newSubItem(this)"><i class="fa fa-code-fork" ></i></a>
-                <span class="b-l b-primary"></span>
-                <a class="icon-grey m-l-xs" ui-sref="home.main.department({branchId:node._id})" data-nodrag  bs-tooltip data-title="Click to add department" data-placement="left"><i class="ti  ti-layers-alt"></i></a>
-              </div>
-            </div>
-            
-
-          </div>
-          <ol ui-tree-nodes="" ng-model="node.childrenObj" style="padding-left:0px;" ng-class="{hidden: collapsed}" data-horizontal="">
-            <li ng-repeat="node in node.childrenObj track by $index" class="text-center" ui-tree-node ng-include="'nodes_renderer.html'">
-            </li>
-          </ol>
-        </script>
-
-<div class="row">
-  <div class="col-xs-12">
-    <div class="panel panel-default">
-        <div set-sub-heading-and-background-color class="panel-heading font-bold text-white  p baab-shadow">Manage branches / departments
-        </div>
-        <div class="panel-body text-center">
-        <div ng-show="branches.length" ui-tree="tree1NodesOptions" style="margin-top:-50px;" id="tree-root" >
-          <ol ui-tree-nodes="" ng-model="branchTree"  data-horizontal="">
-            <li ng-repeat="node in branchTree track by $index" class="text-center list-group list-group-gap" ui-tree-node ng-include="'nodes_renderer.html'"></li>
-          </ol>
-        </div>
-        </div>
-        </div>
+<div class="col-xs-12 bg-light">
+  
+  <!-- <div class="row bg-white shadow-z-1 p-v-sm fixed-tab">
+    <div class="col-xs-12  text-right p-v-xs">
+      <a href="" bs-tooltip data-placement="left" data-title="Create new branch"><i class="mdi-content-add text-2x text-black" ng-click="newBranch()"></i></a>
+    </div>
+  </div> -->
+  <!-- style="margin-top:56px;" id="branch" -->
+  <div class="row bg-white" >
+    <!-- <div class="col-xs-12">
+      <div class="row">
+        <pre>{{branchObj.branches}}</pre>
+      </div>
+    </div> -->
+    <div class="col-xs-12 p-v">
+      <div class="row" ng-if="branchObj.viewTree">
+        <div  data-angular-treeview="true" data-tree-id="syllabusTree" data-tree-model="branchObj.branches" data-node-output="selectedData" data-node-edit="true" data-node-id="nodeId" data-node-label="name" data-node-type="branch" data-node-children="children" ></div>
+      </div>
     </div>
   </div>
-      
+
+</div>

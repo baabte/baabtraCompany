@@ -13,9 +13,7 @@ this.loadPublishedCourses=function($scope,searchKey,lastId,type,firstId, courseT
 	 }).error(function(data, status, headers, config)
 	 {
 
-	 });
-	 
-	
+	 });	
 };
 
 this.courseByKeywords = function(companyId, searchKey){
@@ -33,6 +31,16 @@ this.loadPublishedCoursesWithPromise=function(companyId,searchKey,lastId,type,fi
 	 	method: 'POST',
 	    url: bbConfig.BWS+'loadPublishedCourses/',
 	    data:JSON.stringify({"companyId":companyId,"searchKey":searchKey,"lastId":lastId,"type":type,"firstId":firstId,"courseType":'course'}),
+	 });
+	 return promise;
+	
+};
+
+this.loadPublishedCoursesWithType=function(companyId,searchKey,lastId,type,firstId, courseType){
+	 var promise=$http({
+	 	method: 'POST',
+	    url: bbConfig.BWS+'loadPublishedCourses/',
+	    data:JSON.stringify({"companyId":companyId,"searchKey":searchKey,"lastId":lastId,"type":type,"firstId":firstId,"courseType":courseType}),
 	 });
 	 return promise;
 	

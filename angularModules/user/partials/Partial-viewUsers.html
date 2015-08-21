@@ -59,6 +59,20 @@
                <div style="margin: 10px 0 10px;" range-slider min="1" max="data.selectedCourse.totalMark" model-min="data.searchKey.course.minMark" model-max="data.searchKey.course.maxMark"></div>     
             </div>
 
+            <!-- branch based -->
+            <div class="col-xs-12 b-b p-v" >
+              <div class="font-bold">Branches</div>
+              <div class="box-cell scrollable hover" style="max-height: 170px;">
+                <div class="sample1" ng-repeat="branch in data.branchList">
+                  <div class="checkbox show-in-one-line" style="line-height: 19px;max-height: 25px;">
+                    <label title="{{branch.Name}}">
+                      <input  type="checkbox"  ng-model="data.branch[$index]" ng-change="branchSelectionChanged(branch)"> {{branch.name}}
+                    </label>
+                  </div>
+                </div>
+              </div>
+            </div>
+
             <!-- course based -->
             <div class="col-xs-12 b-b p-v" ng-if="data.courseList.length">
               <div class="font-bold">Courses & Tests ({{data.courseList.length}})</div>
@@ -142,11 +156,11 @@
                   Sorry, no results containing all your search terms were found
             </div>
             <div masonry-tile class="tile col-xs-6 col-sm-4 col-md-4 col-lg-3 pull-left masonry-brick" ng-repeat="user in data.usersObject track by user._id.$oid">
-              <div class="panel b-light link-hover link">
+              <div class="panel b-light link">
                 <div class="panel-heading text-center">
                   <div class="p" style="position: absolute;right: 15px;">
                     <a  data-placement="bottom-right" data-html="true" bs-dropdown="data.userDropdown">
-                      <i class="mdi-navigation-more-vert text-xl text-dark btn no-padding" ></i>
+                      <i class="mdi-navigation-more-vert text-xl text-dark no-padding" ></i>
                     </a>
                   </div>
 

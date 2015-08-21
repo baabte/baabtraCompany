@@ -1,4 +1,4 @@
-angular.module('baabtra').controller('DesignmarksheetCtrl',['$modal','$scope', 'commonService', '$rootScope','PublishedCourse','markSheetService','$alert',function($modal,$scope, commonService, $rootScope,PublishedCourse,markSheetService,$alert){
+angular.module('baabtra').controller('DesignmarksheetCtrl',['$modal','$scope', '$state', 'commonService', '$rootScope','PublishedCourse','markSheetService','$alert',function($modal,$scope, $state, commonService, $rootScope,PublishedCourse,markSheetService,$alert){
 
 	if(!$rootScope.userinfo){
 		commonService.GetUserCredentials($scope);
@@ -19,7 +19,9 @@ angular.module('baabtra').controller('DesignmarksheetCtrl',['$modal','$scope', '
 		$scope.data.courses=angular.fromJson(JSON.parse(response.data));
 	};
 
-	var gotPublishedCourses = PublishedCourse.loadPublishedCoursesWithPromise($scope.companyId,'','','','');
+	$scope.data.courseType = $state.params.key;
+
+	var gotPublishedCourses = PublishedCourse.loadPublishedCoursesWithType($scope.companyId, '' , '', '', '',$scope.data.courseType);
 	    gotPublishedCourses.then(function (response) {
 	    	$scope.gotPublishedCourses(response);
 	    });
@@ -34,7 +36,7 @@ $scope.pageNavigation=function(type){//event  for showing next/prev 12 items
 		$scope.data.pageNumber=$scope.data.pageNumber==1?1:$scope.data.pageNumber-1;
 	}
 
-	  var gotPublishedCourses = PublishedCourse.loadPublishedCoursesWithPromise($scope.companyId,$scope.data.searchText,$scope.data.courses.lastId.$oid,type,$scope.data.courses.firstId.$oid);
+	  var gotPublishedCourses = PublishedCourse.loadPublishedCoursesWithType($scope.companyId,$scope.data.searchText,$scope.data.courses.lastId.$oid,type,$scope.data.courses.firstId.$oid, $scope.data.courseType);
 	      gotPublishedCourses.then(function (response) {
 	    	$scope.gotPublishedCourses(response);
 	    });
@@ -47,7 +49,7 @@ $scope.searchKeyChanged = function () {
 
 		searchKeyTimeout = setTimeout(function () {
 			$scope.data.pageNumber=1;
-			var gotPublishedCourses = PublishedCourse.loadPublishedCoursesWithPromise($scope.companyId,$scope.data.searchText,'','','');
+			var gotPublishedCourses = PublishedCourse.loadPublishedCoursesWithType($scope.companyId,$scope.data.searchText,'','','', $scope.data.courseType);
 		      gotPublishedCourses.then(function (response) {
 		    	$scope.gotPublishedCourses(response);
 		    });		
@@ -165,10 +167,11 @@ $scope.$watch('data.selectedNode',function () {
 			for(index in elemNameArray){
 				elem=elem[elemNameArray[index]];
 			}
-
+			
 			if(angular.equals($scope.data.selectedNode.mark.type,'mark')){
 				$scope.data.markType='mark';
-				if(elem.evaluable&&!angular.equals(elem.totalMark,undefined)){
+				console.log(elemNameArray);
+				if(!angular.equals(elem.totalMark,undefined)){
 					$scope.elementsOfSelectedNode.push({element:elem,key:$scope.data.selectedNode.element[key]});
 				}
 			}

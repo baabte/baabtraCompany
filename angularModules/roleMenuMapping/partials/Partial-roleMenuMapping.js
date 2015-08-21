@@ -1,6 +1,6 @@
 
 angular.module('baabtra').
-	controller('RoleMenuMappingCtrl',['$location','commonService','$scope','$modal','$rootScope','RoleMenuMappingSrv','$alert','localStorageService','$state',function ($location,commonService,$scope,$modal,$rootScope,RoleMenuMappingSrv,$alert,localStorageService,$state) {
+  controller('RoleMenuMappingCtrl',['$location','commonService','$scope','$modal','$rootScope','RoleMenuMappingSrv','$alert','localStorageService','$state',function ($location,commonService,$scope,$modal,$rootScope,RoleMenuMappingSrv,$alert,localStorageService,$state) {
 
     if(!$rootScope.userinfo){
    commonService.GetUserCredentials($scope);
@@ -54,7 +54,7 @@ else if(angular.equals($scope.roleId,2))
       $scope.modelSearch="";
       $scope.placeholderVal="Search Roles";
 }
-	    
+      
     $scope.ChangeCompanyState=function(cmp_id,cmp_name){//To changing the active company in company list
       $scope.SearchType="Roles";
       $scope.modelSearch="";

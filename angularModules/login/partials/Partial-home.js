@@ -8,8 +8,9 @@ $rootScope.errTooltip = "Please choose an image for the course";
 $scope.viewMenu = false;//for controll menu view in mobile
 
 $rootScope.$watch('userinfo',function(){
-  if($rootScope.userinfo){
-    
+  if(!angular.equals($rootScope.userinfo, undefined)){
+  if(!angular.equals($rootScope.userinfo.userLoginId, undefined)){
+
     $scope.rm_id = $rootScope.userinfo.ActiveUserData.roleMappingId.$oid;
     $scope.userinfo = $rootScope.userinfo;
 
@@ -30,19 +31,19 @@ $rootScope.$watch('userinfo',function(){
         $scope.userMenus = $scope.userMenusOrigin = angular.fromJson(JSON.parse(data.data)).menuStructure[0].regionMenuStructure;
         
         // calling service for geting user notification
-        var userNotificationResponse = notification.fnLoadUserNotification($scope.rm_id);
+        var userNotificationResponse = notification.fnLoadUserNotification($scope.userinfo.userLoginId);
         userNotificationResponse.then(function(response){
           $rootScope.data = {};
           $rootScope.data.userNotification = angular.fromJson(JSON.parse(response.data));
-          if(!angular.equals($rootScope.data.userNotification,null)){
-            $rootScope.data.userNotification.notification = $rootScope.data.userNotification.notification.reverse();
-          }
+          // if(!angular.equals($rootScope.data.userNotification,null)){
+          //   $rootScope.data.userNotification.notification = $rootScope.data.userNotification.notifications;
+          // }
         });
 
       });
     }
     
-}
+}}
 else{
 
     $rootScope.hide_when_root_empty=true;
@@ -287,7 +288,7 @@ $rootScope.$on('$stateChangeStart', function(event, toState, toParams, fromState
       sub=0;
     }
     
-
+    if(menu){
     if(!angular.equals(menu[sub],undefined)){
       getMenuByLink(menu,sub+1,path_obj,state, fnCallback);
       if(menu[sub].childMenuStructure.length){
@@ -337,7 +338,7 @@ $rootScope.$on('$stateChangeStart', function(event, toState, toParams, fromState
           }
         }
       }
-
+}
       
     }
 
@@ -359,5 +360,46 @@ $rootScope.$on('$stateChangeStart', function(event, toState, toParams, fromState
     $scope.viewMobileMenu = function(){
       $scope.viewMenu = !$scope.viewMenu;
     };
+
+
+    /*
+This area is for keeping code for managing notifications, please add the other codes before this line.
+Here we are defining all the socket.oi listeners and broadcastings, so that we can get all the things in all pages and
+can manage it at single place.
+*/
+
+if($rootScope.userinfo){
+
+var socketio = notification.socket();
+// console.log('notification'+$rootScope.userinfo.userLoginId);
+socketio.removeEventListener('notification'+$rootScope.userinfo.userLoginId); /* For avoiding duplicate listener
+                                                                                */
+socketio.on('notification'+$rootScope.userinfo.userLoginId,function (data) {
+  // console.log(data);
+  $rootScope.data.userNotification.notifications.splice(0,0,data.notification);
+  $rootScope.data.userNotification.unreadCount = $rootScope.data.userNotification.unreadCount+1;
+  $rootScope.$digest();
+});
+
+
+
+$rootScope.notificationLink = function (notificationObj,mainObj) {
+  var link = notificationObj.link;
+  var id = notificationObj._id.$oid;
+  // console.log(link,id);
+  if(notificationObj.read==0){
+    var updated = notification.markNotificationAsRead($scope.userinfo.userLoginId,id);
+      updated.then(function (response) {
+        notificationObj.read = 1;
+        if(!angular.equals(mainObj,undefined)){
+          mainObj.unreadCount = mainObj.unreadCount-1;
+        }
+      });  
+  }
+  //notification.newNotification({companyId:'54d836934ed3269b80684843',fkLoginId:'559393aa65f384694144b65b',message:'testing notification',link:{state:'home.main',params:{}},crmId:'559393aa65f384694144b65a'});
+  $state.go(link.state,link.params);
+};
+
+}
 
 }]);

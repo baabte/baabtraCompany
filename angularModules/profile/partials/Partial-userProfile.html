@@ -158,11 +158,15 @@
 <div class="shadow-z-1 pull-left col-xs-12 no-padding b bg-light-dk h-full" >
 
 
-      <ul class="nav nav-tabs p " >
-        <li   role="presentation" ng-class="{'b-b b-yellow b-2x':selectedTab=='home'}" ng-click="selectedTab='home'"><a > Home <div class="col-xs-1 pull-right"><i  class="text-lg mdi-hardware-keyboard-arrow-right"></i></div></a></li>
-        <li   role="presentation" ng-class="{'b-b b-yellow b-2x':selectedTab=='AccountSettings'}" ng-click="selectedTab='AccountSettings';loadTabData('AccountSettings')"><a > Account Settings <div class="col-xs-1 pull-right"><i  class="text-lg mdi-hardware-keyboard-arrow-right"></i></div></a></li>
-        <li role="presentation" ng-class="{'b-b b-yellow b-2x':selectedTab=='security'}" ng-click="selectedTab='security'"><a > Security <div class="col-xs-1 pull-right"><i  class="text-lg mdi-hardware-keyboard-arrow-right"></i></div></a></li>
-        <li   role="presentation" ng-class="{'b-b b-yellow b-2x':selectedTab=='Privacy'}" ng-click="selectedTab='Privacy'"><a >Privacy</a></li>
+      <ul class="nav nav-tabs p-xs" >
+        <!-- <li   role="presentation" ng-class="{'b-b b-yellow b-2x':selectedTab=='home'}" ng-click="selectedTab='home'"><a > Home <div class="col-xs-1 pull-right"><i  class="text-lg mdi-hardware-keyboard-arrow-right"></i></div></a></li> -->
+
+        <li   role="presentation" ng-class="{'b-b b-3x b-white':selectedTab=='AccountSettings'}" ng-click="selectedTab='AccountSettings';loadTabData('AccountSettings')"><a > Account Settings</a></li>
+
+        <!-- <li role="presentation" ng-class="{'b-b b-yellow b-2x':selectedTab=='security'}" ng-click="selectedTab='security'"><a > Security <div class="col-xs-1 pull-right"><i  class="text-lg mdi-hardware-keyboard-arrow-right"></i></div></a></li> -->
+
+        <!-- <li   role="presentation" ng-class="{'b-b b-yellow b-2x':selectedTab=='Privacy'}" ng-click="selectedTab='Privacy'"><a >Privacy</a></li> -->
+
       </ul>
 
 
@@ -318,6 +322,37 @@
 
 
                        </div>
+                       </div>
+
+                       <div class="m-t-xs">
+                        <div class="panel-body p-sm bg-light lt " >
+                            <div class="col-xs-3">
+                              Branch
+                            </div>
+                            <div class="col-xs-9 no-padding">
+                              <div class="col-xs-7" ng-if="(!profileData.currentBranch) && (!profileObj.branchObj.length)">
+                                Loading branch....
+                              </div>
+                              <div class="col-xs-7" ng-click="removeBranch(profileData.currentBranch)" ng-if="profileData.currentBranch">
+                                <a class="label label-default p-sm text-sm">
+                                  {{profileData.currentBranch.name}}
+                                  
+                                </a>
+                                <a bs-tooltip data-title="Remove branch" data-placement="right" class="label label-default p-sm text-sm"><span class="text-md">×</span></a>
+                              </div>
+                              <div class="col-xs-7" ng-if="profileObj.branchObj"  ng-repeat="branch in profileObj.branchObj">
+                               <ui-select required ng-model="profileObj.selectedBranch[$index]" theme="selectize" ng-disabled="disabled" on-select=" branchSelected($item, $index)">
+                                <ui-select-match placeholder="{{'Branch name'|translate}}" ng-bind-html="$select.selected.name"></ui-select-match>
+                                <ui-select-choices repeat="br in branch | filter: $select.search">
+                                  <span ng-bind-html="br.name | highlight: $select.search"></span>
+                                </ui-select-choices>
+                              </ui-select>
+                              </div>
+                              <div class="col-xs-5">
+                                <a ng-if="profileData.profile.branchId" ng-click="updateUserProfileDatas()" class="btn btn-info baab-btn no-margin">Save</a>
+                              </div>
+                            </div>
+                        </div>
                        </div>
 
               </div>     

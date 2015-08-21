@@ -43,49 +43,15 @@ $scope.labelname=[];
 
 
 
-var courseFetchData={fkcompanyId:$scope.companyId};
-courseFetchData.type=0;
+var courseFetchData = {fkcompanyId:$scope.companyId};
+courseFetchData.type = 0;
 $scope.candidateReport={};
 var FetchCandidateReportCallBack=candidateReport.FetchCandidateReport(courseFetchData);
       FetchCandidateReportCallBack.then(function(data){
-        // $scope.chartData=[];
-        // var array=[];
-        // array[0]="Course";
-        // array[1]="Candidates";
-        // $scope.chartData.push(array);
-        // $scope.CandidateReport = angular.fromJson(JSON.parse(data.data)); 
-        //  array=[];
-        // for (var i in $scope.CandidateReport) {
-        //    array[0]=$scope.CandidateReport[i].courseName;
-        //    array[1]=$scope.CandidateReport[i].candidateCount;
-        //   $scope.chartData.push(array);
-        //   array=[];
-        //  }
-        //  $scope.CalctotalCount($scope.chartData);
-        //   $scope.candidateReport= { //dummy object
-        //                           "type":"PieChart", 
-        //                           "displayExactValues": true, 
-        //                           "options": {
-        //                             "is3D":true,  
-        //                             "title": "Courses and Candidates",
-        //                             "vAxis":{
-        //                               "title":"Candidates"
-        //                             },
-        //                             "hAxis": {
-        //                                 "title": "Course"
-        //                               },
-        //                             "tooltip": {
-        //                               "isHtml": true
-        //                             },
-        //                             'width':600,
-        //                            'height':400
-        //                           }
-        //                         };                      
-        //  $scope.candidateReport.data=$scope.chartData;
-
 
         $scope.datas=[];
         $scope.CandidateReport = angular.fromJson(JSON.parse(data.data));
+        
         if($scope.CandidateReport.length)
           {
             var counter=0;

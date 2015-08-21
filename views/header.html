@@ -1,8 +1,8 @@
         <!-- navbar header ng-class="{'box-shadow-inset dk':app.settings.headerShadow}"  -->
       <!-- navbar header ng-class="{'box-shadow-inset dk':app.settings.headerShadow}"  -->
 
-      <div class="navbar-header p-v-xs " ng-class="{'box-shadow-inset dk':app.settings.headerShadow}">
-     
+      <div class="navbar-header p-v-xs" ng-class="{'box-shadow-inset dk':app.settings.headerShadow}">
+
         <button class="pull-right visible-xs" bs-aside="aside" data-template="angularModules/login/partials/Partial-sm_User_Menu.html" data-placement="right" data-animation="am-slide-right aside-open-inner modal-open" data-container="body">
           <!-- <span class="visible-xs m-r pull-left">{{userinfo.ActiveUserData.username}}</span> -->
          
@@ -11,11 +11,16 @@
         </button>
         <span class="pull-right visible-xs" data-animation="am-fade" data-template="angularModules/Notification/partials/Popover-notifictionPopover.html" data-placement="bottom-right" bs-dropdown="dropdown">
               <i class="fa fa-bell text-lg m-v"  bs-tooltip data-title="Notifications" data-placement="left"></i>
-              <b class="badge bg-danger up" ng-if="$root.data.userNotification.notification.length > 0">{{$root.data.userNotification.notification.length}}</b>
+
+              <b class="badge bg-danger up" ng-if="$root.data.userNotification.unreadCount > 0">{{$root.data.userNotification.unreadCount}}</b>
 
           </span>
         <!-- brand -->
-        <a bs-tooltip data-title="Click to change logo" data-placement="right" class="navbar-brand text-lt" ng-if="$root.userinfo.ActiveUserData.appSettings.logo" ng-click="appSettings()" style="width: auto;">
+        <a data-placement="right" class="navbar-brand text-lt" ng-if="$root.userinfo.ActiveUserData.appSettings.logo&&roleId != $root.userinfo.ActiveUserData.roleMappingObj.fkRoleId" style="width: auto;">
+          <img src="{{$root.userinfo.ActiveUserData.appSettings.logo}}" class="img-responsive" style="max-height: 40px !important;">
+        </a>
+
+         <a  bs-tooltip data-title="Click to change logo" data-placement="right" class="navbar-brand text-lt" ng-if="$root.userinfo.ActiveUserData.appSettings.logo&&roleId == $root.userinfo.ActiveUserData.roleMappingObj.fkRoleId"  ng-click="appSettings()" style="width: auto;">
           <img src="{{$root.userinfo.ActiveUserData.appSettings.logo}}" class="img-responsive" style="max-height: 40px !important;">
         </a>
 
@@ -39,7 +44,7 @@
           <li >
             <a href=""  data-animation="am-fade" data-template="angularModules/Notification/partials/Popover-notifictionPopover.html" data-placement="bottom-right" bs-dropdown="dropdown">
               <i class="fa fa-bell text-lg m-v-xs" bs-tooltip data-title="Notifications" data-placement="left"></i>
-              <b class="badge bg-danger up" ng-if="$root.data.userNotification.notification.length > 0">{{$root.data.userNotification.notification.length}}</b>
+              <b class="badge bg-danger up" ng-if="$root.data.userNotification.unreadCount > 0">{{$root.data.userNotification.unreadCount}}</b>
 
             </a>
           </li>
@@ -99,7 +104,7 @@
           </li> -->
           <li ng-if="roleId == $root.userinfo.ActiveUserData.roleMappingObj.fkRoleId">
              
-            <a href bs-tooltip data-title="Settings"  data-placement="left" class="hidden-xs">
+            <a href bs-tooltip data-title="Settings"  data-placement="left">
               <i class="mdi-action-settings text-2x m-t-xs" style="font-size:25px" ng-click="redirectToGlobalSettings()"></i>
               <!-- <b class="badge badge-xs bg-warning up">3</b> -->
     <!--           <span class="visible-xs-inline">Notifications</span> -->

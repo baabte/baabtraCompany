@@ -246,9 +246,9 @@ body                            { padding-top:20px; }
 pre                             { margin-bottom:20px; }
 
 /* form styling */
-#form-container                { background:#2f2f2f; margin-bottom:20px;
+#form-container                { background:#FFFFFF; margin-bottom:20px;
     border-radius:5px; }
-#form-container .page-header   { background:#151515; margin:0; padding:30px; 
+#form-container .page-header   { background:#ADADAD; margin:0; padding:30px; 
     border-top-left-radius:5px; border-top-right-radius:5px; }
 
 /* numbered buttons */
@@ -398,6 +398,7 @@ pre                             { margin-bottom:20px; }
 
 /*drafted course view start*/
 .course-description>.line{
+    padding-left:5px!important;
   font-size: 14px!important;
   height: inherit!important;
 }
@@ -754,7 +755,7 @@ display: block;
   cursor: pointer;
 }
 .link-hover:hover{
-  box-shadow: rgb(50, 46, 46) 0px 0px 9px 0px;
+  text-decoration: underline;
 }
 .upper{
   text-transform: uppercase;
@@ -776,7 +777,15 @@ display: block;
 /*basic reset*/
 * {margin: 0; padding: 0;}
 
-
+html {
+  height: 100%;
+  /*Image only BG fallback*/
+ /* background: url('http://thecodeplayer.com/uploads/media/gs.png');
+  /*background = gradient + image pattern combo*/
+/*  background: 
+    linear-gradient(rgba(196, 102, 0, 0.2), rgba(155, 89, 182, 0.2)), 
+    url('http://thecodeplayer.com/uploads/media/gs.png');*/
+}
 
 body {
   font-family: montserrat, arial, verdana;
@@ -912,7 +921,7 @@ body {
 
 
 
-.hide-dropdown + .dropdown-menu{
+.hide-dropdown.dropdown-menu{
   display: none!important;
 }
   
@@ -962,4 +971,48 @@ ul.rating {
 .blurry-text {
   color: transparent!important;
   text-shadow: 0 0 10px rgba(255, 255, 255, 1)!important;
+}
+.bg-white{
+  background: #fff!important;
+}
+
+.iframe-width iframe{
+  width: 100% !important;
+}
+
+  .fa-baabtra{
+    background-image: url("../images/fa-icon/fa-baabtra.png");
+    height: 40px;
+    width: 40px;
+    background-size: cover;
+  }
+
+
+.datepicker.dropdown-menu {
+  width: 275px;
+  height: 375px;
+}
+.datepicker.dropdown-menu button {
+  outline: none;
+  border: 0px;
+}
+.datepicker.dropdown-menu tbody {
+  height: 180px;
+}
+.datepicker.dropdown-menu tbody button {
+  padding: 6px;
+}
+.datepicker.dropdown-menu.datepicker-mode-1 tbody button,
+.datepicker.dropdown-menu.datepicker-mode-2 tbody button {
+  height: 65px; 
+}
+.timepicker.dropdown-menu {
+  padding: 0 4px;
+}
+.timepicker.dropdown-menu button {
+  outline: none;
+  border: 0px;
+}
+.timepicker.dropdown-menu tbody button {
+  padding: 6px;
 }

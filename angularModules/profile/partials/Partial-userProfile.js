@@ -1,4 +1,4 @@
-angular.module('baabtra').controller('UserprofileCtrl',['$scope','$rootScope','userProfile','$state','commonService','$modal','$alert','$stateParams','bbConfig',function($scope,$rootScope,userProfile,$state,commonService,$modal,$alert,$stateParams,bbConfig){
+angular.module('baabtra').controller('UserprofileCtrl',['$scope','$rootScope','userProfile','$state','commonService','$modal','$alert','$stateParams','bbConfig', 'branchSrv',function($scope,$rootScope,userProfile,$state,commonService,$modal,$alert,$stateParams,bbConfig, branchSrv){
 
 $scope.updatepicmsg=true;
 $scope.showHideAbtPic=false;
@@ -18,20 +18,46 @@ if(!$rootScope.userinfo){ //checking for the login credentilas is present or not
       $rootScope.hide_when_root_empty=true;
       commonService.GetUserCredentials($scope);
 }
-$scope.userinfo =$rootScope.userinfo;
+$scope.userinfo = $rootScope.userinfo;
+  var companyId = $rootScope.userinfo.ActiveUserData.roleMappingObj.fkCompanyId.$oid;
 var profile; 
 if(!angular.equals($stateParams.userId,"")){
 	profile = userProfile.loadProfileData($stateParams.userId);
 	userLoginId=$stateParams.userId;
+
 }
 else{
+
 	profile = userProfile.loadProfileData($scope.userinfo.userLoginId);
 	userLoginId=$scope.userinfo.userLoginId;
-
-
 }
 profile.then(function (data) {
-			$scope.profileData = angular.fromJson(JSON.parse(data.data));
+	$scope.profileData = angular.fromJson(JSON.parse(data.data));
+	$scope.profileObj = {};
+	$scope.profileObj.branchObj = [];
+	$scope.profileObj.branchCondition = {companyId:companyId};
+	
+	if($scope.profileData.branchId){
+		$scope.profileObj.branchCondition._id = $scope.profileData.branchId.$oid;
+	}
+	else{
+		$scope.profileObj.branchCondition.parent = "root";
+	}
+
+	var branchLoadResponse = branchSrv.fnLoadBranch($scope.profileObj.branchCondition);
+	branchLoadResponse.then(function(response){
+    var result = angular.fromJson(JSON.parse(response.data));
+    if($scope.profileData.branchId){
+    	
+    	$scope.profileData.currentBranch = {_id:result[0]._id.$oid, name:result[0].name};
+
+    }else{
+    	$scope.profileObj.branch = result;
+    	$scope.profileObj.branchObj.push(result);	
+    }
+    
+});
+
 			//console.log($scope.profileData );
 			if(!$scope.profileData.profile.Preferedlanguage){
 				$scope.profileData.profile.Preferedlanguage=$scope.availlangualges[0];
@@ -66,6 +92,43 @@ profile.then(function (data) {
 
 
 
+$scope.branchSelected = function(item, index){
+	var branchLength = $scope.profileObj.branchObj.length;
+	if(branchLength > (index + 1)){
+		for(var branch in $scope.profileObj.branchObj){
+			if(index < branch){
+				$scope.profileObj.branchObj.splice(branch, 1);
+				delete $scope.profileObj.selectedBranch[branch];
+			}
+		}
+	}
+
+	$scope.profileData.profile.branchId = item._id.$oid;
+
+	$scope.profileObj.branchCondition = {companyId:companyId, parent:item._id.$oid};
+      var branchLoadResponse = branchSrv.fnLoadBranch($scope.profileObj.branchCondition);
+      branchLoadResponse.then(function(response){
+      	var result = angular.fromJson(JSON.parse(response.data));
+      	if(result.length){
+      		$scope.profileObj.branchObj.push(result);
+      	};
+      });
+};
+
+$scope.removeBranch = function (currentBranch) {
+	delete $scope.profileData.currentBranch;
+	$scope.profileObj.branchCondition = {companyId:companyId, parent:"root"};
+	$scope.updateUserProfileDatas();
+	var branchLoadResponse = branchSrv.fnLoadBranch($scope.profileObj.branchCondition);
+	branchLoadResponse.then(function(response){
+
+	    var result = angular.fromJson(JSON.parse(response.data));
+	    $scope.profileObj.branch = result;
+	    $scope.profileObj.branchObj.push(result);
+
+	});
+};
+
 $scope.convertDate=function(date){
 	var date=new Date(date);
 	var cur = new Date();
@@ -74,6 +137,8 @@ $scope.convertDate=function(date){
     date=date.toDateString();
 	return "Born on "+date+" ("+age+" years old)";
 };
+
+
 
 $scope.updateinfo=function(){
 	 $state.go('home.main.updateUserProfile');
