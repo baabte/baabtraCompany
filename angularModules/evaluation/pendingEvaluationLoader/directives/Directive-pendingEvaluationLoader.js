@@ -1,43 +1,31 @@
-angular.module('baabtra').directive('evaluationLoader',['evaluationService', '$alert' , '$modal',function (evaluationService, $alert, $modal) {
+angular.module('baabtra').directive('pendingEvaluationLoader',['evaluationService', '$alert' , '$modal',function (evaluationService, $alert, $modal) {
 	return {
 		restrict: 'E',
 		replace: true,
 		scope: {
-			 courseTimeline:'=',
+			 courseElement:'=',
 			 elementOrder:'=',
 			 evaluatorId:'=',
 			 courseMappingId:'=',
-			 evaluableElement:'='
+			 evaluationId:'=',
+			 removeFunction:'='
 		},
-		templateUrl: 'angularModules/evaluation/directives/Directive-evaluationLoader.html',
+		templateUrl: 'angularModules/evaluation/pendingEvaluationLoader/directives/Directive-pendingEvaluationLoader.html',
 		link: function(scope, element, attrs, fn) {
 
 				scope.evalLoader = {};
 				
 				scope.outElement = [];
 
-				
 
 				var keyArray = scope.elementOrder.split('.');
 
-				var obj = scope.courseTimeline;
-
-				var index = 0;
-				for(var key in keyArray){
-					if(!angular.equals(obj[keyArray[key]],undefined)){
-						obj = obj[keyArray[key]];
-						index++;
-						if(angular.equals(keyArray.length, index)){
-							scope.element = obj;
-							if(scope.element.evaluable){
-								scope.evaluableElement = true;	
-							}
-						}
-					}
-					else{
-						break;
-					}
+				scope.element = scope.courseElement;
+				if(scope.element.evaluable){
+					scope.evaluableElement = true;	
 				}
+				
+				
 
 				scope.evaluated = function(element, elementTotalMarks, outElement, elementOrder, courseMappingId, evaluatorId){
 
@@ -64,12 +52,13 @@ angular.module('baabtra').directive('evaluationLoader',['evaluationService', '$a
 
 						index++;
 						if(angular.equals(result.length, index)){
-							console.log(courseMappingId, element, elementOrder);
+							// console.log(courseMappingId, element, elementOrder);
+							element.evaluationId=scope.evaluationId;
 							var evaluationResponse = evaluationService.evaluateAnswer(courseMappingId, element, elementOrder);
 							evaluationResponse.then(function(response){
 								var result = angular.fromJson(JSON.parse(response.data));
-
-								console.log(result);
+								scope.removeFunction();
+								// console.log(result);
 								
 								if(angular.equals(result.result, "Added")){
 									$alert({title: 'Evaluated!', content: element.Name + ' evaluated successfuly', placement: 'bottom-right', type: 'success', duration:2, show: true});
@@ -95,7 +84,7 @@ angular.module('baabtra').directive('evaluationLoader',['evaluationService', '$a
 										  {label:"Months", value:"months"}];
 
 					//scope.resubmit.duration = [{label:"days", value:"days"}];
-					var askResubmitModal = $modal({scope:scope, template: 'angularModules/evaluation/directives/Popup-askResubmit.html', show: true});
+					var askResubmitModal = $modal({scope:scope, template: 'angularModules/evaluation/pendingEvaluationLoader/directives/Popup-askResubmit.html', show: true});
 			            // Show when some event occurs (use $promise property to ensure the template has been loaded)
 			           //  scope.showModal = function() {
 			           //    askResubmitModal.$promise.then(askResubmitModal.show);
@@ -178,6 +167,7 @@ angular.module('baabtra').directive('evaluationLoader',['evaluationService', '$a
 					return false;
 				};
 
-			}//link end
-		};
-	}]);
+
+		}//link end
+	};
+}]);

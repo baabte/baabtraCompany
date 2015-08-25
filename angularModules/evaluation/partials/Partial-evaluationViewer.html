@@ -1,34 +1,114 @@
-<div class="col-xs-12 bg-white" style="height:500px">
-	
-	<div class="col-xs-6 col-md-2 pull-left  b-r h-full" >
-		<div class="font-bold text-danger m-t-md" translate="{{'Pending Evaluations'|translate}}">
-		</div>
-        <div class="list-group bg-inherit scrollable h-full" style="height:450px" >
-                
+<div class="col-xs-12 bg-light">
+  <div class="row bg-white shadow-z-1 p-v-sm fixed-tab">
+    <div class="col-xs-12 ">
+      <div class="row">
+        <div class="col-xs-3">
+          <!-- <div class="btn-group no-margin" ng-class="{'open':data.clickOnExport}">
+            <a ng-click="data.clickOnExport = !data.clickOnExport" class="btn btn-info"><i class="glyphicon glyphicon-export"></i>&nbsp;Export</a>
+            <a href="bootstrap-elements.html" data-target="#" class="btn btn-info dropdown-toggle" data-toggle="dropdown"><span class="caret"></span></a>
+            <ul class="dropdown-menu">
+                <li ng-click="exportToSpreadsheet();"><a href="javascript:void(0)"><i class="fa fa-fw fa-table"></i>&nbsp;Export to Spreadsheet</a></li>
+            </ul>
+          </div> -->
+        </div>
+        <div class="col-xs-9 text-right">
+          <a class="font-bold" ng-if="data.usersCount">{{data.usersCountFrom}}-{{data.usersCountTo}} Of {{data.usersCount}}</a>&nbsp;
+          <a class="btn btn-rounded btn-stroke btn-info no-margin" ng-disabled="data.prevButtondisabled" ng-click="prevOne()"><i class="fa fa-angle-left text-white font-bold"></i></a>
+          <a ng-click="nextOne()" ng-disabled="data.nextButtondisabled" class="btn btn-rounded btn-stroke btn-info no-margin"><i class="fa fa-angle-right text-white font-bold"></i></a>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="row" style="margin-top:56px;">
+    <div class="col-xs-12 col-md-3 b-r p-v">
+        <div class="col-xs-12 bg-white shadow-z-1 ">
+          <div class="row">
+            
+            <!-- username -->
+            <div class="col-xs-12 b-b p-v">
+               <input type="text" class="form-control floating-label"ng-model="data.searchKey.Key" placeholder="Search Users" autocomplete="off">
+            </div>
 
-                <div class="list-group-item m-l-n w-full" >
-                  <a href="" class="w-thumb-xs pull-left m-r"><img src="" class="img-responsive"></a>
-                  <div class="clear m-b-sm">
-                    <span class="pull-right text-muted text-xs">
-                      12:30 PM
-					</span>
-                    <div>David M.</div>
-                    <a href="" class="text-xs text-ellipsis">Easy Angular development with Yeoman</a>
+           
+
+
+            <!-- branch based -->
+            <div class="col-xs-12 b-b p-v" ng-if="data.branchList.length>0">
+              <div class="font-bold">Branches</div>
+              <div class="box-cell scrollable hover" style="max-height: 170px;">
+                <div class="sample1" ng-repeat="branch in data.branchList">
+                  <div class="checkbox show-in-one-line" style="line-height: 19px;max-height: 25px;">
+                    <label title="{{branch.Name}}">
+                      <input  type="checkbox"  ng-model="data.branch[$index]" ng-change="branchSelectionChanged(branch)"> {{branch.name}}
+                    </label>
                   </div>
                 </div>
+              </div>
+            </div>
 
-                    
+            <!-- course based -->
+            <div class="col-xs-12 b-b p-v" ng-if="data.courseList.length">
+              <div class="font-bold m-b-xs">Courses & Tests ({{data.courseList.length}})</div>
+               <input type="text" class="form-control floating-label" ng-model="data.courseSearchKey" placeholder="Search">              
+              <div  class="box-cell scrollable hover" style="max-height: 170px;">
+                <div class="sample1" ng-repeat="course in data.courseList | filter: data.courseSearchKey ">
+                  <div class="checkbox show-in-one-line" style="line-height: 19px;max-height: 25px;">
+                    <label title="{{course.Name}}">
+                      <input  type="checkbox"  ng-model="data.coures[$index]" ng-change="courseSelectionChanged(course)"> {{course.Name}}
+                    </label>
+                  </div>
+                </div>
+              </div>
+            </div>
 
-        </div>            
+            <!-- Date Search-->
+           <!--  <div class="col-xs-12 b-b p-v" ng-if="data.courseList.length">
+              <div class="font-bold">Date Search</div>
+                <div class="sample1">
+                  <div class="inputs p-v-xs ">
+                    <input type="text" class="form-control" ng-model="data.searchKey.fromDate" placeholder="From Date" autocomplete="off"  data-date-format="dd-MM-yyyy" data-date-type="date" data-autoclose="true" data-max-date="today" onkeydown="return false" bs-datepicker="" autocomplete="off" placement="top-right" placeholder="From date">
+                  </div>
+                   <div class="inputs p-v-xs ">
+                    <input type="text" class="form-control " ng-model="data.searchKey.toDate" placeholder="To Date" autocomplete="off"  data-date-format="dd-MM-yyyy" data-date-type="date" data-autoclose="true" data-max-date="today" onkeydown="return false" bs-datepicker="" autocomplete="off" placement="top-right" placeholder="From date">
+                   </div>
+                </div>
+            </div>-->
+            
+
+           
+
+           
+
+          </div>
+        </div>
     </div>
 
-    <div class="col-xs-6 col-md-10" style="height:450px">
+    <!-- users list view -->
+    <div class="col-xs-12 col-md-9 p-v">
+      <div class="row">
+        <div class="col-xs-12 ">
+            <div class="col-xs-12 bg-warning p-v shadow-z-1 font-bold" ng-if="!data.EvaluationList.length && data.EvaluationList != undefined">
+                  Sorry, no results containing all your search terms were found
+            </div>
+            <div class="tile col-xs-12 pull-left " ng-repeat="evaluation in data.EvaluationList track by evaluation._id.$oid">
+              <div class="panel b-light link" ng-click="selectElement(evaluation,$index)" title="Click to Evaluate ">
+                <div class="p">
+                  <div class="font-bold">{{evaluation.firstName}}&nbsp;{{evaluation.lastName}}</div>
+                  <div>{{evaluation.userName}}</div>
+                  <div>{{evaluation.courseName}}</div>                  
+                  <div ng-if="evaluation.batchName">{{evaluation.batchName}}</div>
+                  <div>{{syllabusSplit(evaluation.syllabus)}}</div>   
+                  <div class="font-bold">{{evaluation.elementName}}</div> 
+                  
 
-      <evaluation-loader question="" evaluator-response=""></evaluation-loader>
-
+                </div>
+                
+              </div>
+            </div>
+        </div>
+      </div>
     </div>
+    <!--/ users list view -->
 
+  </div>
 </div>
-
-
-

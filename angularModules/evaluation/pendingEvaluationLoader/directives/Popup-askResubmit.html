@@ -1,0 +1,35 @@
+<div class="modal" >
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="panel">
+        <div class="p-sm bg-info font-bold">Resubmit</div>
+        <div class="panel-body">
+          
+          <!-- deadline -->
+          <div class="row">
+            <div class="col-xs-3">
+              <input type="number" placeholder="{{'Deadline' | translate }}" class="form-control" ng-model="resubmit.duration">
+            </div>
+
+            <div class="col-xs-6">
+              <button type="button" class="btn btn-default no-margin" ng-model="resubmit.durationUnit" data-html="1" ng-options="timeUnit.value as timeUnit.label for timeUnit in resubmit.penaltyTimeUnits" bs-select placeholder="choose an option">          
+              </button>
+            </div>
+
+          </div>
+
+          <div class="row">
+            <div class="col-xs-12">
+              <textarea class="form-control" rows="4" placeholder="Comments" ng-model="resubmit.comments"></textarea>
+            </div>
+          </div>
+
+        </div>
+        <div class="panel-footer text-right">
+
+          <a class="btn btn-info baab-btn no-margin" style="line-height: 13px;" translate="{{'Save' | translate }}" ng-click="fnResubmit(element, resubmit.outElement, elementOrder, courseMappingId, evaluatorId)" ng-disabled="!resubmit.duration" disabled="disabled"></a>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

@@ -1,10 +1,10 @@
 angular.module('baabtra').service('evaluationService',['$http','bbConfig',function evaluationService($http,bbConfig) {
 
-	this.evaluationFetch = function(userCourseMappingId,tlPoint,elementType,outerIndex){
+	this.evaluationFetch = function(evaluationFetchObj){
 	var promise = $http({
 	 	method: 'POST',
 	    url: bbConfig.BWS+'EvaluationFetch/',
-	    data:{userCourseMappingId:userCourseMappingId,tlPoint:tlPoint,elementType:elementType,outerIndex:outerIndex}
+	    data:angular.toJson(evaluationFetchObj)
 	 });
 	return promise;
 };
@@ -17,6 +17,17 @@ this.evaluateAnswer = function(userCourseMappingId, element, elementOrder){
 	 });
 	return promise;
 };
+
+
+this.evaluationElementFetch = function(evaluationFetchObj){
+	var promise = $http({
+	 	method: 'POST',
+	    url: bbConfig.BWS+'evaluationElementFetch/',
+	    data:angular.toJson(evaluationFetchObj)
+	 });
+	return promise;
+};
+
 
 	
 }]);
