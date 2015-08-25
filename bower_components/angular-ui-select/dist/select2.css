@@ -531,9 +531,9 @@ disabled look for disabled choices in the results dropdown
     height: 13px;
     position: absolute;
     right: 3px;
-    top: 4px;
+    top: 2px;
 
-    font-size: 1px;
+    /*font-size: 1px;*/
     outline: none;
     background: url('select2.png') right top no-repeat;
 }

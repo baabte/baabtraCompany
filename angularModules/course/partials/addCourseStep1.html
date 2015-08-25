@@ -1,18 +1,7 @@
 <!-- Outer Panel  -->
 <form profile="showAll" nv-file-drop xt-form name="acGenInfo" no-validate class="form-validation ng-pristine ng-invalid ng-invalid-required" role="form">
 <div class="panel panel-default m-t p-md p-v-xs b-b b-5x {{borderClass}}">
-  
-  <!-- Top Header row -->
-  <div class="row">
-  
-      <!-- Heading -->
-     <!--  <div class="bg-white p-sm bg-chocolate">
-            <i class="glyphicon glyphicon-bullhorn text-1x inline"></i>
-            <span class="text-1x font-bold">General Info</span>
-      </div> -->
-      <!-- Heading .end -->
-  
-  </div>
+
   <!-- Top header row .End -->
   <!-- body row -->
   <div class="row">
@@ -25,9 +14,9 @@
         <!-- course name -->
         <div class="row">
             <div class="form-group">
-              
-                  <input type="text" class="form-control" float-label ng-model="course.Name" name="courseName" xt-validate required placeholder="Name of the {{course.type}}">
-         
+              <div class="col-xs-12">
+                  <input type="text" class="form-control "  ng-model="course.Name" name="courseName" xt-validate required placeholder="Name of the {{course.type}}">
+              </div>
             </div>
         </div>
 
@@ -53,30 +42,15 @@
                         Online training
                     </label>
                 </div>
-            </div>
-            <!-- <div class="checkbox">
-              <label>
-
-                <input type="checkbox" ng-model="course.Delivery.online" value="course.Delivery.online" checked>
-                <b class="font-normal" translate="{{'Online'|translate}}"></b>
-              </label>
-            </div> 
-
-            <div class="checkbox">
-              <label>
-                <input type="checkbox" ng-model="course.Delivery.offline" value="course.Delivery.offline" checked>
-                <b class="font-normal" translate="{{'Offline'|translate}}"></b>
-               
-              </label>
-
-            </div>-->        
-          <em class="text-muted text-E91E63" translate="{{'(Please specifiy  the mode of delivery of the course)'|translate}}"></em>
+                <em class="text-muted text-E91E63" translate="{{'(Please specifiy  the mode of delivery of the course)'|translate}}"></em>
+            </div>     
+          
         </div>
       </div>
 
 
         <!-- course details viewer -->
-          <course-detail-viewer  course-details="course.courseDetails" editable="true">
+        <course-detail-viewer  course-details="course.courseDetails" editable="true">
           </course-detail-viewer>
 
         <!-- dynamic fields directive -->
@@ -154,27 +128,26 @@
 
         <div class="radio radio-success pull-left">
             <label>
-              <input type="radio" name="Branches" ng-click="specificBranches=false" id="inlineRadio1" checked>
+              <input type="radio" name="Branches" ng-click="course.specificBranches=false" id="inlineRadio1">
               <b class="font-normal" translate="{{'All Branches'|translate}}"></b>
-              <!-- <span translate="{{'All Branches'|translate}}"></span> -->
             </label>
         </div>
 
         <div class="radio radio-success pull-left m-l" style="padding-top:15px;">
             <label>
-              <input type="radio" name="Branches" ng-click="specificBranches=true" id="inlineRadio1" value="option1">
-              <b class="font-normal" translate="{{'Specific Branches'|translate}}"></b><!-- 
-               -->
+              <input type="radio" name="Branches" ng-click="course.specificBranches=true" id="inlineRadio1" value="option1">
+              <b class="font-normal" translate="{{'Specific Branches'|translate}}"></b>
             </label>
         </div>
 
-        <em class="text-muted text-E91E63 col-xs-12" translate="{{'(Please specifiy  to which all branches this course is available)'|translate}}"></em>
-        <div class="col-xs-12">
-          <hierarchical-selector ng-if="specificBranches" data="branchDetails" multi-select="true" class="am-fade" on-selection-changed="onBranchSelectionChanged(items)"></hierarchical-selector>
+        <em ng-if="course.specificBranches" class="text-muted text-E91E63 col-xs-12" translate="{{'(Please specifiy  to which all branches this course is available)'|translate}}"></em>
+        <div class="col-xs-12" ng-if="course.specificBranches">
+          <branch-loader multiple="true" ng-model="course.Branches">
+           </branch-loader>
         </div>
       </div>
 
-      <div class="form-group col-xs-11 pull-right">
+      <div class="form-group col-xs-11 pull-right no-margin">
 
         <div class="radio radio-success pull-left m-l">
             <label>
@@ -204,7 +177,7 @@
       <div class="row">
       <div class="col-xs-12">
           <div class="form-group">
-            <label>Evaluator</label>
+            <label ng-if="$root.userinfo.ActiveUserData.roleMappingObj.evalRoles">Evaluator</label>
             <role-user-loader ng-if="course" role-id="$root.userinfo.ActiveUserData.roleMappingObj.evalRoles[0]" placeholder-value="Please select a person" selection-type="2" ng-model="course.evaluator">
             </role-user-loader>
           </div>

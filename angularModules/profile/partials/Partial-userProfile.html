@@ -329,28 +329,12 @@
                             <div class="col-xs-3">
                               Branch
                             </div>
-                            <div class="col-xs-9 no-padding">
-                              <div class="col-xs-7" ng-if="(!profileData.currentBranch) && (!profileObj.branchObj.length)">
-                                Loading branch....
-                              </div>
-                              <div class="col-xs-7" ng-click="removeBranch(profileData.currentBranch)" ng-if="profileData.currentBranch">
-                                <a class="label label-default p-sm text-sm">
-                                  {{profileData.currentBranch.name}}
-                                  
-                                </a>
-                                <a bs-tooltip data-title="Remove branch" data-placement="right" class="label label-default p-sm text-sm"><span class="text-md">×</span></a>
-                              </div>
-                              <div class="col-xs-7" ng-if="profileObj.branchObj"  ng-repeat="branch in profileObj.branchObj">
-                               <ui-select required ng-model="profileObj.selectedBranch[$index]" theme="selectize" ng-disabled="disabled" on-select=" branchSelected($item, $index)">
-                                <ui-select-match placeholder="{{'Branch name'|translate}}" ng-bind-html="$select.selected.name"></ui-select-match>
-                                <ui-select-choices repeat="br in branch | filter: $select.search">
-                                  <span ng-bind-html="br.name | highlight: $select.search"></span>
-                                </ui-select-choices>
-                              </ui-select>
-                              </div>
-                              <div class="col-xs-5">
-                                <a ng-if="profileData.profile.branchId" ng-click="updateUserProfileDatas()" class="btn btn-info baab-btn no-margin">Save</a>
-                              </div>
+                            <div class="col-xs-7 ">
+                              <branch-loader on-branch-remove="updateUserProfileDatas" on-branch-change="onBranchChange" ng-if="profileData" ng-model="profileData.profile.branchId">
+                              </branch-loader>
+                            </div>
+                            <div class="col-xs-2">
+                              <a ng-if="profileData.showBranchSaveButton" ng-click="updateUserProfileDatas()" class="btn btn-info baab-btn no-margin">Save</a>
                             </div>
                         </div>
                        </div>
