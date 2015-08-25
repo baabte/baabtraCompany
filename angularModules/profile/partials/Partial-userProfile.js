@@ -34,31 +34,7 @@ else{
 profile.then(function (data) {
 	$scope.profileData = angular.fromJson(JSON.parse(data.data));
 	$scope.profileObj = {};
-	$scope.profileObj.branchObj = [];
-	$scope.profileObj.branchCondition = {companyId:companyId};
-	
-	if($scope.profileData.branchId){
-		$scope.profileObj.branchCondition._id = $scope.profileData.branchId.$oid;
-	}
-	else{
-		$scope.profileObj.branchCondition.parent = "root";
-	}
-
-	var branchLoadResponse = branchSrv.fnLoadBranch($scope.profileObj.branchCondition);
-	branchLoadResponse.then(function(response){
-    var result = angular.fromJson(JSON.parse(response.data));
-    if($scope.profileData.branchId){
-    	
-    	$scope.profileData.currentBranch = {_id:result[0]._id.$oid, name:result[0].name};
-
-    }else{
-    	$scope.profileObj.branch = result;
-    	$scope.profileObj.branchObj.push(result);	
-    }
-    
-});
-
-			//console.log($scope.profileData );
+			
 			if(!$scope.profileData.profile.Preferedlanguage){
 				$scope.profileData.profile.Preferedlanguage=$scope.availlangualges[0];
 				$scope.oldLang=$scope.availlangualges[0].langCode;	
@@ -76,12 +52,6 @@ profile.then(function (data) {
 			}
 			if(!angular.equals($scope.profileData.passwordChanges,undefined))
 			{
-				// alert("hai");
-				// var date = new Date();
-				// var nowdate = date.toISOString();
-				//  ts = nowdate.Subtract($scope.profileData.profile.passwordChanges.$date);
-				// // console.log($scope.profileData.profile.passwordChanges.$date);
-				// console.log(ts);
 				$scope.passwordChangeFrequency=$scope.profileData.passwordChanges.$date;
 			}
 			else{
@@ -90,44 +60,6 @@ profile.then(function (data) {
 
 });
 
-
-
-$scope.branchSelected = function(item, index){
-	var branchLength = $scope.profileObj.branchObj.length;
-	if(branchLength > (index + 1)){
-		for(var branch in $scope.profileObj.branchObj){
-			if(index < branch){
-				$scope.profileObj.branchObj.splice(branch, 1);
-				delete $scope.profileObj.selectedBranch[branch];
-			}
-		}
-	}
-
-	$scope.profileData.profile.branchId = item._id.$oid;
-
-	$scope.profileObj.branchCondition = {companyId:companyId, parent:item._id.$oid};
-      var branchLoadResponse = branchSrv.fnLoadBranch($scope.profileObj.branchCondition);
-      branchLoadResponse.then(function(response){
-      	var result = angular.fromJson(JSON.parse(response.data));
-      	if(result.length){
-      		$scope.profileObj.branchObj.push(result);
-      	};
-      });
-};
-
-$scope.removeBranch = function (currentBranch) {
-	delete $scope.profileData.currentBranch;
-	$scope.profileObj.branchCondition = {companyId:companyId, parent:"root"};
-	$scope.updateUserProfileDatas();
-	var branchLoadResponse = branchSrv.fnLoadBranch($scope.profileObj.branchCondition);
-	branchLoadResponse.then(function(response){
-
-	    var result = angular.fromJson(JSON.parse(response.data));
-	    $scope.profileObj.branch = result;
-	    $scope.profileObj.branchObj.push(result);
-
-	});
-};
 
 $scope.convertDate=function(date){
 	var date=new Date(date);
@@ -148,7 +80,7 @@ $scope.showHideFotoDive=function(){
 	$scope.updatepicmsg=$scope.updatepicmsg===false? true:false;
 };
 $scope.updateUserProfileDatas=function(data){
-	// console.log($scope.profileData.profile);
+
 	if(!$scope.profileData._id){
 		$scope.profileDataId=undefined;	
 					
@@ -156,7 +88,7 @@ $scope.updateUserProfileDatas=function(data){
 	else{
 		$scope.profileDataId=$scope.profileData._id.$oid;
 	}
-	//console.log($scope.profileDataId);
+
 	var profileUpdateConfirmation = userProfile.updateUserProfileData($scope.profileDataId,userLoginId,$scope.profileData.profile);
 		profileUpdateConfirmation.then(function (data) {
 			if(data.status==200&&data.statusText=="OK"){
@@ -169,6 +101,11 @@ $scope.updateUserProfileDatas=function(data){
 		});
 
 };
+
+$scope.onBranchChange = function(){
+	$scope.profileData.showBranchSaveButton = true;
+};
+
 $scope.editAboutOpt=function(variable){
 	if(variable=='about'){
 		$scope.showHideAbtPic=$scope.showHideAbtPic===false? true:false;

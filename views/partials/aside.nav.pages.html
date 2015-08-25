@@ -10,7 +10,7 @@
 
     <li ng-click="goMenu(path,$index)" ng-repeat="path in linkPath track by $index">
       <div class="animated fadeInDown">
-      <i class="fa {{path.menuIcon}} fa-1x"></i>
+      <!-- <i class="fa {{path.menuIcon}} fa-1x"></i> -->
        <i class="text-md"text-to-translate="{{path.MenuName}}" translate>{{path.MenuName}}</i>
        <i class="fa fa-chevron-right text-xs m-l-sm" ng-if="linkPath.length > $index+1"></i>
       </div>

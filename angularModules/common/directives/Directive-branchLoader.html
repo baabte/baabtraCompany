@@ -1,4 +1,31 @@
-<div class="m-b font-bold">
-<div>Branch</div>
- <hierarchical-selector data="branches.branchDetails" multi-select="true"  on-selection-changed="onBranchSelectionChanged(items)"></hierarchical-selector>
- </div>
+<div >
+	<div class="row" ng-if="!multiple">
+		<div class="col-xs-12" ng-if="(!branchObj.currentBranch) && (!branchObj.loadedBranches.length)">Loading branch....
+		</div>
+		
+		<div class="col-xs-12"  ng-if="branchObj.currentBranch">
+			<a class="label label-default p-sm text-sm">{{branchObj.currentBranch.name}}<b class="badge m-l-xs" bs-tooltip data-title="Remove branch" ng-click="removeBranch(branchObj.currentBranch)" data-placement="right">×</b></a>
+		</div>
+
+		<div class="col-xs-12" ng-if="branchObj.loadedBranches"  ng-repeat="branch in branchObj.loadedBranches">
+			<ui-select  ng-model="branchObj.selectedBranch[$index]" theme="selectize" ng-disabled="disabled" on-select="branchSelected($item, $index)">
+				<ui-select-match placeholder="{{'Branch name'|translate}}" ng-bind-html="$select.selected.name"></ui-select-match>
+				<ui-select-choices repeat="br in branch | filter: $select.search">
+					<span ng-bind-html="br.name | highlight: $select.search"></span>
+				</ui-select-choices>
+			</ui-select>
+		</div>
+
+	</div>
+	<div class="row" ng-if="multiple">
+		<div class="col-xs-12">
+			<ui-select multiple ng-model="ngModel" theme="select2"  style="width: 100%;" on-select="multipleBranchSelected($item, $index)" on-remove="multipleBranchRemove($item, $index)">
+    			<ui-select-match placeholder="Select branch...">{{$item.name}}</ui-select-match>
+			    <ui-select-choices repeat="branch in branchObj.branch">
+			      <div ng-bind-html="branch.name | highlight: $select.search"></div>
+			      <small>{{branch.name}}</small>
+			    </ui-select-choices>
+  			</ui-select>
+		</div>
+	</div>
+</div>

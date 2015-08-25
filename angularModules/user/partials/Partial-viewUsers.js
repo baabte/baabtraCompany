@@ -63,7 +63,6 @@ angular.module('baabtra').controller('ViewusersCtrl',['$scope','commonService','
 	var branchLoaderResponse = branchSrv.fnLoadAllBranchesUnderCompany(branchLoaderObj);
 	branchLoaderResponse.then(function(response){
 		 $scope.data.branchList = angular.fromJson(JSON.parse(response.data));
-		 console.log($scope.data.branchList);
 	})
 
 	var searchTimeOut;

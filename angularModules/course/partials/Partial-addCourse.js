@@ -25,6 +25,9 @@ if(!angular.equals($state.params.courseId,"")){
   var promise = addCourseService.fnLoadCourseDetails($scope, $scope.courseId);
   promise.then(function(course){
     $scope.course = angular.fromJson(JSON.parse(course.data)).courseDetails;
+    if(!$scope.course.Branches){
+      $scope.course.Branches = [];
+    }
     //checking this course have syllabus
     if(angular.equals($scope.course.syllabus,undefined)){
       // if undefined create a default syllabus
@@ -117,14 +120,6 @@ $scope.onDomainSelectionChanged = function(items) {
     }
   };
 
-$scope.onBranchSelectionChanged = function(items) {
-    $scope.selectedBranches=[];
-    if (items) {
-      for (var i = 0; i < items.length; i++) {
-        $scope.selectedBranches.push(items[i].name);
-      }
-    }
-  };
 
 $scope.onRoleSelectionChanged = function(items) {
     $scope.selectedRole=[];
@@ -177,7 +172,6 @@ RoleMenuMappingSrv.FnGetRoles($scope, $scope.cmp_id, "", "");
   $scope.domains = [];
   $scope.branchDetails =[];
   $scope.rolesDetails = [];
-  $scope.selectedBranches =[];
   $scope.selectedRole = [];
 
 // Global Declaration Of variables end  
@@ -197,13 +191,6 @@ RoleMenuMappingSrv.FnGetRoles($scope, $scope.cmp_id, "", "");
 
 
 
-$scope.$watch('branches', function(newVal, oldVal){
-    if (!angular.equals($scope.branches,undefined)) {
-        $scope.data1=manageTreeStructureSrv.buildTree(manageTreeStructureSrv.findRoots($scope.branches,null),null);
-        $scope.branchDetails = angular.copy($scope.data1);
-        convertObjectName($scope.branchDetails, null);
-    }
-});
 
 
 $scope.$watch('roles', function(newVal, oldVal){
@@ -295,7 +282,6 @@ $scope.completeStep1 = function(course){//created for build step1 object
     $scope.course.crmId = $scope.rm_id;
     $scope.course.companyId =  $scope.cmp_id;
     $scope.course.urmId = $scope.rm_id;
-    $scope.course.Branches = $scope.selectedBranches;
 
     
     $scope.course.Tags = Tags;

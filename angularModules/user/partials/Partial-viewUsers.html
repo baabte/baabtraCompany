@@ -61,7 +61,7 @@
 
             <!-- branch based -->
             <div class="col-xs-12 b-b p-v" >
-              <div class="font-bold">Branches</div>
+              <div class="font-bold" ng-if="data.branchList.length">Branches</div>
               <div class="box-cell scrollable hover" style="max-height: 170px;">
                 <div class="sample1" ng-repeat="branch in data.branchList">
                   <div class="checkbox show-in-one-line" style="line-height: 19px;max-height: 25px;">
