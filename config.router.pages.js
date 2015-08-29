@@ -197,7 +197,7 @@
                 }
               })
               .state('home.main.department', {
-                url: '/department/:branchId',
+                url: '/department',
                  views:{
                   'innercontent':{
                 templateUrl: 'angularModules/Department/partials/Partial-department.html',

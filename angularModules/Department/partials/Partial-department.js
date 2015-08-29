@@ -1,268 +1,141 @@
+/*
+Purpose : Page for load department under company branch
+Created By : Jihin
+Created On : 29/08/2015
+*/
+
 angular.module('baabtra').controller('DepartmentCtrl',['$scope', '$rootScope', '$state', '$aside', '$alert', '$timeout', 'commonService', 'manageTreeStructureSrv', 'department',function($scope, $rootScope, $state, $aside, $alert, $timeout, commonService, manageTreeStructureSrv, department){
 
 	/*login detils start*/
 	if(!$rootScope.userinfo){
 		commonService.GetUserCredentials($scope);
 		$rootScope.hide_when_root_empty=false;
+		return;
 	}
 
 	if(angular.equals($rootScope.loggedIn,false)){
 		$state.go('login');
 	}
 
-	$scope.coursePreviewObject={};
-	$scope.rm_id=$rootScope.userinfo.ActiveUserData.roleMappingId.$oid;
-	$scope.roleId=$rootScope.userinfo.ActiveUserData.roleMappingObj.fkRoleId;
-	$scope.cmp_id=$rootScope.userinfo.ActiveUserData.roleMappingObj.fkCompanyId.$oid;
+	var rm_id = $rootScope.userinfo.ActiveUserData.roleMappingId.$oid;
+	var roleId = $rootScope.userinfo.ActiveUserData.roleMappingObj.fkRoleId;
+	var companyId =$rootScope.userinfo.ActiveUserData.roleMappingObj.fkCompanyId.$oid;
 	/*login detils ends*/
 
-	$scope.data = {};
-	$scope.data.departments = {};
-	
-	$scope.common = {
-                connector: ["Flowchart", {cornerRadius:5}],
-                //connector: ["State Machine"],
-                anchor: ["Top", "Bottom"],
-                endpoint:"Blank"
-            };
+	$scope.deptObj = {};
+	$scope.deptObj.message = {};
+	$scope.deptObj.message.isMsg = true;
+	$scope.deptObj.message.type = "bg-info";
+	$scope.deptObj.message.message = "Please select a branch";
 
-$scope.drawLines = function(bTree){
-  $timeout(function() {
-  angular.forEach(bTree, function(node) {
-        	jsPlumb.ready(function() {
-            if (node.parent!=null) {
-                    $scope.myInstanceOfJsPlumb = jsPlumb.connect({
-                        source:node.parent, //node.parentId+"",
-                        target:node._id, //node.id+"",
-                        paintStyle:{ strokeStyle:"lightgray", lineWidth:3 },
-                        endpointStyle:{ fillStyle:"lightgray", outlineColor:"gray" },
-                        overlays:[ 
-                            ["Arrow" , { width:12, length:12, location:0.67 }]
-                        ]
-                    }, $scope.common); 
-            }
-          });
-          if (!angular.equals(node.childrenObj,undefined)) {
-                  $scope.drawLines(node.childrenObj);
-          } 	
-    });
-},100);
-   
-};
-	//function load existing department under branch
-	var loadDepartmentResponse = department.fnLoadDepartment($scope.cmp_id, $state.params.branchId);
-	loadDepartmentResponse.then(function(response){
-		$scope.departmentsTree = angular.fromJson(JSON.parse(response.data));
+	// function for load department under branch
+	$scope.loadDepartmentUnderBranch = function(branch, index){
+		
+		var departmentLoadCondition = {companyId:branch.companyId.$oid, branchId:branch._id.$oid, parent:"root"};
+		var loadDepartmentResponse = department.fnLoadDepartment(departmentLoadCondition);
+		loadDepartmentResponse.then(function(response){
+			$scope.deptObj.selectedBranch = branch;
 
-		//striping $oid from departmentId
-		angular.forEach($scope.departmentsTree, function(department){
-			if(!angular.equals(department.departmentId,undefined)){
-				department.departmentId = department.departmentId.$oid;
+			$scope.deptObj.departments = angular.fromJson(JSON.parse(response.data));
+
+			if(!$scope.deptObj.departments.length){
+				$scope.deptObj.message.isMsg = true;
+				$scope.deptObj.message.type = "bg-warning";
+				$scope.deptObj.message.message = "No Department under "+branch.name+" branch";
+			}
+			else{
+				$scope.deptObj.departments[0].collapsed = true;
+				$scope.deptObj.message.isMsg = false;
 			}
 		});
+	};
 
-		//function for bulding tree structure
-		if(!angular.equals($scope.departmentsTree,null)){
-			$scope.data.departments[$state.params.branchId] = angular.copy($scope.departmentsTree);
-			$scope.data.departmentsTree = manageTreeStructureSrv.buildTree(manageTreeStructureSrv.findRoots($scope.departmentsTree,null),null);
-			
-			// function for draw lines b/w departments
-			$scope.drawLines($scope.data.departmentsTree);
+	$scope.addNewDepartment = function(branch){
+		$scope.deptObj.btnName = "Add";
+		$scope.deptObj.asideHeader = "Create new department";
+		$scope.deptObj.newDept = {};
+		$scope.deptObj.newDept.branchId = branch._id.$oid;
+		$scope.deptObj.newDept.parent = branch.parentDepartment?branch.parentDepartment.$oid:"root";
+
+		var myOtherAside = $aside({scope: $scope,placement:'right',animation:'am-slide-right', template: 'angularModules/Department/partials/Aside-addDepartment.html'});//call aside for add new department
+	};
+
+	$scope.showPopupForAddChild = function(department){
+		$scope.deptObj.parentDepartment = department;
+		var branch = {_id:department.branchId, parentDepartment:department._id};
+		$scope.addNewDepartment(branch);
+	};
+
+	$scope.editChild = function(node) {
+	    $scope.deptObj.asideHeader = "Edit departments details";
+	    $scope.deptObj.btnName = "Update";
+	    $scope.deptObj.newDept = node;
+	    var myOtherAside = $aside({scope: $scope,placement:'right',animation:'am-slide-right', template: 'angularModules/Department/partials/Aside-addDepartment.html'});//call aside for add new department
+	};
+
+	$scope.changesHappenedInDepartment = function(departmentDetails, hide){
+		
+		departmentDetails.children = [];
+		departmentDetails.companyId = companyId;
+		departmentDetails.branchId = departmentDetails.branchId.$oid?departmentDetails.branchId.$oid:departmentDetails.branchId;
+		departmentDetails.crmId = departmentDetails.crmId?(departmentDetails.crmId.$oid?departmentDetails.crmId.$oid:departmentDetails.crmId):rm_id;
+		departmentDetails.parent = departmentDetails.parent.$oid?departmentDetails.parent.$oid:departmentDetails.parent;
+		departmentDetails.urmId = rm_id;
+		if(angular.equals(departmentDetails.activeFlag, undefined)){
+			departmentDetails.activeFlag = 1;
 		}
-		else{// if currently no departments is added this condition exicute and set default values 
+		if(departmentDetails._id){
 			
-			$scope.data.departmentsTree = [{ _id: $state.params.branchId, 'parent': null, 'children': [], ancestors: [], deptHeadrmId:null, activeFlag:1}];
-			$scope.data.departments[$state.params.branchId] = angular.copy($scope.data.departmentsTree);
+			departmentDetails._id = departmentDetails._id.$oid?departmentDetails._id.$oid:departmentDetails._id;
 		}
-	});
-	
-	var currentSelectedParent = "";
-	$scope.addNewDepartment = function(item){
-		$scope.data.editable = false;//setting mode to create
-		$scope.department = {};
-		currentSelectedParent = item;//details of cliked element to add new chiled
-		$scope.data.asideHeading="Create a new department under "+currentSelectedParent._id;//Setting asside header details
-		var myOtherAside = $aside({scope: $scope,placement:'left',animation:'am-slide-left', template: 'angularModules/Department/partials/Aside-addDepartment.html'});//call aside for add new department
-	};
-
-	$scope.createNewDepartment = function(departmentObj, $hide){
-
-		angular.forEach($scope.data.departments[$state.params.branchId],function(dept){
-			//stripping $oid from rolemappingId
-			if(!angular.equals(dept.deptHeadrmId,null)){
-				dept.deptHeadrmId[0].roleMappingId = dept.deptHeadrmId[0].roleMappingId.$oid;
-			}
-
-			//inserting new children id to his parent element array
-			if(angular.equals(dept._id, currentSelectedParent._id)){	
-				if(angular.equals(dept.children,null)){
-					dept.children = [];
-				}
-				dept.children.push(departmentObj.name);
-			}
-
-		});
-
-		currentSelectedParent.ancestors.push(currentSelectedParent._id);//setting up ancestors of new department added
-
-		//pushing new department
-		$scope.data.departments[$state.params.branchId].push({ _id: departmentObj.name, parent: currentSelectedParent._id, 'children': null, ancestors: currentSelectedParent.ancestors, deptHeadrmId:departmentObj.Head, activeFlag:1});
 		
-		//function for save new department structure 
-		var departmentResponse = department.fnAddDepartment($scope.data.departments, $scope.cmp_id, $scope.rm_id);
+		var departmentResponse = department.fnAddDepartment(departmentDetails);
 		departmentResponse.then(function(response){
-
-			//new department structure
-			$scope.departmentsTree = angular.fromJson(JSON.parse(response.data));
-			$scope.data.departments[$state.params.branchId] = angular.copy($scope.departmentsTree);
-			
-			//function for bulding tree structure
-			$scope.data.departmentsTree = manageTreeStructureSrv.buildTree(manageTreeStructureSrv.findRoots($scope.departmentsTree,null),null);
-			
-			// function for draw lines b/w departments
-			$scope.drawLines($scope.data.departmentsTree);
-			
-			$alert({scope: $scope,container:'body',keyboard:true,animation:'am-fade-and-slide-top',title:'Success... -:)',content:'The department has been added', placement: 'top-right', type: 'success', duration:3});
-			$hide();
+			var result = angular.fromJson(JSON.parse(response.data));
+			if(!departmentDetails._id){
+				if($scope.deptObj.parentDepartment){
+					$scope.deptObj.parentDepartment.children.push(result);
+				}
+				else{
+					$scope.deptObj.message.isMsg = false;
+					$scope.deptObj.departments = [result];
+				}
+			}
 		});
+		if(hide){
+			hide();
+		}
 		
 	};
 
-	var selectedDepartmentForEdit = "";
-	$scope.department = {};
-	$scope.editDepartment = function(item){
+	$scope.fnLoadChild = function(departmentObj){
 		
-		$scope.data.editable = true;//setting mode to edit
-
-		selectedDepartmentForEdit = angular.copy(item);//taking a copy of editing item
-		//building object for editing
-		$scope.department.name = selectedDepartmentForEdit._id;
-		selectedDepartmentForEdit.deptHeadrmId[0].roleMappingId = selectedDepartmentForEdit.deptHeadrmId[0].roleMappingId.$oid;
-		$scope.department.Head = selectedDepartmentForEdit.deptHeadrmId;
-		$scope.department.departmentId = selectedDepartmentForEdit.departmentId;
-		$scope.department.parent = selectedDepartmentForEdit.parent;
-
-		//aside heading conntent
-		$scope.data.asideHeading="Edit department "+item._id;
-		var myOtherAside = $aside({scope: $scope,placement:'left',animation:'am-slide-left', template: 'angularModules/Department/partials/Aside-addDepartment.html'});
-	};
-
-	$scope.updateDepartment = function(departmentObj, $hide){
-
-		//function for update department
-		angular.forEach($scope.data.departments[$state.params.branchId],function(dept){
-			
-			if(angular.equals(dept._id,departmentObj.parent)){
-				dept.children[dept.children.indexOf(selectedDepartmentForEdit._id)] = departmentObj.name;
-			}
-			if(angular.equals(dept.parent,selectedDepartmentForEdit._id)){
-				dept.parent = departmentObj.name;
-				dept.ancestors[dept.ancestors.indexOf(selectedDepartmentForEdit._id)] = departmentObj.name;
-			}
-			if(!angular.equals(dept.deptHeadrmId,null)){
-				if(angular.equals(dept.departmentId, departmentObj.departmentId)){
-					dept._id = departmentObj.name;
-					dept.deptHeadrmId = departmentObj.Head;
-				}
-				if(!angular.equals(dept.deptHeadrmId[0].roleMappingId.$oid,undefined)){
-					//stripping $oid from rolemappingId
-					dept.deptHeadrmId[0].roleMappingId = dept.deptHeadrmId[0].roleMappingId.$oid;
-				}
-			}
-		});
-
-		//function for save changes to database
-		var departmentResponse = department.fnAddDepartment($scope.data.departments, $scope.cmp_id, $scope.rm_id);
-		departmentResponse.then(function(response){
-			$scope.departmentsTree = angular.fromJson(JSON.parse(response.data));
-
-			//striping $oid from departmentId
-			angular.forEach($scope.departmentsTree, function(department){
-				if(!angular.equals(department.departmentId,undefined)){
-					department.departmentId = department.departmentId.$oid;
-				}
-			});
-
-			$scope.data.departments[$state.params.branchId] = angular.copy($scope.departmentsTree);
-			$scope.data.departmentsTree = manageTreeStructureSrv.buildTree(manageTreeStructureSrv.findRoots($scope.departmentsTree,null),null);
-			$scope.drawLines($scope.data.departmentsTree);
-			$alert({scope: $scope,container:'body',keyboard:true,animation:'am-fade-and-slide-top',title:'Success... -:)',content:'The department has been updated', placement: 'top-right', type: 'success', duration:3});
-			$hide();
-		});
-	};
-	var lastDeletedDepartmentId = 0;
-
-	$scope.undo = function(){
-
-		//function for revert deleted element
-		angular.forEach($scope.data.departments[$state.params.branchId],function(dept){
-			if(!angular.equals(dept.deptHeadrmId,null)){
-				if(angular.equals(dept.departmentId,lastDeletedDepartmentId)){
-					lastDeletedDepartmentId = dept.departmentId;
-					dept.activeFlag = 1;
-				}
-
-				if(!angular.equals(dept.deptHeadrmId[0].roleMappingId.$oid,undefined)){
-						//stripping $oid from rolemappingId
-						dept.deptHeadrmId[0].roleMappingId = dept.deptHeadrmId[0].roleMappingId.$oid;
-				}
-			}
-
-		});
-
-		var departmentResponse = department.fnAddDepartment($scope.data.departments, $scope.cmp_id, $scope.rm_id);
-		departmentResponse.then(function(response){
-			$scope.departmentsTree = angular.fromJson(JSON.parse(response.data));
-
-			//striping $oid from departmentId
-			angular.forEach($scope.departmentsTree, function(department){
-				if(!angular.equals(department.departmentId,undefined)){
-					department.departmentId = department.departmentId.$oid;
-				}
-			});
-
-			$scope.data.departments[$state.params.branchId] = angular.copy($scope.departmentsTree);
-			$scope.data.departmentsTree = manageTreeStructureSrv.buildTree(manageTreeStructureSrv.findRoots($scope.departmentsTree,null),null);
-			$scope.drawLines($scope.data.departmentsTree);
-
-			$alert({scope: $scope,container:'body',keyboard:true,animation:'am-fade-and-slide-top',title:'Success... -:)',content:'The department has been reverted', placement: 'top-right', type: 'success', duration:3});
+		var departmentLoadCondition = {companyId:departmentObj.companyId.$oid, branchId:departmentObj.branchId.$oid, parent:departmentObj._id.$oid};
+		var loadDepartmentResponse = department.fnLoadDepartment(departmentLoadCondition);
+		loadDepartmentResponse.then(function(response){
+			var result = angular.fromJson(JSON.parse(response.data));
+			departmentObj.children = result;
 		});
 	};
 
-	$scope.removeDepartment = function(item){
-		// function for remove department
-		angular.forEach($scope.data.departments[$state.params.branchId],function(dept){
-			if(!angular.equals(dept.deptHeadrmId,null)){
-				if(angular.equals(dept.departmentId,item.departmentId)){
-					lastDeletedDepartmentId = dept.departmentId;
-					dept.activeFlag = 0;
-				}
+	function removeChild (departments, id) {
+	    for(var department in departments){
+	      if(angular.equals(departments[department]._id.$oid, id.$oid)){
+	        departments.splice(department, 1);
+	        break;
+	      }
 
-				if(!angular.equals(dept.deptHeadrmId[0].roleMappingId.$oid,undefined)){
-						//stripping $oid from rolemappingId
-						dept.deptHeadrmId[0].roleMappingId = dept.deptHeadrmId[0].roleMappingId.$oid;
-				}
-			}
+	      if(departments[department].children.length){
+	        removeChild(departments[department].children, id);
+	      }
+	    }
+  	}
+	$scope.removeChild = function(node){
+		node.activeFlag = 0;
+	    var currentNode = JSON.parse(JSON.stringify(node));
 
-		});
-
-		var departmentResponse = department.fnAddDepartment($scope.data.departments, $scope.cmp_id, $scope.rm_id);
-		departmentResponse.then(function(response){
-			$scope.departmentsTree = angular.fromJson(JSON.parse(response.data));
-
-			//striping $oid from departmentId
-			angular.forEach($scope.departmentsTree, function(department){
-				if(!angular.equals(department.departmentId,undefined)){
-					department.departmentId = department.departmentId.$oid;
-				}
-			});
-
-			$scope.data.departments[$state.params.branchId] = angular.copy($scope.departmentsTree);
-			$scope.data.departmentsTree = manageTreeStructureSrv.buildTree(manageTreeStructureSrv.findRoots($scope.departmentsTree,null),null);
-			$scope.drawLines($scope.data.departmentsTree);
-
-			$alert({scope: $scope,container:'body',keyboard:true,animation:'am-fade-and-slide-top',template:'views/ui/angular-strap/alert.tpl.html',title:'Undo',content:'The department has been deleted', placement: 'top-right', type: 'warning'});
-		});
+	    removeChild($scope.deptObj.departments, node._id);
+	    $scope.changesHappenedInDepartment(currentNode);
 	};
 
 }]);

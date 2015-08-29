@@ -1,9 +1,9 @@
 angular.module('baabtra').service('department',['$http', 'bbConfig', function($http, bbConfig) {
 
-	this.fnAddDepartment = function(departmentObject, companyId, rmId){
+  this.fnAddDepartment = function(departmentObject){
     var promise = $http({
       url: bbConfig.BWS+'AddDepartment/',
-      data: {departmentObject:departmentObject, companyId:companyId, rmId:rmId},
+      data: departmentObject,
       method: "POST",
       withCredentials: false,
       contentType:"application/json",
@@ -12,10 +12,10 @@ angular.module('baabtra').service('department',['$http', 'bbConfig', function($h
     return promise;
    };
 
-   this.fnLoadDepartment = function(companyId, branchId){
+   this.fnLoadDepartment = function(departmentObj){
     var promise = $http({
       url: bbConfig.BWS+'LoadDepartment/',
-      data: {companyId:companyId, branchId:branchId},
+      data: departmentObj,
       method: "POST",
       withCredentials: false,
       contentType:"application/json",

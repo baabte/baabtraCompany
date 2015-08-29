@@ -1,31 +1,28 @@
-<div class="aside col-xs-4 m-h-n baab-shadow" tabindex="-1" role="dialog">
+<!-- Created by Jihin 29 AUG 2015-->
+
+<div class="aside shadow-z-1">
   <div class="aside-dialog">
-    <div class="aside-content">
-        <div class="aside-title p m-r-n font-bold p-xs shadow-z-2" set-sub-heading-and-background-color translate="{{data.asideHeading|translate}}"></div>
-      <div class="aside-body m-t-n" >
-        <form name="departmentForm">
-          <div class="row">
-            <div class="col-xs-12">
-              <input id="departmentName" float-label type="text" class="form-control"  ng-model="department.name" required="" placeholder="{{'Department Name'|translate}}">
-            </div>
-          </div>
-          <div class="row">
-            <div class="col-xs-12">
+    <div class="aside-content  ">
+      <div class="aside-header" >
+        <button type="button" class="close" ng-click="$hide()">×</button>
+        <h4 class="aside-title ng-binding">{{deptObj.asideHeader}}</h4>
+      </div>
+      <div class="aside-body no-padding-v" >
+        <form name="branchDetail" class="form-validation ng-pristine ng-invalid ng-invalid-required">
+
+            <!-- Department name -->
             <div class="form-group">
-              <label  translate="{{'Department Head'|translate}}"></label>
-              <role-user-loader placeholder-value="Please select a person" role-id="3" selection-type="1" ng-model="department.Head">
-              </role-user-loader>
+              <input type="text" class="form-control floating-label" placeholder="Department Name" ng-model="deptObj.newDept.name" required>
             </div>
+
+            <!-- Department Details -->
+            <div class="form-group">
+              <textarea class="form-control" ng-model="deptObj.newDept.departmentDetails" rows="3" placeholder="Department Details"></textarea>
             </div>
-          </div>
         </form>
       </div>
       <div class="aside-footer">
-        <div class="row m-v-n p-xs">
-          <button type="button" class="btn btn-warning baab-btn no-margin" translate="{{'Cancel'|translate}}" ng-click="$hide()"></button>
-          <button type="button" ng-if="!data.editable" ng-disabled="departmentForm.$invalid" disabled="disabled" class="btn btn-info baab-btn no-margin" translate="{{'Create'|translate}}" ng-click="createNewDepartment(department, $hide)"></button>
-          <button type="button" ng-if="data.editable" ng-disabled="departmentForm.$invalid" disabled="disabled" class="btn btn-info baab-btn no-margin" translate="{{'Update'|translate}}" ng-click="updateDepartment(department, $hide)"></button>
-        </div>
+        <button type="button" class="btn btn-info baab-btn"  ng-click="changesHappenedInDepartment(deptObj.newDept, $hide)" translate="{{deptObj.btnName|translate}}" ng-disabled="branchDetail.$invalid"></button>
       </div>
     </div>
   </div>
