@@ -1,10 +1,10 @@
 angular.module('baabtra').service('baabtraProfile',['$http','bbConfig',function baabtraProfile($http,bbConfig) {
 
-this.fnLoadUserProfileDetails=function(userloginId, type){
+this.fnLoadUserProfileDetails=function(dataObj){
 	var userbaabtraComProfileData = $http({
 			url: bbConfig.BWS + 'loadUserProfileDetails/',
 			method: "POST",
-			data:angular.toJson({'userloginId':userloginId, 'type':type}),
+			data:dataObj,
 			withCredentials: false,
 			contentType:"application/json",
 			dataType:"json",

@@ -1,5 +1,15 @@
 <div>
-		<div class="col-xs-12 text-center">
-		<iframe src="{{trustSrc(newData.value)}}" style="width:100%; height:500px;" frameborder="0"></iframe>
-		</div>
+	<div class="co-xs-12">
+		<div class="panel" style="box-shadow: none;">
+        
+	        <div class="panel-body p-sm">
+	        	<iframe src="{{trustSrc(newData.value)}}" style="width:100%; height:500px;" frameborder="0"></iframe>
+	        </div>
+	        <div class="panel-footer text-right">
+	        	
+	        	<a href="{{newData.url}}" target="_blank" ><i  class="fa fa-download text-lg text-dark" bs-tooltip data-title="Click here to download" data-placement="left"></i></a>
+	        </div>
+      </div>
+	</div>
 </div>
+
