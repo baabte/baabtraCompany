@@ -1,0 +1,27 @@
+<div class="">
+
+	<div class="panel" style="box-shadow: none;" ng-class="{'iframe-fullscreen':epubObj.fullScreen}">
+		<div class="panel-body embed-responsive embed-responsive-16by9">
+			<iframe  class="embed-responsive-item" ng-src="{{currentProjectUrl}}"></iframe>
+
+			<a ng-if="!epubObj.fullScreen" title="Full screen" ng-click="epubObj.fullScreen = true" style="position: absolute; right: 20px; padding: 3px;  display: block; "><i class=" glyphicon glyphicon-fullscreen text-2x"></i></a>
+
+			<a  ng-if="epubObj.fullScreen" title="Exit full screen" ng-click="epubObj.fullScreen = false" class="popin" style="position: fixed; top: 25px; right: 35px; padding: 3px;  z-index: 10001; display: block; "><i class=" mdi-navigation-fullscreen-exit text-4x"></i></a>
+
+			
+		</div>
+		<div class="panel-footer text-right bg-white b-t b-info b-2x">
+			<a ng-if="!epubObj.fullScreen" title="Full screen" ng-click="epubObj.fullScreen = true"><i class=" glyphicon glyphicon-fullscreen text-lg"></i></a>
+		</div>
+	</div>
+	<!-- <div class="col-xs-12 embed-responsive embed-responsive-16by9">
+	 <iframe ng-class="{'iframe-fullscreen':epubObj.fullScreen}" class="embed-responsive-item" ng-src="{{currentProjectUrl}}"></iframe>
+
+	 <a ng-if="!epubObj.fullScreen" ng-click="epubObj.fullScreen = true" style="position: absolute; right: 20px; padding: 3px; border: 1px solid rgb(170, 170, 170); display: block; background-color: rgb(255, 255, 255);">Full screen</a>
+
+	 <div ng-if="epubObj.fullScreen" ng-click="epubObj.fullScreen = false" class="popin" style="position: fixed; top: 35px; right: 35px; padding: 3px; border: 1px solid rgb(170, 170, 170); z-index: 10001; display: block; background-color: rgb(255, 255, 255);"><a>Exit full screen</a></div>
+	</div>
+	<div class="col-xs-12">
+		<a href=""><i class=""></i></a>
+	</div> -->
+</div>
